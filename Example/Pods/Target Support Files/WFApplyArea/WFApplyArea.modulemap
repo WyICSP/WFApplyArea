@@ -1,0 +1,6 @@
+framework module WFApplyArea {
+  umbrella header "WFApplyArea-umbrella.h"
+
+  export *
+  module * { export * }
+}

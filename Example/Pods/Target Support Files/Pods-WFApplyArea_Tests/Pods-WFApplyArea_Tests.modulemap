@@ -1,0 +1,6 @@
+framework module Pods_WFApplyArea_Tests {
+  umbrella header "Pods-WFApplyArea_Tests-umbrella.h"
+
+  export *
+  module * { export * }
+}

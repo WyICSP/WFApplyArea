@@ -1,0 +1,30 @@
+{
+  "name": "WFApplyArea",
+  "version": "0.1.0",
+  "summary": "WFApplyArea申请片区",
+  "description": "WFApplyArea申请片区的组件,合伙人使用的功能",
+  "homepage": "https://github.com/WyICSP/WFApplyArea",
+  "license": {
+    "type": "MIT",
+    "file": "LICENSE"
+  },
+  "authors": {
+    "wyxlh": "wy_wangyu163@163.com"
+  },
+  "source": {
+    "git": "https://github.com/WyICSP/WFApplyArea.git",
+    "tag": "0.1.0"
+  },
+  "platforms": {
+    "ios": "9.0"
+  },
+  "source_files": "WFApplyArea/Classes/**/*",
+  "dependencies": {
+    "WFBasics": [
+
+    ],
+    "WFKitMain": [
+
+    ]
+  }
+}
