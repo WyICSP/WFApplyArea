@@ -247,6 +247,9 @@
 				LastUpgradeCheck = 1030;
 				ORGANIZATIONNAME = wyxlh;
 				TargetAttributes = {
+					6003F589195388D20070C39A = {
+						DevelopmentTeam = 3K7Q9D2L32;
+					};
 					6003F5AD195388D20070C39A = {
 						TestTargetID = 6003F589195388D20070C39A;
 					};
@@ -324,19 +327,31 @@
 			inputPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-WFApplyArea_Example/Pods-WFApplyArea_Example-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/AFNetworking/AFNetworking.framework",
+				"${BUILT_PRODUCTS_DIR}/IQKeyboardManager/IQKeyboardManager.framework",
+				"${BUILT_PRODUCTS_DIR}/MJExtension/MJExtension.framework",
+				"${BUILT_PRODUCTS_DIR}/SDWebImage/SDWebImage.framework",
 				"${BUILT_PRODUCTS_DIR}/SVProgressHUD/SVProgressHUD.framework",
 				"${BUILT_PRODUCTS_DIR}/WFApplyArea/WFApplyArea.framework",
 				"${BUILT_PRODUCTS_DIR}/WFBasics/WFBasics.framework",
+				"${BUILT_PRODUCTS_DIR}/WFHomeAddress/WFHomeAddress.framework",
+				"${BUILT_PRODUCTS_DIR}/WFKitLogin/WFKitLogin.framework",
 				"${BUILT_PRODUCTS_DIR}/WFKitMain/WFKitMain.framework",
+				"${BUILT_PRODUCTS_DIR}/WKFunComponents/WKFunComponents.framework",
 				"${BUILT_PRODUCTS_DIR}/WYAutoLayout/WYAutoLayout.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AFNetworking.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/IQKeyboardManager.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MJExtension.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SDWebImage.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SVProgressHUD.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/WFApplyArea.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/WFBasics.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/WFHomeAddress.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/WFKitLogin.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/WFKitMain.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/WKFunComponents.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/WYAutoLayout.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -531,6 +546,7 @@
 			baseConfigurationReference = 871CA70EE5116A60DE1E6ED6 /* Pods-WFApplyArea_Example.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = 3K7Q9D2L32;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "WFApplyArea/WFApplyArea-Prefix.pch";
 				INFOPLIST_FILE = "WFApplyArea/WFApplyArea-Info.plist";
@@ -547,6 +563,7 @@
 			baseConfigurationReference = F902785F221476CE42AE0AC2 /* Pods-WFApplyArea_Example.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = 3K7Q9D2L32;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "WFApplyArea/WFApplyArea-Prefix.pch";
 				INFOPLIST_FILE = "WFApplyArea/WFApplyArea-Info.plist";

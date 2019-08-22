@@ -26,6 +26,8 @@
 
 //适配高度
 #define KHeight(height) height*ScreenWidth/375.0f
+//适配宽度
+#define KWidth(width) KHeight(width)
 
 //百度地图  fUpYctPLjNGLR77Ni7WIdpYpPsF36hkv
 #define APIKey  @"ef4b045ea93d99c51307da309f0ada76"
@@ -57,7 +59,7 @@
 #define UIColorFromRGB(rgbValue) [UIColor colorWithRed:((float)((rgbValue & 0xFF0000) >> 16))/255.0 green:((float)((rgbValue & 0xFF00) >> 8))/255.0 blue:((float)(rgbValue & 0xFF))/255.0 alpha:1.0]
 
 //主题色
-#define NavColor UIColorFromRGB(0xFF6D22)
+#define NavColor UIColorFromRGB(0xF78556)
 
 #define YFWindow        [UIApplication sharedApplication].keyWindow
 
@@ -65,7 +67,6 @@
 #define SKViewsBorder(View,radius,width,color)\
 \
 [View.layer setCornerRadius:(radius)];\
-[View.layer setMasksToBounds:YES];\
 [View.layer setBorderWidth:(width)];\
 [View.layer setBorderColor:[color CGColor]];
 

@@ -19,11 +19,25 @@
     "ios": "9.0"
   },
   "source_files": "WFApplyArea/Classes/**/*",
+  "resource_bundles": {
+    "WFApplyArea": [
+      "WFApplyArea/Assets/*.png"
+    ]
+  },
   "dependencies": {
     "WFBasics": [
 
     ],
     "WFKitMain": [
+
+    ],
+    "WFKitLogin": [
+
+    ],
+    "IQKeyboardManager": [
+
+    ],
+    "WKFunComponents": [
 
     ]
   }

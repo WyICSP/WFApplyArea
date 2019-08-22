@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="WFMyChargePileHeadView">
+            <rect key="frame" x="0.0" y="0.0" width="414" height="85"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ujq-Hh-oTD">
+                    <rect key="frame" x="207" y="32" width="0.5" height="21"/>
+                    <color key="backgroundColor" red="0.89411764705882346" green="0.89411764705882346" blue="0.89411764705882346" alpha="0.84705882352941175" colorSpace="calibratedRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="21" id="Dq4-Kz-CQj">
+                            <userDefinedRuntimeAttributes>
+                                <userDefinedRuntimeAttribute type="boolean" keyPath="isAdaptateScreen" value="YES"/>
+                            </userDefinedRuntimeAttributes>
+                        </constraint>
+                        <constraint firstAttribute="width" constant="0.5" id="Fzc-Ch-9Dd"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <nil key="textColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="充电桩台数" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UOO-Sa-Vwf">
+                    <rect key="frame" x="0.0" y="18" width="207" height="15"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                    <color key="textColor" red="0.59999999999999998" green="0.59999999999999998" blue="0.59999999999999998" alpha="0.84705882352941175" colorSpace="calibratedRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0台" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="f8L-5F-xZo">
+                    <rect key="frame" x="80" y="38" width="47" height="33"/>
+                    <fontDescription key="fontDescription" type="system" weight="heavy" pointSize="27"/>
+                    <color key="textColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0.00%" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XyK-C4-m1V">
+                    <rect key="frame" x="266" y="38" width="89" height="33"/>
+                    <fontDescription key="fontDescription" type="system" weight="heavy" pointSize="27"/>
+                    <color key="textColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xBV-ZH-mnL">
+                    <rect key="frame" x="207.5" y="18" width="206.5" height="15"/>
+                    <string key="text">充电桩使用率
+                    </string>
+                    <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                    <color key="textColor" red="0.59999999999999998" green="0.59999999999999998" blue="0.59999999999999998" alpha="0.84705882349999995" colorSpace="calibratedRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
+            </subviews>
+            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstItem="xBV-ZH-mnL" firstAttribute="leading" secondItem="Ujq-Hh-oTD" secondAttribute="trailing" id="3kC-ze-n1I"/>
+                <constraint firstItem="Ujq-Hh-oTD" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="4sI-zl-fGo"/>
+                <constraint firstItem="UOO-Sa-Vwf" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" constant="-17" id="6nm-vE-duq"/>
+                <constraint firstItem="UOO-Sa-Vwf" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="7nD-B1-OV2"/>
+                <constraint firstItem="Ujq-Hh-oTD" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="GZa-ck-VVa"/>
+                <constraint firstAttribute="trailing" secondItem="xBV-ZH-mnL" secondAttribute="trailing" id="HT2-US-bD9"/>
+                <constraint firstItem="f8L-5F-xZo" firstAttribute="top" secondItem="UOO-Sa-Vwf" secondAttribute="bottom" constant="5" id="MCG-gm-Fbf"/>
+                <constraint firstItem="xBV-ZH-mnL" firstAttribute="centerY" secondItem="UOO-Sa-Vwf" secondAttribute="centerY" id="MOR-Q7-ItI"/>
+                <constraint firstItem="Ujq-Hh-oTD" firstAttribute="leading" secondItem="UOO-Sa-Vwf" secondAttribute="trailing" id="QGP-pj-jj8"/>
+                <constraint firstItem="XyK-C4-m1V" firstAttribute="centerX" secondItem="xBV-ZH-mnL" secondAttribute="centerX" id="dvX-Xa-O4p"/>
+                <constraint firstItem="f8L-5F-xZo" firstAttribute="centerX" secondItem="UOO-Sa-Vwf" secondAttribute="centerX" id="i6s-B6-64a"/>
+                <constraint firstItem="XyK-C4-m1V" firstAttribute="centerY" secondItem="f8L-5F-xZo" secondAttribute="centerY" id="oPw-xF-3P5"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
+            <connections>
+                <outlet property="pileCount" destination="f8L-5F-xZo" id="N40-tX-0AH"/>
+                <outlet property="rate" destination="XyK-C4-m1V" id="Dcf-1Y-mSF"/>
+            </connections>
+        </view>
+    </objects>
+</document>

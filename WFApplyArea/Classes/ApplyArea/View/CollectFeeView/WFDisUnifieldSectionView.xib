@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="WFDisUnifieldSectionView">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="135"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Stv-jo-PI6">
+                    <rect key="frame" x="0.0" y="0.0" width="375" height="135"/>
+                    <subviews>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4gy-QU-HLV">
+                            <rect key="frame" x="0.0" y="0.0" width="375" height="125"/>
+                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <inset key="titleEdgeInsets" minX="11" minY="0.0" maxX="0.0" maxY="0.0"/>
+                            <state key="normal" title="添加VIP手机号" image="WFApplyArea.bundle/add">
+                                <color key="titleColor" red="0.96862745100000003" green="0.52156862749999999" blue="0.33725490200000002" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                            </state>
+                            <connections>
+                                <action selector="clickAddBtn:" destination="iN0-l3-epB" eventType="touchUpInside" id="j1f-EG-BRz"/>
+                            </connections>
+                        </button>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sBc-Li-PA3">
+                            <rect key="frame" x="0.0" y="125" width="375" height="10"/>
+                            <color key="backgroundColor" red="0.96078431372549022" green="0.96078431372549022" blue="0.96078431372549022" alpha="1" colorSpace="calibratedRGB"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="10" id="i5b-bS-ADl"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                            <nil key="textColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                    </subviews>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <constraints>
+                        <constraint firstAttribute="trailing" secondItem="sBc-Li-PA3" secondAttribute="trailing" id="Lry-xH-YEn"/>
+                        <constraint firstItem="sBc-Li-PA3" firstAttribute="leading" secondItem="Stv-jo-PI6" secondAttribute="leading" id="eyt-ZP-HeL"/>
+                        <constraint firstItem="4gy-QU-HLV" firstAttribute="leading" secondItem="Stv-jo-PI6" secondAttribute="leading" id="iUM-dn-iKk"/>
+                        <constraint firstAttribute="bottom" secondItem="sBc-Li-PA3" secondAttribute="bottom" id="ig3-UZ-Q2e"/>
+                        <constraint firstAttribute="trailing" secondItem="4gy-QU-HLV" secondAttribute="trailing" id="m66-mb-7KC"/>
+                        <constraint firstItem="4gy-QU-HLV" firstAttribute="top" secondItem="Stv-jo-PI6" secondAttribute="top" id="pAk-sv-U9h"/>
+                        <constraint firstItem="sBc-Li-PA3" firstAttribute="top" secondItem="4gy-QU-HLV" secondAttribute="bottom" id="yaC-Ku-HYr"/>
+                    </constraints>
+                </view>
+            </subviews>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <constraints>
+                <constraint firstAttribute="trailing" secondItem="Stv-jo-PI6" secondAttribute="trailing" id="QaC-lt-xO3"/>
+                <constraint firstAttribute="bottom" secondItem="Stv-jo-PI6" secondAttribute="bottom" id="agJ-TT-PSZ"/>
+                <constraint firstItem="Stv-jo-PI6" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="dvz-Ma-V0T"/>
+                <constraint firstItem="Stv-jo-PI6" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="k2o-HR-XzO"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <connections>
+                <outlet property="addBtn" destination="4gy-QU-HLV" id="dIz-84-e2x"/>
+                <outlet property="contentsView" destination="Stv-jo-PI6" id="OAd-bB-rbn"/>
+            </connections>
+            <point key="canvasLocation" x="-157.24637681159422" y="-5.6919642857142856"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="WFApplyArea.bundle/add" width="16" height="16"/>
+    </resources>
+</document>

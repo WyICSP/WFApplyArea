@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="WFApplyAreaFooterView">
+            <rect key="frame" x="0.0" y="0.0" width="414" height="10"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="r8C-cp-YR9">
+                    <rect key="frame" x="12" y="0.0" width="390" height="10"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                </view>
+            </subviews>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <constraints>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="r8C-cp-YR9" secondAttribute="trailing" constant="12" id="0OX-zr-ISp"/>
+                <constraint firstItem="r8C-cp-YR9" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="12" id="JI0-70-kyN"/>
+                <constraint firstAttribute="bottom" secondItem="r8C-cp-YR9" secondAttribute="bottom" id="XBi-dV-qBR"/>
+                <constraint firstItem="r8C-cp-YR9" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="kAt-1Z-Tic"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
+            <connections>
+                <outlet property="contentsView" destination="r8C-cp-YR9" id="xZy-QW-Cef"/>
+            </connections>
+            <point key="canvasLocation" x="-101" y="106"/>
+        </view>
+    </objects>
+</document>

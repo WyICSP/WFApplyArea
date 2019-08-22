@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="KGk-i7-Jjw" customClass="WFDiviIntoSetEditTableViewCell">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="W1K-Jc-Hg7">
+                        <rect key="frame" x="12" y="0.0" width="351" height="43.5"/>
+                        <subviews>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="姓名" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="r4R-GK-6PI">
+                                <rect key="frame" x="12" y="7" width="60" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="ST9-6b-t1q"/>
+                                    <constraint firstAttribute="width" constant="60" id="dIa-hI-OeS"/>
+                                </constraints>
+                                <color key="textColor" red="0.40000000000000002" green="0.40000000000000002" blue="0.40000000000000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                                <connections>
+                                    <action selector="textFieldDidChange:" destination="KGk-i7-Jjw" eventType="editingChanged" id="vAd-oH-Gj7"/>
+                                </connections>
+                            </textField>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="10" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="hq5-YT-Vcc">
+                                <rect key="frame" x="249" y="7" width="50" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="50" id="8Pj-AC-STO"/>
+                                    <constraint firstAttribute="height" constant="30" id="H35-WY-C7C"/>
+                                </constraints>
+                                <color key="textColor" red="0.40000000000000002" green="0.40000000000000002" blue="0.40000000000000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
+                                <connections>
+                                    <action selector="textFieldDidChange:" destination="KGk-i7-Jjw" eventType="editingChanged" id="17o-Qn-e0p"/>
+                                </connections>
+                            </textField>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5ZW-Jf-D7r">
+                                <rect key="frame" x="301" y="0.0" width="40" height="43.5"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="40" id="gia-Tc-m9o"/>
+                                </constraints>
+                                <state key="normal" image="WFApplyArea.bundle/delete"/>
+                                <connections>
+                                    <action selector="clickDeleteBtn:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="3Cf-I3-hkY"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VtA-y5-WHx">
+                                <rect key="frame" x="12" y="0.0" width="339" height="0.5"/>
+                                <color key="backgroundColor" red="0.91764705882352937" green="0.91764705882352937" blue="0.91764705882352937" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="0.5" id="nHT-9S-OkP"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="15618918815  " placeholder="手机号码" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="j6y-B5-0M0">
+                                <rect key="frame" x="107.5" y="7" width="100" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="phK-EN-yrr"/>
+                                    <constraint firstAttribute="width" constant="100" id="qCl-A9-arc"/>
+                                </constraints>
+                                <color key="textColor" red="0.40000000000000002" green="0.40000000000000002" blue="0.40000000000000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
+                                <connections>
+                                    <action selector="textFieldDidChange:" destination="KGk-i7-Jjw" eventType="editingChanged" id="gMg-Dc-blI"/>
+                                </connections>
+                            </textField>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="r4R-GK-6PI" firstAttribute="centerY" secondItem="W1K-Jc-Hg7" secondAttribute="centerY" id="1qL-jc-h1o"/>
+                            <constraint firstItem="j6y-B5-0M0" firstAttribute="centerX" secondItem="W1K-Jc-Hg7" secondAttribute="centerX" constant="-18" id="7jL-vI-pPI">
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="isAdaptateScreen" value="YES"/>
+                                </userDefinedRuntimeAttributes>
+                            </constraint>
+                            <constraint firstAttribute="trailing" secondItem="VtA-y5-WHx" secondAttribute="trailing" id="CCi-nz-YrX"/>
+                            <constraint firstItem="VtA-y5-WHx" firstAttribute="top" secondItem="W1K-Jc-Hg7" secondAttribute="top" id="Dhb-u8-wxk"/>
+                            <constraint firstItem="hq5-YT-Vcc" firstAttribute="centerY" secondItem="j6y-B5-0M0" secondAttribute="centerY" id="F2V-Zi-J0V"/>
+                            <constraint firstAttribute="trailing" secondItem="5ZW-Jf-D7r" secondAttribute="trailing" constant="10" id="Kvl-gd-lRT"/>
+                            <constraint firstAttribute="bottom" secondItem="5ZW-Jf-D7r" secondAttribute="bottom" id="Yoa-Q5-KJJ"/>
+                            <constraint firstItem="5ZW-Jf-D7r" firstAttribute="top" secondItem="W1K-Jc-Hg7" secondAttribute="top" id="ddq-NF-fs5"/>
+                            <constraint firstItem="j6y-B5-0M0" firstAttribute="centerY" secondItem="W1K-Jc-Hg7" secondAttribute="centerY" id="iUL-Y0-IQ9"/>
+                            <constraint firstItem="VtA-y5-WHx" firstAttribute="leading" secondItem="W1K-Jc-Hg7" secondAttribute="leading" constant="12" id="kbc-cV-aA3"/>
+                            <constraint firstItem="r4R-GK-6PI" firstAttribute="leading" secondItem="W1K-Jc-Hg7" secondAttribute="leading" constant="12" id="p5q-x7-B2B">
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="isAdaptateScreen" value="YES"/>
+                                </userDefinedRuntimeAttributes>
+                            </constraint>
+                            <constraint firstAttribute="trailing" secondItem="hq5-YT-Vcc" secondAttribute="trailing" constant="52" id="t92-Ae-Dz5">
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="isAdaptateScreen" value="YES"/>
+                                </userDefinedRuntimeAttributes>
+                            </constraint>
+                        </constraints>
+                    </view>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="W1K-Jc-Hg7" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="8vn-i2-Dsl"/>
+                    <constraint firstAttribute="bottom" secondItem="W1K-Jc-Hg7" secondAttribute="bottom" id="R1W-ro-HDl"/>
+                    <constraint firstItem="W1K-Jc-Hg7" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="12" id="Sfp-fq-VQC">
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute type="boolean" keyPath="isAdaptateScreen" value="YES"/>
+                        </userDefinedRuntimeAttributes>
+                    </constraint>
+                    <constraint firstAttribute="trailing" secondItem="W1K-Jc-Hg7" secondAttribute="trailing" constant="12" id="cXg-U0-VDm">
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute type="boolean" keyPath="isAdaptateScreen" value="YES"/>
+                        </userDefinedRuntimeAttributes>
+                    </constraint>
+                </constraints>
+            </tableViewCellContentView>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <viewLayoutGuide key="safeArea" id="aW0-zy-SZf"/>
+            <connections>
+                <outlet property="contentsView" destination="W1K-Jc-Hg7" id="MwM-RM-zWA"/>
+                <outlet property="deleteBtn" destination="5ZW-Jf-D7r" id="Dzk-je-yuP"/>
+                <outlet property="nameTF" destination="r4R-GK-6PI" id="xOp-7S-lWW"/>
+                <outlet property="percentTF" destination="hq5-YT-Vcc" id="jDG-1b-7oH"/>
+                <outlet property="phoneTF" destination="j6y-B5-0M0" id="Yme-NA-j8c"/>
+            </connections>
+            <point key="canvasLocation" x="47.826086956521742" y="34.821428571428569"/>
+        </tableViewCell>
+    </objects>
+    <resources>
+        <image name="WFApplyArea.bundle/delete" width="16" height="16"/>
+    </resources>
+</document>
