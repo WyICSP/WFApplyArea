@@ -40,6 +40,12 @@
 @property (nonatomic, strong, nullable) WFMyAreaDetailHeadView *headView;
 /**充电桩信号强度*/
 @property (nonatomic, strong, nullable) WFMyAreaChargePileView *chargePileView;
+/**是否显示收费*/
+@property (nonatomic, assign) BOOL isCollectFee;
+/**是否显示计费*/
+@property (nonatomic, assign) BOOL isMeterFee;
+/**是否显示合伙人*/
+@property (nonatomic, assign) BOOL isPartner;
 @end
 
 @implementation WFAreaDetailViewController
@@ -80,11 +86,44 @@
 
 - (void)requestSuccessWithModels:(WFAreaDetailModel * _Nonnull)models {
     self.mainModels = models;
-    //默认选中单次收费
-    self.mainModels.isHaveSinge = self.mainModels.singleCharge.isSelect = YES;
-    self.showType = WFAreaDetailSingleType;
+    //设置默认选中
+    [self setDefaultSelectFee];
+    
+//    //判断是否显示收费模块
+    if (self.mainModels.singleCharge || self.mainModels.vipCharge || self.mainModels.multipleChargesList.count != 0) {
+        self.isCollectFee = YES;
+    }
+    //是否显示计费
+    if (self.mainModels.billingInfos.count != 0) {
+        self.isMeterFee = YES;
+    }
+    //是否显示合伙人
+    if (self.mainModels.partnerPropInfos.count != 0) {
+        self.isPartner = YES;
+    }
     
     [self.tableView reloadData];
+}
+
+/**
+ 设置默认选中
+ */
+- (void)setDefaultSelectFee {
+    if (![NSString isBlankString:self.mainModels.singleCharge.singleChargeId]) {
+        //默认选中单次收费
+        self.mainModels.isHaveSinge = self.mainModels.singleCharge.isSelect = YES;
+        self.showType = WFAreaDetailSingleType;
+        return;
+    }else if (self.mainModels.multipleChargesList.count != 0) {
+        WFAreaDetailMultipleModel *itemModel = [self.mainModels.multipleChargesList firstObject];
+        self.mainModels.isHaveManyTime = itemModel.isSelect = YES;
+        self.showType = WFAreaDetailManyTimesType;
+        return;
+    }else if (![NSString isBlankString:self.mainModels.vipCharge.vipChargeId]) {
+        self.mainModels.isHaveVip = self.mainModels.vipCharge.isSelect = YES;
+        self.showType = WFAreaDetailDiscountType;
+        return;
+    }
 }
 
 /**
@@ -135,7 +174,7 @@
         [self.navigationController pushViewController:edit animated:YES];
         return;
     }
-    [self.tableView refreshTableViewWithSection:1];
+    [self.tableView reloadData];
 }
 
 /**
@@ -179,10 +218,13 @@
 - (CGFloat)getBillHeight {
     //充电金额
     NSInteger index = self.mainModels.billingInfos.count % 3;
+    //获取一共多少行
+    NSInteger row = self.mainModels.billingInfos.count / 3;
     //整除的时候的高度
-    NSInteger wholeHeight = self.mainModels.billingInfos.count / 3 * KHeight(32.0f);
+    NSInteger wholeHeight = row * KHeight(32.0f) +  (row - 2) * KHeight(10.0f);
     //不能整除的时候的高度
-    NSInteger maxHeight = (self.mainModels.billingInfos.count / 3 + 1) * KHeight(32.0f);
+    NSInteger maxHeight = (row + 1) * KHeight(32.0f) + (row - 1) * KHeight(10.0f);
+    
     return index == 0 ? wholeHeight + 20 : maxHeight + 20;
 }
 
@@ -194,13 +236,13 @@
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     if (section == 1) {
         //收费
-        return (self.mainModels.singleCharge || self.mainModels.vipCharge || self.mainModels.multipleChargesList.count != 0) ? 1 : 0;
+        return self.isCollectFee ? 1 : 0;
     }else if (section == 2) {
         //计费
-        return self.mainModels.billingInfos.count == 0 ? 0 : 1;
+        return self.isMeterFee ? 1 : 0;
     }else if (section == 3) {
         //合伙人
-        return self.mainModels.partnerPropInfos.count == 0 ? 0 : self.mainModels.partnerPropInfos.count + 1;
+        return self.isPartner ? self.mainModels.partnerPropInfos.count + 1 : 0;
     }
     return 1;
 }
@@ -256,7 +298,7 @@
         sectionView.clickBtnBlock = ^(NSString * _Nonnull btnTitle) {
             [weakSelf handleSectionWithTitle:btnTitle];
         };
-        return sectionView;
+        return self.isCollectFee ? sectionView : [UIView new];
     }else if (section == 2 || section == 3) {
         WFAreaDetailOtherSectionView *sectionView = [[[NSBundle bundleForClass:[self class]] loadNibNamed:@"WFAreaDetailOtherSectionView" owner:nil options:nil] firstObject];
         sectionView.title.text = section == 2 ? @"我的计费标准" : @"我的合伙人";
@@ -266,7 +308,11 @@
             @strongify(self)
             [self jumpPartnerOrchargeCtrlWithSection:section];
         };
-        return sectionView;
+        if (section == 2) {
+            return self.isMeterFee ? sectionView : [UIView new];
+        }else if (section == 3) {
+            return self.isPartner ? sectionView : [UIView new];
+        }
     }
     return [UIView new];
 }
@@ -274,7 +320,12 @@
 - (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section {
     if (section != 0) {
         WFAreaDetailFooterView *footerView = [[[NSBundle bundleForClass:[self class]] loadNibNamed:@"WFAreaDetailFooterView" owner:nil options:nil] firstObject];
-        return footerView;
+        if (section == 1) {
+            return self.isCollectFee ? footerView : [UIView new];
+        }else if (section == 2) {
+            return self.isMeterFee ? footerView : [UIView new];
+        }
+        return self.isPartner ? footerView : [UIView new];
     }
     return [UIView new];
 }
@@ -304,15 +355,26 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
     if (section == 1) {
-        return KHeight(95.0f);
-    }else if (section == 2 || section == 3) {
-        return KHeight(44.0f);
+        return self.isCollectFee ? KHeight(95.0f) : CGFLOAT_MIN;
+    }else if (section == 2) {
+        return self.isMeterFee ? KHeight(44.0f) : CGFLOAT_MIN;
+    }else if (section == 3) {
+        return self.isPartner ? KHeight(44.0f) : CGFLOAT_MIN;
     }
     return CGFLOAT_MIN;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
-    return section == 0 ? 10.0f : 20.0f;
+    if (section == 0) {
+        return 10.0f;
+    }else if (section == 1) {
+        return self.isCollectFee ? 20.0f : CGFLOAT_MIN;
+    }else if (section == 2) {
+        return self.isMeterFee ? 20.0f : CGFLOAT_MIN;
+    }else if (section == 3) {
+        return self.isPartner ? 20.0f : CGFLOAT_MIN;
+    }
+    return CGFLOAT_MIN;
 }
 
 

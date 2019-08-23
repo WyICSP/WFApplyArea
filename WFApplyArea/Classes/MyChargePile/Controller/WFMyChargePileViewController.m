@@ -20,6 +20,8 @@
 @interface WFMyChargePileViewController ()<UITableViewDelegate,UITableViewDataSource>
 /**头视图*/
 @property (nonatomic, strong, nullable) WFMyChargePileHeadView *pHeadView;
+/**充电桩状态*/
+@property (nonatomic, strong, nullable) WFMyChargePileSectionView *cpView;
 /**tableView*/
 @property (nonatomic, strong, nullable) UITableView *tableView;
 /**数据*/
@@ -32,6 +34,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self setUI];
+    DLog(@"11");
 }
 
 #pragma mark 私有方法
@@ -70,6 +73,9 @@
         self.models.isNoInstallPile = YES;
         self.models.isSelectAbnormalPile = self.models.isSelectPile = NO;
     }
+    //重新刷新数据
+    self.cpView.model = self.models;
+    
     [self.tableView reloadData];
 }
 
@@ -102,19 +108,8 @@
     return cell;
 }
 
-- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
-    WFMyChargePileSectionView *head = [[[NSBundle bundleForClass:[self class]] loadNibNamed:@"WFMyChargePileSectionView" owner:nil options:nil] firstObject];
-    head.model = self.models;
-    @weakify(self)
-    head.clickBtnBlock = ^(NSInteger index) {
-        @strongify(self)
-        [self handleSectionWithIndex:index];
-    };
-    return section == 0 ? head : [UIView new];
-}
-
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
-    return section == 0 ? KHeight(71.0f) : CGFLOAT_MIN;
+    return CGFLOAT_MIN;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
@@ -147,6 +142,7 @@
         _tableView.estimatedSectionFooterHeight = 0.0f;
         _tableView.estimatedSectionHeaderHeight = 0.0f;
         _tableView.backgroundColor = UIColor.clearColor;
+        _tableView.tableHeaderView = self.cpView;
         [self.view addSubview:_tableView];
         
     }
@@ -163,4 +159,19 @@
     }
     return _pHeadView;
 }
+
+- (WFMyChargePileSectionView *)cpView {
+    if (!_cpView) {
+        _cpView = [[[NSBundle bundleForClass:[self class]] loadNibNamed:@"WFMyChargePileSectionView" owner:nil options:nil] firstObject];
+        _cpView.frame = CGRectMake(0, 0, ScreenWidth, KHeight(71.0f));
+        _cpView.model = self.models;
+        @weakify(self)
+        _cpView.clickBtnBlock = ^(NSInteger index) {
+            @strongify(self)
+            [self handleSectionWithIndex:index];
+        };
+    }
+    return _cpView;
+}
+
 @end

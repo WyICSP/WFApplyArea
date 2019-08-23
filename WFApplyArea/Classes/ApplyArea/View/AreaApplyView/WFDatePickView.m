@@ -99,7 +99,7 @@
 #pragma mark - 确定按钮点击
 -(void)tapButton:(UIButton*)button
 {
-    NSString *date = [NSString stringWithFormat:@"%@/%@/%@",self.year,self.month,self.day];
+    NSString *date = [NSString stringWithFormat:@"%@-%@-%@",self.year,self.month,self.day];
     !self.chooseDateMsgString ? : self.chooseDateMsgString (date);
     [self hiddenBottomView];
 }
@@ -148,11 +148,8 @@
     if (component == 0) {
         lable.text = [self.yearArray objectAtIndex:row];
     } else if (component == 1) {
-        //加保险,防止数组越界
-        lable.text = [self.monthArray objectAtIndex:row];
+        lable.text = [NSString stringWithFormat:@"%ld",[[self.monthArray objectAtIndex:row] integerValue]];
     } else {
-        //加保险,防止数组越界
-//        NSLog(@"%ld",component);
         lable.text = [self.dayArray objectAtIndex:row];
     }
     return lable;
@@ -226,12 +223,21 @@
     
     if ([[[self getYearData] objectAtIndex:index] isEqualToString:months.firstObject]) {
         //当年
-        for (int i = 0 ; i < 5; i ++) {
-            [monthArray addObject:[NSString stringWithFormat:@"%d",newMonth +i]];
+        for (int i = 0 ; i < (12-newMonth+1); i ++) {
+            if (newMonth + i < 10) {
+                [monthArray addObject:[NSString stringWithFormat:@"0%d",newMonth +i]];
+            }else {
+                [monthArray addObject:[NSString stringWithFormat:@"%d",newMonth +i]];
+            }
         }
     }else {
         for (int i = 0 ; i < 12; i ++) {
-            [monthArray addObject:[NSString stringWithFormat:@"%d",i+1]];
+            if (i < 10) {
+                [monthArray addObject:[NSString stringWithFormat:@"0%d",i+1]];
+            }else {
+                [monthArray addObject:[NSString stringWithFormat:@"%d",i+1]];
+            }
+            
         }
     }
     return monthArray;
@@ -241,6 +247,22 @@
  获取天数
  */
 - (NSArray *)getDataCountWithDateString:(NSString *)dateString {
+    
+    //获取当前月份
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    [dateFormatter setDateFormat:@"yyyy:MM"];
+    NSString *strDate = [dateFormatter stringFromDate:[NSDate date]];
+    //当前日
+    NSString *currentDayStr = @"";
+    BOOL isCurrentMonth = NO;
+    if ([strDate isEqualToString:dateString]) {
+        isCurrentMonth = YES;
+        //获取当前是多少号
+        NSDateFormatter *dayFormatter = [[NSDateFormatter alloc] init];
+        [dayFormatter setDateFormat:@"dd"];
+        currentDayStr = [dayFormatter stringFromDate:[NSDate date]];
+    }
+    
     NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
     [dateFormat setDateFormat:@"yyyy:MM"];
     NSDate *date = [dateFormat dateFromString:dateString];
@@ -248,9 +270,18 @@
     // dayCountOfThisMonth就是date月份的天数
     NSInteger dayCountOfThisMonth = daysInLastMonth.length;
     NSMutableArray *dayArray = [[NSMutableArray alloc] init];
-    for (int i = 0; i < dayCountOfThisMonth; i++) {
-        [dayArray addObject:[NSString stringWithFormat:@"%d",i+1]];
+    
+    if (isCurrentMonth) {
+        //如果是当月
+        for (int i = 0; i < dayCountOfThisMonth - currentDayStr.intValue + 1; i++) {
+            [dayArray addObject:[NSString stringWithFormat:@"%d",currentDayStr.intValue + i]];
+        }
+    }else {
+        for (int i = 0; i < dayCountOfThisMonth; i++) {
+            [dayArray addObject:[NSString stringWithFormat:@"%d",i+1]];
+        }
     }
+    
     return dayArray;
 }
 

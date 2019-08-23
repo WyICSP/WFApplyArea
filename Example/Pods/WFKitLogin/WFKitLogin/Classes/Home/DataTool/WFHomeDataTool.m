@@ -23,8 +23,24 @@
     [WKRequest getWithURLString:path parameters:params isShowHud:NO success:^(WKBaseModel *baseModel) {
         if (CODE_ZERO) {
             resultBlock([WFHomeDataModel mj_objectWithKeyValues:baseModel.data]);
+            //存储数据
+            [YFUserDefaults setObject:baseModel.data forKey:@"HomeData"];
         }else {
             [YFToast showMessage:baseModel.message inView:[[YFKeyWindow shareInstance] getCurrentVC].view];
+        }
+    } failure:^(NSError *error) {
+        
+    }];
+}
+
+#pragma mark 版本更新
+
++ (void)updateAppWithParams:(NSDictionary *)params
+                resultBlock:(void(^)(NSDictionary *models))resultBlock {
+    NSString *path = [NSString stringWithFormat:@"%@app-system/app-system/v1/get/app/version",NEW_HOST_URL];
+    [WKRequest getWithURLString:path parameters:nil isShowHud:NO success:^(WKBaseModel *baseModel) {
+        if (CODE_ZERO) {
+            resultBlock([baseModel.mDictionary objectForKey:@"data"]);
         }
     } failure:^(NSError *error) {
         

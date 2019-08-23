@@ -109,6 +109,10 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, copy) NSString *useCount;
 /**时间*/
 @property (nonatomic, copy) NSString *useTime;
+/**多少次*/
+@property (nonatomic, assign) NSInteger giveCount;
+/**时间*/
+@property (nonatomic, copy) NSString *expireTime;
 /**vipId*/
 @property (nonatomic, copy) NSString *vipId;
 @end

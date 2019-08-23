@@ -63,7 +63,7 @@
     [YFNotificationCenter addObserver:self selector:@selector(monitorTimeDataChange:) name:@"MonitorTimeKeys" object:nil];
     //注册通知：监听充电时间变化
     [YFNotificationCenter addObserver:self selector:@selector(addCustom:) name:@"AddTimeKeys" object:nil];
-    //获取积分方式
+    //获取积计费方式
     if (!self.models) {
         [self getBillMethod];
     }else {
@@ -231,11 +231,31 @@
  */
 - (void)handleOpenOrChoseSectionViewWithSection:(NSInteger)section
                                           index:(NSInteger)index  {
-    if (section == 0) {
+    if (index == 10 && section == 0) {
+        //选中时间
+        for (WFBillingPriceMethodModel *tModel in self.models.billingPriceMethods) {
+            tModel.isSelect = NO;
+        }
+        self.models.isSelectFirstSection = YES;
+        self.models.isSelectSecondSection = NO;
+        self.models.secondSelectNum = 0;
+        
+    }else if (index == 10 && section == 1) {
+        //选中价格
+        for (WFBillingTimeMethodModel *tModel in self.models.billingTimeMethods) {
+            tModel.isSelect = NO;
+        }
+        self.models.isSelectFirstSection = NO;
+        self.models.isSelectSecondSection = YES;
+        self.models.firstSelectNum = 0;
+    }else if (index == 20 && section == 0) {
+        //打开或者关闭
         self.models.isOpenFirstSection = !self.models.isOpenFirstSection;
-    }else if (section == 1) {
+    }else if (index == 20 && section == 1) {
+        //打开或者关闭
         self.models.isOpenSecondSection = !self.models.isOpenSecondSection;
     }
+    
     [self.tableView reloadData];
 }
 

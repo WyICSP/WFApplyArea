@@ -44,12 +44,15 @@
 
 #pragma mark 私有方法
 - (void)setUI {
-    self.title = @"添加VIP手机号";
     self.contentsView.layer.cornerRadius = 10.0f;
     self.addBtn.layer.cornerRadius = self.btnCons.constant/2;
     self.view.backgroundColor = UIColorFromRGB(0xF5F5F5);
-    if (self.itemModel)
-    [self assignment];
+    if (self.itemModel) {
+        [self assignment];
+        self.title = @"编辑VIP信息";
+    }else {
+        self.title = @"添加VIP手机号";
+    }
 }
 
 /**
@@ -58,9 +61,10 @@
 - (void)assignment {
     self.nameTF.text = self.itemModel.name;
     self.phoneTF.text = self.itemModel.phone;
-    self.countTF.text = self.itemModel.useCount;
-    self.timetTF.text = self.itemModel.useTime;
+    self.countTF.text = [NSString stringWithFormat:@"%ld",(long)self.itemModel.giveCount];
+    self.timetTF.text = self.itemModel.expireTime;
     self.phoneTF.enabled = NO;
+    
 }
 
 /**
