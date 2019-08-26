@@ -105,6 +105,9 @@
         return;
     }
     
+    //禁止重复点击
+    self.nextBtn.enabled = NO;
+    
     NSMutableDictionary *params = [NSMutableDictionary dictionary];
     [params safeSetObject:self.addressModel.detailAddress forKey:@"address"];//详细地址
     [params safeSetObject:self.addressModel.addressId forKey:@"areaId"];//区的 Id
@@ -122,6 +125,7 @@
 }
 
 - (void)applyAreaSuccess {
+    self.nextBtn.enabled = YES;
     [YFToast showMessage:@"申请成功" inView:self.view];
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         !self.reloadDataBlock ? : self.reloadDataBlock();
