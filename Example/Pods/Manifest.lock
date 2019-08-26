@@ -21,7 +21,7 @@ PODS:
     - SDWebImage/Core (= 5.1.0)
   - SDWebImage/Core (5.1.0)
   - SVProgressHUD (2.2.5)
-  - WFApplyArea (0.1.1):
+  - WFApplyArea (0.1.2):
     - IQKeyboardManager
     - WFBasics
     - WFKitLogin
@@ -74,7 +74,7 @@ SPEC CHECKSUMS:
   MJRefresh: ed450d6eb9d3346a2cb033ab7eb6de090aeef437
   SDWebImage: fb387001955223213dde14bc08c8b73f371f8d8f
   SVProgressHUD: 1428aafac632c1f86f62aa4243ec12008d7a51d6
-  WFApplyArea: e494ca784553177f8cb10b954fc8bbb4969f2c04
+  WFApplyArea: d3c9cc2aac7b6c56191641479aae8b1acca615f3
   WFBasics: 771c266c673f9319a61e4b3b4a54d61badd5618d
   WFHomeAddress: 5f910d0370e0b8b3c62f5b3cc5cd03a800b84125
   WFKitLogin: 29037a7043c33393cb01ed6776ea32e85f4376d3
