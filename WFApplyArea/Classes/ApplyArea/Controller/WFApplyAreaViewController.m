@@ -113,14 +113,26 @@
     [params safeSetObject:self.addressModel.addressId forKey:@"areaId"];//区的 Id
     [params safeSetObject:self.addressModel.areaName forKey:@"name"];//片区名
     [params safeSetObject:[self billingPlanIds] forKey:@"billingPlanIds"];//计费方式数组
+    
+    if ([[self multipleChargesList] count] != 0)
     [params safeSetObject:[self multipleChargesList] forKey:@"multipleChargesList"];//多次收费
-    [params safeSetObject:[self partnerPropInfos] forKey:@"partnerPropInfos"];//合伙人分成设置
-    [params safeSetObject:[self singleCharge] forKey:@"singleCharge"];//单次收费
+    
+    if (self.discountModels.chargingDefaultConfigId.length != 0)
     [params safeSetObject:[self vipCharge] forKey:@"vipCharge"];//优惠收费
+    
+    if (self.singleFeeData.count != 0)
+    [params safeSetObject:[self singleCharge] forKey:@"singleCharge"];//单次收费
+    
+    [params safeSetObject:[self partnerPropInfos] forKey:@"partnerPropInfos"];//合伙人分成设置
+    
+    
     @weakify(self)
     [WFApplyAreaDataTool applyAreaWithParams:params resultBlock:^{
         @strongify(self)
         [self applyAreaSuccess];
+    } failBlock:^{
+        @strongify(self)
+        self.nextBtn.enabled = YES;
     }];
 }
 

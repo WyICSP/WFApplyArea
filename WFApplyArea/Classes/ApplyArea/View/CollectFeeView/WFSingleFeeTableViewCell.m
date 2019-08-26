@@ -68,7 +68,6 @@ static NSString *const cellId = @"WFSingleFeeTableViewCell";
     }else if (textField == self.countTF) {
         self.model.unifiedTime = textField.text.integerValue;
     }
-    self.model.isChange = YES;
 }
 
 - (void)dealloc {

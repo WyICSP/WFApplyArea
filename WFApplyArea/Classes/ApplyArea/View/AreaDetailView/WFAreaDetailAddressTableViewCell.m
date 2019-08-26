@@ -37,7 +37,10 @@ static NSString *const cellId = @"WFAreaDetailAddressTableViewCell";
 }
 
 - (void)bindToCell:(WFAreaDetailModel *)model addressHeight:(CGFloat)addressHeight {
-    self.address.text = [NSString stringWithFormat:@"%@",model.address];
+    
+    NSString *address = [NSString stringWithFormat:@"%@%@",model.areaName,model.address];
+    self.address.text = [NSString stringWithFormat:@"%@",address];
+    
     self.addressViewHeight.constant = addressHeight;
     //0：申请中 1：申请通过 2：申请驳回
     if (model.auditStatus == 0) {

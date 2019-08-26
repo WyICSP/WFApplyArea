@@ -28,6 +28,8 @@ static NSString *const cellId = @"WFApplyAddressTableViewCell";
 - (void)awakeFromNib {
     [super awakeFromNib];
     self.selectionStyle = 0;
+    self.addressBtn.titleLabel.adjustsFontSizeToFitWidth = YES;
+    self.addressBtn.titleLabel.minimumScaleFactor = 0.5;
     self.contentsView.backgroundColor = UIColor.clearColor;
     [self.contentsView setRounderCornerWithRadius:10.0f rectCorner:WFRadiusRectCornerBottomLeft | WFRadiusRectCornerBottomRight imageColor:UIColor.whiteColor size:CGSizeMake(ScreenWidth-24.0f, KHeight(120.0f))];
 }

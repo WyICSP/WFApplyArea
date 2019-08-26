@@ -34,7 +34,8 @@ static NSString *const cellId = @"WFMyAreaAddressTableViewCell";
 }
 
 - (void)setModel:(WFAreaDetailModel *)model {
-    self.address.text = [NSString stringWithFormat:@"%@",model.address];
+    NSString *address = [NSString stringWithFormat:@"%@%@",model.areaName,model.address];
+    self.address.text = [NSString stringWithFormat:@"%@",address];
 }
 
 @end

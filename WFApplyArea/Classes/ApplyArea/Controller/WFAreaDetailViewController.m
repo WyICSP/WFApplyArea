@@ -127,12 +127,13 @@
 }
 
 /**
- 获取地址 cell 的高度
+ 获取地址 cell 的高度 areaName
 
  @return getAddressHeight
  */
 - (CGFloat)getAddressHeight {
-    CGSize size = [NSString getStringSize:16.0f withString:self.mainModels.address andWidth:ScreenWidth-96.0f];
+    NSString *address = [NSString stringWithFormat:@"%@%@",self.mainModels.areaName,self.mainModels.address];
+    CGSize size = [NSString getStringSize:16.0f withString:address andWidth:ScreenWidth-96.0f];
     return size.height + 31;
 }
 

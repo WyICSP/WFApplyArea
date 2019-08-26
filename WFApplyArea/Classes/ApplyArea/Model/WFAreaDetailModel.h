@@ -56,7 +56,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, copy) NSString *address;
 /**区域Id*/
 @property (nonatomic, copy) NSString *areaId;
-/**区域名*/
+/**省市区*/
 @property (nonatomic, copy) NSString *areaName;
 /**片区Id*/
 @property (nonatomic, copy) NSString *groupId;

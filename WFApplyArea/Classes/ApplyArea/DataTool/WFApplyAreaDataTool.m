@@ -276,7 +276,8 @@
 
 #pragma mark 申请片区
 + (void)applyAreaWithParams:(NSDictionary *)params
-                resultBlock:(void(^)(void))resultBlock {
+                resultBlock:(void(^)(void))resultBlock
+                  failBlock:(void(^)(void))failBlock {
     //接口地址
     NSString *path = [NSString stringWithFormat:@"%@app-partner-group/v1/charging/group/add",NEW_HOST_URL];
     [WKRequest postWithURLString:path parameters:params isJson:YES isShowHud:YES success:^(WKBaseModel *baseModel) {
@@ -284,9 +285,10 @@
             resultBlock();
         }else {
             [YFToast showMessage:baseModel.message inView:[[YFKeyWindow shareInstance] getCurrentVC].view];
+            failBlock();
         }
     } failure:^(NSError *error) {
-        
+        failBlock();
     }];
 }
 

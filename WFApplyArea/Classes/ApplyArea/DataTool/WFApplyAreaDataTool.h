@@ -204,7 +204,8 @@ NS_ASSUME_NONNULL_BEGIN
  @param resultBlock 返回结果
  */
 + (void)applyAreaWithParams:(NSDictionary *)params
-                resultBlock:(void(^)(void))resultBlock;
+                resultBlock:(void(^)(void))resultBlock
+                  failBlock:(void(^)(void))failBlock;
 
 
 /**

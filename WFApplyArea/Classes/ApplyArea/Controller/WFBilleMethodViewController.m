@@ -300,6 +300,16 @@
     //输入的金额
     NSString *price = [NSString stringWithFormat:@"%@",[dict objectForKey:@"inputKeys"]];
     
+    //校验输入的和后台返回的有没有重复的
+    for (WFBillingPriceMethodModel *itemModel in self.models.billingPriceMethods) {
+        if (price.floatValue *100 == itemModel.billingValue.floatValue) {
+            itemModel.isSelect = YES;
+            //处理选择状态
+            [self handleSelectPriceMethod];
+            return;
+        }
+    }
+    
     NSMutableDictionary *params = [NSMutableDictionary dictionary];
     [params safeSetObject:@(price.floatValue*100) forKey:@"price"];
     @weakify(self)
@@ -307,14 +317,40 @@
         @strongify(self)
         
         if (self.billPriceMethodArray.count >= 1) {
+            models.isSelect = YES;
             [self.billPriceMethodArray insertObject:models atIndex:self.models.billingPriceMethods.count-1];
         }
         self.models.billingPriceMethods = self.billPriceMethodArray;
         //重新获取充电金额高度
         self.billMethodPriceHeight = [self getPriceHeight];
-        [self.tableView refreshTableViewWithSection:1];
+        //处理选择状态
+        [self handleSelectPriceMethod];
     }];
-    
+}
+
+/**
+ 处理选择选择价格方法
+ */
+- (void)handleSelectPriceMethod {
+    //表示当前数据经过修改
+    self.models.isChange = YES;
+    //将时间设置未选中
+    for (WFBillingTimeMethodModel *tModel in self.models.billingTimeMethods) {
+        tModel.isSelect = NO;
+        self.models.firstSelectNum = 0;
+        self.models.isSelectFirstSection = NO;
+    }
+    //计算几条选中数据
+    NSInteger totalCount = 0;
+    for (WFBillingPriceMethodModel *newModel in self.models.billingPriceMethods) {
+        if (newModel.isSelect) {
+            totalCount += 1;
+        }
+    }
+    //选中价格
+    self.models.isSelectSecondSection = YES;
+    self.models.secondSelectNum = totalCount;
+    [self.tableView reloadData];
 }
 
 #pragma mark 确定数据
