@@ -6,6 +6,7 @@
 //
 
 #import "WFJSApiTools.h"
+#import "WFUserCenterPublicAPI.h"
 #import "dsbridge.h"
 #import "YFKeyWindow.h"
 #import "UserData.h"
@@ -33,5 +34,29 @@
     completionHandler(msg,YES);
     
 }
+
+/**上传头像 点击拍照*/
+- (void)getHeadImage:(NSString *)msg :(JSCallback) completionHandler
+{
+    [WFUserCenterPublicAPI openSystemCameraWithType:WFUpdatePhotoModHeadType resyltBlock:^(NSString * _Nonnull photoData) {
+        completionHandler(photoData,YES);
+    }];
+}
+
+/**上传头像 点击相册*/
+- (void)upLoadHeadImage:(NSString *)msg :(JSCallback) completionHandler
+{
+    [WFUserCenterPublicAPI openSystemAlbumWithType:WFUpdatePhotoModHeadType resultBlock:^(NSString * _Nonnull photoData) {
+        completionHandler(photoData,YES);
+    }];
+}
+
+/**联系客服*/
+- (void)phoneCilck:(NSString *)msg :(JSCallback) completionHandler
+{
+    [WFUserCenterPublicAPI callPhoneWithNumber:msg];
+    completionHandler(msg,YES);
+}
+
 
 @end

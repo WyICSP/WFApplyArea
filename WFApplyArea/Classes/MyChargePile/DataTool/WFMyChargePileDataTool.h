@@ -45,6 +45,18 @@ NS_ASSUME_NONNULL_BEGIN
 + (void)getAreaPilesignalIntensitWithParams:(NSDictionary *)params
                                 resultBlock:(void(^)(NSArray <WFSignleIntensityListModel *> *models))resultBlock;
 
+
+
+#pragma mark 上传头像接口
+/**
+ 上传头像
+
+ @param params 参数
+ @param resultBlock 返回结果
+ */
++ (void)uploadModHeadWithParams:(NSDictionary *)params
+                    resultBlock:(void (^)(NSString *str))resultBlock;
+
 @end
 
 NS_ASSUME_NONNULL_END

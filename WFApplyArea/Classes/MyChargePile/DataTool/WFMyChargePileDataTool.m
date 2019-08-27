@@ -62,4 +62,20 @@
     }];
 }
 
+#pragma mark 个人中心上传头像
++ (void)uploadModHeadWithParams:(NSDictionary *)params
+                    resultBlock:(void (^)(NSString *str))resultBlock {
+    //接口地址POST
+    NSString *path = [NSString stringWithFormat:@"%@admin/uploadPicture",HOST_URL];
+    [WKRequest postWithURLString:path parameters:params isJson:NO isShowHud:YES success:^(WKBaseModel *baseModel) {
+        if (CODE_ZERO) {
+            resultBlock(baseModel.data);
+        }else {
+            [YFToast showMessage:baseModel.message inView:[[YFKeyWindow shareInstance] getCurrentVC].view];
+        }
+    } failure:^(NSError *error) {
+        
+    }];
+}
+
 @end

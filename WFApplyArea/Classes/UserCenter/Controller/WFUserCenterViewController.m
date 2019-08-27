@@ -43,7 +43,7 @@
     [super viewWillDisappear:animated];
     [self.navigationController setNavigationBarHidden:NO animated:animated];
     //清空缓存
-//    [self deleteWebCache];
+    [self deleteWebCache];
     // 开启
     if ([self.navigationController respondsToSelector:@selector(interactivePopGestureRecognizer)]) {
         self.navigationController.interactivePopGestureRecognizer.enabled = YES;

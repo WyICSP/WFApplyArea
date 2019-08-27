@@ -86,6 +86,8 @@
 #import "WFMyChargePileSectionView.h"
 #import "WFMyChargePileTableViewCell.h"
 #import "WFUserCenterViewController.h"
+#import "JMUpdataImage.h"
+#import "WFUserCenterPublicAPI.h"
 
 FOUNDATION_EXPORT double WFApplyAreaVersionNumber;
 FOUNDATION_EXPORT const unsigned char WFApplyAreaVersionString[];

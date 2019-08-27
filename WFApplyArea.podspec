@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'WFApplyArea'
-  s.version          = '0.1.4'
+  s.version          = '0.1.5'
   s.summary          = 'WFApplyArea申请片区'
 
 # This description is used to generate tags and improve search results.
@@ -44,4 +44,5 @@ WFApplyArea申请片区的组件,合伙人使用的功能
   s.dependency 'WFKitLogin'
   s.dependency 'IQKeyboardManager'
   s.dependency 'WKFunComponents'
+  s.dependency 'TZImagePickerController'
 end
