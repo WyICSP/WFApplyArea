@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'WFApplyArea'
-  s.version          = '0.1.3'
+  s.version          = '0.1.4'
   s.summary          = 'WFApplyArea申请片区'
 
 # This description is used to generate tags and improve search results.

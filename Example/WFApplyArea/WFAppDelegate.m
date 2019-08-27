@@ -12,9 +12,10 @@
 #import "YFMainPublicModelAPI.h"
 #import "WFViewController.h"
 #import "WFLoginViewController.h"
-#import "WFLoginPublicAPI.h"
+#import <WFKitLogin/WFLoginPublicAPI.h>
 #import "NSString+Regular.h"
 #import "WKNavigationController.h"
+#import "WFUserCenterViewController.h"
 #import "WFHomeViewController.h"
 #import "UserData.h"
 #import "IQKeyboardManager.h"
@@ -78,17 +79,18 @@
             UITabBarController *rootVC        = [YFMainPublicModelAPI rootTabBarCcontroller];
             [YFMainPublicModelAPI addChildVC:[WFHomeViewController new] normalImageName:@"" selectedImageName:@"" title:@"登录"];
             [YFMainPublicModelAPI addChildVC:[WFMyAreaViewController new] normalImageName:@"" selectedImageName:@"" title:@"我的片区"];
+            [YFMainPublicModelAPI addChildVC:[WFUserCenterViewController new] normalImageName:@"" selectedImageName:@"" title:@"我的"];
             [YFMainPublicModelAPI setGlobalBackGroundColor:[UIColor whiteColor]];
             [YFMainPublicModelAPI setNarBarGlobalTextColor:[UIColor blackColor] andFontSize:18];
             
             [self.window setRootViewController:rootVC];
         }else{
-            WFLoginViewController *login     = [WFLoginPublicAPI rootLoginViewController];
+            WFLoginViewController *login      = [WFLoginPublicAPI rootLoginViewController];
             self.window.rootViewController    = [[WKNavigationController alloc] initWithRootViewController:login];
         }
     }else{
         WFLoginViewController *login         = [WFLoginPublicAPI rootLoginViewController];
-        self.window.rootViewController        = [[WKNavigationController alloc] initWithRootViewController:login];
+        self.window.rootViewController       = [[WKNavigationController alloc] initWithRootViewController:login];
         // 存储新版本
         [defaults setObject:currentVersion forKey:key];
         [defaults synchronize];

@@ -74,6 +74,8 @@
 #import "WFProfitItemTableViewCell.h"
 #import "WFSingleFeeTableViewCell.h"
 #import "WFSinglePowerTableViewCell.h"
+#import "WFCurrentWebViewController.h"
+#import "WFJSApiTools.h"
 #import "WFAbnormalPileViewController.h"
 #import "WFMyChargePileViewController.h"
 #import "WFMyChargePileDataTool.h"
@@ -83,6 +85,7 @@
 #import "WFMyChargePileHeadView.h"
 #import "WFMyChargePileSectionView.h"
 #import "WFMyChargePileTableViewCell.h"
+#import "WFUserCenterViewController.h"
 
 FOUNDATION_EXPORT double WFApplyAreaVersionNumber;
 FOUNDATION_EXPORT const unsigned char WFApplyAreaVersionString[];
