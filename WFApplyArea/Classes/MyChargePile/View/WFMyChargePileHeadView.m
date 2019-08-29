@@ -12,7 +12,7 @@
 @implementation WFMyChargePileHeadView
 
 - (void)setModels:(WFMyChargePileModel *)models {
-    self.pileCount.text = [NSString stringWithFormat:@"%ld",models.count];
+    self.pileCount.text = [NSString stringWithFormat:@"%ld台",models.count];
     NSString *present = @"%";
     self.rate.text = [NSString stringWithFormat:@"%.2f%@",models.usage,present];
 }

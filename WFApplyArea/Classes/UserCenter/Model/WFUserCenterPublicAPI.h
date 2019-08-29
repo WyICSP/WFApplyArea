@@ -35,6 +35,11 @@ typedef NS_ENUM(NSInteger, WFUpdatePhotoType) {
  */
 + (void)callPhoneWithNumber:(NSString *)phone;
 
+/**
+ 退出登录 跳转登录页面
+ */
++ (void)loginOutAndJumpLogin;
+
 @end
 
 NS_ASSUME_NONNULL_END

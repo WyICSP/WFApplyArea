@@ -148,7 +148,7 @@
     if (index == 10) {
         //控制选中未选中
         if (section == 0) {
-            self.mainModel.isSelectFirstSection = !self.mainModel.isSelectFirstSection;
+            self.mainModel.isSelectFirstSection = YES;
             self.mainModel.isSelectSecondSection = NO;
             //如果头部没有选中 则该区域的数据都不应该选中
             if (!self.mainModel.isSelectFirstSection) {
@@ -163,7 +163,7 @@
             }
             
         }else if (section == 1) {
-            self.mainModel.isSelectSecondSection = !self.mainModel.isSelectSecondSection;
+            self.mainModel.isSelectSecondSection = YES;
             self.mainModel.isSelectFirstSection = NO;
             //如果头部没有选中 则该区域的数据都不应该选中
             if (!self.mainModel.isSelectSecondSection) {
@@ -234,6 +234,25 @@
 - (void)clickConfirmBtn {
     [self.view endEditing:YES];
     if (self.itemArray.count == 0) {
+        NSInteger totalData = 0;
+        if (self.mainModel.isSelectFirstSection) {
+            for (WFDefaultUnifiedListModel *model in self.mainModel.multipleChargesUnifiedList) {
+                if (model.isSelect) {
+                    totalData += 1;
+                }
+            }
+        }else if (self.mainModel.isSelectSecondSection) {
+            for (WFDefaultPowerListModel *model in self.mainModel.multipleChargesPowerList) {
+                if (model.isSelect) {
+                    totalData += 1;
+                }
+            }
+        }
+        //如果没有选中数据需要提示
+        if (totalData == 0) {
+            [YFToast showMessage:@"请选择具体的收费模式" inView:self.view];
+            return;
+        }
         //获取默认数据
         !self.mainModelBlock ? : self.mainModelBlock(self.mainModel);
         [self goBack];
@@ -241,7 +260,6 @@
         //修改
         [self updateManyTimeFee];
     }
-    
 }
 
 /**

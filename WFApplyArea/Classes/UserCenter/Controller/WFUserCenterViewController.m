@@ -62,11 +62,12 @@
 
 #pragma mark 设置页面
 - (void)setUI {
-    //添加进度条
-    [self.navigationController.navigationBar.layer addSublayer:self.webProgressLayer];
-    //添加 webview
+    
     self.urlString = [NSString stringWithFormat:@"%@page/menu.html?uuid=%@&appVersion=v%@",H5_HOST,USER_UUID,APP_VERSION];
-    [self.dwebview loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:self.urlString]]];
+    //添加 webview
+    [self.view addSubview:self.dwebview];
+    //添加进度条
+    [self.view.layer addSublayer:self.webProgressLayer];
 }
 
 - (void)deleteWebCache {
@@ -104,10 +105,9 @@
     if (!_dwebview) {
         _dwebview = [[DWKWebView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, ScreenHeight-TabbarHeight)];
         [_dwebview addJavascriptObject:[[WFJSApiTools alloc] init] namespace:nil];
+        [_dwebview loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:self.urlString]]];
         _dwebview.navigationDelegate = self;
         [_dwebview setDebugMode:true];
-        
-        [self.view addSubview:_dwebview];
     }
     return _dwebview;
 }

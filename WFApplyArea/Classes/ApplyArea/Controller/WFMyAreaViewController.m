@@ -9,12 +9,15 @@
 #import "WFMyAreaViewController.h"
 #import "WFApplyAreaViewController.h"
 #import "WFAreaDetailViewController.h"
+#import "WFCurrentWebViewController.h"
 #import "WFMyAreaListTableViewCell.h"
 #import "WFApplyAreaDataTool.h"
 #import "WFMyAreaListModel.h"
 #import "WFMyAreaQRCodeView.h"
 #import "SKSafeObject.h"
 #import "WFPopTool.h"
+#import "WKSetting.h"
+#import "UserData.h"
 #import "WKHelp.h"
 
 @interface WFMyAreaViewController ()<UITableViewDelegate,UITableViewDataSource>
@@ -62,14 +65,17 @@
  根据片区 Id 获取二维码
 
  @param areaId 片区 id
+ @param areaName 片区名称
  */
-- (void)getAreaQRcodeWithAreaId:(NSString *)areaId {
+- (void)getAreaQRcodeWithAreaId:(NSString *)areaId
+                       areaName:(NSString *)areaName {
     NSMutableDictionary *params = [NSMutableDictionary dictionary];
     [params safeSetObject:areaId forKey:@"chargingGroupId"];
     @weakify(self)
     [WFApplyAreaDataTool getAreaQRcodeWithParams:params resultBlock:^(WFMyAreaQRcodeModel * _Nonnull model) {
         @strongify(self)
         self.qrCodeView.imgUrl = model.shareUrl;
+        self.qrCodeView.name.text = areaName;
         [[WFPopTool sharedInstance] popView:self.qrCodeView animated:YES];
     }];
 }
@@ -102,8 +108,7 @@
     @weakify(self)
     cell.showQRCodeBlock = ^{
         @strongify(self)
-        if (itemModel.auditStatus == 0) return;
-        [self getAreaQRcodeWithAreaId:[self.models[indexPath.section] groupId]];
+        [self getAreaQRcodeWithAreaId:itemModel.groupId areaName:itemModel.groupName];
     };
     return cell;
 }
@@ -119,10 +124,18 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     WFMyAreaListModel *itemModel = self.models[indexPath.section];
     if (itemModel.auditStatus == 0) return;
-    WFAreaDetailViewController *detail = [[WFAreaDetailViewController alloc] init];
-    detail.groupId = itemModel.groupId;
-    detail.jumpType = WFAreaDetailJumpAreaType;
-    [self.navigationController pushViewController:detail animated:YES];
+    if (itemModel.isNew) {
+        //新片区
+        WFAreaDetailViewController *detail = [[WFAreaDetailViewController alloc] init];
+        detail.groupId = itemModel.groupId;
+        detail.jumpType = WFAreaDetailJumpAreaType;
+        [self.navigationController pushViewController:detail animated:YES];
+    }else {
+        //老片区
+        WFCurrentWebViewController *web = [[WFCurrentWebViewController alloc] init];
+        web.urlString = [NSString stringWithFormat:@"%@page/areaInfoSetmealsDetail.html?areaId=%@&uuid=%@",H5_HOST,itemModel.applyGroupId,USER_UUID];
+        [self.navigationController pushViewController:web animated:YES];
+    }
 }
 
 #pragma mark get set

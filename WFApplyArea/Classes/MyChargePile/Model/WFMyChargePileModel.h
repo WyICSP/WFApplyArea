@@ -43,6 +43,9 @@ NS_ASSUME_NONNULL_BEGIN
 @end
 
 @interface WFMyCdzListListModel : NSObject
+/**老片区Id*/
+@property (nonatomic, copy) NSString *applyGroupId;
+/**新片区Id*/
 @property (nonatomic, copy) NSString *groupId;
 /**片区名*/
 @property (nonatomic, copy) NSString *name;
@@ -50,6 +53,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, assign) NSInteger cdzNumber;
 /**片区每日使用率*/
 @property (nonatomic, assign) CGFloat utilizationRate;
+/**是否是新片区*/
+@property (nonatomic, assign) BOOL isNew;
 @end
 
 @interface WFNotInstalledCdzListModel : NSObject

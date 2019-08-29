@@ -11,10 +11,13 @@
 #import "WFAbnormalPileViewController.h"
 #import "WFAreaDetailViewController.h"
 #import "WFMyChargePileSectionView.h"
+#import "WFCurrentWebViewController.h"
 #import "WFMyChargePileHeadView.h"
 #import "WFMyChargePileDataTool.h"
 #import "WFMyChargePileModel.h"
 #import "UIView+Frame.h"
+#import "UserData.h"
+#import "WKSetting.h"
 #import "WKHelp.h"
 
 @interface WFMyChargePileViewController ()<UITableViewDelegate,UITableViewDataSource>
@@ -34,12 +37,11 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self setUI];
-    DLog(@"11");
 }
 
 #pragma mark 私有方法
 - (void)setUI {
-    self.title = @"充电桩";
+    self.title = @"我的充电桩";
     self.view.backgroundColor = UIColorFromRGB(0xF5F5F5);
     [self getMyChargePile];
 }
@@ -124,10 +126,19 @@
         [self.navigationController pushViewController:abnor animated:YES];
     }else if (self.models.isSelectPile) {
         WFMyCdzListListModel *model = self.models.myCdzListList[indexPath.section];
-        WFAreaDetailViewController *detail = [[WFAreaDetailViewController alloc] init];
-        detail.groupId = model.groupId;
-        detail.jumpType = WFAreaDetailJumpPileType;
-        [self.navigationController pushViewController:detail animated:YES];
+        if (model.isNew) {
+            //新片区
+            WFAreaDetailViewController *detail = [[WFAreaDetailViewController alloc] init];
+            detail.groupId = model.groupId;
+            detail.jumpType = WFAreaDetailJumpPileType;
+            [self.navigationController pushViewController:detail animated:YES];
+        }else {
+            //老片区
+            WFCurrentWebViewController *web = [[WFCurrentWebViewController alloc] init];
+            web.urlString = [NSString stringWithFormat:@"%@page/areaInfoSetmealsDetail.html?areaId=%@&uuid=",H5_HOST,model.applyGroupId,USER_UUID];
+            web.title = @"片区详情";
+            [self.navigationController pushViewController:web animated:YES];
+        }
     }
 }
 

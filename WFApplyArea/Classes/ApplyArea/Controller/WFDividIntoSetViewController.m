@@ -235,7 +235,7 @@
             [YFToast showMessage:@"请完善用户信息" inView:self.view];
             return NO;
         }else if (![NSString validateMobile:model.phone]) {
-            [YFToast showMessage:@"请填写正常的手机号" inView:self.view];
+            [YFToast showMessage:@"请填写正确的手机号" inView:self.view];
             return NO;
         }
     }

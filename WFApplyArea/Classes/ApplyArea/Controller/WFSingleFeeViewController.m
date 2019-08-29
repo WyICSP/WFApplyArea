@@ -192,10 +192,10 @@
     if (index == 10) {
         //控制选中未选中
         if (section == 0) {
-            self.unifiedModel.isSelectFirstSection = !self.unifiedModel.isSelectFirstSection;
+            self.unifiedModel.isSelectFirstSection = YES;
             self.powerModel.isSelectSecondSection = NO;
         }else if (section == 1) {
-            self.powerModel.isSelectSecondSection = !self.powerModel.isSelectSecondSection;
+            self.powerModel.isSelectSecondSection = YES;
             self.unifiedModel.isSelectFirstSection = NO;
         }
     }else if (index == 20) {
@@ -270,6 +270,7 @@
         //设置圆角
         WFRadiusRectCorner radiusRect = self.unifiedModel.isOpenFirstSection ? (WFRadiusRectCornerTopLeft | WFRadiusRectCornerTopRight) : WFRadiusRectCornerAllCorners;
         [sectionView.contentsView setRounderCornerWithRadius:10.0f rectCorner:radiusRect imageColor:UIColor.whiteColor size:CGSizeMake(ScreenWidth-KWidth(24.0f), KHeight(50.0f))];
+        [sectionView.showImgBtn setTitle:@"按照每小时收费" forState:0];
     }else if (section == 1) {
         //得到图片的路径
         NSString *showImgPath = [NSString getImagePathWithCurrentBundler:currentBundler PhotoName:self.powerModel.isOpenSecondSection ? @"showTop" : @"showBottom" bundlerName:@"WFApplyArea.bundle"];
@@ -280,6 +281,7 @@
         //设置圆角
         WFRadiusRectCorner radiusRect = self.powerModel.isOpenSecondSection ? (WFRadiusRectCornerTopLeft | WFRadiusRectCornerTopRight) : WFRadiusRectCornerAllCorners;
         [sectionView.contentsView setRounderCornerWithRadius:10.0f rectCorner:radiusRect imageColor:UIColor.whiteColor size:CGSizeMake(ScreenWidth-KWidth(24.0f), KHeight(50.0f))];
+        [sectionView.showImgBtn setTitle:@"" forState:0];
     }
     
     @weakify(self)

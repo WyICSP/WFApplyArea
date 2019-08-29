@@ -11,6 +11,8 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @interface WFMyAreaListModel : NSObject
+/**老片区id*/
+@property (nonatomic, copy) NSString *applyGroupId;
 /**申请片区id*/
 @property (nonatomic, copy) NSString *groupId;
 /**创建时间*/

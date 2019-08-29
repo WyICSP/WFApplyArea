@@ -58,5 +58,14 @@
     completionHandler(msg,YES);
 }
 
+/**退出登录 跳转到登录页面*/
+- (void)dsBLoginOut:(NSString *)msg :(JSCallback) completionHandler
+{
+    [WFUserCenterPublicAPI loginOutAndJumpLogin];
+    completionHandler(msg,YES);
+}
+
+
+
 
 @end

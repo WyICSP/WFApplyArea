@@ -421,7 +421,7 @@
     if (!_nextBtn) {
         _nextBtn = [UIButton buttonWithType:UIButtonTypeSystem];
         _nextBtn.frame = CGRectMake(0, ScreenHeight - KHeight(45.0f) - NavHeight, ScreenWidth, KHeight(45));
-        [_nextBtn setTitle:@"下一步" forState:UIControlStateNormal];
+        [_nextBtn setTitle:@"提交" forState:UIControlStateNormal];
         [_nextBtn addTarget:self action:@selector(clickNextBtn) forControlEvents:UIControlEventTouchUpInside];
         _nextBtn.titleLabel.font = [UIFont boldSystemFontOfSize:16.0f];
         [_nextBtn setTitleColor:UIColor.whiteColor forState:UIControlStateNormal];

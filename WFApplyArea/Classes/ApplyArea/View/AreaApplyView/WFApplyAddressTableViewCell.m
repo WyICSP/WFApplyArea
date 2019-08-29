@@ -42,6 +42,7 @@ static NSString *const cellId = @"WFApplyAddressTableViewCell";
 
 
 - (IBAction)clickbtn:(id)sender {
+    [self endEditing:YES];
     YFAddressPickView *addressPickView = [YFAddressPickView shareInstance];
     addressPickView.addressDatas = [[WFHomeSaveDataTool shareInstance] readAddressFile];
     WS(weakSelf)

@@ -11,7 +11,10 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @interface WFCurrentWebViewController : YFBaseViewController
-
+/**
+ 加载url
+ */
+@property (nonatomic, copy) NSString *urlString;
 @end
 
 NS_ASSUME_NONNULL_END

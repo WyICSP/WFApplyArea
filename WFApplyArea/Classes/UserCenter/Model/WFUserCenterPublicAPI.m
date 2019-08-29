@@ -91,4 +91,17 @@
     }
 }
 
+/**
+ 退出登录 跳转登录页面
+ */
++ (void)loginOutAndJumpLogin {
+    //退出登录
+    [UserData userInfo:nil];
+    //跳转登录
+//    NSBundle *currentBundle = [NSBundle bundleForClass:[self class]];
+//    WFLoginViewController *login = [[WFLoginViewController alloc] initWithNibName:@"WFLoginViewController" bundle:currentBundle];
+//    login.loginType = WFJumpScanByH5;
+//    [[[YFKeyWindow shareInstance] getCurrentVC].navigationController pushViewController:login animated:YES];
+}
+
 @end
