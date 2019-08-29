@@ -1,37 +1,31 @@
 //
-//  WFUserCenterViewController.m
-//  WFApplyArea_Example
+//  WFHomeIncomeWebViewController.m
+//  AFNetworking
 //
-//  Created by 王宇 on 2019/8/27.
-//  Copyright © 2019 wyxlh. All rights reserved.
+//  Created by 王宇 on 2019/8/29.
 //
 
-#import "WFUserCenterViewController.h"
+#import "WFHomeIncomeWebViewController.h"
 #import "YukiWebProgressLayer.h"
 #import "dsbridge.h"
-#import "WFJSApiTools.h"
+#import "JsApiTest.h"
 #import <WebKit/WebKit.h>
-#import "UserData.h"
 #import "WKHelp.h"
-#import "WKSetting.h"
 
-@interface WFUserCenterViewController ()<WKNavigationDelegate>
+
+@interface WFHomeIncomeWebViewController ()<WKNavigationDelegate>
 /**DWKWebView*/
 @property (nonatomic, strong) DWKWebView * dwebview;
 /**进度条*/
 @property (nonatomic, strong) YukiWebProgressLayer *webProgressLayer;
 @end
 
-@implementation WFUserCenterViewController
+@implementation WFHomeIncomeWebViewController
 
 #pragma mark 生命周期
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self setUI];
-}
-
-- (UIStatusBarStyle)preferredStatusBarStyle {
-    return UIStatusBarStyleLightContent;
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -62,22 +56,10 @@
 
 #pragma mark 设置页面
 - (void)setUI {
-    
-    //注册通知：监听充电时间变化
-    [YFNotificationCenter addObserver:self selector:@selector(reloadWebData) name:@"reloadUserCnter" object:nil];
-    
-    self.urlString = [NSString stringWithFormat:@"%@page/menu.html?uuid=%@&appVersion=v%@",H5_HOST,USER_UUID,APP_VERSION];
     //添加 webview
     [self.view addSubview:self.dwebview];
     //添加进度条
     [self.view.layer addSublayer:self.webProgressLayer];
-}
-
-/**
- 刷新数据
- */
-- (void)reloadWebData {
-    [self.dwebview loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:self.urlString]]];
 }
 
 - (void)deleteWebCache {
@@ -113,9 +95,11 @@
 
 - (DWKWebView *)dwebview {
     if (!_dwebview) {
-        _dwebview = [[DWKWebView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, ScreenHeight-TabbarHeight)];
-        [_dwebview addJavascriptObject:[[WFJSApiTools alloc] init] namespace:nil];
+        _dwebview = [[DWKWebView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, ScreenHeight)];
+        [_dwebview addJavascriptObject:[[JsApiTest alloc] init] namespace:nil];
         [_dwebview loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:self.urlString]]];
+        if (@available(iOS 11.0, *))
+            _dwebview.scrollView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;
         _dwebview.navigationDelegate = self;
         [_dwebview setDebugMode:true];
     }
@@ -126,7 +110,7 @@
 -(YukiWebProgressLayer *)webProgressLayer{
     if (!_webProgressLayer) {
         _webProgressLayer = [[YukiWebProgressLayer alloc]init];
-        _webProgressLayer.frame = CGRectMake(0, 42, ScreenWidth, 3);
+        _webProgressLayer.frame = CGRectMake(0, NavHeight-3, ScreenWidth, 3);
         _webProgressLayer.strokeColor = NavColor.CGColor;
     }
     return _webProgressLayer;
@@ -141,8 +125,7 @@
     [_webProgressLayer removeFromSuperlayer];
     _webProgressLayer = nil;
     
-    [YFNotificationCenter removeObserver:self name:@"reloadUserCnter" object:nil];
+    
 }
-
 
 @end

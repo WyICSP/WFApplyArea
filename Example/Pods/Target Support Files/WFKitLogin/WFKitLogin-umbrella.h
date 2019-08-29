@@ -10,6 +10,7 @@
 #endif
 #endif
 
+#import "WFHomeIncomeWebViewController.h"
 #import "WFHomeViewController.h"
 #import "WFHomeWebViewController.h"
 #import "WFOtherViewController.h"
@@ -17,6 +18,7 @@
 #import "JsApiTest.h"
 #import "WFHomeDataModel.h"
 #import "WFLoginPublicAPI.h"
+#import "WFPayTypeMsgModel.h"
 #import "YFMediatorManager+WFLogin.h"
 #import "SKAppUpdaterView.h"
 #import "WFHomeFirstItemCollectionViewCell.h"

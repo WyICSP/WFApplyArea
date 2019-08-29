@@ -20,6 +20,20 @@ NS_ASSUME_NONNULL_BEGIN
  */
 + (WFLoginViewController *)rootLoginViewController;
 
+
+/**
+ 发起支付
+
+ @param params 参数
+ */
++ (void)getPaymentMsgWithParams:(NSDictionary *)params;
+
+
+/**
+ 退出登录 跳转登录页面
+ */
++ (void)loginOutAndJumpLogin;
+
 @end
 
 NS_ASSUME_NONNULL_END

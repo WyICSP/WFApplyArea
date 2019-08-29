@@ -8,6 +8,7 @@
 #import "WFUserCenterPublicAPI.h"
 #import <TZImagePickerController/TZImagePickerController.h>
 #import "WFMyChargePileDataTool.h"
+#import "YFMediatorManager+WFUser.h"
 #import "JMUpdataImage.h"
 #import "YFKeyWindow.h"
 #import "UserData.h"
@@ -98,10 +99,7 @@
     //退出登录
     [UserData userInfo:nil];
     //跳转登录
-//    NSBundle *currentBundle = [NSBundle bundleForClass:[self class]];
-//    WFLoginViewController *login = [[WFLoginViewController alloc] initWithNibName:@"WFLoginViewController" bundle:currentBundle];
-//    login.loginType = WFJumpScanByH5;
-//    [[[YFKeyWindow shareInstance] getCurrentVC].navigationController pushViewController:login animated:YES];
+    [YFMediatorManager loginOutByOpenLoginCtrl];
 }
 
 @end

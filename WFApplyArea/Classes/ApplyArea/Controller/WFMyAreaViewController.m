@@ -40,11 +40,16 @@
     [self setUI];
 }
 
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    [self getAreaList];
+}
+
 #pragma mark 私有方法
 - (void)setUI {
     self.title = @"我的片区";
     [self.view addSubview:self.applyBtn];
-    [self getAreaList];
+    
 }
 
 /**
@@ -123,7 +128,6 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     WFMyAreaListModel *itemModel = self.models[indexPath.section];
-    if (itemModel.auditStatus == 0) return;
     if (itemModel.isNew) {
         //新片区
         WFAreaDetailViewController *detail = [[WFAreaDetailViewController alloc] init];

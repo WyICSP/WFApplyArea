@@ -355,6 +355,13 @@
 
 #pragma mark 确定数据
 - (void)clickConfirmBtn {
+    
+    //如果没有选中数据需要提示
+    if ([self getSelectMethodCount] == 0) {
+        [YFToast showMessage:@"请选择具体的计费模式" inView:self.view];
+        return;
+    }
+    
     if (self.groupId.length == 0) {
         //默认收费方式
         !self.billMethodDataBlock ? : self.billMethodDataBlock(self.models);
@@ -367,6 +374,24 @@
             [self goBack];
         }
     }
+}
+
+- (NSInteger)getSelectMethodCount {
+    NSInteger totalData = 0;
+    if (self.models.isSelectFirstSection) {
+        for (WFBillingTimeMethodModel *model in self.models.billingTimeMethods) {
+            if (model.isSelect) {
+                totalData += 1;
+            }
+        }
+    }else if (self.models.isSelectSecondSection) {
+        for (WFBillingPriceMethodModel *model in self.models.billingPriceMethods) {
+            if (model.isSelect) {
+                totalData += 1;
+            }
+        }
+    }
+    return totalData;
 }
 
 #pragma mark UITableViewDelegate,UITableViewDataSource

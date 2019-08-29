@@ -233,26 +233,14 @@
 #pragma mark 完成操作
 - (void)clickConfirmBtn {
     [self.view endEditing:YES];
+    
+    //如果没有选中数据需要提示
+    if ([self getSelectFeeCount] == 0) {
+        [YFToast showMessage:@"请选择具体的收费模式" inView:self.view];
+        return;
+    }
+    
     if (self.itemArray.count == 0) {
-        NSInteger totalData = 0;
-        if (self.mainModel.isSelectFirstSection) {
-            for (WFDefaultUnifiedListModel *model in self.mainModel.multipleChargesUnifiedList) {
-                if (model.isSelect) {
-                    totalData += 1;
-                }
-            }
-        }else if (self.mainModel.isSelectSecondSection) {
-            for (WFDefaultPowerListModel *model in self.mainModel.multipleChargesPowerList) {
-                if (model.isSelect) {
-                    totalData += 1;
-                }
-            }
-        }
-        //如果没有选中数据需要提示
-        if (totalData == 0) {
-            [YFToast showMessage:@"请选择具体的收费模式" inView:self.view];
-            return;
-        }
         //获取默认数据
         !self.mainModelBlock ? : self.mainModelBlock(self.mainModel);
         [self goBack];
@@ -260,6 +248,30 @@
         //修改
         [self updateManyTimeFee];
     }
+}
+
+
+/**
+ 获取选中数据的条数
+
+ @return 返回条数
+ */
+- (NSInteger)getSelectFeeCount {
+    NSInteger totalData = 0;
+    if (self.mainModel.isSelectFirstSection) {
+        for (WFDefaultUnifiedListModel *model in self.mainModel.multipleChargesUnifiedList) {
+            if (model.isSelect) {
+                totalData += 1;
+            }
+        }
+    }else if (self.mainModel.isSelectSecondSection) {
+        for (WFDefaultPowerListModel *model in self.mainModel.multipleChargesPowerList) {
+            if (model.isSelect) {
+                totalData += 1;
+            }
+        }
+    }
+    return totalData;
 }
 
 /**

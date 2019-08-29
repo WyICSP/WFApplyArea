@@ -40,6 +40,8 @@
 @property (nonatomic, strong, nullable) WFMyAreaDetailHeadView *headView;
 /**充电桩信号强度*/
 @property (nonatomic, strong, nullable) WFMyAreaChargePileView *chargePileView;
+/**计费类型，1:小时计费 2:金额计费*/
+@property (nonatomic, assign) NSInteger billingPlay;
 /**是否显示收费*/
 @property (nonatomic, assign) BOOL isCollectFee;
 /**是否显示计费*/
@@ -95,6 +97,8 @@
     }
     //是否显示计费
     if (self.mainModels.billingInfos.count != 0) {
+        WFAreaDetailBillingInfosModel *firstModel = [self.mainModels.billingInfos firstObject];
+        self.billingPlay = firstModel.billingPlay;
         self.isMeterFee = YES;
     }
     //是否显示合伙人
@@ -304,6 +308,7 @@
         WFAreaDetailOtherSectionView *sectionView = [[[NSBundle bundleForClass:[self class]] loadNibNamed:@"WFAreaDetailOtherSectionView" owner:nil options:nil] firstObject];
         sectionView.title.text = section == 2 ? @"我的计费标准" : @"我的合伙人";
         sectionView.detailLbl.hidden = section != 2;
+        sectionView.detailLbl.text = self.billingPlay == 1 ? @"按小时计费" : @"按金额计费";
         @weakify(self)
         sectionView.clickBtnBlock = ^{
             @strongify(self)

@@ -88,6 +88,7 @@
 #import "WFUserCenterViewController.h"
 #import "JMUpdataImage.h"
 #import "WFUserCenterPublicAPI.h"
+#import "YFMediatorManager+WFUser.h"
 
 FOUNDATION_EXPORT double WFApplyAreaVersionNumber;
 FOUNDATION_EXPORT const unsigned char WFApplyAreaVersionString[];
