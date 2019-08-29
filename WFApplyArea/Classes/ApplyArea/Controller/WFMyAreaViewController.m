@@ -38,10 +38,6 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self setUI];
-}
-
-- (void)viewWillAppear:(BOOL)animated {
-    [super viewWillAppear:animated];
     [self getAreaList];
 }
 
@@ -49,7 +45,6 @@
 - (void)setUI {
     self.title = @"我的片区";
     [self.view addSubview:self.applyBtn];
-    
 }
 
 /**
@@ -79,7 +74,7 @@
     @weakify(self)
     [WFApplyAreaDataTool getAreaQRcodeWithParams:params resultBlock:^(WFMyAreaQRcodeModel * _Nonnull model) {
         @strongify(self)
-        self.qrCodeView.imgUrl = model.shareUrl;
+        self.qrCodeView.imgUrl = [NSString stringWithFormat:@"%@?qrCode_id=%@&timestamp=%@",model.shareUrl,model.qrCodeId,model.expirationMsec];
         self.qrCodeView.name.text = areaName;
         [[WFPopTool sharedInstance] popView:self.qrCodeView animated:YES];
     }];

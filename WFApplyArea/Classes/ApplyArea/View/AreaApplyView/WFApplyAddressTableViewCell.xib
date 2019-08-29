@@ -97,29 +97,29 @@
                                 </connections>
                             </textField>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="*" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rkY-gO-2FR">
-                                <rect key="frame" x="15" y="16" width="8" height="21"/>
+                                <rect key="frame" x="15" y="18.5" width="8" height="14.5"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="8" id="sJy-eI-jfG"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                 <color key="textColor" red="0.96862745100000003" green="0.52156862749999999" blue="0.33725490200000002" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="*" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hCd-T8-2xj">
-                                <rect key="frame" x="15" y="45" width="8" height="21"/>
+                                <rect key="frame" x="15" y="47.5" width="8" height="14.5"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="8" id="VDm-Xx-3gn"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                 <color key="textColor" red="0.96862745100000003" green="0.52156862749999999" blue="0.33725490200000002" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="*" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="r0L-UW-wsb">
-                                <rect key="frame" x="15" y="89.5" width="8" height="21"/>
+                                <rect key="frame" x="15" y="92" width="8" height="14.5"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="8" id="zgM-gO-NwD"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                 <color key="textColor" red="0.96862745100000003" green="0.52156862749999999" blue="0.33725490200000002" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
@@ -138,7 +138,7 @@
                                     <userDefinedRuntimeAttribute type="boolean" keyPath="isAdaptateScreen" value="YES"/>
                                 </userDefinedRuntimeAttributes>
                             </constraint>
-                            <constraint firstItem="rkY-gO-2FR" firstAttribute="centerY" secondItem="w7m-lE-yyQ" secondAttribute="centerY" constant="3" id="Apt-zC-HjG"/>
+                            <constraint firstItem="rkY-gO-2FR" firstAttribute="centerY" secondItem="w7m-lE-yyQ" secondAttribute="centerY" constant="2" id="Apt-zC-HjG"/>
                             <constraint firstItem="581-XC-Tdr" firstAttribute="trailing" secondItem="uYB-OV-OK2" secondAttribute="trailing" id="CBA-co-fuE">
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="boolean" keyPath="isAdaptateScreen" value="YES"/>
@@ -185,8 +185,8 @@
                                     <userDefinedRuntimeAttribute type="boolean" keyPath="isAdaptateScreen" value="YES"/>
                                 </userDefinedRuntimeAttributes>
                             </constraint>
-                            <constraint firstItem="hCd-T8-2xj" firstAttribute="centerY" secondItem="JfW-7h-LJP" secondAttribute="centerY" constant="3" id="enO-bA-VbB"/>
-                            <constraint firstItem="r0L-UW-wsb" firstAttribute="centerY" secondItem="QIJ-Qw-XdQ" secondAttribute="centerY" constant="3" id="iDv-Ba-Zq7"/>
+                            <constraint firstItem="hCd-T8-2xj" firstAttribute="centerY" secondItem="JfW-7h-LJP" secondAttribute="centerY" constant="2" id="enO-bA-VbB"/>
+                            <constraint firstItem="r0L-UW-wsb" firstAttribute="centerY" secondItem="QIJ-Qw-XdQ" secondAttribute="centerY" constant="2" id="iDv-Ba-Zq7"/>
                             <constraint firstAttribute="trailing" secondItem="m5C-8t-gL9" secondAttribute="trailing" constant="15" id="idA-yb-YHN">
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="boolean" keyPath="isAdaptateScreen" value="YES"/>

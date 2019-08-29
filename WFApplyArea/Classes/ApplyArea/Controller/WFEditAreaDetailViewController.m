@@ -53,7 +53,9 @@
     if (!_eContentViews) {
         _eContentViews = [[[NSBundle bundleForClass:[self class]] loadNibNamed:@"WFEditAreaContentView" owner:nil options:nil] firstObject];
         _eContentViews.mainModel = self.models;
+        _eContentViews.frame = CGRectMake(0, 0, ScreenWidth, ScreenHeight);
         _eContentViews.superVC = self;
+        _eContentViews.autoresizingMask = 0;
         @weakify(self)
         _eContentViews.jumpCtrlBlock = ^(UIViewController * _Nonnull ctrl) {
             @strongify(self)

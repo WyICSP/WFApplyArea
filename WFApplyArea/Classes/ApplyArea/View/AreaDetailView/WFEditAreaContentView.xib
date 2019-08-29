@@ -6,7 +6,6 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
-        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -17,7 +16,7 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pLz-X7-3sj">
-                    <rect key="frame" x="12" y="54" width="390" height="140"/>
+                    <rect key="frame" x="12" y="10" width="390" height="140"/>
                     <subviews>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="单次收费" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="V36-6S-seh">
                             <rect key="frame" x="12" y="13" width="66" height="20"/>
@@ -181,7 +180,7 @@
                     </constraints>
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hry-oi-5Ft">
-                    <rect key="frame" x="12" y="194" width="390" height="270"/>
+                    <rect key="frame" x="12" y="150" width="390" height="270"/>
                     <subviews>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rhO-An-ItO">
                             <rect key="frame" x="0.0" y="0.0" width="390" height="10"/>
@@ -377,7 +376,7 @@
                     </constraints>
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4ug-TJ-G3a">
-                    <rect key="frame" x="12" y="464" width="390" height="150"/>
+                    <rect key="frame" x="12" y="420" width="390" height="150"/>
                     <subviews>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Nlx-hJ-pfL">
                             <rect key="frame" x="0.0" y="0.0" width="390" height="10"/>
@@ -581,18 +580,17 @@
             </subviews>
             <color key="backgroundColor" red="0.96078431372549022" green="0.96078431372549022" blue="0.96078431372549022" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
-                <constraint firstItem="pLz-X7-3sj" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" constant="10" id="2MZ-CT-OOj"/>
+                <constraint firstItem="pLz-X7-3sj" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="10" id="2MZ-CT-OOj"/>
                 <constraint firstItem="4ug-TJ-G3a" firstAttribute="top" secondItem="hry-oi-5Ft" secondAttribute="bottom" id="Bth-Mm-uay"/>
-                <constraint firstItem="4ug-TJ-G3a" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="12" id="FHP-iX-QdC"/>
+                <constraint firstItem="4ug-TJ-G3a" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="12" id="FHP-iX-QdC"/>
                 <constraint firstItem="hry-oi-5Ft" firstAttribute="top" secondItem="pLz-X7-3sj" secondAttribute="bottom" id="WSF-dC-1jk"/>
-                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="4ug-TJ-G3a" secondAttribute="trailing" constant="12" id="WbS-h6-o0H"/>
-                <constraint firstItem="pLz-X7-3sj" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="12" id="Y7Z-pz-uCX"/>
+                <constraint firstAttribute="trailing" secondItem="4ug-TJ-G3a" secondAttribute="trailing" constant="12" id="WbS-h6-o0H"/>
+                <constraint firstItem="pLz-X7-3sj" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="12" id="Y7Z-pz-uCX"/>
                 <constraint firstItem="hry-oi-5Ft" firstAttribute="trailing" secondItem="pLz-X7-3sj" secondAttribute="trailing" id="d2V-jx-zMp"/>
                 <constraint firstItem="hry-oi-5Ft" firstAttribute="leading" secondItem="pLz-X7-3sj" secondAttribute="leading" id="d4o-KA-OtK"/>
-                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="pLz-X7-3sj" secondAttribute="trailing" constant="12" id="vEB-L3-qAj"/>
+                <constraint firstAttribute="trailing" secondItem="pLz-X7-3sj" secondAttribute="trailing" constant="12" id="vEB-L3-qAj"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
-            <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
             <connections>
                 <outlet property="manyBaseView" destination="hry-oi-5Ft" id="v2X-Uk-9ce"/>
                 <outlet property="manyContentView" destination="Oe2-tm-rd4" id="LhN-ed-T1b"/>

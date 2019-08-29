@@ -50,10 +50,8 @@
     }
 }
 
-- (void)viewDidAppear:(BOOL)animated
-{
+- (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
-    
     // 禁用返回手势
     if ([self.navigationController respondsToSelector:@selector(interactivePopGestureRecognizer)]) {
         self.navigationController.interactivePopGestureRecognizer.enabled = NO;
@@ -62,10 +60,9 @@
 
 #pragma mark 设置页面
 - (void)setUI {
-    
     //注册通知：监听充电时间变化
     [YFNotificationCenter addObserver:self selector:@selector(reloadWebData) name:@"reloadUserCnter" object:nil];
-    
+    //拼接 url
     self.urlString = [NSString stringWithFormat:@"%@page/menu.html?uuid=%@&appVersion=v%@",H5_HOST,USER_UUID,APP_VERSION];
     //添加 webview
     [self.view addSubview:self.dwebview];
@@ -73,10 +70,58 @@
     [self.view.layer addSublayer:self.webProgressLayer];
 }
 
+- (void)webView:(WKWebView *)webView decidePolicyForNavigationAction:(WKNavigationAction *)navigationAction decisionHandler:(void (^)(WKNavigationActionPolicy))decisionHandler {
+    NSString *urlString =navigationAction.request.URL.absoluteString;
+    if ([urlString containsString:@"page/menu.html"]) {
+        //个人中心
+        [self hideTabbar:NO];
+    } else{
+        //其他页面
+        [self hideTabbar:YES];
+    }
+    
+    if (navigationAction.targetFrame == nil) {
+        //如果说有的网页点击数据点不了 就重新加载下这个页面
+        [webView loadRequest:navigationAction.request];
+    }
+    decisionHandler(WKNavigationActionPolicyAllow);
+}
+
+/**
+ 隐藏 tabbar
+ 
+ @param hide 显示与隐藏
+ */
+- (void)hideTabbar:(BOOL)hide {
+    // 内嵌页面 不操作tabbar
+    if (![self.parentViewController isKindOfClass:[UINavigationController class]]) {
+        return;
+    }
+    
+    // 二级页面 不操作tabbar
+    if (![self isEqual:self.navigationController.viewControllers[0]]) {
+        return;
+    }
+    
+    self.tabBarController.tabBar.hidden = hide;
+    self.hidesBottomBarWhenPushed = hide; // 设置这个主要是用于tab间切换，切换回来的时候，保持当前页面tabbar状态不变
+    
+    // 调整view的大小
+    //    UIView *tab = self.tabBarController.view;
+    if (hide) {
+        self.dwebview.frame = CGRectMake(0, 0, ScreenWidth, ScreenHeight);
+    } else {
+        self.dwebview.frame = CGRectMake(0, 0, ScreenWidth, ScreenHeight - TabbarHeight);
+    }
+}
+
 /**
  刷新数据
  */
 - (void)reloadWebData {
+    //url
+    self.urlString = [NSString stringWithFormat:@"%@page/menu.html?uuid=%@&appVersion=v%@",H5_HOST,USER_UUID,APP_VERSION];
+    //重新加载
     [self.dwebview loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:self.urlString]]];
 }
 
@@ -140,7 +185,6 @@
     [self.webProgressLayer closeTimer];
     [_webProgressLayer removeFromSuperlayer];
     _webProgressLayer = nil;
-    
     [YFNotificationCenter removeObserver:self name:@"reloadUserCnter" object:nil];
 }
 
