@@ -62,6 +62,10 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, copy) NSString *groupId;
 /**片区名*/
 @property (nonatomic, copy) NSString *name;
+/**多次收费默认Id*/
+@property (nonatomic, copy) NSString *multipleChargeModelId;
+/**优惠收费默认Id*/
+@property (nonatomic, copy) NSString *vipChargeModelId;
 /**是否选中多次*/
 @property (nonatomic, assign) BOOL isSelectMany;
 /**是否有单次收费*/
@@ -70,6 +74,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, assign) BOOL isHaveManyTime;
 /**是否有优惠收费*/
 @property (nonatomic, assign) BOOL isHaveVip;
+/**是否可以编辑*/
+@property (nonatomic, assign) BOOL isUpdate;
 /**状态0：申请中 1：申请通过 2：申请驳回*/
 @property (nonatomic, assign) NSInteger auditStatus;
 /**计费方式数据*/
@@ -130,6 +136,21 @@ NS_ASSUME_NONNULL_BEGIN
 /**占比*/
 @property (nonatomic, assign) NSInteger rate;
 @property (nonatomic, assign) NSInteger chargePersonFlag;
+@end
+
+@interface WFAreaDetailSectionTitleModel : NSObject
+/**title*/
+@property (nonatomic, copy) NSString *title;
+/**是否显示按钮*/
+@property (nonatomic, assign) BOOL isShowForm;
+/**是否显示详细 title*/
+@property (nonatomic, assign) BOOL isShowDetail;
+/**是否显示编辑按钮*/
+@property (nonatomic, assign) BOOL isShowEditBtn;
+/**按钮 title*/
+@property (nonatomic, copy) NSString *formTitle;
+/**详细 title*/
+@property (nonatomic, copy) NSString *detailTitle;
 @end
 
 NS_ASSUME_NONNULL_END

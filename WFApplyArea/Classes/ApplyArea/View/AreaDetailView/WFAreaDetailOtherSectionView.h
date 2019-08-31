@@ -10,6 +10,8 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+@class WFAreaDetailSectionTitleModel;
+
 @interface WFAreaDetailOtherSectionView : UIView
 /**背景*/
 @property (weak, nonatomic) IBOutlet UIView *contentsView;
@@ -19,8 +21,14 @@ NS_ASSUME_NONNULL_BEGIN
 @property (weak, nonatomic) IBOutlet UIButton *detailBtn;
 /**说明*/
 @property (weak, nonatomic) IBOutlet UILabel *detailLbl;
-/**点击事件*/
+/**查看按钮*/
+@property (weak, nonatomic) IBOutlet UIButton *lookBtn;
+/**赋值*/
+@property (nonatomic, strong) WFAreaDetailSectionTitleModel *model;
+/**编辑按钮点击事件*/
 @property (nonatomic, copy) void (^clickBtnBlock)(void);
+/**查看按钮点击事件*/
+@property (nonatomic, copy) void (^lookBtnBlock)(NSString *title);
 @end
 
 NS_ASSUME_NONNULL_END

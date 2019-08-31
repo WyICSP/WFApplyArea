@@ -79,6 +79,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, copy) NSString *shellId;
 /**信号强度*/
 @property (nonatomic, assign) NSInteger qos;
+/**1在线 2离线*/
+@property (nonatomic, assign) NSInteger status;
 @end
 
 NS_ASSUME_NONNULL_END

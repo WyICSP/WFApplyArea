@@ -27,7 +27,7 @@ static NSString *const cellId = @"WFMyAreaPileListTableViewCell";
     self.selectionStyle = 0;
     self.contentsView.layer.cornerRadius = 10.0f;
     self.yuanLbl.layer.cornerRadius = 7.0/2;
-    self.yuanLbl.layer.backgroundColor = NavColor.CGColor;
+    
     for (UIImageView *imgView in self.progress.subviews) {
         imgView.layer.cornerRadius = 4;
         imgView.clipsToBounds = YES;
@@ -42,6 +42,13 @@ static NSString *const cellId = @"WFMyAreaPileListTableViewCell";
 
 - (void)setModel:(WFSignleIntensityListModel *)model {
     self.shellId.text = model.shellId;
+    if (model.status == 1) {
+        //在线
+        self.yuanLbl.layer.backgroundColor = UIColorFromRGB(0x19B07E).CGColor;
+    } else {
+        //离线
+        self.yuanLbl.layer.backgroundColor = NavColor.CGColor;
+    }
     self.signal.text = [NSString stringWithFormat:@"%ld",(long)model.qos];
     CGFloat pro = model.qos/100.0f;
     [self.progress setProgress:pro];

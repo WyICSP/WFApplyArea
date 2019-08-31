@@ -24,8 +24,17 @@ static NSString *const cellId = @"WFAreaDetailDiscountTableViewCell";
 
 - (void)awakeFromNib {
     [super awakeFromNib];
-    SKViewsBorder(self.contentsView, 0, 0.5, UIColorFromRGB(0xE4E4E4));
     self.selectionStyle = 0;
+    
+    UILongPressGestureRecognizer *longPress = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(longPressAction:)];//初始化一个长按手势
+    [longPress setMinimumPressDuration:0.75];//设置按多久之后触发事件
+    [self.contentsView addGestureRecognizer:longPress];//把长按手势添加给按钮
+}
+
+- (void)longPressAction:(UILongPressGestureRecognizer *)sender {
+    if (sender.state == UIGestureRecognizerStateBegan) {
+        !self.longPressDeleteBlock ? : self.longPressDeleteBlock(200);
+    }
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
@@ -35,8 +44,13 @@ static NSString *const cellId = @"WFAreaDetailDiscountTableViewCell";
 }
 
 - (void)setModel:(WFAreaDetailVipChargeModel *)model {
-    self.price.text = [NSString stringWithFormat:@"%@",@(model.unifiedPrice.floatValue/100)];
-    self.time.text = [NSString stringWithFormat:@"%ld",model.unifiedTime];
+//    self.price.text = [NSString stringWithFormat:@"%@",@(model.unifiedPrice.floatValue/100)];
+//    self.time.text = [NSString stringWithFormat:@"%ld",(long)model.unifiedTime];
+    self.timeByMoney.text = [NSString stringWithFormat:@"%@ 元    %ld 小时",@(model.unifiedPrice.floatValue/100),(long)model.unifiedTime];
+}
+
+- (void)setSingleModel:(WFAreaDetailSingleChargeModel *)singleModel {
+    self.timeByMoney.text = [NSString stringWithFormat:@"%@ 元    %ld 小时",@(singleModel.unifiedPrice.floatValue/100),(long)singleModel.unifiedTime];
 }
 
 @end

@@ -11,8 +11,8 @@
 #import "WFAreaDetailModel.h"
 #import "WKHelp.h"
 
-@interface WFAreaDetailManyTimesTableViewCell()<UITableViewDelegate,UITableViewDataSource>
-@property (nonatomic, strong, nullable) UITableView *tableView;
+@interface WFAreaDetailManyTimesTableViewCell()
+
 @end
 
 @implementation WFAreaDetailManyTimesTableViewCell
@@ -30,7 +30,16 @@ static NSString *const cellId = @"WFAreaDetailManyTimesTableViewCell";
 - (void)awakeFromNib {
     [super awakeFromNib];
     self.selectionStyle = 0;
-    SKViewsBorder(self.bgView, 0, 0.5, UIColorFromRGB(0xE4E4E4));
+    
+    UILongPressGestureRecognizer *longPress = [[UILongPressGestureRecognizer alloc]initWithTarget:self action:@selector(longPressAction:)];//初始化一个长按手势
+    [longPress setMinimumPressDuration:0.75];//设置按多久之后触发事件
+    [self.contentsView addGestureRecognizer:longPress];//把长按手势添加给按钮
+}
+
+- (void)longPressAction:(UILongPressGestureRecognizer *)sender {
+    if (sender.state == UIGestureRecognizerStateBegan) {
+        !self.longPressDeleteBlock ? : self.longPressDeleteBlock(100);
+    }
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
@@ -39,44 +48,10 @@ static NSString *const cellId = @"WFAreaDetailManyTimesTableViewCell";
     // Configure the view for the selected state
 }
 
-- (void)setModels:(NSArray<WFAreaDetailMultipleModel *> *)models {
-    _models = models;
-    if (models.count != 0) {
-        WFAreaDetailMultipleModel *itemModel = models.firstObject;
-        self.leftLbl.text = itemModel.chargeType == 0 ? @"统一收费" : @"功率收费";
-        [self.tableView reloadData];
-    }
+- (void)setModel:(WFAreaDetailMultipleModel *)model {
+    self.leftLbl.text = model.optionName;
+    self.timeByMoney.text = [NSString stringWithFormat:@"%@ 元    %ld 小时",@(model.proposalPrice.floatValue/100),(long)model.proposalTimes];
 }
 
-#pragma mark UITableViewDelegate,UITableViewDataSource
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return self.models.count;
-}
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    WFDiscountItemTableViewCell *cell = [WFDiscountItemTableViewCell cellWithTableView:tableView];
-    cell.model = self.models[indexPath.row];
-    return cell;
-}
-
-#pragma mark get set
-/**
- tableView
-
- @return  总共把 contentsView 分为了 7份,按照 1.5:1:1 的比例分配就是 3:2:2
- */
-- (UITableView *)tableView {
-    if (!_tableView) {
-        _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth-44-(ScreenWidth-44)/7*1.5, 37*self.models.count) style:UITableViewStylePlain];
-        _tableView.delegate = self;
-        _tableView.dataSource = self;
-        _tableView.rowHeight = 37.0f;
-        _tableView.scrollEnabled = NO;
-        _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
-        _tableView.showsVerticalScrollIndicator = NO;
-        _tableView.backgroundColor = UIColor.whiteColor;
-        [self.contentsView addSubview:_tableView];
-    }
-    return _tableView;
-}
 
 @end

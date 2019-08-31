@@ -13,14 +13,16 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @interface WFAreaDetailManyTimesTableViewCell : UITableViewCell
-/**整体背景*/
-@property (weak, nonatomic) IBOutlet UIView *bgView;
-/**套餐信息*/
-@property (weak, nonatomic) IBOutlet UIView *contentsView;
 //左边的收费宽度
 @property (weak, nonatomic) IBOutlet UILabel *leftLbl;
+/**钱和多少次*/
+@property (weak, nonatomic) IBOutlet UILabel *timeByMoney;
+/**背景*/
+@property (weak, nonatomic) IBOutlet UIView *contentsView;
+/**长按删除*/
+@property (nonatomic, copy) void (^longPressDeleteBlock)(NSInteger index);
 /**赋值*/
-@property (nonatomic, strong) NSArray <WFAreaDetailMultipleModel *> *models;
+@property (nonatomic, strong) WFAreaDetailMultipleModel *model;
 /**初始化*/
 + (instancetype)cellWithTableView:(UITableView *)tableView;
 @end

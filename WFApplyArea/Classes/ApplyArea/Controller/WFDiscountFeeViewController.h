@@ -27,6 +27,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, copy) NSString *chargingModelId;
 /**1 = 单次收费2 = 多次收费3 = 优惠收费*/
 @property (nonatomic, copy) NSString *chargingModePlay;
+/**是否不允许编辑*/
+@property (nonatomic, assign) BOOL isNotAllow;
 /**编辑优惠收费*/
 @property (nonatomic, strong) WFAreaDetailVipChargeModel *editModel;
 /**默认数据*/
@@ -40,6 +42,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, copy) WFDiscountFeeViewController *(^dChargingModePlay)(NSString *chargingModePlay);
 @property (nonatomic, copy) WFDiscountFeeViewController *(^editModels)(WFAreaDetailVipChargeModel *editModel);
 @property (nonatomic, copy) WFDiscountFeeViewController *(^dDiscountModels)(WFDefaultDiscountModel *discountModels);
+@property (nonatomic, copy) WFDiscountFeeViewController *(^isNotAllows)(BOOL isNotAllow);
 @end
 
 NS_ASSUME_NONNULL_END

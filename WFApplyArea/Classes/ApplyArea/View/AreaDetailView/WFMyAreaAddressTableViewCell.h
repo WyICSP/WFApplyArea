@@ -15,6 +15,10 @@ NS_ASSUME_NONNULL_BEGIN
 @interface WFMyAreaAddressTableViewCell : UITableViewCell
 /**地址*/
 @property (weak, nonatomic) IBOutlet UILabel *address;
+/**地址*/
+@property (weak, nonatomic) IBOutlet UILabel *detailAddress;
+/**地址*/
+@property (weak, nonatomic) IBOutlet UILabel *areaName;
 /**背景*/
 @property (weak, nonatomic) IBOutlet UIView *contentsView;
 /**赋值*/

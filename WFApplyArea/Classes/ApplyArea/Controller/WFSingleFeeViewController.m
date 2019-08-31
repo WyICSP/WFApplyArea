@@ -346,7 +346,7 @@
     if (!_confirmBtn) {
         _confirmBtn = [UIButton buttonWithType:UIButtonTypeSystem];
         _confirmBtn.frame = CGRectMake(0, ScreenHeight - KHeight(45.0f) - NavHeight, ScreenWidth, KHeight(45));
-        [_confirmBtn setTitle:@"完成" forState:UIControlStateNormal];
+        [_confirmBtn setTitle:self.type == WFUpdateSingleFeeUpdateType ? @"确认修改" : @"完成" forState:0];
         [_confirmBtn addTarget:self action:@selector(clickConfirmBtn) forControlEvents:UIControlEventTouchUpInside];
         _confirmBtn.titleLabel.font = [UIFont boldSystemFontOfSize:16.0f];
         [_confirmBtn setTitleColor:UIColor.whiteColor forState:UIControlStateNormal];

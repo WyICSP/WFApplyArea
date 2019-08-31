@@ -119,7 +119,8 @@ NS_ASSUME_NONNULL_BEGIN
  @param resultBlock 返回结果
  */
 + (void)getVipUserWithParams:(NSDictionary *)params
-                 resultBlock:(void(^)(NSArray <WFGroupVipUserModel *> *models))resultBlock;
+                 resultBlock:(void(^)(NSArray <WFGroupVipUserModel *> *models))resultBlock
+                   failBlock:(void(^)(void))failBlock;
 
 
 #pragma mark 获取计费方式
@@ -247,6 +248,15 @@ NS_ASSUME_NONNULL_BEGIN
  */
 + (void)updateSingleFeeWithParams:(NSDictionary *)params
                       resultBlock:(void(^)(void))resultBlock;
+
+/**
+ 修改地址
+
+ @param params 参数
+ @param resultBlock 返回结果
+ */
++ (void)updateAreaAddressWithParams:(NSDictionary *)params
+                        resultBlock:(void(^)(void))resultBlock;
 
 
 /**

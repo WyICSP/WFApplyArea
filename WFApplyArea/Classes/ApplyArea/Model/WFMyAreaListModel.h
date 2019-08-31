@@ -34,6 +34,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, copy) NSString *expirationMsec;
 /**二维码*/
 @property (nonatomic, copy) NSString *qrCodeId;
+/**二维码*/
+@property (nonatomic, copy) NSString *Id;
 @end
 
 @interface WFMyAreaDividIntoSetModel : NSObject

@@ -187,7 +187,7 @@
         [[[YFKeyWindow shareInstance] getCurrentVC] presentViewController:alertController animated:true completion:nil];
         
     }else if (sender.tag == 50) {
-        UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"您确定要删除单次收费吗?" message:nil preferredStyle:UIAlertControllerStyleAlert];
+        UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"您确定要删除优惠收费吗?" message:nil preferredStyle:UIAlertControllerStyleAlert];
         //增加取消按钮；
         [alertController addAction:[UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleDefault handler:nil]];
         //增加确定按钮；

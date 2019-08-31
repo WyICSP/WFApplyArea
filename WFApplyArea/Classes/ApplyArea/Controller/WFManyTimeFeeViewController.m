@@ -240,11 +240,11 @@
         return;
     }
     
-    if (self.itemArray.count == 0) {
+    if (self.groupId.length == 0) {
         //获取默认数据
         !self.mainModelBlock ? : self.mainModelBlock(self.mainModel);
         [self goBack];
-    }else if (self.itemArray.count != 0){
+    }else if (self.groupId.length != 0){
         //修改
         [self updateManyTimeFee];
     }
@@ -450,7 +450,7 @@
     if (!_confirmBtn) {
         _confirmBtn = [UIButton buttonWithType:UIButtonTypeSystem];
         _confirmBtn.frame = CGRectMake(0, ScreenHeight - KHeight(45.0f) - NavHeight, ScreenWidth, KHeight(45));
-        [_confirmBtn setTitle:@"完成" forState:UIControlStateNormal];
+        [_confirmBtn setTitle:self.groupId.length != 0 ? @"确认修改" : @"完成" forState:UIControlStateNormal];
         [_confirmBtn addTarget:self action:@selector(clickConfirmBtn) forControlEvents:UIControlEventTouchUpInside];
         _confirmBtn.titleLabel.font = [UIFont boldSystemFontOfSize:16.0f];
         [_confirmBtn setTitleColor:UIColor.whiteColor forState:UIControlStateNormal];

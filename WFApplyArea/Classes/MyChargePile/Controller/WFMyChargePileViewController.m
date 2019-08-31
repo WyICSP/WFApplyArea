@@ -153,6 +153,7 @@
         _tableView.estimatedSectionFooterHeight = 0.0f;
         _tableView.estimatedSectionHeaderHeight = 0.0f;
         _tableView.backgroundColor = UIColor.clearColor;
+        _tableView.showsVerticalScrollIndicator = NO;
         _tableView.tableHeaderView = self.cpView;
         [self.view addSubview:_tableView];
         

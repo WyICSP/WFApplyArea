@@ -40,7 +40,7 @@ static NSString *const cellId = @"WFMyChargePileTableViewCell";
 - (void)setMModel:(WFMyCdzListListModel *)mModel {
     self.title.text = mModel.name;
     NSString *present = @"%";
-    self.rate.text = [NSString stringWithFormat:@"充电桩使用率 %.2f%@",mModel.utilizationRate,present];
+    self.rate.text = [NSString stringWithFormat:@"安装使用率 %.2f%@",mModel.utilizationRate,present];
     self.count.text = [NSString stringWithFormat:@"充电桩 %ld台",mModel.cdzNumber];
 }
 

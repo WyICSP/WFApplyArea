@@ -14,6 +14,11 @@
 #import "WFAreaDetailTimeTableViewCell.h"
 #import "WFMyAreaAddressTableViewCell.h"
 #import "WFAreaDetailPartnerTableViewCell.h"
+#import "WFNotHaveFeeTableViewCell.h"
+#import "WFSingleFeeViewController.h"
+#import "WFDiscountFeeViewController.h"
+#import "WFManyTimeFeeViewController.h"
+#import "WFEditAreaAddressViewController.h"
 #import "WFAreaDetailCollectFeeSectionView.h"
 #import "WFAreaDetailPersonTableViewCell.h"
 #import "WFAreaDetailOtherSectionView.h"
@@ -22,6 +27,7 @@
 #import "WFBilleMethodViewController.h"
 #import "WFDiscountFeeViewController.h"
 #import "WFDividIntoSetViewController.h"
+#import <MJExtension/MJExtension.h>
 #import "UITableView+YFExtension.h"
 #import "WFAreaDetailFooterView.h"
 #import "WFMyAreaDetailHeadView.h"
@@ -30,22 +36,25 @@
 #import "WFAreaDetailModel.h"
 #import "NSString+Regular.h"
 #import "SKSafeObject.h"
+#import "YFToast.h"
 #import "WKHelp.h"
 
 @interface WFAreaDetailViewController ()<UITableViewDelegate,UITableViewDataSource>
 @property (nonatomic, strong, nullable) UITableView *tableView;
 /**数据*/
 @property (nonatomic, strong, nullable) WFAreaDetailModel *mainModels;
+/**title*/
+@property (nonatomic, strong, nullable) NSArray <WFAreaDetailSectionTitleModel *> *sectionTitles;
 /**我的充电桩过来的需要显示的*/
 @property (nonatomic, strong, nullable) WFMyAreaDetailHeadView *headView;
 /**充电桩信号强度*/
 @property (nonatomic, strong, nullable) WFMyAreaChargePileView *chargePileView;
 /**计费类型，1:小时计费 2:金额计费*/
 @property (nonatomic, assign) NSInteger billingPlay;
-/**是否显示收费*/
-@property (nonatomic, assign) BOOL isCollectFee;
-/**是否显示计费*/
-@property (nonatomic, assign) BOOL isMeterFee;
+/** 多次收费*/
+@property (nonatomic, assign) BOOL isHaveManyFee;
+/**优惠收费*/
+@property (nonatomic, assign) BOOL isHaveDiscountFee;
 /**是否显示合伙人*/
 @property (nonatomic, assign) BOOL isPartner;
 @end
@@ -70,7 +79,6 @@
     [self getAreaDetailMsg];
     //注册通知：监听充电时间变化
     [YFNotificationCenter addObserver:self selector:@selector(getAreaDetailMsg) name:@"reloadDataKeys" object:nil];
-    
 }
 
 /**
@@ -88,98 +96,119 @@
 
 - (void)requestSuccessWithModels:(WFAreaDetailModel * _Nonnull)models {
     self.mainModels = models;
-    //设置默认选中
-    [self setDefaultSelectFee];
-    
-//    //判断是否显示收费模块
-    if (self.mainModels.singleCharge || self.mainModels.vipCharge || self.mainModels.multipleChargesList.count != 0) {
-        self.isCollectFee = YES;
-    }
+    //是否有多次收费
+    self.isHaveManyFee = self.mainModels.multipleChargesList.count != 0 ? YES : NO;
+    //是否有单次收费
+    self.isHaveDiscountFee = self.mainModels.vipCharge.vipChargeId.length != 0 ? YES : NO;
     //是否显示计费
     if (self.mainModels.billingInfos.count != 0) {
         WFAreaDetailBillingInfosModel *firstModel = [self.mainModels.billingInfos firstObject];
         self.billingPlay = firstModel.billingPlay;
-        self.isMeterFee = YES;
     }
     //是否显示合伙人
     if (self.mainModels.partnerPropInfos.count != 0) {
         self.isPartner = YES;
     }
     
+    //获取区头的 title
+    [self getSectionTitles];
+    
     [self.tableView reloadData];
 }
 
 /**
- 设置默认选中
+ 获取区头的 title
  */
-- (void)setDefaultSelectFee {
-    if (![NSString isBlankString:self.mainModels.singleCharge.singleChargeId]) {
-        //默认选中单次收费
-        self.mainModels.isHaveSinge = self.mainModels.singleCharge.isSelect = YES;
-        self.showType = WFAreaDetailSingleType;
-        return;
-    }else if (self.mainModels.multipleChargesList.count != 0) {
-        WFAreaDetailMultipleModel *itemModel = [self.mainModels.multipleChargesList firstObject];
-        self.mainModels.isHaveManyTime = itemModel.isSelect = YES;
-        self.showType = WFAreaDetailManyTimesType;
-        return;
-    }else if (![NSString isBlankString:self.mainModels.vipCharge.vipChargeId]) {
-        self.mainModels.isHaveVip = self.mainModels.vipCharge.isSelect = YES;
-        self.showType = WFAreaDetailDiscountType;
-        return;
+- (void)getSectionTitles {
+    NSMutableArray *titles = [[NSMutableArray alloc] init];
+    //单次收费
+    NSMutableDictionary *single = [NSMutableDictionary dictionary];
+    NSString *singleTitle = self.mainModels.singleCharge.chargeType == 0 ? @"单次收费/统一收费" : @"单次收费/功率收费";
+    [single safeSetObject:singleTitle forKey:@"title"];
+    [single safeSetObject:self.mainModels.singleCharge.chargeType == 0 ? @0 : @1 forKey:@"isShowForm"];
+    [single safeSetObject:@0 forKey:@"isShowDetail"];
+    if (self.jumpType == WFAreaDetailJumpAreaType) {
+        [single safeSetObject:self.mainModels.isUpdate ? @1 : @0 forKey:@"isShowEditBtn"];
+    }else {
+        [single safeSetObject:@0 forKey:@"isShowEditBtn"];
     }
-}
-
-/**
- 获取地址 cell 的高度 areaName
-
- @return getAddressHeight
- */
-- (CGFloat)getAddressHeight {
-    NSString *address = [NSString stringWithFormat:@"%@%@",self.mainModels.areaName,self.mainModels.address];
-    CGSize size = [NSString getStringSize:16.0f withString:address andWidth:ScreenWidth-96.0f];
-    return size.height + 31;
-}
-
-/**
- 处理区头时间
- */
-- (void)handleSectionWithTitle:(NSString *)title {
-    if ([title containsString:@"单次收费"]) {
-        self.showType = WFAreaDetailSingleType;
-        self.mainModels.singleCharge.isSelect = YES;
-        self.mainModels.vipCharge.isSelect = self.mainModels.isSelectMany = NO;
-    }else if ([title containsString:@"多次收费"]) {
-        self.showType = WFAreaDetailManyTimesType;
-        self.mainModels.isSelectMany = YES;
-        self.mainModels.singleCharge.isSelect = self.mainModels.vipCharge.isSelect = NO;
-    }else if ([title containsString:@"优惠收费"]) {
-        self.showType = WFAreaDetailDiscountType;
-        self.mainModels.vipCharge.isSelect = YES;
-        self.mainModels.singleCharge.isSelect = self.mainModels.isSelectMany = NO;
-    }else if ([title containsString:@"利润计算表"]) {
-        WFLookPowerFormViewController *form = [[WFLookPowerFormViewController alloc] init];
-        form.formTypes(WFLookFormProfitType).unitPrices(self.mainModels.singleCharge.unitPrice).
-        salesPrices(self.mainModels.singleCharge.salesPrice);
-        [self.navigationController pushViewController:form animated:YES];
-        return;
-    }else if ([title containsString:@"功率计次表"]) {
-        WFLookPowerFormViewController *form = [[WFLookPowerFormViewController alloc] init];
-        form.formTypes(WFLookFormPowerType);
-        [self.navigationController pushViewController:form animated:YES];
-        return;
-    }else if ([title containsString:@"查看会员"]) {
-        WFLookPowerFormViewController *form = [[WFLookPowerFormViewController alloc] init];
-        form.formTypes(WFLookFormVipType).groupIds(self.mainModels.groupId);
-        [self.navigationController pushViewController:form animated:YES];
-        return;
-    }else if ([title containsString:@"编辑"]) {
-        WFEditAreaDetailViewController *edit = [[WFEditAreaDetailViewController alloc] init];
-        edit.models = self.mainModels;
-        [self.navigationController pushViewController:edit animated:YES];
-        return;
+    [single safeSetObject:@"   查看利润计算表   " forKey:@"formTitle"];
+    [single safeSetObject:@"" forKey:@"detailTitle"];
+    [titles addObject:single];
+    //多次收费
+    NSMutableDictionary *manyFee = [NSMutableDictionary dictionary];
+    if (self.mainModels.multipleChargesList.count != 0) {
+        WFAreaDetailMultipleModel *manyModel = self.mainModels.multipleChargesList.firstObject;
+        NSString *manyTitle = manyModel.chargeType == 0 ? @"多次收费/统一收费" : @"多次收费/功率收费";
+        [manyFee safeSetObject:manyTitle forKey:@"title"];
+        [manyFee safeSetObject:self.mainModels.singleCharge.chargeType == 0 ? @0 : @1 forKey:@"isShowForm"];
+        [manyFee safeSetObject:@0 forKey:@"isShowDetail"];
+    }else {
+        [manyFee safeSetObject:@"多次收费" forKey:@"title"];
+        [manyFee safeSetObject:@0 forKey:@"isShowForm"];
+        [manyFee safeSetObject:@0 forKey:@"isShowDetail"];
     }
-    [self.tableView reloadData];
+    [manyFee safeSetObject:@"   查看功率计次表   " forKey:@"formTitle"];
+    [manyFee safeSetObject:@"" forKey:@"detailTitle"];
+    if (self.jumpType == WFAreaDetailJumpAreaType) {
+        if (self.mainModels.isUpdate && self.mainModels.multipleChargesList.count != 0) {
+            //如果允许修改 并且多次收费
+            [manyFee safeSetObject:@1 forKey:@"isShowEditBtn"];
+        }else {
+            [manyFee safeSetObject:@0 forKey:@"isShowEditBtn"];
+        }
+    }else {
+        [manyFee safeSetObject:@0 forKey:@"isShowEditBtn"];
+    }
+    [titles addObject:manyFee];
+    //优惠收费
+    NSMutableDictionary *discountFee = [NSMutableDictionary dictionary];
+    [discountFee safeSetObject:@"优惠收费" forKey:@"title"];
+    [discountFee safeSetObject:self.mainModels.vipCharge ? @1 : @0 forKey:@"isShowForm"];
+    [discountFee safeSetObject:@0 forKey:@"isShowDetail"];
+    if (self.jumpType == WFAreaDetailJumpAreaType) {
+        if (self.mainModels.isUpdate && self.mainModels.vipCharge.vipChargeId.length != 0) {
+            //如果允许修改 并且有优惠收费
+            [discountFee safeSetObject:@1 forKey:@"isShowEditBtn"];
+        }else {
+            [discountFee safeSetObject:@0 forKey:@"isShowEditBtn"];
+        }
+        [discountFee safeSetObject:@"   查看会员   " forKey:@"formTitle"];
+    }else {
+        [discountFee safeSetObject:@0 forKey:@"isShowEditBtn"];
+        [discountFee safeSetObject:@"   编辑会员   " forKey:@"formTitle"];
+    }
+    [discountFee safeSetObject:@"" forKey:@"detailTitle"];
+    [titles addObject:discountFee];
+    //计费标准
+    NSMutableDictionary *freight = [NSMutableDictionary dictionary];
+    [freight safeSetObject:@"我的计费标准" forKey:@"title"];
+    [freight safeSetObject:@0 forKey:@"isShowForm"];
+    [freight safeSetObject:@1 forKey:@"isShowDetail"];
+    if (self.jumpType == WFAreaDetailJumpAreaType) {
+        //是否允许编辑
+        [freight safeSetObject:self.mainModels.isUpdate ? @1 : @0 forKey:@"isShowEditBtn"];
+    }else {
+        [freight safeSetObject:@0 forKey:@"isShowEditBtn"];
+    }
+    [freight safeSetObject:@"" forKey:@"formTitle"];
+    [freight safeSetObject:self.billingPlay == 1 ? @"按小时计费" : @"按金额计费" forKey:@"detailTitle"];
+    [titles addObject:freight];
+    //我的合伙人
+    NSMutableDictionary *partner = [NSMutableDictionary dictionary];
+    [partner safeSetObject:@"我的合伙人" forKey:@"title"];
+    [partner safeSetObject:@0 forKey:@"isShowForm"];
+    [partner safeSetObject:@0 forKey:@"isShowDetail"];
+    if (self.jumpType == WFAreaDetailJumpAreaType) {
+        [partner safeSetObject:self.mainModels.isUpdate ? @1 : @0 forKey:@"isShowEditBtn"];
+    }else {
+        [partner safeSetObject:@0 forKey:@"isShowEditBtn"];
+    }
+    [partner safeSetObject:@"" forKey:@"formTitle"];
+    [partner safeSetObject:@"" forKey:@"detailTitle"];
+    [titles addObject:partner];
+    
+    self.sectionTitles = [WFAreaDetailSectionTitleModel mj_objectArrayWithKeyValuesArray:titles];
 }
 
 /**
@@ -198,26 +227,79 @@
 }
 
 /**
+ 处理区头时间
+ */
+- (void)handleSectionWithTitle:(NSString *)title {
+    if ([title containsString:@"利润计算表"]) {
+        WFLookPowerFormViewController *form = [[WFLookPowerFormViewController alloc] init];
+        form.formTypes(WFLookFormProfitType).unitPrices(self.mainModels.singleCharge.unitPrice).
+        salesPrices(self.mainModels.singleCharge.salesPrice);
+        [self.navigationController pushViewController:form animated:YES];
+    }else if ([title containsString:@"功率计次表"]) {
+        WFLookPowerFormViewController *form = [[WFLookPowerFormViewController alloc] init];
+        form.formTypes(WFLookFormPowerType);
+        [self.navigationController pushViewController:form animated:YES];
+    }else if ([title containsString:@"查看会员"]) {
+        WFLookPowerFormViewController *form = [[WFLookPowerFormViewController alloc] init];
+        form.formTypes(WFLookFormVipType).groupIds(self.mainModels.groupId);
+        [self.navigationController pushViewController:form animated:YES];
+    }else if ([title containsString:@"编辑会员"]) {
+        WFDiscountFeeViewController *vip = [[WFDiscountFeeViewController alloc] init];
+        vip.eType(WFUpdateUserMsgUpdateType).dChargingModePlay(@"3").cModelId(self.mainModels.vipCharge.chargeModelId).
+        aGroupId(self.mainModels.groupId).editModels(self.mainModels.vipCharge).
+        cModelId(self.mainModels.vipChargeModelId).isNotAllows(YES);
+        [self.navigationController pushViewController:vip animated:YES];
+    }
+}
+
+/**
  跳转到合伙人 和积分方式
 
  @param section 区域
  */
 - (void)jumpPartnerOrchargeCtrlWithSection:(NSInteger)section {
-    if (section == 2) {
+    if (section == 0) {
+        //地址
+        WFEditAreaAddressViewController *address = [[WFEditAreaAddressViewController alloc] initWithNibName:@"WFEditAreaAddressViewController" bundle:[NSBundle bundleForClass:[self class]]];
+        address.models = self.mainModels;
+        [self.navigationController pushViewController:address animated:YES];
+    }else if (section == 1) {
+        //单次收费
+        WFSingleFeeViewController *single = [[WFSingleFeeViewController alloc] init];
+        single.dChargingModePlay(@"1").dChargingModelId(self.mainModels.singleCharge.chargeModelId).
+        sType(WFUpdateSingleFeeUpdateType).editModels(self.mainModels.singleCharge).
+        groupIds(self.mainModels.groupId);
+        [self.navigationController pushViewController:single animated:YES];
+    }else if (section == 2) {
+        //多次收费
+        WFAreaDetailMultipleModel *mModel = [self.mainModels.multipleChargesList firstObject];
+        WFManyTimeFeeViewController *many = [[WFManyTimeFeeViewController alloc] init];
+        many.dChargingModePlay(@"2").dChargingModelId(mModel.chargeModelId).
+        itemArrays(self.mainModels.multipleChargesList).chargeTypes(mModel.chargeType).groupIds(self.mainModels.groupId).
+        dChargingModelId(self.mainModels.multipleChargeModelId);
+        [self.navigationController pushViewController:many animated:YES];
+    }else if (section == 3) {
+        //优惠收费
+        WFDiscountFeeViewController *vip = [[WFDiscountFeeViewController alloc] init];
+        vip.eType(WFUpdateUserMsgUpdateType).dChargingModePlay(@"3").cModelId(self.mainModels.vipCharge.chargeModelId).
+        aGroupId(self.mainModels.groupId).editModels(self.mainModels.vipCharge).cModelId(self.mainModels.vipChargeModelId);
+        [self.navigationController pushViewController:vip animated:YES];
+    }else if (section == 4) {
+        //计费方式
         WFBilleMethodViewController *method = [[WFBilleMethodViewController alloc] init];
         method.groupIds(self.mainModels.groupId);
         [self.navigationController pushViewController:method animated:YES];
-    }else if(section == 3) {
-        //优惠收费
+    }else if (section == 5) {
+        //我的合伙人
         WFDividIntoSetViewController *set = [[WFDividIntoSetViewController alloc] init];
         set.groupIds(self.mainModels.groupId);
         [self.navigationController pushViewController:set animated:YES];
     }
 }
-
+//
 /**
  获取计费方式的高度
- 
+
  @return getPriceHeight
  */
 - (CGFloat)getBillHeight {
@@ -229,24 +311,77 @@
     NSInteger wholeHeight = row * KHeight(32.0f) +  (row - 2) * KHeight(10.0f);
     //不能整除的时候的高度
     NSInteger maxHeight = (row + 1) * KHeight(32.0f) + (row - 1) * KHeight(10.0f);
-    
+
     return index == 0 ? wholeHeight + 20 : maxHeight + 20;
+}
+
+#pragma mark 删除多次收费 和优惠收费
+- (void)longPressDeleteManyOrDiscontFeeWithIndex:(NSInteger)index {
+    if (self.jumpType == WFAreaDetailJumpPileType) return;
+    if (index == 100) {
+        UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"您确定要删除多次收费吗?" message:nil preferredStyle:UIAlertControllerStyleAlert];
+        //增加取消按钮；
+        [alertController addAction:[UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleDefault handler:nil]];
+        //增加确定按钮；
+        [alertController addAction:[UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+            [self deleteManyTimesFee];
+        }]];
+        
+        [self presentViewController:alertController animated:true completion:nil];
+        
+    }else if (index == 200) {
+        UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"您确定要删除优惠收费吗?" message:nil preferredStyle:UIAlertControllerStyleAlert];
+        //增加取消按钮；
+        [alertController addAction:[UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleDefault handler:nil]];
+        //增加确定按钮；
+        [alertController addAction:[UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+            [self deleteVipChargeFee];
+        }]];
+        
+        [self presentViewController:alertController animated:true completion:nil];
+    }
+}
+
+/**
+ 删除多次收费
+ */
+- (void)deleteManyTimesFee {
+    NSMutableDictionary *params = [NSMutableDictionary dictionary];
+    [params safeSetObject:self.mainModels.groupId forKey:@"groupId"];
+    @weakify(self)
+    [WFApplyAreaDataTool deleteManyTimeFeeWithParams:params resultBlock:^{
+        @strongify(self)
+        [self deleteSuccess];
+    }];
+}
+
+
+/**
+ 删除优惠收费
+ */
+- (void)deleteVipChargeFee {
+    NSMutableDictionary *params = [NSMutableDictionary dictionary];
+    [params safeSetObject:self.mainModels.vipCharge.vipChargeId forKey:@"vipChargeId"];
+    @weakify(self)
+    [WFApplyAreaDataTool deleteVipChargeFeeWithParams:params resultBlock:^{
+        @strongify(self)
+        [self deleteSuccess];
+    }];
+}
+
+- (void)deleteSuccess {
+    [self getAreaDetailMsg];
 }
 
 #pragma mark UITableViewDelegate,UITableViewDataSource
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return 4;
+    return 6;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    if (section == 1) {
-        //收费
-        return self.isCollectFee ? 1 : 0;
-    }else if (section == 2) {
-        //计费
-        return self.isMeterFee ? 1 : 0;
-    }else if (section == 3) {
-        //合伙人
+    if (section == 2) {
+        return self.isHaveManyFee ? self.mainModels.multipleChargesList.count : 1;
+    }else if (section == 5) {
         return self.isPartner ? self.mainModels.partnerPropInfos.count + 1 : 0;
     }
     return 1;
@@ -254,32 +389,71 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.section == 0) {
-        //地址 我的片区进来
+        //地址 我的充电桩进来
         if (self.jumpType == WFAreaDetailJumpPileType) {
             WFMyAreaAddressTableViewCell *cell = [WFMyAreaAddressTableViewCell cellWithTableView:tableView];
             cell.model = self.mainModels;
             return cell;
         }
         WFAreaDetailAddressTableViewCell *cell = [WFAreaDetailAddressTableViewCell cellWithTableView:tableView];
-        [cell bindToCell:self.mainModels addressHeight:[self getAddressHeight]];
+        [cell bindToCell:self.mainModels];
+        @weakify(self)
+        cell.clickEditBtnBlock = ^{
+            @strongify(self)
+            [self jumpPartnerOrchargeCtrlWithSection:indexPath.section];
+        };
         return cell;
     }else if (indexPath.section == 1) {
-        if (self.showType == WFAreaDetailSingleType) {
-            //单次收费
-            WFAreaDetailSingleTableViewCell *cell = [WFAreaDetailSingleTableViewCell cellWithTableView:tableView];
-            cell.model = self.mainModels.singleCharge;
-            return cell;
-        }else if (self.showType == WFAreaDetailManyTimesType) {
-            //多次收费
-            WFAreaDetailManyTimesTableViewCell *cell = [WFAreaDetailManyTimesTableViewCell cellWithTableView:tableView];
-            cell.models = self.mainModels.multipleChargesList;
+        //单次收费
+        if (self.mainModels.singleCharge.chargeType == 0) {
+            //统一收费
+            WFAreaDetailDiscountTableViewCell *cell = [WFAreaDetailDiscountTableViewCell cellWithTableView:tableView];
+            cell.singleModel = self.mainModels.singleCharge;
             return cell;
         }
-        //优惠收费
-        WFAreaDetailDiscountTableViewCell *cell = [WFAreaDetailDiscountTableViewCell cellWithTableView:tableView];
-        cell.model = self.mainModels.vipCharge;
+        WFAreaDetailSingleTableViewCell *cell = [WFAreaDetailSingleTableViewCell cellWithTableView:tableView];
+        cell.model = self.mainModels.singleCharge;
         return cell;
     }else if (indexPath.section == 2) {
+        //多次收费
+        if (self.isHaveManyFee) {
+            WFAreaDetailManyTimesTableViewCell *cell = [WFAreaDetailManyTimesTableViewCell cellWithTableView:tableView];
+            cell.model = self.mainModels.multipleChargesList[indexPath.row];
+            @weakify(self)
+            cell.longPressDeleteBlock = ^(NSInteger index) {
+                @strongify(self)
+                [self longPressDeleteManyOrDiscontFeeWithIndex:index];
+            };
+            return cell;
+        }
+        WFNotHaveFeeTableViewCell *cell = [WFNotHaveFeeTableViewCell cellWithTableView:tableView];
+        @weakify(self)
+        cell.gotoSetFeeBlock = ^{
+            @strongify(self)
+            [self jumpPartnerOrchargeCtrlWithSection:indexPath.section];
+        };
+        return cell;
+        
+    }else if (indexPath.section == 3) {
+        //优惠收费
+        if (self.isHaveDiscountFee) {
+            WFAreaDetailDiscountTableViewCell *cell = [WFAreaDetailDiscountTableViewCell cellWithTableView:tableView];
+            cell.model = self.mainModels.vipCharge;
+            @weakify(self)
+            cell.longPressDeleteBlock = ^(NSInteger index) {
+                @strongify(self)
+                [self longPressDeleteManyOrDiscontFeeWithIndex:index];
+            };
+            return cell;
+        }
+        WFNotHaveFeeTableViewCell *cell = [WFNotHaveFeeTableViewCell cellWithTableView:tableView];
+        @weakify(self)
+        cell.gotoSetFeeBlock = ^{
+            @strongify(self)
+            [self jumpPartnerOrchargeCtrlWithSection:indexPath.section];
+        };
+        return cell;
+    }else if (indexPath.section == 4) {
         //时间设置
         WFAreaDetailTimeTableViewCell *cell = [WFAreaDetailTimeTableViewCell cellWithTableView:tableView];
         [cell bindToCell:self.mainModels.billingInfos cellHeight:[self getBillHeight]];
@@ -295,94 +469,59 @@
     return cell;
 }
 
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    if (indexPath.section == 0) {
+        //地址
+        return self.jumpType == WFAreaDetailJumpPileType ? 153.0f : KHeight(250.0f);
+    }else if (indexPath.section == 1) {
+        //单次收费
+        return self.mainModels.singleCharge.chargeType == 0 ? KHeight(40.0f) : KHeight(70.0f);
+    }else if (indexPath.section == 2) {
+        //多次收费
+        return self.isHaveManyFee ? KHeight(40.0f) : 200.0f;
+    }else if (indexPath.section == 3) {
+        //优惠收费
+        return self.isHaveDiscountFee ? KHeight(40.0f) : 200.0f;
+    }else if (indexPath.section == 4) {
+        //计费方式
+        return [self getBillHeight];
+    }
+    return KHeight(44.0f);
+}
+
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
-    if (section == 1) {
-        WFAreaDetailCollectFeeSectionView *sectionView = [[[NSBundle bundleForClass:[self class]] loadNibNamed:@"WFAreaDetailCollectFeeSectionView" owner:nil options:nil] firstObject];
-        sectionView.model = self.mainModels;
-        WS(weakSelf)
-        sectionView.clickBtnBlock = ^(NSString * _Nonnull btnTitle) {
-            [weakSelf handleSectionWithTitle:btnTitle];
-        };
-        return self.isCollectFee ? sectionView : [UIView new];
-    }else if (section == 2 || section == 3) {
+    if (section != 0) {
         WFAreaDetailOtherSectionView *sectionView = [[[NSBundle bundleForClass:[self class]] loadNibNamed:@"WFAreaDetailOtherSectionView" owner:nil options:nil] firstObject];
-        sectionView.title.text = section == 2 ? @"我的计费标准" : @"我的合伙人";
-        sectionView.detailLbl.hidden = section != 2;
-        sectionView.detailLbl.text = self.billingPlay == 1 ? @"按小时计费" : @"按金额计费";
+        sectionView.model = self.sectionTitles[section-1];
         @weakify(self)
         sectionView.clickBtnBlock = ^{
             @strongify(self)
             [self jumpPartnerOrchargeCtrlWithSection:section];
         };
-        if (section == 2) {
-            return self.isMeterFee ? sectionView : [UIView new];
-        }else if (section == 3) {
-            return self.isPartner ? sectionView : [UIView new];
-        }
+        sectionView.lookBtnBlock = ^(NSString * _Nonnull title) {
+            @strongify(self)
+            [self handleSectionWithTitle:title];
+        };
+        return sectionView;
     }
     return [UIView new];
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
+    return section == 0 ? CGFLOAT_MIN : KHeight(40.0f);
 }
 
 - (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section {
     if (section != 0) {
         WFAreaDetailFooterView *footerView = [[[NSBundle bundleForClass:[self class]] loadNibNamed:@"WFAreaDetailFooterView" owner:nil options:nil] firstObject];
-        if (section == 1) {
-            return self.isCollectFee ? footerView : [UIView new];
-        }else if (section == 2) {
-            return self.isMeterFee ? footerView : [UIView new];
-        }
-        return self.isPartner ? footerView : [UIView new];
+        return footerView;
     }
     return [UIView new];
 }
 
-- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (indexPath.section == 0) {
-        //地址
-        return self.jumpType == WFAreaDetailJumpPileType ? [self getAddressHeight] : KHeight(115.0f) + [self getAddressHeight]/2;
-    }else if (indexPath.section == 1) {
-        //收费标准
-        if (self.showType == WFAreaDetailSingleType) {
-            //单次收费
-            return KHeight(80.0f);
-        }else if (self.showType == WFAreaDetailManyTimesType) {
-            //多次收费 +1 是头部高度
-            return 10.0f+37.0f*(self.mainModels.multipleChargesList.count+1);
-        }
-        //优惠收费
-        return KHeight(80.0f);
-    }else if (indexPath.section == 2) {
-        //时间设置
-        return [self getBillHeight];
-    }
-    //合伙人
-    return KHeight(44.0f);
-}
-
-- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
-    if (section == 1) {
-        return self.isCollectFee ? KHeight(95.0f) : CGFLOAT_MIN;
-    }else if (section == 2) {
-        return self.isMeterFee ? KHeight(44.0f) : CGFLOAT_MIN;
-    }else if (section == 3) {
-        return self.isPartner ? KHeight(44.0f) : CGFLOAT_MIN;
-    }
-    return CGFLOAT_MIN;
-}
-
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
-    if (section == 0) {
-        return 10.0f;
-    }else if (section == 1) {
-        return self.isCollectFee ? 20.0f : CGFLOAT_MIN;
-    }else if (section == 2) {
-        return self.isMeterFee ? 20.0f : CGFLOAT_MIN;
-    }else if (section == 3) {
-        return self.isPartner ? 20.0f : CGFLOAT_MIN;
-    }
-    return CGFLOAT_MIN;
+    return section == 0 ? 10.0f : 20.0f;
 }
-
 
 #pragma mark get set
 - (UITableView *)tableView {

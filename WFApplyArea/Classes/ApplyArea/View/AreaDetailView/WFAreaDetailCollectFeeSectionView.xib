@@ -56,92 +56,20 @@
                                 <action selector="clickOtherBtn:" destination="iN0-l3-epB" eventType="touchUpInside" id="abS-aC-wun"/>
                             </connections>
                         </button>
-                        <button hidden="YES" opaque="NO" tag="30" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pfS-0B-R4B">
-                            <rect key="frame" x="20" y="50" width="80" height="30"/>
-                            <color key="backgroundColor" red="0.96862745100000003" green="0.52156862749999999" blue="0.33725490200000002" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
-                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                            <state key="normal" title="单次收费">
-                                <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                            </state>
-                            <state key="selected">
-                                <color key="titleColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
-                            </state>
-                            <connections>
-                                <action selector="clickBtn:" destination="iN0-l3-epB" eventType="touchUpInside" id="OUt-YM-Iih"/>
-                            </connections>
-                        </button>
-                        <button hidden="YES" opaque="NO" tag="50" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lLT-zU-hNk">
-                            <rect key="frame" x="196" y="50" width="80" height="30"/>
-                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                            <state key="normal" title="优惠收费">
-                                <color key="titleColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
-                            </state>
-                            <state key="selected">
-                                <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                            </state>
-                            <connections>
-                                <action selector="clickBtn:" destination="iN0-l3-epB" eventType="touchUpInside" id="3JV-bh-w3y"/>
-                            </connections>
-                        </button>
-                        <button hidden="YES" opaque="NO" tag="40" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="B3Y-5c-DOI">
-                            <rect key="frame" x="108" y="50" width="80" height="30"/>
-                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                            <constraints>
-                                <constraint firstAttribute="height" constant="30" id="00M-Ie-p6O">
-                                    <userDefinedRuntimeAttributes>
-                                        <userDefinedRuntimeAttribute type="boolean" keyPath="isAdaptateScreen" value="YES"/>
-                                    </userDefinedRuntimeAttributes>
-                                </constraint>
-                                <constraint firstAttribute="width" constant="80" id="RGV-JZ-C1H">
-                                    <userDefinedRuntimeAttributes>
-                                        <userDefinedRuntimeAttribute type="boolean" keyPath="isAdaptateScreen" value="YES"/>
-                                    </userDefinedRuntimeAttributes>
-                                </constraint>
-                            </constraints>
-                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                            <state key="normal" title="多次收费">
-                                <color key="titleColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
-                            </state>
-                            <state key="selected">
-                                <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                            </state>
-                            <connections>
-                                <action selector="clickBtn:" destination="iN0-l3-epB" eventType="touchUpInside" id="ZTA-Yl-811"/>
-                            </connections>
-                        </button>
                     </subviews>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <constraints>
-                        <constraint firstItem="lLT-zU-hNk" firstAttribute="width" secondItem="pfS-0B-R4B" secondAttribute="width" id="8ZC-AR-hLv"/>
                         <constraint firstItem="SMS-TZ-9nj" firstAttribute="leading" secondItem="btT-Pe-r3K" secondAttribute="trailing" constant="10" id="AlT-sd-q3A"/>
-                        <constraint firstItem="pfS-0B-R4B" firstAttribute="centerY" secondItem="B3Y-5c-DOI" secondAttribute="centerY" id="CTG-We-5mC"/>
                         <constraint firstItem="vaY-iG-CLF" firstAttribute="leading" secondItem="SMS-TZ-9nj" secondAttribute="trailing" constant="10" id="F9z-Tl-nBy"/>
                         <constraint firstItem="btT-Pe-r3K" firstAttribute="top" secondItem="D4L-kf-jtR" secondAttribute="top" constant="15" id="FCS-lB-iOl">
                             <userDefinedRuntimeAttributes>
                                 <userDefinedRuntimeAttribute type="boolean" keyPath="isAdaptateScreen" value="YES"/>
                             </userDefinedRuntimeAttributes>
                         </constraint>
-                        <constraint firstItem="lLT-zU-hNk" firstAttribute="width" secondItem="B3Y-5c-DOI" secondAttribute="width" id="Hd0-bB-gkL"/>
                         <constraint firstItem="vaY-iG-CLF" firstAttribute="centerY" secondItem="btT-Pe-r3K" secondAttribute="centerY" id="MJI-89-xw6"/>
                         <constraint firstAttribute="trailing" secondItem="vaY-iG-CLF" secondAttribute="trailing" id="PnX-7l-F0T"/>
                         <constraint firstItem="SMS-TZ-9nj" firstAttribute="centerY" secondItem="btT-Pe-r3K" secondAttribute="centerY" id="Q3x-RW-rq4"/>
-                        <constraint firstItem="B3Y-5c-DOI" firstAttribute="width" secondItem="pfS-0B-R4B" secondAttribute="width" id="WsV-Xu-Lqp"/>
-                        <constraint firstItem="pfS-0B-R4B" firstAttribute="leading" secondItem="D4L-kf-jtR" secondAttribute="leading" constant="20" id="eIg-5n-vMN">
-                            <userDefinedRuntimeAttributes>
-                                <userDefinedRuntimeAttribute type="boolean" keyPath="isAdaptateScreen" value="YES"/>
-                            </userDefinedRuntimeAttributes>
-                        </constraint>
-                        <constraint firstAttribute="trailing" secondItem="lLT-zU-hNk" secondAttribute="trailing" constant="20" id="f1O-RC-qsN">
-                            <userDefinedRuntimeAttributes>
-                                <userDefinedRuntimeAttribute type="boolean" keyPath="isAdaptateScreen" value="YES"/>
-                            </userDefinedRuntimeAttributes>
-                        </constraint>
-                        <constraint firstAttribute="bottom" secondItem="B3Y-5c-DOI" secondAttribute="bottom" constant="5" id="f42-MY-moe"/>
                         <constraint firstItem="btT-Pe-r3K" firstAttribute="leading" secondItem="D4L-kf-jtR" secondAttribute="leading" constant="12" id="mMz-ci-XLk"/>
-                        <constraint firstItem="lLT-zU-hNk" firstAttribute="centerY" secondItem="B3Y-5c-DOI" secondAttribute="centerY" id="rBO-1m-Isd"/>
-                        <constraint firstItem="pfS-0B-R4B" firstAttribute="height" secondItem="B3Y-5c-DOI" secondAttribute="height" id="sIJ-Dx-Uao"/>
-                        <constraint firstItem="B3Y-5c-DOI" firstAttribute="centerX" secondItem="D4L-kf-jtR" secondAttribute="centerX" id="sOz-qZ-OW8"/>
-                        <constraint firstItem="lLT-zU-hNk" firstAttribute="height" secondItem="B3Y-5c-DOI" secondAttribute="height" id="sgY-XZ-xXZ"/>
                     </constraints>
                 </view>
             </subviews>
@@ -155,14 +83,8 @@
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
             <connections>
-                <outlet property="centerBtn" destination="B3Y-5c-DOI" id="mTB-Ge-glF"/>
                 <outlet property="contentsView" destination="D4L-kf-jtR" id="ejv-4N-Dot"/>
                 <outlet property="formBtn" destination="SMS-TZ-9nj" id="3CF-uE-WID"/>
-                <outlet property="leftBtn" destination="pfS-0B-R4B" id="0JG-8J-JG5"/>
-                <outlet property="rightBtn" destination="lLT-zU-hNk" id="8lw-mA-4JX"/>
-                <outletCollection property="btns" destination="pfS-0B-R4B" id="Zcn-EQ-nw4"/>
-                <outletCollection property="btns" destination="B3Y-5c-DOI" id="jQO-W1-QWe"/>
-                <outletCollection property="btns" destination="lLT-zU-hNk" id="FMr-0J-6Xi"/>
             </connections>
             <point key="canvasLocation" x="-164" y="-71"/>
         </view>

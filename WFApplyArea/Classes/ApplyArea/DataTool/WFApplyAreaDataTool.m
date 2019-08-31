@@ -149,17 +149,19 @@
 
 
 + (void)getVipUserWithParams:(NSDictionary *)params
-                 resultBlock:(void(^)(NSArray <WFGroupVipUserModel *> *models))resultBlock {
+                 resultBlock:(void(^)(NSArray <WFGroupVipUserModel *> *models))resultBlock
+                   failBlock:(void(^)(void))failBlock {
     //接口地址
     NSString *path = [NSString stringWithFormat:@"%@app-partner-group/v1/charging/group/get/group/vip/member",NEW_HOST_URL];
     [WKRequest getWithURLString:path parameters:params isShowHud:YES success:^(WKBaseModel *baseModel) {
         if (CODE_ZERO) {
-            resultBlock([WFGroupVipUserModel mj_objectArrayWithKeyValuesArray:baseModel.data]);
+            resultBlock([WFGroupVipUserModel mj_objectArrayWithKeyValuesArray:[[baseModel.mDictionary safeJsonObjForKey:@"data"] safeJsonObjForKey:@"list"]]);
         }else {
             [YFToast showMessage:baseModel.message inView:[[YFKeyWindow shareInstance] getCurrentVC].view];
+            failBlock();
         }
     } failure:^(NSError *error) {
-        
+        failBlock();
     }];
 }
 
@@ -354,6 +356,21 @@
     }];
 }
 
++ (void)updateAreaAddressWithParams:(NSDictionary *)params
+                        resultBlock:(void(^)(void))resultBlock {
+    //接口地址
+    NSString *path = [NSString stringWithFormat:@"%@app-partner-group/v1/charging/group/update/group/base/info",NEW_HOST_URL];
+    [WKRequest postWithURLString:path parameters:params isJson:YES isShowHud:YES success:^(WKBaseModel *baseModel) {
+        if (CODE_ZERO) {
+            resultBlock();
+        }else {
+            [YFToast showMessage:baseModel.message inView:[[YFKeyWindow shareInstance] getCurrentVC].view];
+        }
+    } failure:^(NSError *error) {
+        
+    }];
+}
+
 
 + (void)updateManyTimeFeeWithPamrams:(NSDictionary *)params
                          resultBlock:(void(^)(void))resultBlock {
@@ -377,7 +394,7 @@
                         resultBlock:(void(^)(void))resultBlock {
     //接口地址
     NSString *path = [NSString stringWithFormat:@"%@app-partner-group/v1/charging/group/delete/multiple/charge",NEW_HOST_URL];
-    [WKRequest postWithURLString:path parameters:params isJson:YES isShowHud:YES success:^(WKBaseModel *baseModel) {
+    [WKRequest postWithURLString:path parameters:params isJson:YES isShowHud:NO success:^(WKBaseModel *baseModel) {
         if (CODE_ZERO) {
             resultBlock();
         }else {
@@ -392,7 +409,7 @@
                          resultBlock:(void(^)(void))resultBlock {
     //接口地址
     NSString *path = [NSString stringWithFormat:@"%@app-partner-group/v1/charging/group/delete/vip/charge",NEW_HOST_URL];
-    [WKRequest postWithURLString:path parameters:params isJson:YES isShowHud:YES success:^(WKBaseModel *baseModel) {
+    [WKRequest postWithURLString:path parameters:params isJson:YES isShowHud:NO success:^(WKBaseModel *baseModel) {
         if (CODE_ZERO) {
             resultBlock();
         }else {

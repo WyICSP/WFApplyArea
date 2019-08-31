@@ -15,8 +15,6 @@ NS_ASSUME_NONNULL_BEGIN
 @interface WFAreaDetailSingleTableViewCell : UITableViewCell
 /**背景*/
 @property (weak, nonatomic) IBOutlet UIView *contentsView;
-/**描述*/
-@property (weak, nonatomic) IBOutlet UILabel *title;
 /**单价*/
 @property (weak, nonatomic) IBOutlet UILabel *unitPrice;
 /**销售价*/

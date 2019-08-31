@@ -20,6 +20,7 @@
 #import "SKSafeObject.h"
 #import "UIView+Frame.h"
 #import "WFPopTool.h"
+#import "MJRefresh.h"
 #import "YFToast.h"
 #import "WKHelp.h"
 
@@ -31,7 +32,9 @@
 /**申请片区按钮*/
 @property (nonatomic, strong, nullable) UIButton *confirmBtn;
 /**vip用户*/
-@property (nonatomic, strong, nullable) NSArray <WFGroupVipUserModel *> *vipData;
+@property (nonatomic, strong, nullable) NSMutableArray <WFGroupVipUserModel *> *vipData;
+/**页码*/
+@property (nonatomic, assign) NSInteger pageNo;
 
 @end
 
@@ -50,6 +53,7 @@
 #pragma mark 私有方法
 - (void)setUI {
     self.title = @"优惠收费";
+    self.pageNo = 1;
     self.view.backgroundColor = UIColorFromRGB(0xF5F5F5);
     if (!self.mainModel) {
         //获取默认的收费
@@ -64,7 +68,6 @@
         [YFNotificationCenter addObserver:self selector:@selector(getVipUser) name:@"refreshVipKeys" object:nil];
         [self getVipUser];
     }
-    
 }
 
 /**
@@ -84,7 +87,7 @@
 - (void)requestSuccessWithModels:(NSArray<WFDefaultDiscountModel *> * _Nonnull)models {
     if (models.count != 0) {
         self.mainModel = models.firstObject;
-        if (self.type == WFUpdateUserMsgUpdateType) {
+        if (self.type == WFUpdateUserMsgUpdateType && self.editModel.vipChargeId.length != 0) {
             //如果是修改需要重新设置值
             self.mainModel.unifiedPrice = self.editModel.unifiedPrice;
             self.mainModel.unifiedTime = self.editModel.unifiedTime;
@@ -99,12 +102,30 @@
 - (void)getVipUser {
     NSMutableDictionary *params = [NSMutableDictionary dictionary];
     [params safeSetObject:self.applyGroupId forKey:@"groupId"];
+    [params safeSetObject:@(self.pageNo) forKey:@"pageNo"];
+    [params safeSetObject:@(10) forKey:@"pageSize"];
     @weakify(self)
     [WFApplyAreaDataTool getVipUserWithParams:params resultBlock:^(NSArray<WFGroupVipUserModel *> * _Nonnull models) {
-         @strongify(self)
-        self.vipData = models;
-        [self.tableView refreshTableViewWithSection:1];
+        @strongify(self)
+        [self requestVipDataSuccessWith:models];
+    } failBlock:^{
+        @strongify(self)
+        [self.tableView.mj_footer endRefreshing];
     }];
+}
+
+- (void)requestVipDataSuccessWith:(NSArray<WFGroupVipUserModel *> * _Nonnull)models {
+    // 结束刷新
+    [self.tableView.mj_footer endRefreshing];
+    //将获取的数据添加到数组中
+    if (models.count != 0) [self.vipData addObjectsFromArray:models];
+    
+    if (models.count == 0 & self.vipData.count != 0 & self.pageNo != 1) {
+        [self.tableView.mj_footer endRefreshingWithNoMoreData];
+    } else {
+        [self.tableView.mj_footer resetNoMoreData];
+    }
+    [self.tableView refreshTableViewWithSection:1];
 }
 
 /**
@@ -113,8 +134,11 @@
 - (void)updateVipCollectFee {
     NSMutableDictionary *params = [NSMutableDictionary dictionary];
     [params safeSetObject:self.mainModel.unifiedPrice forKey:@"unifiedPrice"];
+    [params safeSetObject:self.applyGroupId forKey:@"groupId"];
     [params safeSetObject:@(self.mainModel.unifiedTime) forKey:@"unifiedTime"];
     [params safeSetObject:self.editModel.vipChargeId forKey:@"vipChargeId"];
+    [params safeSetObject:self.mainModel.chargingDefaultConfigId forKey:@"chargingDefaultConfigId"];
+    [params safeSetObject:self.mainModel.chargeModelId forKey:@"chargeModelId"];
     @weakify(self)
     [WFApplyAreaDataTool updateVipCollectFeeWithParams:params resultBlock:^{
         @strongify(self)
@@ -130,13 +154,11 @@
     });
 }
 
-/**
- 完成
- */
+#pragma mark 完成
 - (void)clickConfirmBtn {
     [self.view endEditing:YES];
     
-    if (self.type == WFUpdateUserMsgUpdateType && self.mainModel.isChange){
+    if (self.type == WFUpdateUserMsgUpdateType){
         //修改优化收费
         [self updateVipCollectFee];
     }else {
@@ -230,6 +252,14 @@
         _tableView.estimatedRowHeight = 0.0f;
         _tableView.estimatedSectionFooterHeight = 0.0f;
         _tableView.estimatedSectionHeaderHeight = 0.0f;
+        if (self.type == WFUpdateUserMsgUpdateType) {
+            @weakify(self)
+            _tableView.mj_footer = [MJRefreshAutoNormalFooter footerWithRefreshingBlock:^{
+                @strongify(self)
+                self.pageNo ++;
+                [self getVipUser];
+            }];
+        }
         [self.view addSubview:_tableView];
     }
     return _tableView;
@@ -260,14 +290,22 @@
     if (!_confirmBtn) {
         _confirmBtn = [UIButton buttonWithType:UIButtonTypeSystem];
         _confirmBtn.frame = CGRectMake(0, ScreenHeight - KHeight(45.0f) - NavHeight, ScreenWidth, KHeight(45));
-        [_confirmBtn setTitle:@"完成" forState:UIControlStateNormal];
+        [_confirmBtn setTitle:self.type == WFUpdateUserMsgUpdateType ? @"确认修改" : @"完成" forState:UIControlStateNormal];
         [_confirmBtn addTarget:self action:@selector(clickConfirmBtn) forControlEvents:UIControlEventTouchUpInside];
         _confirmBtn.titleLabel.font = [UIFont boldSystemFontOfSize:16.0f];
         [_confirmBtn setTitleColor:UIColor.whiteColor forState:UIControlStateNormal];
         _confirmBtn.backgroundColor = UIColorFromRGB(0xF78556);
+        _confirmBtn.hidden = self.isNotAllow;
         [self.view addSubview:_confirmBtn];
     }
     return _confirmBtn;
+}
+
+- (NSMutableArray<WFGroupVipUserModel *> *)vipData {
+    if (!_vipData) {
+        _vipData = [[NSMutableArray alloc] init];
+    }
+    return _vipData;
 }
 
 #pragma mark 链式编程
@@ -309,6 +347,13 @@
 - (WFDiscountFeeViewController * _Nonnull (^)(WFAreaDetailVipChargeModel * _Nonnull))editModels {
     return ^(WFAreaDetailVipChargeModel *editModel) {
         self.editModel = editModel;
+        return self;
+    };
+}
+
+- (WFDiscountFeeViewController * _Nonnull (^)(BOOL))isNotAllows {
+    return ^(BOOL isNotAllow) {
+        self.isNotAllow = isNotAllow;
         return self;
     };
 }

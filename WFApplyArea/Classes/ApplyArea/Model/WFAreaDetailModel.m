@@ -42,3 +42,7 @@
 @implementation WFAreaDetailPartnerModel
 
 @end
+
+@implementation WFAreaDetailSectionTitleModel
+
+@end

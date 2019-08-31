@@ -36,12 +36,9 @@ static NSString *const cellId = @"WFAreaDetailAddressTableViewCell";
     // Configure the view for the selected state
 }
 
-- (void)bindToCell:(WFAreaDetailModel *)model addressHeight:(CGFloat)addressHeight {
+- (void)bindToCell:(WFAreaDetailModel *)model {
     
-    NSString *address = [NSString stringWithFormat:@"%@%@",model.areaName,model.address];
-    self.address.text = [NSString stringWithFormat:@"%@",address];
-    
-    self.addressViewHeight.constant = addressHeight;
+    self.editBtn.hidden = !model.isUpdate;
     //0：申请中 1：申请通过 2：申请驳回
     if (model.auditStatus == 0) {
         self.status.text = @"审核中";
@@ -50,6 +47,13 @@ static NSString *const cellId = @"WFAreaDetailAddressTableViewCell";
     }else {
         self.status.text = @"审核驳回";
     }
+    
+    self.address.text = model.areaName;
+    self.detailAddress.text = model.address;
+    self.areaName.text = model.name;
 }
 
+- (IBAction)clickEditBtn:(id)sender {
+    !self.clickEditBtnBlock ? : self.clickEditBtnBlock();
+}
 @end

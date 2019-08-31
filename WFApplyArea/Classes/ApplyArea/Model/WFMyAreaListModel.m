@@ -7,12 +7,18 @@
 //
 
 #import "WFMyAreaListModel.h"
+#import <MJExtension/MJExtension.h>
 
 @implementation WFMyAreaListModel
 
 @end
 
 @implementation WFMyAreaQRcodeModel
+
++ (NSDictionary *)mj_replacedKeyFromPropertyName {
+    return @{@"Id":@"id"};
+}
+
 
 @end
 

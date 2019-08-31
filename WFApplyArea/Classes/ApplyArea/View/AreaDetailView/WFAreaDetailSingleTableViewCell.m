@@ -36,14 +36,8 @@ static NSString *const cellId = @"WFAreaDetailSingleTableViewCell";
 }
 
 - (void)setModel:(WFAreaDetailSingleChargeModel *)model {
-    self.title.text = model.chargeType == 0 ? @"统一收费" : @"功率收费";
-    if (model.chargeType == 0) {
-        self.unitPrice.text = [NSString stringWithFormat:@"%@",@(model.unifiedPrice.floatValue/100)];
-        self.salesPrice.text = [NSString stringWithFormat:@"%ld",model.unifiedTime];
-    }else if (model.chargeType == 1) {
-        self.unitPrice.text = [NSString stringWithFormat:@"%@",@(model.unitPrice.floatValue/100)];
-        self.salesPrice.text = [NSString stringWithFormat:@"%@",@(model.salesPrice.floatValue/100)];
-    }
+    self.unitPrice.text = [NSString stringWithFormat:@"%@ 元/度",@(model.unitPrice.floatValue/100)];
+    self.salesPrice.text = [NSString stringWithFormat:@"%@ 元/度",@(model.salesPrice.floatValue/100)];
 }
 
 @end

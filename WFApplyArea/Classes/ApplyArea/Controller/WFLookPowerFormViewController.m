@@ -10,11 +10,13 @@
 #import "WFLookPowerFormListTableViewCell.h"
 #import "WFLookPowerFormHeadView.h"
 #import "WFProfitItemTableViewCell.h"
+#import "WFAreaVipUsersListTableViewCell.h"
 #import "WFLookProfitFormHeadView.h"
 #import "WFPowerIntervalModel.h"
 #import "WFDefaultChargeFeeModel.h"
 #import "WFApplyAreaDataTool.h"
 #import "SKSafeObject.h"
+#import "MJRefresh.h"
 #import "YFToast.h"
 #import "WKHelp.h"
 
@@ -26,7 +28,9 @@
 /**利润区间*/
 @property (nonatomic, strong, nullable) NSArray <WFProfitTableModel *> *profitModels;
 /**vip用户*/
-@property (nonatomic, strong, nullable) NSArray <WFGroupVipUserModel *> *vipData;
+@property (nonatomic, strong, nullable) NSMutableArray <WFGroupVipUserModel *> *vipData;
+/**页码*/
+@property (nonatomic, assign) NSInteger pageNo;
 @end
 
 @implementation WFLookPowerFormViewController
@@ -47,6 +51,8 @@
         [self getPowerIntervalTable];
     }else {
         self.title = @"查看会员";
+        self.view.backgroundColor = UIColorFromRGB(0xF5F5F5);
+        self.pageNo = 1;
         [self getGroupVipUser];
     }
     
@@ -85,16 +91,30 @@
 - (void)getGroupVipUser {
     NSMutableDictionary *params = [NSMutableDictionary dictionary];
     [params safeSetObject:self.groupId forKey:@"groupId"];
+    [params safeSetObject:@(self.pageNo) forKey:@"pageNo"];
+    [params safeSetObject:@(10) forKey:@"pageSize"];
     @weakify(self)
     [WFApplyAreaDataTool getVipUserWithParams:params resultBlock:^(NSArray<WFGroupVipUserModel *> * _Nonnull models) {
         @strongify(self)
-        self.vipData = models;
-        
-        if (self.vipData.count == 0)
-        [YFToast showMessage:@"暂无数据"];
-        
-        [self.tableView reloadData];
+        [self requestVipDataSuccessWith:models];
+    } failBlock:^{
+        @strongify(self)
+        [self.tableView.mj_footer endRefreshing];
     }];
+}
+
+- (void)requestVipDataSuccessWith:(NSArray<WFGroupVipUserModel *> * _Nonnull)models {
+    // 结束刷新
+    [self.tableView.mj_footer endRefreshing];
+    //将获取的数据添加到数组中
+    if (models.count != 0) [self.vipData addObjectsFromArray:models];
+    
+    if (models.count == 0 & self.vipData.count != 0 & self.pageNo != 1) {
+        [self.tableView.mj_footer endRefreshingWithNoMoreData];
+    } else {
+        [self.tableView.mj_footer resetNoMoreData];
+    }
+    [self.tableView reloadData];
 }
 
 #pragma mark UITableViewDelegate,UITableViewDataSource
@@ -113,18 +133,17 @@
         WFProfitItemTableViewCell *cell = [WFProfitItemTableViewCell cellWithTableView:tableView];
         cell.model = self.profitModels[indexPath.row];
         return cell;
-    }
-    //功率
-    WFLookPowerFormListTableViewCell *cell = [WFLookPowerFormListTableViewCell cellWithTableView:tableView];
-    if (self.formType == WFLookFormPowerType) {
+    }else if (self.formType == WFLookFormPowerType) {
+        //功率
+        WFLookPowerFormListTableViewCell *cell = [WFLookPowerFormListTableViewCell cellWithTableView:tableView];
         cell.model = self.powerModels[indexPath.row];
         cell.vipContentView.hidden = YES;
-    }else {
-        cell.vModel = self.vipData[indexPath.row];
-        cell.vipContentView.hidden = NO;
+        return cell;
     }
-    
+    WFAreaVipUsersListTableViewCell *cell = [WFAreaVipUsersListTableViewCell cellWithTableView:tableView];
+    cell.model = self.vipData[indexPath.row];
     return cell;
+    
 }
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
@@ -134,29 +153,50 @@
     }
     WFLookPowerFormHeadView *headView = [[[NSBundle bundleForClass:[self class]] loadNibNamed:@"WFLookPowerFormHeadView" owner:nil options:nil] firstObject];
     headView.vipContentView.hidden = self.formType == WFLookFormPowerType;
-    return headView;
+    return self.formType == WFLookFormVipType ? [UIView new] : headView;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
-    return KHeight(37.0f);
+    return self.formType == WFLookFormVipType ? CGFLOAT_MIN : KHeight(37.0f);
 }
 
 #pragma mark get set
 - (UITableView *)tableView {
     if (!_tableView) {
         _tableView = [[UITableView alloc] initWithFrame:CGRectMake(KWidth(17.0f), 10.0f, ScreenWidth-KWidth(34.0f), ScreenHeight-NavHeight) style:UITableViewStylePlain];
+        if (self.formType == WFLookFormVipType) {
+            _tableView.frame = CGRectMake(0, 0, ScreenWidth, ScreenHeight-NavHeight);
+            _tableView.backgroundColor = UIColorFromRGB(0xF5F5F5);
+            _tableView.rowHeight = 140.0f;
+        }else {
+            _tableView.backgroundColor = UIColor.whiteColor;
+            _tableView.rowHeight = KHeight(37.0f);
+        }
         _tableView.delegate = self;
         _tableView.dataSource = self;
-        _tableView.backgroundColor = UIColor.whiteColor;
         _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
         _tableView.showsVerticalScrollIndicator = NO;
-        _tableView.rowHeight = KHeight(37.0f);
         _tableView.estimatedRowHeight = 0.0f;
         _tableView.estimatedSectionFooterHeight = 0.0f;
         _tableView.estimatedSectionHeaderHeight = 0.0f;
+        if (self.formType == WFLookFormVipType) {
+            @weakify(self)
+            _tableView.mj_footer = [MJRefreshAutoNormalFooter footerWithRefreshingBlock:^{
+                @strongify(self)
+                self.pageNo ++;
+                [self getGroupVipUser];
+            }];
+        }
         [self.view addSubview:_tableView];
     }
     return _tableView;
+}
+
+- (NSMutableArray<WFGroupVipUserModel *> *)vipData {
+    if (!_vipData) {
+        _vipData = [[NSMutableArray alloc] init];
+    }
+    return _vipData;
 }
 
 #pragma mark 链式编程

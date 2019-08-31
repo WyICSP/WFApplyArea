@@ -21,7 +21,7 @@
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="我的计费标准" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XHH-aL-1yn">
                             <rect key="frame" x="12" y="10" width="98" height="20"/>
                             <fontDescription key="fontDescription" type="boldSystem" pointSize="16"/>
-                            <color key="textColor" red="0.40000000000000002" green="0.40000000000000002" blue="0.40000000000000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <color key="textColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <nil key="highlightedColor"/>
                             <userDefinedRuntimeAttributes>
                                 <userDefinedRuntimeAttribute type="boolean" keyPath="isAdapterFont" value="YES"/>
@@ -30,21 +30,36 @@
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="按小时计费" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bLs-F5-HuJ">
                             <rect key="frame" x="120" y="14" width="51.5" height="12"/>
                             <fontDescription key="fontDescription" type="system" pointSize="10"/>
-                            <color key="textColor" red="0.59999999999999998" green="0.59999999999999998" blue="0.59999999999999998" alpha="0.84705882349999995" colorSpace="calibratedRGB"/>
+                            <color key="textColor" red="0.59999999999999998" green="0.59999999999999998" blue="0.59999999999999998" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                             <nil key="highlightedColor"/>
                         </label>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="right" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Rvd-S9-S7i">
-                            <rect key="frame" x="120" y="5" width="231" height="30"/>
+                            <rect key="frame" x="311" y="5" width="40" height="30"/>
                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="30" id="A57-3W-SBk"/>
+                                <constraint firstAttribute="width" constant="40" id="I1x-og-4r5"/>
                             </constraints>
                             <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="12" maxY="0.0"/>
-                            <state key="normal" image="WFApplyArea.bundle/vipNext">
+                            <state key="normal" image="WFApplyArea.bundle/edit">
                                 <color key="titleColor" red="0.40000000000000002" green="0.40000000000000002" blue="0.40000000000000002" alpha="0.84705882349999995" colorSpace="calibratedRGB"/>
                             </state>
                             <connections>
                                 <action selector="clickBtn:" destination="iN0-l3-epB" eventType="touchUpInside" id="wr9-H3-y2D"/>
+                            </connections>
+                        </button>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xVM-2i-9Nb">
+                            <rect key="frame" x="120" y="6.5" width="113" height="27"/>
+                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="27" id="GIn-bU-TV7"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                            <state key="normal" title="    查看利润计算表    ">
+                                <color key="titleColor" red="0.40000000000000002" green="0.40000000000000002" blue="0.40000000000000002" alpha="1" colorSpace="calibratedRGB"/>
+                            </state>
+                            <connections>
+                                <action selector="clickLookBtn:" destination="iN0-l3-epB" eventType="touchUpInside" id="wVp-C6-9wN"/>
                             </connections>
                         </button>
                     </subviews>
@@ -52,8 +67,9 @@
                     <constraints>
                         <constraint firstItem="Rvd-S9-S7i" firstAttribute="centerY" secondItem="XHH-aL-1yn" secondAttribute="centerY" id="M4j-TQ-1ot"/>
                         <constraint firstItem="XHH-aL-1yn" firstAttribute="leading" secondItem="mxw-RS-qmu" secondAttribute="leading" constant="12" id="NRd-Fn-KdU"/>
-                        <constraint firstItem="Rvd-S9-S7i" firstAttribute="leading" secondItem="XHH-aL-1yn" secondAttribute="trailing" constant="10" id="On1-oe-PlF"/>
+                        <constraint firstItem="xVM-2i-9Nb" firstAttribute="leading" secondItem="XHH-aL-1yn" secondAttribute="trailing" constant="10" id="SOR-fe-x9E"/>
                         <constraint firstItem="bLs-F5-HuJ" firstAttribute="leading" secondItem="XHH-aL-1yn" secondAttribute="trailing" constant="10" id="Y5a-M9-n4h"/>
+                        <constraint firstItem="xVM-2i-9Nb" firstAttribute="centerY" secondItem="XHH-aL-1yn" secondAttribute="centerY" id="YzH-x3-5N4"/>
                         <constraint firstItem="bLs-F5-HuJ" firstAttribute="centerY" secondItem="XHH-aL-1yn" secondAttribute="centerY" id="ZW0-SA-LsC"/>
                         <constraint firstItem="XHH-aL-1yn" firstAttribute="centerY" secondItem="mxw-RS-qmu" secondAttribute="centerY" id="uQX-1a-WlV"/>
                         <constraint firstAttribute="trailing" secondItem="Rvd-S9-S7i" secondAttribute="trailing" id="vOY-bT-nfI"/>
@@ -72,12 +88,13 @@
                 <outlet property="contentsView" destination="mxw-RS-qmu" id="oz1-I0-wt4"/>
                 <outlet property="detailBtn" destination="Rvd-S9-S7i" id="G4v-Pv-fgr"/>
                 <outlet property="detailLbl" destination="bLs-F5-HuJ" id="dKI-P7-AJQ"/>
+                <outlet property="lookBtn" destination="xVM-2i-9Nb" id="cT0-8U-T4o"/>
                 <outlet property="title" destination="XHH-aL-1yn" id="akq-GV-Bl7"/>
             </connections>
             <point key="canvasLocation" x="21.014492753623191" y="-16.071428571428569"/>
         </view>
     </objects>
     <resources>
-        <image name="WFApplyArea.bundle/vipNext" width="16" height="16"/>
+        <image name="WFApplyArea.bundle/edit" width="16" height="16"/>
     </resources>
 </document>

@@ -6,17 +6,16 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
-        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="KGk-i7-Jjw" customClass="WFAreaDetailAddressTableViewCell">
-            <rect key="frame" x="0.0" y="0.0" width="375" height="140"/>
+            <rect key="frame" x="0.0" y="0.0" width="375" height="250"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
-                <rect key="frame" x="0.0" y="0.0" width="375" height="139.5"/>
+                <rect key="frame" x="0.0" y="0.0" width="375" height="249.5"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="biP-pE-OuW">
@@ -44,54 +43,190 @@
                         </constraints>
                     </view>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ztF-uX-oqz">
-                        <rect key="frame" x="12" y="90" width="351" height="50"/>
+                        <rect key="frame" x="12" y="99.5" width="351" height="150"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="地址：" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="o68-v9-fRo">
-                                <rect key="frame" x="12" y="15" width="50" height="20"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="片区信息" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="o68-v9-fRo">
+                                <rect key="frame" x="12" y="15" width="65.5" height="20"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="16"/>
+                                <color key="textColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" tag="10" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6aQ-S2-TN5">
+                                <rect key="frame" x="311" y="0.0" width="40" height="50"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="50" id="TCp-1S-9hZ"/>
+                                    <constraint firstAttribute="width" constant="40" id="skf-Ro-HIb"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" type="boldSystem" pointSize="16"/>
-                                <color key="textColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="0.84705882349999995" colorSpace="calibratedRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="地址：" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="D8C-TE-ZrH">
-                                <rect key="frame" x="62" y="16" width="279" height="19.5"/>
-                                <fontDescription key="fontDescription" type="boldSystem" pointSize="16"/>
-                                <color key="textColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="0.84705882349999995" colorSpace="calibratedRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
+                                <inset key="imageEdgeInsets" minX="0.0" minY="10" maxX="0.0" maxY="10"/>
+                                <state key="normal" image="WFApplyArea.bundle/edit"/>
+                                <connections>
+                                    <action selector="clickEditBtn:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="7mj-Sa-VEC"/>
+                                </connections>
+                            </button>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Bee-1U-nqV">
+                                <rect key="frame" x="0.0" y="35" width="351" height="105"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="城市" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UdH-kS-q9l">
+                                        <rect key="frame" x="12" y="15" width="29" height="17"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <color key="textColor" red="0.40000000000000002" green="0.40000000000000002" blue="0.40000000000000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <nil key="highlightedColor"/>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="boolean" keyPath="isAdapterFont" value="YES"/>
+                                        </userDefinedRuntimeAttributes>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="具体地址" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZnN-g3-UTS">
+                                        <rect key="frame" x="12" y="44" width="58" height="17"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <color key="textColor" red="0.40000000000000002" green="0.40000000000000002" blue="0.40000000000000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <nil key="highlightedColor"/>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="boolean" keyPath="isAdapterFont" value="YES"/>
+                                        </userDefinedRuntimeAttributes>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="片区名称" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DNT-By-MaA">
+                                        <rect key="frame" x="12" y="85.5" width="58" height="17"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <color key="textColor" red="0.40000000000000002" green="0.40000000000000002" blue="0.40000000000000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <nil key="highlightedColor"/>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="boolean" keyPath="isAdapterFont" value="YES"/>
+                                        </userDefinedRuntimeAttributes>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vNJ-xu-CrJ">
+                                        <rect key="frame" x="12" y="73" width="324" height="0.5"/>
+                                        <color key="backgroundColor" red="0.89411764709999997" green="0.89411764709999997" blue="0.89411764709999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="0.5" id="qhD-Zv-AMc"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <color key="textColor" red="0.53333333329999999" green="0.53333333329999999" blue="0.53333333329999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="城市" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bNV-lL-UU7">
+                                        <rect key="frame" x="310" y="15" width="29" height="17"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <color key="textColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <nil key="highlightedColor"/>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="boolean" keyPath="isAdapterFont" value="YES"/>
+                                        </userDefinedRuntimeAttributes>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="城市" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZTY-wt-2gy">
+                                        <rect key="frame" x="310" y="44" width="29" height="17"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <color key="textColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <nil key="highlightedColor"/>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="boolean" keyPath="isAdapterFont" value="YES"/>
+                                        </userDefinedRuntimeAttributes>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="城市" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZN8-fa-paN">
+                                        <rect key="frame" x="310" y="85.5" width="29" height="17"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <color key="textColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <nil key="highlightedColor"/>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="boolean" keyPath="isAdapterFont" value="YES"/>
+                                        </userDefinedRuntimeAttributes>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstItem="UdH-kS-q9l" firstAttribute="top" secondItem="Bee-1U-nqV" secondAttribute="top" constant="15" id="1Io-eD-0mh">
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="boolean" keyPath="isAdaptateScreen" value="YES"/>
+                                        </userDefinedRuntimeAttributes>
+                                    </constraint>
+                                    <constraint firstAttribute="trailing" secondItem="bNV-lL-UU7" secondAttribute="trailing" constant="12" id="392-U5-RYt"/>
+                                    <constraint firstItem="DNT-By-MaA" firstAttribute="top" secondItem="vNJ-xu-CrJ" secondAttribute="bottom" constant="12" id="4R5-x3-B33">
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="boolean" keyPath="isAdaptateScreen" value="YES"/>
+                                        </userDefinedRuntimeAttributes>
+                                    </constraint>
+                                    <constraint firstItem="DNT-By-MaA" firstAttribute="leading" secondItem="ZnN-g3-UTS" secondAttribute="leading" id="BRE-Yw-JJ6">
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="boolean" keyPath="isAdaptateScreen" value="YES"/>
+                                        </userDefinedRuntimeAttributes>
+                                    </constraint>
+                                    <constraint firstAttribute="trailing" secondItem="vNJ-xu-CrJ" secondAttribute="trailing" constant="15" id="CRj-cL-Bzj">
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="boolean" keyPath="isAdaptateScreen" value="YES"/>
+                                        </userDefinedRuntimeAttributes>
+                                    </constraint>
+                                    <constraint firstItem="vNJ-xu-CrJ" firstAttribute="leading" secondItem="ZnN-g3-UTS" secondAttribute="leading" id="EWN-iW-H4Y">
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="boolean" keyPath="isAdaptateScreen" value="YES"/>
+                                        </userDefinedRuntimeAttributes>
+                                    </constraint>
+                                    <constraint firstItem="bNV-lL-UU7" firstAttribute="centerY" secondItem="UdH-kS-q9l" secondAttribute="centerY" id="JLG-9c-IAl"/>
+                                    <constraint firstItem="ZTY-wt-2gy" firstAttribute="centerY" secondItem="ZnN-g3-UTS" secondAttribute="centerY" id="Ts9-UN-6B2"/>
+                                    <constraint firstItem="bNV-lL-UU7" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="UdH-kS-q9l" secondAttribute="trailing" constant="30" id="UI0-Ve-PrV"/>
+                                    <constraint firstItem="ZN8-fa-paN" firstAttribute="centerY" secondItem="DNT-By-MaA" secondAttribute="centerY" id="YjE-vC-qBE"/>
+                                    <constraint firstItem="vNJ-xu-CrJ" firstAttribute="top" secondItem="ZnN-g3-UTS" secondAttribute="bottom" constant="12" id="dYP-UK-x8c">
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="boolean" keyPath="isAdaptateScreen" value="YES"/>
+                                        </userDefinedRuntimeAttributes>
+                                    </constraint>
+                                    <constraint firstItem="ZTY-wt-2gy" firstAttribute="trailing" secondItem="bNV-lL-UU7" secondAttribute="trailing" id="g05-xX-Xgk"/>
+                                    <constraint firstItem="ZN8-fa-paN" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="DNT-By-MaA" secondAttribute="trailing" constant="20" id="h2p-XZ-t67"/>
+                                    <constraint firstItem="ZN8-fa-paN" firstAttribute="trailing" secondItem="ZTY-wt-2gy" secondAttribute="trailing" id="ilS-sk-yII"/>
+                                    <constraint firstItem="UdH-kS-q9l" firstAttribute="leading" secondItem="Bee-1U-nqV" secondAttribute="leading" constant="12" id="kyk-ge-d9v"/>
+                                    <constraint firstItem="ZnN-g3-UTS" firstAttribute="top" secondItem="UdH-kS-q9l" secondAttribute="bottom" constant="12" id="nRe-2H-uHc">
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="boolean" keyPath="isAdaptateScreen" value="YES"/>
+                                        </userDefinedRuntimeAttributes>
+                                    </constraint>
+                                    <constraint firstItem="ZnN-g3-UTS" firstAttribute="leading" secondItem="UdH-kS-q9l" secondAttribute="leading" id="qlK-fi-2CT">
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="boolean" keyPath="isAdaptateScreen" value="YES"/>
+                                        </userDefinedRuntimeAttributes>
+                                    </constraint>
+                                    <constraint firstItem="ZTY-wt-2gy" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="ZnN-g3-UTS" secondAttribute="trailing" constant="20" id="zfL-yq-Xm6"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="D8C-TE-ZrH" firstAttribute="leading" secondItem="o68-v9-fRo" secondAttribute="trailing" id="3NY-at-938"/>
+                            <constraint firstAttribute="trailing" secondItem="6aQ-S2-TN5" secondAttribute="trailing" id="8Er-hD-3Ec"/>
                             <constraint firstItem="o68-v9-fRo" firstAttribute="leading" secondItem="ztF-uX-oqz" secondAttribute="leading" constant="12" id="Bth-cU-vOF"/>
-                            <constraint firstAttribute="trailing" secondItem="D8C-TE-ZrH" secondAttribute="trailing" constant="10" id="GIb-9E-UEN"/>
-                            <constraint firstItem="D8C-TE-ZrH" firstAttribute="top" secondItem="o68-v9-fRo" secondAttribute="top" constant="1" id="mCb-e8-Fzx"/>
+                            <constraint firstAttribute="bottom" secondItem="Bee-1U-nqV" secondAttribute="bottom" constant="10" id="Eox-Tf-61S"/>
+                            <constraint firstItem="6aQ-S2-TN5" firstAttribute="centerY" secondItem="o68-v9-fRo" secondAttribute="centerY" id="I0V-ty-mX5"/>
+                            <constraint firstItem="Bee-1U-nqV" firstAttribute="leading" secondItem="ztF-uX-oqz" secondAttribute="leading" id="Mcl-4v-88x"/>
+                            <constraint firstItem="6aQ-S2-TN5" firstAttribute="top" secondItem="ztF-uX-oqz" secondAttribute="top" id="YoS-0Y-gr2"/>
+                            <constraint firstAttribute="trailing" secondItem="Bee-1U-nqV" secondAttribute="trailing" id="kFU-Ol-ism"/>
                             <constraint firstItem="o68-v9-fRo" firstAttribute="top" secondItem="ztF-uX-oqz" secondAttribute="top" constant="15" id="o0s-iz-XCR"/>
-                            <constraint firstAttribute="height" constant="50" id="x0f-kH-wAT"/>
+                            <constraint firstItem="Bee-1U-nqV" firstAttribute="top" secondItem="o68-v9-fRo" secondAttribute="bottom" id="qu9-aw-3eB"/>
+                            <constraint firstAttribute="height" constant="150" id="x0f-kH-wAT">
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="isAdaptateScreen" value="YES"/>
+                                </userDefinedRuntimeAttributes>
+                            </constraint>
                         </constraints>
                     </view>
                 </subviews>
                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                 <constraints>
                     <constraint firstAttribute="trailing" secondItem="ztF-uX-oqz" secondAttribute="trailing" constant="12" id="3PQ-gJ-j4W"/>
+                    <constraint firstAttribute="bottom" secondItem="ztF-uX-oqz" secondAttribute="bottom" id="5kv-dz-Fzb"/>
                     <constraint firstItem="biP-pE-OuW" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="J9B-kG-RYv"/>
                     <constraint firstItem="ztF-uX-oqz" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="12" id="MbN-nY-VrI"/>
-                    <constraint firstItem="ztF-uX-oqz" firstAttribute="centerY" secondItem="biP-pE-OuW" secondAttribute="centerY" multiplier="2" id="V2X-SW-F8R"/>
                     <constraint firstItem="biP-pE-OuW" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="boF-J6-cTq"/>
                     <constraint firstAttribute="trailing" secondItem="biP-pE-OuW" secondAttribute="trailing" id="eGe-2h-B7C"/>
                 </constraints>
             </tableViewCellContentView>
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-            <viewLayoutGuide key="safeArea" id="aW0-zy-SZf"/>
             <connections>
-                <outlet property="address" destination="D8C-TE-ZrH" id="YDC-Or-L6N"/>
-                <outlet property="addressViewHeight" destination="x0f-kH-wAT" id="RPd-9E-lI9"/>
+                <outlet property="address" destination="bNV-lL-UU7" id="Az4-QO-Tak"/>
+                <outlet property="areaName" destination="ZN8-fa-paN" id="503-iN-Olf"/>
                 <outlet property="contentsView" destination="ztF-uX-oqz" id="ZfR-z2-H1I"/>
+                <outlet property="detailAddress" destination="ZTY-wt-2gy" id="Jfu-JB-ed1"/>
+                <outlet property="editBtn" destination="6aQ-S2-TN5" id="Jta-re-c8K"/>
                 <outlet property="status" destination="erR-mR-auf" id="ppO-qg-sqj"/>
             </connections>
             <point key="canvasLocation" x="48.550724637681164" y="34.821428571428569"/>
         </tableViewCell>
     </objects>
+    <resources>
+        <image name="WFApplyArea.bundle/edit" width="16" height="16"/>
+    </resources>
 </document>

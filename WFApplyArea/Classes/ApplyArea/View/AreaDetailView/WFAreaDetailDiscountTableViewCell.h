@@ -9,20 +9,20 @@
 #import <UIKit/UIKit.h>
 
 @class WFAreaDetailVipChargeModel;
+@class WFAreaDetailSingleChargeModel;
 
 NS_ASSUME_NONNULL_BEGIN
 
 @interface WFAreaDetailDiscountTableViewCell : UITableViewCell
 /**背景*/
 @property (weak, nonatomic) IBOutlet UIView *contentsView;
-/**描述*/
-@property (weak, nonatomic) IBOutlet UILabel *title;
-/**单价*/
-@property (weak, nonatomic) IBOutlet UILabel *price;
-/**销售价*/
-@property (weak, nonatomic) IBOutlet UILabel *time;
+@property (weak, nonatomic) IBOutlet UILabel *timeByMoney;
+/**长按删除*/
+@property (nonatomic, copy) void (^longPressDeleteBlock)(NSInteger index);
 /**赋值*/
 @property (nonatomic, strong) WFAreaDetailVipChargeModel *model;
+/**单次收费*/
+@property (nonatomic, strong) WFAreaDetailSingleChargeModel *singleModel;
 /**初始化*/
 + (instancetype)cellWithTableView:(UITableView *)tableView;
 @end

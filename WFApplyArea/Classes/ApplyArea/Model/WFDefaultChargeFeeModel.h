@@ -107,6 +107,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, copy) NSString *name;
 /**次数*/
 @property (nonatomic, copy) NSString *useCount;
+/**剩余次数*/
+@property (nonatomic, assign) NSInteger remainCount;
 /**时间*/
 @property (nonatomic, copy) NSString *useTime;
 /**多少次*/
