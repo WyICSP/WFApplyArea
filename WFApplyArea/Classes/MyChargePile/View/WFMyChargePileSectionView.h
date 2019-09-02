@@ -23,6 +23,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property (strong, nonatomic) IBOutletCollection(UIButton) NSArray *btns;
 /**点击事件*/
 @property (nonatomic, copy) void (^clickBtnBlock)(NSInteger index);
+/**title*/
+@property (nonatomic, strong) NSArray *titles;
 /**赋值*/
 @property (nonatomic, strong) WFMyChargePileModel *model;
 @end

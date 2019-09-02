@@ -62,12 +62,28 @@
                                 <action selector="clickLookBtn:" destination="iN0-l3-epB" eventType="touchUpInside" id="wVp-C6-9wN"/>
                             </connections>
                         </button>
+                        <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Nl5-ra-CCm">
+                            <rect key="frame" x="283" y="6.5" width="63" height="27"/>
+                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="27" id="HZh-ui-woM"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                            <state key="normal" title="  编辑会员  ">
+                                <color key="titleColor" red="0.40000000000000002" green="0.40000000000000002" blue="0.40000000000000002" alpha="1" colorSpace="calibratedRGB"/>
+                            </state>
+                            <connections>
+                                <action selector="clickLookBtn:" destination="iN0-l3-epB" eventType="touchUpInside" id="Lx4-y7-iir"/>
+                            </connections>
+                        </button>
                     </subviews>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <constraints>
+                        <constraint firstAttribute="trailing" secondItem="Nl5-ra-CCm" secondAttribute="trailing" constant="5" id="Em3-IZ-LF3"/>
                         <constraint firstItem="Rvd-S9-S7i" firstAttribute="centerY" secondItem="XHH-aL-1yn" secondAttribute="centerY" id="M4j-TQ-1ot"/>
                         <constraint firstItem="XHH-aL-1yn" firstAttribute="leading" secondItem="mxw-RS-qmu" secondAttribute="leading" constant="12" id="NRd-Fn-KdU"/>
                         <constraint firstItem="xVM-2i-9Nb" firstAttribute="leading" secondItem="XHH-aL-1yn" secondAttribute="trailing" constant="10" id="SOR-fe-x9E"/>
+                        <constraint firstItem="Nl5-ra-CCm" firstAttribute="centerY" secondItem="xVM-2i-9Nb" secondAttribute="centerY" id="U6l-Fg-Ka7"/>
                         <constraint firstItem="bLs-F5-HuJ" firstAttribute="leading" secondItem="XHH-aL-1yn" secondAttribute="trailing" constant="10" id="Y5a-M9-n4h"/>
                         <constraint firstItem="xVM-2i-9Nb" firstAttribute="centerY" secondItem="XHH-aL-1yn" secondAttribute="centerY" id="YzH-x3-5N4"/>
                         <constraint firstItem="bLs-F5-HuJ" firstAttribute="centerY" secondItem="XHH-aL-1yn" secondAttribute="centerY" id="ZW0-SA-LsC"/>
@@ -88,6 +104,7 @@
                 <outlet property="contentsView" destination="mxw-RS-qmu" id="oz1-I0-wt4"/>
                 <outlet property="detailBtn" destination="Rvd-S9-S7i" id="G4v-Pv-fgr"/>
                 <outlet property="detailLbl" destination="bLs-F5-HuJ" id="dKI-P7-AJQ"/>
+                <outlet property="editVipBtn" destination="Nl5-ra-CCm" id="Gff-Qo-zxb"/>
                 <outlet property="lookBtn" destination="xVM-2i-9Nb" id="cT0-8U-T4o"/>
                 <outlet property="title" destination="XHH-aL-1yn" id="akq-GV-Bl7"/>
             </connections>

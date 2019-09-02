@@ -8,6 +8,7 @@
 
 #import "WFAreaDetailAddressTableViewCell.h"
 #import "WFAreaDetailModel.h"
+#import "WKHelp.h"
 
 @implementation WFAreaDetailAddressTableViewCell
 
@@ -25,8 +26,7 @@ static NSString *const cellId = @"WFAreaDetailAddressTableViewCell";
     [super awakeFromNib];
     self.selectionStyle = 0;
     self.contentsView.layer.cornerRadius = 10.0f;
-//    self.address.adjustsFontSizeToFitWidth = YES;
-//    self.address.minimumScaleFactor = 0.5;
+    self.topBgView.backgroundColor = NavColor;
     // Initialization code
 }
 

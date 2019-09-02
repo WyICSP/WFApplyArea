@@ -12,6 +12,7 @@
 #import "WFBillMethodModel.h"
 #import "UIView+Frame.h"
 #import "YFKeyWindow.h"
+#import "YFToast.h"
 #import "WKHelp.h"
 
 @interface WFBilleMethodMoneyTableViewCell()<UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout>
@@ -87,6 +88,12 @@ static NSString *const cellId = @"WFBilleMethodMoneyTableViewCell";
         UITextField *textField = (UITextField *)object;
         if (textField.text.doubleValue > 99999)
             textField.text = [textField.text substringWithRange:NSMakeRange(0, 5)];
+        
+        //发现包含小数点，并且小数点在倒数第三位就，如果再多就截掉。
+        NSInteger loca = [textField.text rangeOfString:@"."].location;
+        if (loca + 3 < textField.text.length && loca > 0) {
+            textField.text = [textField.text substringToIndex:loca + 3];
+        }
     }
 }
 
@@ -133,6 +140,7 @@ static NSString *const cellId = @"WFBilleMethodMoneyTableViewCell";
         if (selectNum > 6) {
             WFBillingPriceMethodModel *lastModel =  self.models[indexPath.row];
             lastModel.isSelect = NO;
+            [YFToast showMessage:@"最多只能选择6个" inView:[[YFKeyWindow shareInstance] getCurrentVC].view];
             return;
         }
         

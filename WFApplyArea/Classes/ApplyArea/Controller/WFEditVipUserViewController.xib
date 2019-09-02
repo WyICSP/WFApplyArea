@@ -78,8 +78,8 @@
                                 <userDefinedRuntimeAttribute type="boolean" keyPath="isAdapterFont" value="YES"/>
                             </userDefinedRuntimeAttributes>
                         </label>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="次数(月/次)" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LyS-KF-Qz6">
-                            <rect key="frame" x="14" y="102.5" width="73" height="17"/>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="总次数" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LyS-KF-Qz6">
+                            <rect key="frame" x="14" y="102.5" width="43" height="17"/>
                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                             <color key="textColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <nil key="highlightedColor"/>
@@ -97,34 +97,40 @@
                             </userDefinedRuntimeAttributes>
                         </label>
                         <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="请输入姓名" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="Iza-34-gVb">
-                            <rect key="frame" x="125" y="7" width="250" height="30"/>
+                            <rect key="frame" x="95" y="7" width="280" height="30"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="30" id="wve-p0-dje"/>
                             </constraints>
                             <color key="textColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                             <textInputTraits key="textInputTraits"/>
+                            <connections>
+                                <action selector="textFieldDidChange:" destination="-1" eventType="editingChanged" id="WM8-2g-kmF"/>
+                            </connections>
                         </textField>
                         <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="请输入手机号" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="8XH-ji-SdS">
-                            <rect key="frame" x="125" y="51.5" width="250" height="30"/>
+                            <rect key="frame" x="95" y="51.5" width="280" height="30"/>
                             <color key="textColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                             <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
+                            <connections>
+                                <action selector="textFieldDidChange:" destination="-1" eventType="editingChanged" id="XYf-wa-rJI"/>
+                            </connections>
                         </textField>
                         <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="30" placeholder="请选择次数" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="K7T-LI-kPk">
-                            <rect key="frame" x="125" y="102.5" width="75.5" height="17"/>
+                            <rect key="frame" x="95" y="102.5" width="75.5" height="17"/>
                             <color key="textColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                             <textInputTraits key="textInputTraits"/>
                         </textField>
                         <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="请选择到期时间" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="vep-P2-gfF">
-                            <rect key="frame" x="125" y="147" width="104" height="17"/>
+                            <rect key="frame" x="95" y="147" width="104" height="17"/>
                             <color key="textColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                             <textInputTraits key="textInputTraits"/>
                         </textField>
                         <button opaque="NO" tag="10" contentMode="scaleToFill" contentHorizontalAlignment="right" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mbv-WY-wh7">
-                            <rect key="frame" x="125" y="96" width="250" height="30"/>
+                            <rect key="frame" x="95" y="96" width="280" height="30"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="30" id="4Dz-Mz-wu9"/>
                             </constraints>
@@ -134,7 +140,7 @@
                             </connections>
                         </button>
                         <button opaque="NO" tag="20" contentMode="scaleToFill" contentHorizontalAlignment="right" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Nlo-KM-bXh">
-                            <rect key="frame" x="125" y="140.5" width="250" height="30"/>
+                            <rect key="frame" x="95" y="140.5" width="280" height="30"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="30" id="qT5-BK-408"/>
                             </constraints>

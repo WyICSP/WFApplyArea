@@ -41,9 +41,11 @@
     self.title = @"片区信息";
     self.contentsView.layer.cornerRadius = 10.0f;
     self.view.backgroundColor = UIColorFromRGB(0xF5F5F5);
+    [self.addressBtn setTitleColor:UIColorFromRGB(0x333333) forState:0];
     [self.addressBtn setTitle:self.models.areaName forState:0];
     self.detailAddressTF.text = self.models.address;
     self.areaNameTF.text = self.models.name;
+    self.areaId = self.models.areaId;
 }
 
 /**
@@ -57,6 +59,7 @@
         DLog(@"地址=%@-addressId=%@",address,addressId);
         weakSelf.areaId = addressId;
         [weakSelf.addressBtn setTitle:address forState:UIControlStateNormal];
+        [weakSelf.addressBtn setTitleColor:UIColorFromRGB(0x333333) forState:0];
     };
     [YFWindow addSubview:addressPickView];
 }

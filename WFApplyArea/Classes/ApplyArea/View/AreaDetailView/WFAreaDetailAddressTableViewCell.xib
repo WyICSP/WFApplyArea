@@ -31,7 +31,7 @@
                                 </userDefinedRuntimeAttributes>
                             </label>
                         </subviews>
-                        <color key="backgroundColor" red="0.96862745100000003" green="0.52156862749999999" blue="0.33725490200000002" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                        <color key="backgroundColor" red="0.96862745098039216" green="0.52156862745098043" blue="0.33725490196078434" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstItem="erR-mR-auf" firstAttribute="leading" secondItem="biP-pE-OuW" secondAttribute="leading" constant="20" id="cfE-ax-2kP">
                                 <userDefinedRuntimeAttributes>
@@ -222,6 +222,7 @@
                 <outlet property="detailAddress" destination="ZTY-wt-2gy" id="Jfu-JB-ed1"/>
                 <outlet property="editBtn" destination="6aQ-S2-TN5" id="Jta-re-c8K"/>
                 <outlet property="status" destination="erR-mR-auf" id="ppO-qg-sqj"/>
+                <outlet property="topBgView" destination="biP-pE-OuW" id="Sg2-6q-EBa"/>
             </connections>
             <point key="canvasLocation" x="48.550724637681164" y="34.821428571428569"/>
         </tableViewCell>

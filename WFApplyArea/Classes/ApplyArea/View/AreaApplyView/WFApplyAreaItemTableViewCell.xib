@@ -61,12 +61,21 @@
                                     <color key="titleColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
                             </button>
+                            <imageView hidden="YES" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="selectItem" translatesAutoresizingMaskIntoConstraints="NO" id="mo1-sF-VV4">
+                                <rect key="frame" x="152.5" y="17" width="10.5" height="9.5"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="10.5" id="EvI-7e-b57"/>
+                                    <constraint firstAttribute="width" secondItem="mo1-sF-VV4" secondAttribute="height" multiplier="10:9" id="XUP-e9-O4w"/>
+                                </constraints>
+                            </imageView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="qP5-ps-K2y" firstAttribute="centerY" secondItem="3c2-uw-3LA" secondAttribute="centerY" constant="3" id="0qi-FJ-fDk"/>
                             <constraint firstItem="eRK-sC-a5h" firstAttribute="centerY" secondItem="3c2-uw-3LA" secondAttribute="centerY" id="2FL-0e-jxJ"/>
                             <constraint firstItem="3tP-9m-Oef" firstAttribute="centerY" secondItem="eRK-sC-a5h" secondAttribute="centerY" id="2yf-1h-K2n"/>
+                            <constraint firstItem="mo1-sF-VV4" firstAttribute="centerX" secondItem="3c2-uw-3LA" secondAttribute="centerX" multiplier="0.9" id="AaS-w9-ZVh"/>
+                            <constraint firstItem="mo1-sF-VV4" firstAttribute="centerY" secondItem="eRK-sC-a5h" secondAttribute="centerY" id="Fdd-hw-DKt"/>
                             <constraint firstAttribute="trailing" secondItem="kwe-FT-J9G" secondAttribute="trailing" constant="15" id="TFb-pe-L2z"/>
                             <constraint firstItem="3tP-9m-Oef" firstAttribute="leading" secondItem="eRK-sC-a5h" secondAttribute="trailing" id="WIN-lt-yTd"/>
                             <constraint firstAttribute="bottom" secondItem="kwe-FT-J9G" secondAttribute="bottom" id="aQO-Wj-TyE"/>
@@ -91,6 +100,7 @@
                 <outlet property="contentsView" destination="3c2-uw-3LA" id="OVy-KU-Vbw"/>
                 <outlet property="detaillbl" destination="qP5-ps-K2y" id="F0M-9i-XNf"/>
                 <outlet property="lineLbl" destination="kwe-FT-J9G" id="8Qt-Gi-q1c"/>
+                <outlet property="selectImg" destination="mo1-sF-VV4" id="7el-FZ-4h4"/>
                 <outlet property="title" destination="eRK-sC-a5h" id="oTW-dl-M5m"/>
             </connections>
             <point key="canvasLocation" x="48.550724637681164" y="34.821428571428569"/>
@@ -98,5 +108,6 @@
     </objects>
     <resources>
         <image name="WFApplyArea.bundle/vipNext" width="16" height="16"/>
+        <image name="selectItem" width="10.5" height="9"/>
     </resources>
 </document>

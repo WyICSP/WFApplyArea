@@ -127,6 +127,20 @@
 }
 
 /**
+ 提示是否删除合伙人
+ */
+- (void)showDeleteAlertWithIndex:(NSInteger)index {
+    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"确定要删除此合伙人吗?" message:nil preferredStyle:UIAlertControllerStyleAlert];
+    //增加取消按钮；
+    [alertController addAction:[UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleDefault handler:nil]];
+    //增加确定按钮；
+    [alertController addAction:[UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        [self reduceItemDataWithIndex:index];
+    }]];
+    [self presentViewController:alertController animated:true completion:nil];
+}
+
+/**
  删除某一个数据
 
  @param index 第几的的一条数据
@@ -266,7 +280,7 @@
     WS(weakSelf)
     cell.deleteItemBlock = ^{
         //删除数据
-        [weakSelf reduceItemDataWithIndex:indexPath.row-2];
+        [weakSelf showDeleteAlertWithIndex:indexPath.row-2];
     };
     cell.checkPresentBlock = ^(NSInteger present) {
         //检查输入值的有效性

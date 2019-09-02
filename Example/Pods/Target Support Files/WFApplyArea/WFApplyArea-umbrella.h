@@ -65,7 +65,6 @@
 #import "WFMyAreaPileListTableViewCell.h"
 #import "WFNotHaveFeeTableViewCell.h"
 #import "WFDiscountFeeAddView.h"
-#import "WFDisItemsTableViewCell.h"
 #import "WFDisUnifieldFeeTableViewCell.h"
 #import "WFDisUnifieldSectionView.h"
 #import "WFLookPowerFormHeadView.h"

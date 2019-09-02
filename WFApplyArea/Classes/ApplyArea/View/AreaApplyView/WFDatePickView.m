@@ -204,7 +204,7 @@
     int newYear = strDate.intValue;
     //将年份加 5 年
     NSMutableArray *yearArray = [NSMutableArray new];
-    for (int i = 0 ; i < 5; i ++) {
+    for (int i = 0 ; i <= 5; i ++) {
         [yearArray addObject:[NSString stringWithFormat:@"%d",newYear+i]];
     }
     return yearArray;

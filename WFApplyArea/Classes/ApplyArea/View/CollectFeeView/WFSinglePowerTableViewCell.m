@@ -71,10 +71,22 @@ static NSString *const cellId = @"WFSinglePowerTableViewCell";
     if (textField == self.costPriceLbl) {
         if (textField.text.doubleValue > 99999)
             textField.text = [textField.text substringWithRange:NSMakeRange(0, 5)];
+        
+        //发现包含小数点，并且小数点在倒数第三位就，如果再多就截掉。
+        NSInteger loca = [textField.text rangeOfString:@"."].location;
+        if (loca + 3 < textField.text.length && loca > 0) {
+            textField.text = [textField.text substringToIndex:loca + 3];
+        }
         self.model.unitPrice = @(textField.text.floatValue *100);
     }else if (textField == self.salePriceLbl) {
         if (textField.text.doubleValue > 99999)
             textField.text = [textField.text substringWithRange:NSMakeRange(0, 5)];
+        
+        //发现包含小数点，并且小数点在倒数第三位就，如果再多就截掉。
+        NSInteger loca = [textField.text rangeOfString:@"."].location;
+        if (loca + 3 < textField.text.length && loca > 0) {
+            textField.text = [textField.text substringToIndex:loca + 3];
+        }
         self.model.salesPrice = @(textField.text.floatValue*100);
     }
     self.model.isChange = YES;

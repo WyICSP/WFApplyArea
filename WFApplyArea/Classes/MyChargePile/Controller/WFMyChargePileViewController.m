@@ -29,6 +29,8 @@
 @property (nonatomic, strong, nullable) UITableView *tableView;
 /**数据*/
 @property (nonatomic, strong, nullable) WFMyChargePileModel *models;
+/**title 数组*/
+@property (nonatomic, strong, nullable) NSArray *titles;
 @end
 
 @implementation WFMyChargePileViewController
@@ -53,11 +55,24 @@
     @weakify(self)
     [WFMyChargePileDataTool getMyChargePileWithParams:@{} resultBlock:^(WFMyChargePileModel * _Nonnull models) {
         @strongify(self)
-        self.models = models;
-        self.models.isSelectPile = YES;
-        [self.tableView reloadData];
+        [self getMyChargePileSuccessWith:models];
     }];
 }
+
+- (void)getMyChargePileSuccessWith:(WFMyChargePileModel * _Nonnull)models {
+    self.models = models;
+    self.models.isSelectPile = YES;
+    //正常充电桩
+    NSString *normalPileTitle = @"   充电桩详情   ";
+    //异常充电桩
+    NSString *abnormalPileTitle = [NSString stringWithFormat:@"   异常充电桩(%ld)   ",(long)self.models.abnormalCount];
+    //未安装
+    NSString *notInstallPileTitle = [NSString stringWithFormat:@"   未安装(%ld)   ",(long)self.models.notInstalledCount];
+    self.titles = @[normalPileTitle,abnormalPileTitle,notInstallPileTitle];
+    
+    [self.tableView reloadData];
+}
+
 
 /**
  处理区头点击事件
@@ -177,6 +192,7 @@
         _cpView = [[[NSBundle bundleForClass:[self class]] loadNibNamed:@"WFMyChargePileSectionView" owner:nil options:nil] firstObject];
         _cpView.frame = CGRectMake(0, 0, ScreenWidth, KHeight(71.0f));
         _cpView.model = self.models;
+        _cpView.titles = self.titles;
         @weakify(self)
         _cpView.clickBtnBlock = ^(NSInteger index) {
             @strongify(self)

@@ -31,7 +31,7 @@ static NSString *const cellId = @"WFApplyAddressTableViewCell";
     self.addressBtn.titleLabel.adjustsFontSizeToFitWidth = YES;
     self.addressBtn.titleLabel.minimumScaleFactor = 0.5;
     self.contentsView.backgroundColor = UIColor.clearColor;
-    [self.contentsView setRounderCornerWithRadius:10.0f rectCorner:WFRadiusRectCornerBottomLeft | WFRadiusRectCornerBottomRight imageColor:UIColor.whiteColor size:CGSizeMake(ScreenWidth-24.0f, KHeight(120.0f))];
+    [self.contentsView setRounderCornerWithRadius:10.0f rectCorner:WFRadiusRectCornerBottomLeft | WFRadiusRectCornerBottomRight imageColor:UIColor.whiteColor size:CGSizeMake(ScreenWidth-24.0f, ISIPHONEX ? KHeight(120.0f) + 8.0f : KHeight(120.0f))];
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
@@ -49,6 +49,7 @@ static NSString *const cellId = @"WFApplyAddressTableViewCell";
     addressPickView.startPlaceBlock = ^(NSString *address, NSString *addressId) {
         DLog(@"地址=%@-addressId=%@",address,addressId);
         [weakSelf.addressBtn setTitle:address forState:UIControlStateNormal];
+        [weakSelf.addressBtn setTitleColor:UIColorFromRGB(0x333333) forState:0];
         weakSelf.model.address = address;
         weakSelf.model.addressId = addressId;
     };

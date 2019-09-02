@@ -10,6 +10,10 @@
 #import "UITextField+RYNumberKeyboard.h"
 #import "WFDefaultChargeFeeModel.h"
 
+@interface WFManyTimesUnifiedTableViewCell()
+
+@end
+
 @implementation WFManyTimesUnifiedTableViewCell
 
 static NSString *const cellId = @"WFManyTimesUnifiedTableViewCell";
@@ -90,6 +94,12 @@ static NSString *const cellId = @"WFManyTimesUnifiedTableViewCell";
             if (textField.text.doubleValue > 99999)
                 textField.text = [textField.text substringWithRange:NSMakeRange(0, 5)];
             
+            //发现包含小数点，并且小数点在倒数第三位就，如果再多就截掉。
+            NSInteger loca = [textField.text rangeOfString:@"."].location;
+            if (loca + 3 < textField.text.length && loca > 0) {
+                textField.text = [textField.text substringToIndex:loca + 3];
+            }
+            
             self.unModel.proposalPrice = @(textField.text.floatValue*100);
         }else if (textField == self.countTF) {
             self.unModel.proposalTimes = textField.text.integerValue;
@@ -98,6 +108,12 @@ static NSString *const cellId = @"WFManyTimesUnifiedTableViewCell";
         if (textField == self.moneyTF) {
             if (textField.text.doubleValue > 99999)
                 textField.text = [textField.text substringWithRange:NSMakeRange(0, 5)];
+            
+            //发现包含小数点，并且小数点在倒数第三位就，如果再多就截掉。
+            NSInteger loca = [textField.text rangeOfString:@"."].location;
+            if (loca + 3 < textField.text.length && loca > 0) {
+                textField.text = [textField.text substringToIndex:loca + 3];
+            }
             
             self.powModel.proposalPrice = @(textField.text.floatValue*100);
         }else if (textField == self.countTF) {

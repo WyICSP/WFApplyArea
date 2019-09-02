@@ -42,4 +42,9 @@ static NSString *const cellId = @"WFAreaVipUsersListTableViewCell";
     self.time.text = [NSString stringWithFormat:@"到期时间: %@",model.expireTime];
 }
 
+- (IBAction)gotoEditBtn:(id)sender {
+    !self.editUserMsgBlock ? : self.editUserMsgBlock();
+}
+
+
 @end

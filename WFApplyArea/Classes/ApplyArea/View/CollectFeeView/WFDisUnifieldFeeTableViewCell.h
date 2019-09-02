@@ -23,6 +23,12 @@ NS_ASSUME_NONNULL_BEGIN
 @property (weak, nonatomic) IBOutlet UITextField *moneyTF;
 /**输入的时间*/
 @property (weak, nonatomic) IBOutlet UITextField *dateTF;
+/**只读*/
+@property (weak, nonatomic) IBOutlet UIView *isOnlyReadView;
+/**只读价格*/
+@property (weak, nonatomic) IBOutlet UILabel *onlyPriceLbl;
+/**只读时间*/
+@property (weak, nonatomic) IBOutlet UILabel *onlyTimeLbl;
 /**赋值操作*/
 @property (nonatomic, strong) WFDefaultDiscountModel *model;
 /**初始化*/

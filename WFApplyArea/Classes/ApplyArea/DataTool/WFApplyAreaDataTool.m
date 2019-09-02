@@ -394,7 +394,7 @@
                         resultBlock:(void(^)(void))resultBlock {
     //接口地址
     NSString *path = [NSString stringWithFormat:@"%@app-partner-group/v1/charging/group/delete/multiple/charge",NEW_HOST_URL];
-    [WKRequest postWithURLString:path parameters:params isJson:YES isShowHud:NO success:^(WKBaseModel *baseModel) {
+    [WKRequest postWithURLString:path parameters:params isJson:YES isShowHud:YES success:^(WKBaseModel *baseModel) {
         if (CODE_ZERO) {
             resultBlock();
         }else {
@@ -409,7 +409,7 @@
                          resultBlock:(void(^)(void))resultBlock {
     //接口地址
     NSString *path = [NSString stringWithFormat:@"%@app-partner-group/v1/charging/group/delete/vip/charge",NEW_HOST_URL];
-    [WKRequest postWithURLString:path parameters:params isJson:YES isShowHud:NO success:^(WKBaseModel *baseModel) {
+    [WKRequest postWithURLString:path parameters:params isJson:YES isShowHud:YES success:^(WKBaseModel *baseModel) {
         if (CODE_ZERO) {
             resultBlock();
         }else {

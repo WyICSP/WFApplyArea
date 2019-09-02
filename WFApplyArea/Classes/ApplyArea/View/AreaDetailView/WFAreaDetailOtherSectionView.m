@@ -18,7 +18,7 @@
     self.contentsView.backgroundColor = UIColor.clearColor;
     [self.contentsView setRounderCornerWithRadius:10.0f rectCorner:WFRadiusRectCornerTopLeft | WFRadiusRectCornerTopRight imageColor:UIColor.whiteColor size:CGSizeMake(ScreenWidth-24.0f, KHeight(44.0f))];
     SKViewsBorder(self.lookBtn, 27/2, 0.5, UIColorFromRGB(0xE4E4E4));
-    
+    SKViewsBorder(self.editVipBtn, 27/2, 0.5, UIColorFromRGB(0xE4E4E4));
 }
 
 - (IBAction)clickBtn:(id)sender {
@@ -32,11 +32,23 @@
 
 - (void)setModel:(WFAreaDetailSectionTitleModel *)model {
     self.title.text = model.title;
-    self.lookBtn.hidden = !model.isShowForm;
-    [self.lookBtn setTitle:model.formTitle forState:0];
+    
+    
     self.detailLbl.hidden = !model.isShowDetail;
     self.detailLbl.text = model.detailTitle;
     self.detailBtn.hidden = !model.isShowEditBtn;
+    
+    if ([model.formTitle containsString:@"编辑会员"]) {
+        [self.editVipBtn setTitle:model.formTitle forState:0];
+        self.editVipBtn.hidden = NO;
+        self.lookBtn.hidden = YES;
+    }else {
+        [self.lookBtn setTitle:model.formTitle forState:0];
+        self.lookBtn.hidden = NO;
+        self.editVipBtn.hidden = YES;
+        self.lookBtn.hidden = !model.isShowForm;
+    }
+    
 }
 
 

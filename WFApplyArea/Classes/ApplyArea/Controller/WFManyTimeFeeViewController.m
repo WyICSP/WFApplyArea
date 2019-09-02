@@ -148,6 +148,9 @@
     if (index == 10) {
         //控制选中未选中
         if (section == 0) {
+            //打开次区域
+            self.mainModel.isOpenFirstSection = YES;
+            //选中此区域
             self.mainModel.isSelectFirstSection = YES;
             self.mainModel.isSelectSecondSection = NO;
             //如果头部没有选中 则该区域的数据都不应该选中
@@ -156,13 +159,15 @@
                     unModel.isSelect = NO;
                 }
             }
-            
             //将功率收费全部置为 No
             for (WFDefaultPowerListModel *pModel in self.mainModel.multipleChargesPowerList) {
                 pModel.isSelect = NO;
             }
             
         }else if (section == 1) {
+            //打开次区域
+            self.mainModel.isOpenSecondSection = YES;
+            //选中此区域
             self.mainModel.isSelectSecondSection = YES;
             self.mainModel.isSelectFirstSection = NO;
             //如果头部没有选中 则该区域的数据都不应该选中
@@ -171,7 +176,6 @@
                     powModel.isSelect = NO;
                 }
             }
-            
             //将统一收费全部置为No
             for (WFDefaultUnifiedListModel *unModel in self.mainModel.multipleChargesUnifiedList) {
                 unModel.isSelect = NO;

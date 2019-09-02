@@ -52,6 +52,16 @@
         self.title = @"编辑VIP信息";
     }else {
         self.title = @"添加VIP手机号";
+        NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+        [dateFormatter setDateFormat:@"yyyy-MM-dd"];
+        NSString *strDate = [dateFormatter stringFromDate:[NSDate date]];
+        //今年年份
+        NSString *nowYear = [[strDate componentsSeparatedByString:@"-"] firstObject];
+        //五年以后
+        NSString *fiveYear = [NSString stringWithFormat:@"%d",nowYear.intValue + 5];
+        //替换
+        NSString *getYear = [strDate stringByReplacingOccurrencesOfString:nowYear withString:fiveYear];
+        self.timetTF.text = getYear;
     }
 }
 
@@ -71,10 +81,11 @@
  添加用户
  */
 - (void)addUser {
+    [self.view endEditing:YES];
 
     NSString *alertMsg = @"";
     if (self.nameTF.text.length == 0) {
-        alertMsg = @"请输入姓名";
+        alertMsg = @"姓名不能为空";
     }else if (![NSString validateMobile:self.phoneTF.text]) {
         alertMsg = @"请输入正确的手机号";
     }else if (self.timetTF.text.length == 0) {
@@ -144,7 +155,9 @@
 /**
  时间
  */
--(void)loadingTime {
+- (void)loadingTime {
+    [self.view endEditing:YES];
+    
     WFDatePickView *datePickView = [[WFDatePickView alloc] init];
     WS(weakSelf)
     datePickView.chooseDateMsgString = ^(NSString * _Nonnull date) {
@@ -166,6 +179,8 @@
 }
 
 - (IBAction)clickAddBtn:(UIButton *)sender {
+    [self.view endEditing:YES];
+    
     if (sender.tag == 10) {
         //次数
         [self loadingCount];
@@ -182,7 +197,17 @@
             [self addUser];
         }
     }
-    
+}
+
+- (IBAction)textFieldDidChange:(UITextField *)textField {
+    if (textField == self.nameTF) {
+        if (textField.text.length > 10)
+            textField.text = [textField.text substringWithRange:NSMakeRange(0, 10)];
+    }else if (textField == self.phoneTF) {
+        if (textField.text.length > 11) {
+            textField.text = [textField.text substringWithRange:NSMakeRange(0, 11)];
+        }
+    }
 }
 
 #pragma mark 链式编程

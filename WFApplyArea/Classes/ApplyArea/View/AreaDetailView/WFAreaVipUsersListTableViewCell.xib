@@ -58,9 +58,21 @@
                                 <color key="textColor" red="0.96862745100000003" green="0.52156862749999999" blue="0.33725490200000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hTb-ca-CMY">
+                                <rect key="frame" x="301" y="33.5" width="50" height="63"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="hTb-ca-CMY" secondAttribute="height" multiplier="50:63" id="5Og-6g-2jN"/>
+                                    <constraint firstAttribute="width" constant="50" id="aBu-Y4-gL7"/>
+                                </constraints>
+                                <state key="normal" image="WFApplyArea.bundle/edit"/>
+                                <connections>
+                                    <action selector="gotoEditBtn:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="mou-L8-taP"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
+                            <constraint firstItem="hTb-ca-CMY" firstAttribute="centerY" secondItem="Mqe-Sn-5sM" secondAttribute="centerY" id="1Bp-kM-nIl"/>
                             <constraint firstItem="KmD-M3-9Wb" firstAttribute="leading" secondItem="AWN-j5-IIq" secondAttribute="trailing" id="7RH-wg-9ev"/>
                             <constraint firstItem="AWN-j5-IIq" firstAttribute="leading" secondItem="ga7-WZ-GhO" secondAttribute="leading" id="801-Wf-zR3"/>
                             <constraint firstItem="09x-ZT-7nQ" firstAttribute="top" secondItem="AWN-j5-IIq" secondAttribute="bottom" constant="5" id="8mF-Dq-Fzu"/>
@@ -72,6 +84,7 @@
                             <constraint firstItem="ga7-WZ-GhO" firstAttribute="leading" secondItem="5ha-uY-krO" secondAttribute="leading" id="Swn-Ce-23b"/>
                             <constraint firstItem="dd0-cN-uff" firstAttribute="top" secondItem="Mqe-Sn-5sM" secondAttribute="top" constant="14" id="Ugi-cs-hJe"/>
                             <constraint firstItem="AWN-j5-IIq" firstAttribute="top" secondItem="ga7-WZ-GhO" secondAttribute="bottom" constant="5" id="cS6-kn-Geh"/>
+                            <constraint firstAttribute="trailing" secondItem="hTb-ca-CMY" secondAttribute="trailing" id="fhE-q4-sL3"/>
                             <constraint firstItem="09x-ZT-7nQ" firstAttribute="leading" secondItem="AWN-j5-IIq" secondAttribute="leading" id="lMN-At-Crc"/>
                         </constraints>
                     </view>
@@ -100,6 +113,7 @@
             <viewLayoutGuide key="safeArea" id="aW0-zy-SZf"/>
             <connections>
                 <outlet property="contentsView" destination="Mqe-Sn-5sM" id="2zA-FO-dyW"/>
+                <outlet property="editBtn" destination="hTb-ca-CMY" id="tuJ-Ko-YE7"/>
                 <outlet property="name" destination="dd0-cN-uff" id="ZpK-S8-y6P"/>
                 <outlet property="phone" destination="5ha-uY-krO" id="Lt4-fG-uBk"/>
                 <outlet property="surplusCount" destination="KmD-M3-9Wb" id="I2I-Sh-pgd"/>
@@ -109,4 +123,7 @@
             <point key="canvasLocation" x="48.550724637681164" y="35.491071428571423"/>
         </tableViewCell>
     </objects>
+    <resources>
+        <image name="WFApplyArea.bundle/edit" width="16" height="16"/>
+    </resources>
 </document>

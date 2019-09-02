@@ -32,7 +32,7 @@ static NSString *const cellId = @"WFAreaDetailManyTimesTableViewCell";
     self.selectionStyle = 0;
     
     UILongPressGestureRecognizer *longPress = [[UILongPressGestureRecognizer alloc]initWithTarget:self action:@selector(longPressAction:)];//初始化一个长按手势
-    [longPress setMinimumPressDuration:0.75];//设置按多久之后触发事件
+    [longPress setMinimumPressDuration:0.4];//设置按多久之后触发事件
     [self.contentsView addGestureRecognizer:longPress];//把长按手势添加给按钮
 }
 

@@ -312,7 +312,7 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.section == 0) {
-        return KHeight(120.0f);
+        return ISIPHONEX ? KHeight(120.0f) + 8.0f : KHeight(120.0f);
     }
     return KHeight(44.0f);
 }
@@ -345,6 +345,8 @@
             single.singleFeeData = ^(NSArray<WFDefaultChargeFeeModel *> * _Nonnull models) {
                 @strongify(self)
                 self.singleFeeData = models;
+                //是否勾选
+                [self changeSelectImgWithIndexPath:indexPath isShow:YES];
             };
             [self.navigationController pushViewController:single animated:YES];
         }else if (indexPath.row == 1) {
@@ -356,6 +358,8 @@
             many.mainModelBlock = ^(WFDefaultManyTimesModel * _Nonnull mainModel) {
                 @strongify(self)
                 self.manyTimesModel = mainModel;
+                //是否勾选
+                [self changeSelectImgWithIndexPath:indexPath isShow:YES];
             };
             [self.navigationController pushViewController:many animated:YES];
         }else if (indexPath.row == 2) {
@@ -367,6 +371,8 @@
             discount.discountFeeDataBlock = ^(WFDefaultDiscountModel * _Nonnull discountModels) {
                 @strongify(self)
                 self.discountModels = discountModels;
+                //是否勾选
+                [self changeSelectImgWithIndexPath:indexPath isShow:YES];
             };
             [self.navigationController pushViewController:discount animated:YES];
         }
@@ -379,6 +385,8 @@
         method.billMethodDataBlock = ^(WFBillMethodModel * _Nonnull datas) {
             @strongify(self)
             self.billMethodModel = datas;
+            //是否勾选
+            [self changeSelectImgWithIndexPath:indexPath isShow:YES];
         };
         [self.navigationController pushViewController:method animated:YES];
     }else if (indexPath.section == 3) {
@@ -389,11 +397,24 @@
         set.dividIntoDataBlock = ^(NSArray<WFMyAreaDividIntoSetModel *> * _Nonnull models) {
             @strongify(self)
             self.diviIntoDatas = models;
+            //是否勾选
+            [self changeSelectImgWithIndexPath:indexPath isShow:YES];
         };
         [self.navigationController pushViewController:set animated:YES];
     }
-    
 }
+
+/**
+ 改变选择勾选
+
+ @param indexPath indexPath
+ @param isShow 是否显示
+ */
+- (void)changeSelectImgWithIndexPath:(NSIndexPath *)indexPath isShow:(BOOL)isShow {
+    WFApplyAreaItemTableViewCell *cell = [self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:indexPath.row inSection:indexPath.section]];
+    cell.selectImg.hidden = !isShow;
+}
+
 
 #pragma mark get set
 - (UITableView *)tableView {

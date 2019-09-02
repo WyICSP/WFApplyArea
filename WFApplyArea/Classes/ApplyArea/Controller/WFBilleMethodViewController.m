@@ -236,9 +236,12 @@
         for (WFBillingPriceMethodModel *tModel in self.models.billingPriceMethods) {
             tModel.isSelect = NO;
         }
+        //选中第一区 并且选中的数字为 0
         self.models.isSelectFirstSection = YES;
         self.models.isSelectSecondSection = NO;
         self.models.secondSelectNum = 0;
+        //打开此区域
+        self.models.isOpenFirstSection = YES;
         
     }else if (index == 10 && section == 1) {
         //选中价格
@@ -248,6 +251,8 @@
         self.models.isSelectFirstSection = NO;
         self.models.isSelectSecondSection = YES;
         self.models.firstSelectNum = 0;
+        //打开此区域
+        self.models.isOpenSecondSection = YES;
     }else if (index == 20 && section == 0) {
         //打开或者关闭
         self.models.isOpenFirstSection = !self.models.isOpenFirstSection;
@@ -301,11 +306,17 @@
     NSString *price = [NSString stringWithFormat:@"%@",[dict objectForKey:@"inputKeys"]];
     
     //校验输入的和后台返回的有没有重复的
+
     for (WFBillingPriceMethodModel *itemModel in self.models.billingPriceMethods) {
+
         if (price.floatValue *100 == itemModel.billingValue.floatValue) {
-            itemModel.isSelect = YES;
             //处理选择状态
             [self handleSelectPriceMethod];
+            //判断是否大于 6
+            if (self.models.secondSelectNum < 6)
+            itemModel.isSelect = YES;
+            
+            [YFToast showMessage:@"您输入的金额已展示" inView:self.view];
             return;
         }
     }

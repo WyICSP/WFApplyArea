@@ -23,10 +23,16 @@ NS_ASSUME_NONNULL_BEGIN
 @property (weak, nonatomic) IBOutlet UILabel *surplusCount;
 /**到期时间*/
 @property (weak, nonatomic) IBOutlet UILabel *time;
+/**编辑按钮*/
+@property (weak, nonatomic) IBOutlet UIButton *editBtn;
+
+
 /**背景*/
 @property (weak, nonatomic) IBOutlet UIView *contentsView;
 /**赋值*/
 @property (nonatomic, strong) WFGroupVipUserModel *model;
+/**去编辑*/
+@property (nonatomic, copy) void (^editUserMsgBlock)(void);
 /**初始化*/
 + (instancetype)cellWithTableView:(UITableView *)tableView;
 @end

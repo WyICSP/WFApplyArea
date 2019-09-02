@@ -16,13 +16,13 @@
     [super awakeFromNib];
     for (UIButton *btn in self.btns) {
         btn.layer.cornerRadius = 33/2;
+        btn.titleLabel.adjustsFontSizeToFitWidth = YES;
     }
 }
 
 - (IBAction)clickBtn:(UIButton *)sender {
     !self.clickBtnBlock ? : self.clickBtnBlock(sender.tag);
 }
-
 
 - (void)setModel:(WFMyChargePileModel *)model {
     
@@ -43,6 +43,13 @@
         //选中未安装充电桩
         [self.rightBtn setTitleColor:UIColor.whiteColor forState:0];
         self.rightBtn.backgroundColor = NavColor;
+    }
+}
+
+- (void)setTitles:(NSArray *)titles {
+    for (int i = 0; i < self.btns.count; i ++) {
+        UIButton *btn = self.btns[i];
+        [btn setTitle:titles[i] forState:0];
     }
 }
 

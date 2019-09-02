@@ -16,7 +16,6 @@
 #import "WFAreaDetailPartnerTableViewCell.h"
 #import "WFNotHaveFeeTableViewCell.h"
 #import "WFSingleFeeViewController.h"
-#import "WFDiscountFeeViewController.h"
 #import "WFManyTimeFeeViewController.h"
 #import "WFEditAreaAddressViewController.h"
 #import "WFAreaDetailCollectFeeSectionView.h"
@@ -282,7 +281,8 @@
         //优惠收费
         WFDiscountFeeViewController *vip = [[WFDiscountFeeViewController alloc] init];
         vip.eType(WFUpdateUserMsgUpdateType).dChargingModePlay(@"3").cModelId(self.mainModels.vipCharge.chargeModelId).
-        aGroupId(self.mainModels.groupId).editModels(self.mainModels.vipCharge).cModelId(self.mainModels.vipChargeModelId);
+        aGroupId(self.mainModels.groupId).editModels(self.mainModels.vipCharge).
+        cModelId(self.mainModels.vipChargeModelId).isNotAllows(NO);
         [self.navigationController pushViewController:vip animated:YES];
     }else if (section == 4) {
         //计费方式
@@ -427,6 +427,7 @@
             return cell;
         }
         WFNotHaveFeeTableViewCell *cell = [WFNotHaveFeeTableViewCell cellWithTableView:tableView];
+        cell.goBtn.hidden = ![self.sectionTitles[indexPath.section+1] isShowEditBtn];
         @weakify(self)
         cell.gotoSetFeeBlock = ^{
             @strongify(self)
@@ -447,6 +448,7 @@
             return cell;
         }
         WFNotHaveFeeTableViewCell *cell = [WFNotHaveFeeTableViewCell cellWithTableView:tableView];
+        cell.goBtn.hidden = ![self.sectionTitles[indexPath.section+1] isShowEditBtn];
         @weakify(self)
         cell.gotoSetFeeBlock = ^{
             @strongify(self)

@@ -26,6 +26,9 @@ NS_ASSUME_NONNULL_BEGIN
 /**编辑按钮*/
 @property (weak, nonatomic) IBOutlet UIButton *editBtn;
 
+/**背景*/
+@property (weak, nonatomic) IBOutlet UIView *topBgView;
+
 /**点击编辑按钮*/
 @property (nonatomic, copy) void (^clickEditBtnBlock)(void);
 

@@ -20,6 +20,9 @@ NS_ASSUME_NONNULL_BEGIN
 @property (weak, nonatomic) IBOutlet UILabel *detaillbl;
 /**分割线*/
 @property (weak, nonatomic) IBOutlet UILabel *lineLbl;
+/**选中*/
+@property (weak, nonatomic) IBOutlet UIImageView *selectImg;
+
 /**赋值*/
 @property (nonatomic, strong) WFApplyChargeMethod *model;
 /**初始化*/

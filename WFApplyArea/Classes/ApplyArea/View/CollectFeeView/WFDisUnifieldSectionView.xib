@@ -19,7 +19,7 @@
                     <rect key="frame" x="0.0" y="0.0" width="375" height="135"/>
                     <subviews>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4gy-QU-HLV">
-                            <rect key="frame" x="0.0" y="0.0" width="375" height="125"/>
+                            <rect key="frame" x="12" y="0.0" width="351" height="135"/>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <inset key="titleEdgeInsets" minX="11" minY="0.0" maxX="0.0" maxY="0.0"/>
                             <state key="normal" title="添加VIP手机号" image="WFApplyArea.bundle/add">
@@ -29,26 +29,13 @@
                                 <action selector="clickAddBtn:" destination="iN0-l3-epB" eventType="touchUpInside" id="j1f-EG-BRz"/>
                             </connections>
                         </button>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sBc-Li-PA3">
-                            <rect key="frame" x="0.0" y="125" width="375" height="10"/>
-                            <color key="backgroundColor" red="0.96078431372549022" green="0.96078431372549022" blue="0.96078431372549022" alpha="1" colorSpace="calibratedRGB"/>
-                            <constraints>
-                                <constraint firstAttribute="height" constant="10" id="i5b-bS-ADl"/>
-                            </constraints>
-                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                            <nil key="textColor"/>
-                            <nil key="highlightedColor"/>
-                        </label>
                     </subviews>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <constraints>
-                        <constraint firstAttribute="trailing" secondItem="sBc-Li-PA3" secondAttribute="trailing" id="Lry-xH-YEn"/>
-                        <constraint firstItem="sBc-Li-PA3" firstAttribute="leading" secondItem="Stv-jo-PI6" secondAttribute="leading" id="eyt-ZP-HeL"/>
-                        <constraint firstItem="4gy-QU-HLV" firstAttribute="leading" secondItem="Stv-jo-PI6" secondAttribute="leading" id="iUM-dn-iKk"/>
-                        <constraint firstAttribute="bottom" secondItem="sBc-Li-PA3" secondAttribute="bottom" id="ig3-UZ-Q2e"/>
-                        <constraint firstAttribute="trailing" secondItem="4gy-QU-HLV" secondAttribute="trailing" id="m66-mb-7KC"/>
+                        <constraint firstAttribute="bottom" secondItem="4gy-QU-HLV" secondAttribute="bottom" id="dKM-5S-Fdy"/>
+                        <constraint firstItem="4gy-QU-HLV" firstAttribute="leading" secondItem="Stv-jo-PI6" secondAttribute="leading" constant="12" id="iUM-dn-iKk"/>
+                        <constraint firstAttribute="trailing" secondItem="4gy-QU-HLV" secondAttribute="trailing" constant="12" id="m66-mb-7KC"/>
                         <constraint firstItem="4gy-QU-HLV" firstAttribute="top" secondItem="Stv-jo-PI6" secondAttribute="top" id="pAk-sv-U9h"/>
-                        <constraint firstItem="sBc-Li-PA3" firstAttribute="top" secondItem="4gy-QU-HLV" secondAttribute="bottom" id="yaC-Ku-HYr"/>
                     </constraints>
                 </view>
             </subviews>

@@ -9,7 +9,7 @@
 #import "WFDiscountFeeViewController.h"
 #import "WFDisUnifieldFeeTableViewCell.h"
 #import "WFEditVipUserViewController.h"
-#import "WFDisItemsTableViewCell.h"
+#import "WFAreaVipUsersListTableViewCell.h"
 #import "WFDisUnifieldSectionView.h"
 #import "UITableView+YFExtension.h"
 #import "WFDefaultChargeFeeModel.h"
@@ -117,6 +117,9 @@
 - (void)requestVipDataSuccessWith:(NSArray<WFGroupVipUserModel *> * _Nonnull)models {
     // 结束刷新
     [self.tableView.mj_footer endRefreshing];
+    //移除所有数据
+    [self.vipData removeAllObjects];
+    
     //将获取的数据添加到数组中
     if (models.count != 0) [self.vipData addObjectsFromArray:models];
     
@@ -202,11 +205,13 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.section == 0) {
         WFDisUnifieldFeeTableViewCell *cell = [WFDisUnifieldFeeTableViewCell cellWithTableView:tableView];
+        cell.isOnlyReadView.hidden = !self.isNotAllow;
         cell.model = self.mainModel;
         return cell;
     }else {
-        WFDisItemsTableViewCell *cell = [WFDisItemsTableViewCell cellWithTableView:tableView];
+        WFAreaVipUsersListTableViewCell *cell = [WFAreaVipUsersListTableViewCell cellWithTableView:tableView];
         cell.model = self.vipData[indexPath.row];
+        cell.editBtn.hidden = NO;
         @weakify(self)
         cell.editUserMsgBlock = ^{
             @strongify(self)
@@ -233,17 +238,21 @@
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
-    return section == 0 ? KHeight(10.0f) : 60.0f;
+    return section == 0 ? 10.0f : 50.0f;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
+    return 10.0f;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    return indexPath.section == 0 ? KHeight(94.0f) : KHeight(74.0f);
+    return indexPath.section == 0 ? KHeight(94.0f) : 140.0f;
 }
 
 #pragma mark get set
 - (UITableView *)tableView {
     if (!_tableView) {
-        _tableView = [[UITableView alloc] initWithFrame:CGRectMake(KWidth(12.0f), 0, ScreenWidth-KWidth(24.0f), ScreenHeight - NavHeight - self.confirmBtn.height) style:UITableViewStyleGrouped];
+        _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, ScreenHeight - NavHeight - self.confirmBtn.height) style:UITableViewStyleGrouped];
         _tableView.delegate = self;
         _tableView.dataSource = self;
         _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;

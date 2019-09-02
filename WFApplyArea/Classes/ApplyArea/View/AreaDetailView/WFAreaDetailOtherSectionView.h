@@ -23,6 +23,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property (weak, nonatomic) IBOutlet UILabel *detailLbl;
 /**查看按钮*/
 @property (weak, nonatomic) IBOutlet UIButton *lookBtn;
+@property (weak, nonatomic) IBOutlet UIButton *editVipBtn;
+
 /**赋值*/
 @property (nonatomic, strong) WFAreaDetailSectionTitleModel *model;
 /**编辑按钮点击事件*/

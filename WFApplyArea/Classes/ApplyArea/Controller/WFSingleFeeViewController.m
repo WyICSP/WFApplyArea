@@ -192,9 +192,15 @@
     if (index == 10) {
         //控制选中未选中
         if (section == 0) {
+            //打开此区域
+            self.unifiedModel.isOpenFirstSection = YES;
+            //选中地区与
             self.unifiedModel.isSelectFirstSection = YES;
             self.powerModel.isSelectSecondSection = NO;
         }else if (section == 1) {
+            //打开此区域
+            self.powerModel.isOpenSecondSection = YES;
+            //选中地区与
             self.powerModel.isSelectSecondSection = YES;
             self.unifiedModel.isSelectFirstSection = NO;
         }
