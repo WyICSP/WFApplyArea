@@ -31,12 +31,6 @@
     
     
     
-//    for (int i = 0; i < 100; i ++) {
-//        NSObject *beautifulGirl = [NSObject new];
-//    }
-    
-    
-    
 }
 
 - (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
