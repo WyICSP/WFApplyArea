@@ -65,9 +65,14 @@
     
     if (self.type == WFUpdateUserMsgUpdateType){
         //注册通知：刷新 vip
-        [YFNotificationCenter addObserver:self selector:@selector(getVipUser) name:@"refreshVipKeys" object:nil];
+        [YFNotificationCenter addObserver:self selector:@selector(notificationGetVipData) name:@"refreshVipKeys" object:nil];
         [self getVipUser];
     }
+}
+
+- (void)notificationGetVipData {
+    self.pageNo = 1;
+    [self getVipUser];
 }
 
 /**
@@ -265,7 +270,7 @@
         _tableView.estimatedSectionHeaderHeight = 0.0f;
         if (self.type == WFUpdateUserMsgUpdateType && self.editModel.vipChargeId.length != 0) {
             @weakify(self)
-            _tableView.mj_footer = [MJRefreshAutoNormalFooter footerWithRefreshingBlock:^{
+            _tableView.mj_footer = [MJRefreshBackNormalFooter footerWithRefreshingBlock:^{
                 @strongify(self)
                 self.pageNo ++;
                 [self getVipUser];

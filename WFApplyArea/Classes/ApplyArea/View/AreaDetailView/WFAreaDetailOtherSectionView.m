@@ -40,7 +40,7 @@
     
     if ([model.formTitle containsString:@"编辑会员"]) {
         [self.editVipBtn setTitle:model.formTitle forState:0];
-        self.editVipBtn.hidden = NO;
+        self.editVipBtn.hidden = !model.isShowForm;
         self.lookBtn.hidden = YES;
     }else {
         [self.lookBtn setTitle:model.formTitle forState:0];

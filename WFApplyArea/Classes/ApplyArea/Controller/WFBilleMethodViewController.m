@@ -232,10 +232,18 @@
 - (void)handleOpenOrChoseSectionViewWithSection:(NSInteger)section
                                           index:(NSInteger)index  {
     if (index == 10 && section == 0) {
-        //选中时间
-        for (WFBillingPriceMethodModel *tModel in self.models.billingPriceMethods) {
-            tModel.isSelect = NO;
+        //选中时间 把价格都设置未选中
+        for (WFBillingPriceMethodModel *pModel in self.models.billingPriceMethods) {
+            pModel.isSelect = NO;
         }
+        
+        //选中充满自停
+        for (WFBillingTimeMethodModel *tModel in self.models.billingTimeMethods) {
+            if (tModel.isDefault == 2) {
+                tModel.isSelect = YES;
+            }
+        }
+        
         //选中第一区 并且选中的数字为 0
         self.models.isSelectFirstSection = YES;
         self.models.isSelectSecondSection = NO;
@@ -244,10 +252,18 @@
         self.models.isOpenFirstSection = YES;
         
     }else if (index == 10 && section == 1) {
-        //选中价格
+        //选中价格 把时间都设置未选中
         for (WFBillingTimeMethodModel *tModel in self.models.billingTimeMethods) {
             tModel.isSelect = NO;
         }
+        
+        //选中充满自停
+        for (WFBillingPriceMethodModel *pModel in self.models.billingPriceMethods) {
+            if (pModel.isDefault == 2) {
+                pModel.isSelect = YES;
+            }
+        }
+        
         self.models.isSelectFirstSection = NO;
         self.models.isSelectSecondSection = YES;
         self.models.firstSelectNum = 0;
@@ -323,7 +339,7 @@
     
     //如果没有重复的, 但是操过了 6 个
     if (self.models.secondSelectNum >= 6) {
-        [YFToast showMessage:@"您输入的金额已展示" inView:self.view];
+        [YFToast showMessage:@"最多只能选择6个" inView:self.view];
         return;
     }
     

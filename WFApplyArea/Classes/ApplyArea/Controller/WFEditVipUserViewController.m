@@ -74,6 +74,7 @@
     self.countTF.text = [NSString stringWithFormat:@"%ld",(long)self.itemModel.giveCount];
     self.timetTF.text = self.itemModel.expireTime;
     self.phoneTF.enabled = NO;
+    [self.addBtn setTitle:@"确认修改" forState:0];
     
 }
 
@@ -86,6 +87,8 @@
     NSString *alertMsg = @"";
     if (self.nameTF.text.length == 0) {
         alertMsg = @"姓名不能为空";
+    }else if (self.phoneTF.text.length == 0) {
+        alertMsg = @"手机号不能为空";
     }else if (![NSString validateMobile:self.phoneTF.text]) {
         alertMsg = @"请输入正确的手机号";
     }else if (self.timetTF.text.length == 0) {

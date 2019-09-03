@@ -87,6 +87,8 @@
 #import "WFMyChargePileHeadView.h"
 #import "WFMyChargePileSectionView.h"
 #import "WFMyChargePileTableViewCell.h"
+#import "WFShopMallWebViewController.h"
+#import "WFShareHelpTool.h"
 #import "WFUserCenterViewController.h"
 #import "JMUpdataImage.h"
 #import "WFUserCenterPublicAPI.h"

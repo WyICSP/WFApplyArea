@@ -109,6 +109,9 @@
     //将获取的数据添加到数组中
     if (models.count != 0) [self.vipData addObjectsFromArray:models];
     
+    //如果没有数据隐藏 footer
+    self.tableView.mj_footer.hidden = (models.count == 0 && self.vipData.count == 0) ? YES : NO;
+    
     if (models.count == 0 & self.vipData.count != 0 & self.pageNo != 1) {
         [self.tableView.mj_footer endRefreshingWithNoMoreData];
     } else {

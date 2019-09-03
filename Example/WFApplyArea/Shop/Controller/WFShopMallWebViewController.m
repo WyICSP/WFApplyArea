@@ -39,7 +39,7 @@
 - (void)setUI {
     self.title = @"商城";
     //拼接 url
-    self.urlString = [NSString stringWithFormat:@"%@page/recommendCoupon/homePage.html",SHOPMALL_URL];
+    self.urlString = [NSString stringWithFormat:@"%@page/recommendCoupon/homePage.html",H5_SHOP_URL];
     //添加 webview
     [self.view addSubview:self.dwebview];
     //添加进度条

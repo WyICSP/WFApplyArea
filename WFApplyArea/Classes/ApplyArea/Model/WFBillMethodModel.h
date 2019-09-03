@@ -47,6 +47,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, copy) NSString *elec;
 /**是否选中*/
 @property (nonatomic, assign) BOOL isSelect;
+/**是否是充满自停*/
+@property (nonatomic, assign) NSInteger isDefault;
 @end
 
 
@@ -65,6 +67,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, assign) CGFloat elec;
 /**是否选中*/
 @property (nonatomic, assign) BOOL isSelect;
+/**是否是充满自停*/
+@property (nonatomic, assign) NSInteger isDefault;
 @end
 
 NS_ASSUME_NONNULL_END

@@ -25,6 +25,7 @@
 		7AF49458F7D8E5770AF1C14E /* Pods_WFApplyArea_Example.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 254DA9A013A355D3FCAF9843 /* Pods_WFApplyArea_Example.framework */; };
 		873B8AEB1B1F5CCA007FD442 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 873B8AEA1B1F5CCA007FD442 /* Main.storyboard */; };
 		88DA96E4231D37830087127F /* WFShopMallWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 88DA96E3231D37830087127F /* WFShopMallWebViewController.m */; };
+		88FF55BE231E680800A79402 /* WFShareHelpTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 88FF55BD231E680800A79402 /* WFShareHelpTool.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -67,6 +68,8 @@
 		873B8AEA1B1F5CCA007FD442 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = Main.storyboard; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		88DA96E2231D37830087127F /* WFShopMallWebViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WFShopMallWebViewController.h; sourceTree = "<group>"; };
 		88DA96E3231D37830087127F /* WFShopMallWebViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WFShopMallWebViewController.m; sourceTree = "<group>"; };
+		88FF55BC231E680800A79402 /* WFShareHelpTool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WFShareHelpTool.h; sourceTree = "<group>"; };
+		88FF55BD231E680800A79402 /* WFShareHelpTool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WFShareHelpTool.m; sourceTree = "<group>"; };
 		A32214EEB966966F8638624B /* Pods-WFApplyArea_Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WFApplyArea_Tests.debug.xcconfig"; path = "Target Support Files/Pods-WFApplyArea_Tests/Pods-WFApplyArea_Tests.debug.xcconfig"; sourceTree = "<group>"; };
 		B6D2EE948975AF8B81E30A89 /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = net.daringfireball.markdown; name = README.md; path = ../README.md; sourceTree = "<group>"; };
 		F902785F221476CE42AE0AC2 /* Pods-WFApplyArea_Example.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WFApplyArea_Example.release.xcconfig"; path = "Target Support Files/Pods-WFApplyArea_Example/Pods-WFApplyArea_Example.release.xcconfig"; sourceTree = "<group>"; };
@@ -192,10 +195,28 @@
 		88DA96E1231D374E0087127F /* Shop */ = {
 			isa = PBXGroup;
 			children = (
+				88FF55BB231E67E800A79402 /* Model */,
+				88FF55BA231E679E00A79402 /* Controller */,
+			);
+			path = Shop;
+			sourceTree = "<group>";
+		};
+		88FF55BA231E679E00A79402 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
 				88DA96E2231D37830087127F /* WFShopMallWebViewController.h */,
 				88DA96E3231D37830087127F /* WFShopMallWebViewController.m */,
 			);
-			path = Shop;
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		88FF55BB231E67E800A79402 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				88FF55BC231E680800A79402 /* WFShareHelpTool.h */,
+				88FF55BD231E680800A79402 /* WFShareHelpTool.m */,
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 		8E053587CBE5E57F0009D03F /* Pods */ = {
@@ -408,6 +429,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				6003F59E195388D20070C39A /* WFAppDelegate.m in Sources */,
+				88FF55BE231E680800A79402 /* WFShareHelpTool.m in Sources */,
 				6003F5A7195388D20070C39A /* WFViewController.m in Sources */,
 				88DA96E4231D37830087127F /* WFShopMallWebViewController.m in Sources */,
 				6003F59A195388D20070C39A /* main.m in Sources */,
