@@ -310,11 +310,12 @@
     for (WFBillingPriceMethodModel *itemModel in self.models.billingPriceMethods) {
 
         if (price.floatValue *100 == itemModel.billingValue.floatValue) {
-            //处理选择状态
-            [self handleSelectPriceMethod];
             //判断是否大于 6
-            if (self.models.secondSelectNum < 6)
-            itemModel.isSelect = YES;
+            if (self.models.secondSelectNum < 6) {
+                itemModel.isSelect = YES;
+                //处理选择状态
+                [self handleSelectPriceMethod];
+            }
             
             [YFToast showMessage:@"您输入的金额已展示" inView:self.view];
             return;
