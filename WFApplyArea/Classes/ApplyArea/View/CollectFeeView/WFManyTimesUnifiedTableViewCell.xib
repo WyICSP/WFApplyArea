@@ -22,7 +22,7 @@
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="FWk-f1-Tmp">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="43.666666666666664"/>
                         <subviews>
-                            <button opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="c1z-mm-wpa">
+                            <button opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="c1z-mm-wpa">
                                 <rect key="frame" x="0.0" y="0.0" width="42" height="43.666666666666664"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="42" id="NhT-QF-bkC">
@@ -31,6 +31,7 @@
                                         </userDefinedRuntimeAttributes>
                                     </constraint>
                                 </constraints>
+                                <inset key="imageEdgeInsets" minX="15" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 <state key="normal" image="WFApplyArea.bundle/unSelect"/>
                                 <state key="selected" image="WFApplyArea.bundle/selectLogo"/>
                             </button>
@@ -59,7 +60,7 @@
                                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="0" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="bny-ml-Cjo">
                                                 <rect key="frame" x="10.000000000000004" y="0.0" width="53.333333333333343" height="29"/>
                                                 <color key="textColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                <fontDescription key="fontDescription" type="system" weight="medium" pointSize="14"/>
                                                 <textInputTraits key="textInputTraits"/>
                                                 <connections>
                                                     <action selector="textFieldDidChange:" destination="KGk-i7-Jjw" eventType="editingChanged" id="YaY-vr-fjG"/>
@@ -80,7 +81,7 @@
                                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="0" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="S96-UR-oqB">
                                                 <rect key="frame" x="10" y="0.0" width="53" height="29"/>
                                                 <color key="textColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                <fontDescription key="fontDescription" type="system" weight="medium" pointSize="14"/>
                                                 <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
                                                 <connections>
                                                     <action selector="textFieldDidChange:" destination="KGk-i7-Jjw" eventType="editingChanged" id="X7Y-mk-K0I"/>

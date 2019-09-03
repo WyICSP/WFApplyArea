@@ -23,11 +23,11 @@
                         <rect key="frame" x="12" y="0.0" width="351" height="43.5"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="*" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qP5-ps-K2y">
-                                <rect key="frame" x="15" y="14.5" width="8" height="21"/>
+                                <rect key="frame" x="15" y="16.5" width="8" height="14.5"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="8" id="mVX-a7-ewb"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                 <color key="textColor" red="0.96862745100000003" green="0.52156862749999999" blue="0.33725490200000002" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
@@ -71,7 +71,7 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="qP5-ps-K2y" firstAttribute="centerY" secondItem="3c2-uw-3LA" secondAttribute="centerY" constant="3" id="0qi-FJ-fDk"/>
+                            <constraint firstItem="qP5-ps-K2y" firstAttribute="centerY" secondItem="3c2-uw-3LA" secondAttribute="centerY" constant="2" id="0qi-FJ-fDk"/>
                             <constraint firstItem="eRK-sC-a5h" firstAttribute="centerY" secondItem="3c2-uw-3LA" secondAttribute="centerY" id="2FL-0e-jxJ"/>
                             <constraint firstItem="3tP-9m-Oef" firstAttribute="centerY" secondItem="eRK-sC-a5h" secondAttribute="centerY" id="2yf-1h-K2n"/>
                             <constraint firstItem="mo1-sF-VV4" firstAttribute="centerX" secondItem="3c2-uw-3LA" secondAttribute="centerX" multiplier="0.9" id="AaS-w9-ZVh"/>

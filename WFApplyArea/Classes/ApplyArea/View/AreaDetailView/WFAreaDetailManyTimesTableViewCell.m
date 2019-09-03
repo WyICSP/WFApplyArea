@@ -50,7 +50,7 @@ static NSString *const cellId = @"WFAreaDetailManyTimesTableViewCell";
 
 - (void)setModel:(WFAreaDetailMultipleModel *)model {
     self.leftLbl.text = model.optionName;
-    self.timeByMoney.text = [NSString stringWithFormat:@"%@ 元    %ld 小时",@(model.proposalPrice.floatValue/100),(long)model.proposalTimes];
+    self.timeByMoney.text = [NSString stringWithFormat:@"%@ 元    %ld 次",@(model.proposalPrice.floatValue/100),(long)model.proposalTimes];
 }
 
 

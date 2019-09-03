@@ -29,16 +29,19 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="手机号" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EbR-Le-j0T">
-                                <rect key="frame" x="112.5" y="13.5" width="86.5" height="17"/>
+                                <rect key="frame" x="113.5" y="13.5" width="100" height="17"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="86.5" id="dn8-e4-rfQ"/>
+                                    <constraint firstAttribute="width" constant="100" id="v1r-3l-2nR"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <color key="textColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="比值(%)" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="a0W-A2-0fI">
-                                <rect key="frame" x="258" y="13.5" width="51" height="17"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="比值(%)" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="a0W-A2-0fI">
+                                <rect key="frame" x="259" y="13.5" width="52" height="17"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="52" id="Rg4-FX-zC0"/>
+                                </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <color key="textColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
@@ -46,9 +49,9 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="EbR-Le-j0T" firstAttribute="centerX" secondItem="s2c-xQ-tbl" secondAttribute="centerX" constant="-20" id="3wa-FA-pFv"/>
+                            <constraint firstItem="EbR-Le-j0T" firstAttribute="centerX" secondItem="s2c-xQ-tbl" secondAttribute="centerX" constant="-12" id="3wa-FA-pFv"/>
                             <constraint firstItem="0eX-WI-BX8" firstAttribute="centerY" secondItem="s2c-xQ-tbl" secondAttribute="centerY" id="4se-dK-CRk"/>
-                            <constraint firstAttribute="trailing" secondItem="a0W-A2-0fI" secondAttribute="trailing" constant="42" id="Avy-fg-A3p">
+                            <constraint firstAttribute="trailing" secondItem="a0W-A2-0fI" secondAttribute="trailing" constant="40" id="Avy-fg-A3p">
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="boolean" keyPath="isAdaptateScreen" value="YES"/>
                                 </userDefinedRuntimeAttributes>

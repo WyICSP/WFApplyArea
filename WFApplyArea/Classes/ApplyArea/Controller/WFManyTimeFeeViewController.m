@@ -244,6 +244,11 @@
         return;
     }
     
+    if (![self isCompleteData]) {
+        [YFToast showMessage:@"请完善信息" inView:self.view];
+        return;
+    }
+    
     if (self.groupId.length == 0) {
         //获取默认数据
         !self.mainModelBlock ? : self.mainModelBlock(self.mainModel);
@@ -276,6 +281,46 @@
         }
     }
     return totalData;
+}
+
+/**
+ 是否把信息填写完整
+
+ @return YES 是, NO 表示没有
+ */
+- (BOOL)isCompleteData {
+    BOOL isComplete = NO;
+    if (self.mainModel.isSelectFirstSection) {
+        //统一收费
+        NSInteger complete = 0;
+        for (WFDefaultUnifiedListModel *model in self.mainModel.multipleChargesUnifiedList) {
+            if (model.isSelect) {
+                if (model.proposalPrice.floatValue >= 0 && model.proposalTimes > 0) {
+                    complete = 1;
+                }else {
+                    complete = 0;
+                    break;
+                }
+            }
+        }
+        isComplete = complete == 1 ? YES : NO;
+        
+    }else if (self.mainModel.isSelectSecondSection) {
+        //功率收费
+        NSInteger complete = 0;
+        for (WFDefaultPowerListModel *model in self.mainModel.multipleChargesPowerList) {
+            if (model.isSelect) {
+                if (model.proposalPrice.floatValue >= 0 && model.proposalTimes > 0) {
+                    complete = 1;
+                }else {
+                    complete = 0;
+                    break;
+                }
+            }
+        }
+        isComplete = complete == 1 ? YES : NO;
+    }
+    return isComplete;
 }
 
 /**
@@ -436,7 +481,7 @@
     if (!_headView) {
         _headView = [[UIView alloc] initWithFrame:CGRectMake(0, -KHeight(44.0f), ScreenWidth, KHeight(44.0f))];
         _headView.backgroundColor = UIColor.clearColor;
-        UILabel *title = [[UILabel alloc] initWithFrame:CGRectMake(KWidth(20.0f), KHeight(20.0f), 200, KHeight(17.0f))];
+        UILabel *title = [[UILabel alloc] initWithFrame:CGRectMake(15.0f, KHeight(20.0f), 200, KHeight(17.0f))];
         title.text = @"*多次收费为单选";
         title.font = [UIFont systemFontOfSize:14.0f];
         title.textColor = UIColorFromRGB(0x999999);

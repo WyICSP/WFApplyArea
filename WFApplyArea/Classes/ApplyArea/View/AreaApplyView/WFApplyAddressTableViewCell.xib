@@ -84,7 +84,7 @@
                                     <action selector="textFieldDidChange:" destination="KGk-i7-Jjw" eventType="editingChanged" id="H4n-2I-Rcd"/>
                                 </connections>
                             </textField>
-                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="请输入市+区+小区名" textAlignment="right" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="zAk-NL-3Xa">
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="请输入小区名" textAlignment="right" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="zAk-NL-3Xa">
                                 <rect key="frame" x="92" y="82" width="244" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="30" id="qow-Bx-ay8"/>

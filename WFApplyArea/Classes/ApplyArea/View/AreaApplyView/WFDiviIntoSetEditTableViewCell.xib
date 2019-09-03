@@ -36,7 +36,7 @@
                                 </connections>
                             </textField>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="10" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="hq5-YT-Vcc">
-                                <rect key="frame" x="249" y="7" width="50" height="30"/>
+                                <rect key="frame" x="261" y="7" width="50" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="50" id="8Pj-AC-STO"/>
                                     <constraint firstAttribute="height" constant="30" id="H35-WY-C7C"/>
@@ -49,9 +49,9 @@
                                 </connections>
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5ZW-Jf-D7r">
-                                <rect key="frame" x="301" y="0.0" width="40" height="43.5"/>
+                                <rect key="frame" x="311" y="0.0" width="35" height="43.5"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="40" id="gia-Tc-m9o"/>
+                                    <constraint firstAttribute="width" constant="35" id="gia-Tc-m9o"/>
                                 </constraints>
                                 <state key="normal" image="WFApplyArea.bundle/delete"/>
                                 <connections>
@@ -69,7 +69,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="15618918815  " placeholder="手机号码" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="j6y-B5-0M0">
-                                <rect key="frame" x="107.5" y="7" width="100" height="30"/>
+                                <rect key="frame" x="113.5" y="7" width="100" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="30" id="phK-EN-yrr"/>
                                     <constraint firstAttribute="width" constant="100" id="qCl-A9-arc"/>
@@ -85,7 +85,7 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="r4R-GK-6PI" firstAttribute="centerY" secondItem="W1K-Jc-Hg7" secondAttribute="centerY" id="1qL-jc-h1o"/>
-                            <constraint firstItem="j6y-B5-0M0" firstAttribute="centerX" secondItem="W1K-Jc-Hg7" secondAttribute="centerX" constant="-18" id="7jL-vI-pPI">
+                            <constraint firstItem="j6y-B5-0M0" firstAttribute="centerX" secondItem="W1K-Jc-Hg7" secondAttribute="centerX" constant="-12" id="7jL-vI-pPI">
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="boolean" keyPath="isAdaptateScreen" value="YES"/>
                                 </userDefinedRuntimeAttributes>
@@ -93,7 +93,7 @@
                             <constraint firstAttribute="trailing" secondItem="VtA-y5-WHx" secondAttribute="trailing" id="CCi-nz-YrX"/>
                             <constraint firstItem="VtA-y5-WHx" firstAttribute="top" secondItem="W1K-Jc-Hg7" secondAttribute="top" id="Dhb-u8-wxk"/>
                             <constraint firstItem="hq5-YT-Vcc" firstAttribute="centerY" secondItem="j6y-B5-0M0" secondAttribute="centerY" id="F2V-Zi-J0V"/>
-                            <constraint firstAttribute="trailing" secondItem="5ZW-Jf-D7r" secondAttribute="trailing" constant="10" id="Kvl-gd-lRT"/>
+                            <constraint firstAttribute="trailing" secondItem="5ZW-Jf-D7r" secondAttribute="trailing" constant="5" id="Kvl-gd-lRT"/>
                             <constraint firstAttribute="bottom" secondItem="5ZW-Jf-D7r" secondAttribute="bottom" id="Yoa-Q5-KJJ"/>
                             <constraint firstItem="5ZW-Jf-D7r" firstAttribute="top" secondItem="W1K-Jc-Hg7" secondAttribute="top" id="ddq-NF-fs5"/>
                             <constraint firstItem="j6y-B5-0M0" firstAttribute="centerY" secondItem="W1K-Jc-Hg7" secondAttribute="centerY" id="iUL-Y0-IQ9"/>
@@ -103,7 +103,7 @@
                                     <userDefinedRuntimeAttribute type="boolean" keyPath="isAdaptateScreen" value="YES"/>
                                 </userDefinedRuntimeAttributes>
                             </constraint>
-                            <constraint firstAttribute="trailing" secondItem="hq5-YT-Vcc" secondAttribute="trailing" constant="52" id="t92-Ae-Dz5">
+                            <constraint firstAttribute="trailing" secondItem="hq5-YT-Vcc" secondAttribute="trailing" constant="40" id="t92-Ae-Dz5">
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="boolean" keyPath="isAdaptateScreen" value="YES"/>
                                 </userDefinedRuntimeAttributes>

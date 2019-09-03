@@ -307,7 +307,7 @@
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    return indexPath.section == 0 ? 50.0f : KHeight(135.0f);
+    return indexPath.section == 0 ? 50.0f : 135.0f;
 }
 
 
@@ -334,7 +334,7 @@
     if (!_headView) {
         _headView = [[UIView alloc] initWithFrame:CGRectMake(0, -KHeight(44.0f), ScreenWidth, KHeight(44.0f))];
         _headView.backgroundColor = UIColor.clearColor;
-        UILabel *title = [[UILabel alloc] initWithFrame:CGRectMake(KWidth(20.0f), KHeight(20.0f), 200, KHeight(17.0f))];
+        UILabel *title = [[UILabel alloc] initWithFrame:CGRectMake(15.0f, KHeight(20.0f), 200, KHeight(17.0f))];
         title.text = @"*单次收费为单选";
         title.font = [UIFont systemFontOfSize:14.0f];
         title.textColor = UIColorFromRGB(0x999999);

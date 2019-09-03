@@ -306,7 +306,6 @@
     NSString *price = [NSString stringWithFormat:@"%@",[dict objectForKey:@"inputKeys"]];
     
     //校验输入的和后台返回的有没有重复的
-
     for (WFBillingPriceMethodModel *itemModel in self.models.billingPriceMethods) {
 
         if (price.floatValue *100 == itemModel.billingValue.floatValue) {
@@ -320,6 +319,12 @@
             [YFToast showMessage:@"您输入的金额已展示" inView:self.view];
             return;
         }
+    }
+    
+    //如果没有重复的, 但是操过了 6 个
+    if (self.models.secondSelectNum >= 6) {
+        [YFToast showMessage:@"您输入的金额已展示" inView:self.view];
+        return;
     }
     
     NSMutableDictionary *params = [NSMutableDictionary dictionary];

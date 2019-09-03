@@ -32,7 +32,7 @@
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="0" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="pnF-lU-3G4">
                                         <rect key="frame" x="10" y="0.0" width="56" height="29"/>
                                         <color key="textColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <fontDescription key="fontDescription" type="system" weight="medium" pointSize="14"/>
                                         <textInputTraits key="textInputTraits"/>
                                         <connections>
                                             <action selector="textFieldDidChange:" destination="KGk-i7-Jjw" eventType="editingChanged" id="7BY-BG-dGE"/>
@@ -53,7 +53,7 @@
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="0" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="fQj-tx-Zbd">
                                         <rect key="frame" x="10" y="0.0" width="55.5" height="29"/>
                                         <color key="textColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <fontDescription key="fontDescription" type="system" weight="medium" pointSize="14"/>
                                         <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
                                         <connections>
                                             <action selector="textFieldDidChange:" destination="KGk-i7-Jjw" eventType="editingChanged" id="MUf-Dt-tca"/>
@@ -73,18 +73,12 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <color key="textColor" red="0.59999999999999998" green="0.59999999999999998" blue="0.59999999999999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
-                                <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="boolean" keyPath="isAdapterFont" value="YES"/>
-                                </userDefinedRuntimeAttributes>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="小时" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CKU-rW-1fY">
                                 <rect key="frame" x="191" y="0.0" width="29" height="29"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <color key="textColor" red="0.59999999999999998" green="0.59999999999999998" blue="0.59999999999999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
-                                <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="boolean" keyPath="isAdapterFont" value="YES"/>
-                                </userDefinedRuntimeAttributes>
                             </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -117,11 +111,7 @@
                 </subviews>
                 <constraints>
                     <constraint firstItem="yqf-09-YWX" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="A86-pb-zt1"/>
-                    <constraint firstItem="wzx-WF-e3Q" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="15" id="QGa-l9-WPb">
-                        <userDefinedRuntimeAttributes>
-                            <userDefinedRuntimeAttribute type="boolean" keyPath="isAdaptateScreen" value="YES"/>
-                        </userDefinedRuntimeAttributes>
-                    </constraint>
+                    <constraint firstItem="wzx-WF-e3Q" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="15" id="QGa-l9-WPb"/>
                     <constraint firstAttribute="bottom" secondItem="yqf-09-YWX" secondAttribute="bottom" id="S2U-KJ-HTs"/>
                     <constraint firstItem="yqf-09-YWX" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="SeQ-Q2-edw"/>
                     <constraint firstAttribute="trailing" secondItem="yqf-09-YWX" secondAttribute="trailing" id="feZ-YC-HnX"/>

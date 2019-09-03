@@ -28,7 +28,7 @@
     
     for (UIButton *btn in self.btns) {
         [btn setTitleColor:UIColorFromRGB(0x333333) forState:0];
-        btn.backgroundColor = UIColor.whiteColor;
+        btn.backgroundColor = UIColor.clearColor;
     }
     
     if (model.isSelectPile) {

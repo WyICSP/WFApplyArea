@@ -66,8 +66,19 @@ static NSString *const cellId = @"WFManyTimesUnifiedTableViewCell";
                            section:(NSInteger)section {
     _unModel = unModel;
     _section = section;
-    self.moneyTF.text = [NSString stringWithFormat:@"%@",@(unModel.proposalPrice.floatValue/100)];
-    self.countTF.text = [NSString stringWithFormat:@"%ld",unModel.proposalTimes];
+    if (unModel.proposalPrice.floatValue < 0) {
+        //表示没有输入的时候
+        self.moneyTF.text = @"";
+    }else {
+        self.moneyTF.text = [NSString stringWithFormat:@"%@",@(unModel.proposalPrice.floatValue/100)];
+    }
+    
+    if (unModel.proposalTimes == 0) {
+        //没有输入的时候
+        self.countTF.text = @"";
+    }else {
+        self.countTF.text = [NSString stringWithFormat:@"%ld",unModel.proposalTimes];
+    }
     self.title.text = unModel.optionName;
     self.selectBtn.selected = unModel.isSelect;
 }
@@ -79,8 +90,18 @@ static NSString *const cellId = @"WFManyTimesUnifiedTableViewCell";
                          section:(NSInteger)section {
     _powModel = powModel;
     _section = section;
-    self.moneyTF.text = [NSString stringWithFormat:@"%@",@(powModel.proposalPrice.floatValue/100)];
-    self.countTF.text = [NSString stringWithFormat:@"%ld",powModel.proposalTimes];
+    if (powModel.proposalPrice.floatValue < 0) {
+        //没有输入的时候
+        self.moneyTF.text = @"";
+    }else {
+        self.moneyTF.text = [NSString stringWithFormat:@"%@",@(powModel.proposalPrice.floatValue/100)];
+    }
+    
+    if (powModel.proposalTimes == 0) {
+        self.countTF.text = @"";
+    }else {
+        self.countTF.text = [NSString stringWithFormat:@"%ld",powModel.proposalTimes];
+    }
     self.title.text = powModel.optionName;
     self.selectBtn.selected = powModel.isSelect;
 }
@@ -100,8 +121,15 @@ static NSString *const cellId = @"WFManyTimesUnifiedTableViewCell";
                 textField.text = [textField.text substringToIndex:loca + 3];
             }
             
-            self.unModel.proposalPrice = @(textField.text.floatValue*100);
+            //如果为输入为空的的时候 就给他一个负值,方便区分
+            if (textField.text.length == 0) {
+                self.unModel.proposalPrice = @(-1);
+            }else {
+                self.unModel.proposalPrice = @(textField.text.floatValue*100);
+            }
         }else if (textField == self.countTF) {
+            //次数不能输入0
+            if (textField.text.integerValue == 0) {textField.text = @"";}
             self.unModel.proposalTimes = textField.text.integerValue;
         }
     }else if (self.section == 1) {
@@ -115,8 +143,15 @@ static NSString *const cellId = @"WFManyTimesUnifiedTableViewCell";
                 textField.text = [textField.text substringToIndex:loca + 3];
             }
             
-            self.powModel.proposalPrice = @(textField.text.floatValue*100);
+            //如果为输入为空的的时候 就给他一个负值,方便区分
+            if (textField.text.length == 0) {
+                self.powModel.proposalPrice = @(-1);
+            }else {
+                self.powModel.proposalPrice = @(textField.text.floatValue*100);
+            }
         }else if (textField == self.countTF) {
+            //次数不能输入0
+            if (textField.text.integerValue == 0) {textField.text = @"";}
             self.powModel.proposalTimes = textField.text.integerValue;
         }
     }

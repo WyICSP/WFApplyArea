@@ -23,22 +23,19 @@
                         <rect key="frame" x="12" y="0.0" width="351" height="43.5"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="姓名" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nlx-pM-9Fp">
-                                <rect key="frame" x="12" y="14" width="86.5" height="16"/>
+                                <rect key="frame" x="12" y="14" width="106.5" height="16"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                 <color key="textColor" red="0.40000000000000002" green="0.40000000000000002" blue="0.40000000000000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="手机号" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vNf-Xl-oBZ">
-                                <rect key="frame" x="112.5" y="13.5" width="86.5" height="17"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="86.5" id="yyp-Lw-EYm"/>
-                                </constraints>
+                                <rect key="frame" x="118.5" y="13.5" width="106" height="17"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <color key="textColor" red="0.40000000000000002" green="0.40000000000000002" blue="0.40000000000000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="分成(%)" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GWu-MR-xiF">
-                                <rect key="frame" x="244.5" y="13.5" width="86.5" height="17"/>
+                                <rect key="frame" x="224.5" y="13.5" width="106.5" height="17"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <color key="textColor" red="0.40000000000000002" green="0.40000000000000002" blue="0.40000000000000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
@@ -67,9 +64,10 @@
                             <constraint firstItem="I4l-lN-n1M" firstAttribute="leading" secondItem="nlx-pM-9Fp" secondAttribute="leading" id="TCD-xV-Zbe"/>
                             <constraint firstItem="nlx-pM-9Fp" firstAttribute="centerY" secondItem="2eS-k4-0PL" secondAttribute="centerY" id="Zgd-6X-HTr"/>
                             <constraint firstItem="vNf-Xl-oBZ" firstAttribute="centerY" secondItem="2eS-k4-0PL" secondAttribute="centerY" id="d2U-EN-ePG"/>
+                            <constraint firstItem="GWu-MR-xiF" firstAttribute="leading" secondItem="vNf-Xl-oBZ" secondAttribute="trailing" id="e4l-ft-c7e"/>
                             <constraint firstAttribute="trailing" secondItem="I4l-lN-n1M" secondAttribute="trailing" id="e8Q-d6-xmO"/>
                             <constraint firstItem="GWu-MR-xiF" firstAttribute="width" secondItem="nlx-pM-9Fp" secondAttribute="width" id="fL8-y8-qi2"/>
-                            <constraint firstItem="vNf-Xl-oBZ" firstAttribute="centerX" secondItem="2eS-k4-0PL" secondAttribute="centerX" constant="-20" id="u2A-Tt-ETQ"/>
+                            <constraint firstItem="vNf-Xl-oBZ" firstAttribute="leading" secondItem="nlx-pM-9Fp" secondAttribute="trailing" id="yVz-bs-ngd"/>
                         </constraints>
                     </view>
                 </subviews>
