@@ -13,6 +13,7 @@
 #import "WFViewController.h"
 #import "WFLoginViewController.h"
 #import <WFKitLogin/WFLoginPublicAPI.h>
+#import "WFShopMallWebViewController.h"
 #import "NSString+Regular.h"
 #import "WKNavigationController.h"
 #import "WFUserCenterViewController.h"
@@ -78,7 +79,7 @@
         if ([UserData isUserLogin]) {
             UITabBarController *rootVC        = [YFMainPublicModelAPI rootTabBarCcontroller];
             [YFMainPublicModelAPI addChildVC:[WFHomeViewController new] normalImageName:@"" selectedImageName:@"" title:@"登录"];
-            [YFMainPublicModelAPI addChildVC:[WFMyAreaViewController new] normalImageName:@"" selectedImageName:@"" title:@"我的片区"];
+            [YFMainPublicModelAPI addChildVC:[WFShopMallWebViewController new] normalImageName:@"" selectedImageName:@"" title:@"我的片区"];
             [YFMainPublicModelAPI addChildVC:[WFUserCenterViewController new] normalImageName:@"" selectedImageName:@"" title:@"我的"];
             [YFMainPublicModelAPI setGlobalBackGroundColor:[UIColor whiteColor]];
             [YFMainPublicModelAPI setNarBarGlobalTextColor:[UIColor blackColor] andFontSize:18];

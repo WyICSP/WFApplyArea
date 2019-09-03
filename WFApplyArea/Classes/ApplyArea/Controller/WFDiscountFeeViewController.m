@@ -117,8 +117,9 @@
 - (void)requestVipDataSuccessWith:(NSArray<WFGroupVipUserModel *> * _Nonnull)models {
     // 结束刷新
     [self.tableView.mj_footer endRefreshing];
-    //移除所有数据
-    [self.vipData removeAllObjects];
+    
+    if (self.pageNo == 1)
+       [self.vipData removeAllObjects];
     
     //将获取的数据添加到数组中
     if (models.count != 0) [self.vipData addObjectsFromArray:models];
@@ -233,12 +234,13 @@
             @strongify(self)
             [self handleEditMsgIsEdit:NO index:0];
         };
-        return sectionView;
+        
+        return (self.type == WFUpdateUserMsgUpdateType && self.editModel.vipChargeId.length == 0) ? [UIView new] : sectionView;
     }
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
-    return section == 0 ? 10.0f : 50.0f;
+    return section == 0 ? 10.0f : ((self.type == WFUpdateUserMsgUpdateType && self.editModel.vipChargeId.length == 0) ? CGFLOAT_MIN : 50.0f) ;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
@@ -261,7 +263,7 @@
         _tableView.estimatedRowHeight = 0.0f;
         _tableView.estimatedSectionFooterHeight = 0.0f;
         _tableView.estimatedSectionHeaderHeight = 0.0f;
-        if (self.type == WFUpdateUserMsgUpdateType) {
+        if (self.type == WFUpdateUserMsgUpdateType && self.editModel.vipChargeId.length != 0) {
             @weakify(self)
             _tableView.mj_footer = [MJRefreshAutoNormalFooter footerWithRefreshingBlock:^{
                 @strongify(self)
