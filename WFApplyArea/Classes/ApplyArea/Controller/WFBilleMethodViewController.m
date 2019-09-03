@@ -239,8 +239,11 @@
         
         //选中充满自停
         for (WFBillingTimeMethodModel *tModel in self.models.billingTimeMethods) {
-            if (tModel.isDefault == 2) {
+            if (tModel.isDefault == 2 && tModel.isSelect) {
                 tModel.isSelect = YES;
+            }else if (tModel.isDefault == 2 && !tModel.isSelect) {
+                tModel.isSelect = YES;
+                self.models.firstSelectNum += 1;
             }
         }
         
@@ -259,8 +262,11 @@
         
         //选中充满自停
         for (WFBillingPriceMethodModel *pModel in self.models.billingPriceMethods) {
-            if (pModel.isDefault == 2) {
+            if (pModel.isDefault == 2 && pModel.isSelect) {
                 pModel.isSelect = YES;
+            }else if (pModel.isDefault == 2 && !pModel.isSelect) {
+                pModel.isSelect = YES;
+                self.models.secondSelectNum += 1;
             }
         }
         
