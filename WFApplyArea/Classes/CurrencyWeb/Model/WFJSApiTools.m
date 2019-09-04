@@ -7,6 +7,7 @@
 
 #import "WFJSApiTools.h"
 #import "WFUserCenterPublicAPI.h"
+#import "WFShareHelpTool.h"
 #import "dsbridge.h"
 #import "YFKeyWindow.h"
 #import "UserData.h"
@@ -16,7 +17,7 @@
 @implementation WFJSApiTools
 
 /**同步*/
-- (NSString *)getUserId: (NSString *) msg
+- (NSString *)getUUID: (NSString *) msg
 {
     return [UserData userInfo].uuid;
 }
@@ -64,6 +65,70 @@
     [WFUserCenterPublicAPI loginOutAndJumpLogin];
     completionHandler(msg,YES);
 }
+
+/**分享微信好友*/
+- (void)shareWeixin:(NSString *)msg :(JSCallback) completionHandler
+{
+    if (msg.length != 0) {
+        UIImage *image = [UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:msg]]];
+        [WFShareHelpTool shareImagesToWechatWithUrls:@[image] successBlock:^{} failBlock:^{}];
+    }
+    completionHandler(msg,YES);
+}
+
+/**分享朋友圈*/
+- (void)shareCircle:(NSString *)msg :(JSCallback) completionHandler
+{
+    if (msg.length != 0) {
+        UIImage *image = [UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:msg]]];
+        [WFShareHelpTool shareImagesToWechatWithUrls:@[image] successBlock:^{} failBlock:^{}];
+    }
+    completionHandler(msg,YES);
+}
+
+/**复制 url*/
+- (void)copyUrl:(NSString *)msg :(JSCallback) completionHandler
+{
+    if (msg.length != 0) {
+        @weakify(self)
+        [WFShareHelpTool copyByContentText:msg resultBlock:^{
+            @strongify(self)
+            [YFToast showMessage:@"复制成功" inView:[[YFKeyWindow shareInstance] getCurrentVC].view];
+        }];
+    }
+    completionHandler(msg,YES);
+}
+
+/**下载图片*/
+- (void)saveImg:(NSString *)msg :(JSCallback) completionHandler
+{
+    if (msg.length != 0) {
+        UIImage *image = [UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:msg]]];
+        [WFShareHelpTool saveImageToAlbumWithUrls:@[image]];
+    }
+    completionHandler(msg,YES);
+}
+
+/**下载图片*/
+- (void)shareWeixinUrl:(NSString *)msg :(JSCallback) completionHandler
+{
+    if (msg.length != 0) {
+        UIImage *image = [UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:msg]]];
+        [WFShareHelpTool saveImageToAlbumWithUrls:@[image]];
+    }
+    completionHandler(msg,YES);
+}
+
+- (void)shareWeixinUrl:(NSString *)msg {
+    if (msg.length != 0) {
+        [WFShareHelpTool shareImagesToWechatWithUrls:@[[NSURL URLWithString:msg]] successBlock:^{} failBlock:^{}];
+    }
+    
+}
+
+
+
+
 
 
 

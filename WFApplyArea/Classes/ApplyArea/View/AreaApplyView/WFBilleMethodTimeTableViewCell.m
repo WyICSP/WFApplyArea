@@ -11,6 +11,8 @@
 #import "WFBilleMethodCollectionReusableView.h"
 #import "WFBillMethodModel.h"
 #import "UIView+Frame.h"
+#import "YFKeyWindow.h"
+#import "YFToast.h"
 #import "WKHelp.h"
 
 @interface WFBilleMethodTimeTableViewCell()<UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout>
@@ -85,6 +87,7 @@ static NSString *const cellId = @"WFBilleMethodTimeTableViewCell";
     if (selectNum > 6) {
         WFBillingTimeMethodModel *lastModel =  self.models[indexPath.row];
         lastModel.isSelect = NO;
+        [YFToast showMessage:@"最多只能选择6个" inView:[[YFKeyWindow shareInstance] getCurrentVC].view];
         return;
     }
     

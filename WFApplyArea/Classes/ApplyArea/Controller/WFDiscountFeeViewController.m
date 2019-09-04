@@ -189,9 +189,11 @@
     
     WFEditVipUserViewController *vip = [[WFEditVipUserViewController alloc] initWithNibName:@"WFEditVipUserViewController" bundle:[NSBundle bundleForClass:[self class]]];
     if (isEdit) {
-        vip.imodel(self.vipData[index]).aGroupId(self.applyGroupId).cModelId(self.chargingModelId);
+        vip.imodel(self.vipData[index]).aGroupId(self.applyGroupId).cModelId(self.chargingModelId).
+        cVipChargeId(self.editModel.vipChargeId);
     }else {
-        vip.aGroupId(self.applyGroupId).cModelId(self.chargingModelId);
+        vip.aGroupId(self.applyGroupId).cModelId(self.chargingModelId).
+        cVipChargeId(self.editModel.vipChargeId);
     }
     [self.navigationController pushViewController:vip animated:YES];
 }
@@ -270,7 +272,7 @@
         _tableView.estimatedSectionHeaderHeight = 0.0f;
         if (self.type == WFUpdateUserMsgUpdateType && self.editModel.vipChargeId.length != 0) {
             @weakify(self)
-            _tableView.mj_footer = [MJRefreshBackNormalFooter footerWithRefreshingBlock:^{
+            _tableView.mj_footer = [MJRefreshBackStateFooter footerWithRefreshingBlock:^{
                 @strongify(self)
                 self.pageNo ++;
                 [self getVipUser];
@@ -305,7 +307,7 @@
 - (UIButton *)confirmBtn {
     if (!_confirmBtn) {
         _confirmBtn = [UIButton buttonWithType:UIButtonTypeSystem];
-        _confirmBtn.frame = CGRectMake(0, ScreenHeight - KHeight(45.0f) - NavHeight, ScreenWidth, KHeight(45));
+        _confirmBtn.frame = CGRectMake(0, ScreenHeight - KHeight(45.0f) - NavHeight, ScreenWidth, self.isNotAllow ? 0.0f : KHeight(45));
         [_confirmBtn setTitle:self.type == WFUpdateUserMsgUpdateType ? @"确认修改" : @"完成" forState:UIControlStateNormal];
         [_confirmBtn addTarget:self action:@selector(clickConfirmBtn) forControlEvents:UIControlEventTouchUpInside];
         _confirmBtn.titleLabel.font = [UIFont boldSystemFontOfSize:16.0f];

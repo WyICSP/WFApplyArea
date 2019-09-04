@@ -107,6 +107,7 @@
     [params safeSetObject:self.nameTF.text forKey:@"vipName"];
     [params safeSetObject:self.applyGroupId forKey:@"groupId"];
     [params safeSetObject:self.chargingModelId forKey:@"chargingModelId"];
+    [params safeSetObject:self.vipChargeId forKey:@"vipChargeId"];
     @weakify(self)
     [WFApplyAreaDataTool addDiscountUserWithParams:params resultBlock:^{
         @strongify(self)
@@ -231,6 +232,13 @@
 - (WFEditVipUserViewController * _Nonnull (^)(NSString * _Nonnull))cModelId {
     return ^(NSString *cModelId){
         self.chargingModelId = cModelId;
+        return self;
+    };
+}
+
+- (WFEditVipUserViewController * _Nonnull (^)(NSString * _Nonnull))cVipChargeId {
+    return ^(NSString *vipChargeId) {
+        self.vipChargeId = vipChargeId;
         return self;
     };
 }

@@ -24,11 +24,14 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, copy) NSString *applyGroupId;
 /**充电桩片区id*/
 @property (nonatomic, copy) NSString *chargingModelId;
+/**vipChargeId*/
+@property (nonatomic, copy) NSString *vipChargeId;
 /**编辑的时候数据*/
 @property (nonatomic, strong) WFGroupVipUserModel *itemModel;
 @property (nonatomic, copy) WFEditVipUserViewController *(^eType)(WFEditAddUserType type);
 @property (nonatomic, copy) WFEditVipUserViewController *(^aGroupId)(NSString *applyGroupId);
 @property (nonatomic, copy) WFEditVipUserViewController *(^cModelId)(NSString *chargingModelId);
+@property (nonatomic, copy) WFEditVipUserViewController *(^cVipChargeId)(NSString *vipChargeId);
 @property (nonatomic, copy) WFEditVipUserViewController *(^imodel)(WFGroupVipUserModel *itemModel);
 @end
 

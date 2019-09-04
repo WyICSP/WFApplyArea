@@ -8,6 +8,7 @@
 
 #import "WFMyAreaQRCodeView.h"
 #import "WFSavePhotoTool.h"
+#import "WFShareHelpTool.h"
 #import "UIImage+QRCode.h"
 #import "WKHelp.h"
 
@@ -23,7 +24,8 @@
 }
 
 - (IBAction)clickSavePhotoBtn:(id)sender {
-    [[WFSavePhotoTool shareInstance] saveImageToAlbumWithUrls:@[self.imgView.image]];
+    UIImage *imgge = [WFShareHelpTool screenshotForView:self.contentsView];
+    [[WFSavePhotoTool shareInstance] saveImageToAlbumWithUrls:@[imgge]];
     
     __weak typeof(self) weakSelf = self;
     [WFSavePhotoTool shareInstance].savePhotoSuccessBlock = ^{

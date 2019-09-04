@@ -30,6 +30,16 @@
     [self setUI];
 }
 
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    [self.navigationController setNavigationBarHidden:YES animated:animated];
+}
+
+- (void)viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
+    [self.navigationController setNavigationBarHidden:NO animated:NO];
+}
+
 - (UIStatusBarStyle)preferredStatusBarStyle {
     return UIStatusBarStyleLightContent;
 }
@@ -43,7 +53,7 @@
     //添加 webview
     [self.view addSubview:self.dwebview];
     //添加进度条
-    [self.navigationController.navigationBar.layer addSublayer:self.webProgressLayer];
+    [self.view.layer addSublayer:self.webProgressLayer];
 }
 
 - (void)webView:(WKWebView *)webView decidePolicyForNavigationAction:(WKNavigationAction *)navigationAction decisionHandler:(void (^)(WKNavigationActionPolicy))decisionHandler {
@@ -147,7 +157,7 @@
 -(YukiWebProgressLayer *)webProgressLayer{
     if (!_webProgressLayer) {
         _webProgressLayer = [[YukiWebProgressLayer alloc]init];
-        _webProgressLayer.frame = CGRectMake(0, 42, ScreenWidth, 3);
+        _webProgressLayer.frame = CGRectMake(0, 0, ScreenWidth, 5);
         _webProgressLayer.strokeColor = NavColor.CGColor;
     }
     return _webProgressLayer;
