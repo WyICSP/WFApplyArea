@@ -77,7 +77,7 @@ static NSString *const cellId = @"WFManyTimesUnifiedTableViewCell";
         //没有输入的时候
         self.countTF.text = @"";
     }else {
-        self.countTF.text = [NSString stringWithFormat:@"%ld",unModel.proposalTimes];
+        self.countTF.text = [NSString stringWithFormat:@"%ld",(long)unModel.proposalTimes];
     }
     self.title.text = unModel.optionName;
     self.selectBtn.selected = unModel.isSelect;
@@ -100,7 +100,7 @@ static NSString *const cellId = @"WFManyTimesUnifiedTableViewCell";
     if (powModel.proposalTimes == 0) {
         self.countTF.text = @"";
     }else {
-        self.countTF.text = [NSString stringWithFormat:@"%ld",powModel.proposalTimes];
+        self.countTF.text = [NSString stringWithFormat:@"%ld",(long)powModel.proposalTimes];
     }
     self.title.text = powModel.optionName;
     self.selectBtn.selected = powModel.isSelect;

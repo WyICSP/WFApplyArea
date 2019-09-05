@@ -35,7 +35,7 @@ static NSString *const cellId = @"WFAreaDetailPartnerTableViewCell";
 - (void)setModel:(WFAreaDetailPartnerModel *)model {
     self.name.text = model.name;
     self.phone.text = model.phone;
-    self.rate.text = [NSString stringWithFormat:@"%ld",model.rate];
+    self.rate.text = [NSString stringWithFormat:@"%ld",(long)model.rate];
 }
 
 @end

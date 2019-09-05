@@ -44,7 +44,7 @@
         self.singleTitle.text = self.mainModel.singleCharge.chargeType == 0 ? @"统一收费" : @"功率收费";
         if (self.mainModel.singleCharge.chargeType == 0) {
             self.sUnliPrice.text = [NSString stringWithFormat:@"%@",@(self.mainModel.singleCharge.unifiedPrice.floatValue/100)];
-            self.sSalesPrice.text = [NSString stringWithFormat:@"%ld",self.mainModel.singleCharge.unifiedTime];
+            self.sSalesPrice.text = [NSString stringWithFormat:@"%ld",(long)self.mainModel.singleCharge.unifiedTime];
         }else if (self.mainModel.singleCharge.chargeType == 1) {
             self.sUnliPrice.text = [NSString stringWithFormat:@"%@",@(self.mainModel.singleCharge.unitPrice.floatValue/100)];
             self.sSalesPrice.text = [NSString stringWithFormat:@"%@",@(self.mainModel.singleCharge.salesPrice.floatValue/100)];
@@ -67,7 +67,7 @@
     if (self.mainModel.vipCharge.chargeModelId.length != 0) {
         self.vipHeight.constant = 150.0f;
         self.vUnliPrice.text = [NSString stringWithFormat:@"%@",@(self.mainModel.vipCharge.unifiedPrice.floatValue/100)];
-        self.vSalesPrice.text = [NSString stringWithFormat:@"%ld",self.mainModel.vipCharge.unifiedTime];
+        self.vSalesPrice.text = [NSString stringWithFormat:@"%ld",(long)self.mainModel.vipCharge.unifiedTime];
     }else {
         [self.vipBaseView removeAllSubview];
         self.vipHeight.constant = 0.0f;

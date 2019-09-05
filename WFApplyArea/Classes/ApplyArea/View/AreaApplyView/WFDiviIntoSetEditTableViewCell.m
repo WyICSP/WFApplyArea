@@ -75,7 +75,7 @@ static NSString *const cellId = @"WFDiviIntoSetEditTableViewCell";
     }else if (textField == self.percentTF) {
         
         if (textField.text.integerValue > 0) {
-            textField.text = [NSString stringWithFormat:@"%ld",textField.text.integerValue];
+            textField.text = [NSString stringWithFormat:@"%ld",(long)textField.text.integerValue];
         }
         //百分占比
         !self.checkPresentBlock ? : self.checkPresentBlock(self.percentTF.text.integerValue);

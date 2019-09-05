@@ -55,7 +55,7 @@ static NSString *const cellId = @"WFDisUnifieldFeeTableViewCell";
 - (void)setModel:(WFDefaultDiscountModel *)model {
     _model = model;
     self.onlyPriceLbl.text = self.moneyTF.text = [NSString stringWithFormat:@"%@",@(model.unifiedPrice.floatValue/100)];
-    self.onlyTimeLbl.text = self.dateTF.text = [NSString stringWithFormat:@"%ld",model.unifiedTime];    
+    self.onlyTimeLbl.text = self.dateTF.text = [NSString stringWithFormat:@"%ld",(long)model.unifiedTime];    
 }
 
 - (IBAction)textFieldDidChange:(UITextField *)textField {

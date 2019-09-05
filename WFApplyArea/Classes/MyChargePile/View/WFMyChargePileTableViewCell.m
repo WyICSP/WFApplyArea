@@ -41,7 +41,7 @@ static NSString *const cellId = @"WFMyChargePileTableViewCell";
     self.title.text = mModel.name;
     NSString *present = @"%";
     self.rate.text = [NSString stringWithFormat:@"安装使用率 %.2f%@",mModel.utilizationRate,present];
-    self.count.text = [NSString stringWithFormat:@"充电桩 %ld台",mModel.cdzNumber];
+    self.count.text = [NSString stringWithFormat:@"充电桩 %ld台",(long)mModel.cdzNumber];
 }
 
 /**
@@ -49,7 +49,7 @@ static NSString *const cellId = @"WFMyChargePileTableViewCell";
  */
 - (void)setAModel:(WFAbnormalCdzListModel *)aModel {
     self.title.text = aModel.name;
-    self.rate.text = [NSString stringWithFormat:@"充电桩 %ld台",aModel.cdzNumber];
+    self.rate.text = [NSString stringWithFormat:@"充电桩 %ld台",(long)aModel.cdzNumber];
     self.count.hidden = YES;
 }
 

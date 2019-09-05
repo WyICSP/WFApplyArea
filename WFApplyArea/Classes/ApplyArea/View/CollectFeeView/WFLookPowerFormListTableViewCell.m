@@ -36,7 +36,7 @@ static NSString *const cellId = @"WFLookPowerFormListTableViewCell";
 
 - (void)setModel:(WFPowerIntervalModel *)model {
     self.powerLbl.text = model.powerInterval;
-    self.countLbl.text = [NSString stringWithFormat:@"%ld",model.time];
+    self.countLbl.text = [NSString stringWithFormat:@"%ld",(long)model.time];
 }
 
 - (void)setVModel:(WFGroupVipUserModel *)vModel {

@@ -56,7 +56,7 @@ static NSString *const cellId = @"WFSingleFeeTableViewCell";
 - (void)setModel:(WFDefaultChargeFeeModel *)model {
     _model = model;
     self.moneyTF.text = [NSString stringWithFormat:@"%@",@(model.unifiedPrice.floatValue/100)];
-    self.countTF.text = [NSString stringWithFormat:@"%ld",model.unifiedTime];
+    self.countTF.text = [NSString stringWithFormat:@"%ld",(long)model.unifiedTime];
 }
 
 - (IBAction)textFieldDidChange:(UITextField *)textField {

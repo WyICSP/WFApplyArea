@@ -466,7 +466,7 @@
         NSString *timeImgPath = [NSString getImagePathWithCurrentBundler:currentBundler PhotoName:self.models.isSelectFirstSection ? @"selectLogo" : @"unSelect" bundlerName:@"WFApplyArea.bundle"];
         [sectionView.timeBtn setImage:[UIImage imageWithContentsOfFile:timeImgPath] forState:0];
         
-        NSString *btnTitle = [NSString stringWithFormat:@"选择充电时长(%ld/6)",self.models.firstSelectNum];
+        NSString *btnTitle = [NSString stringWithFormat:@"选择充电时长(%ld/6)",(long)self.models.firstSelectNum];
         sectionView.title.text = btnTitle;
         //设置圆角
         WFRadiusRectCorner radiusRect = self.models.isOpenFirstSection ? (WFRadiusRectCornerTopLeft | WFRadiusRectCornerTopRight) : WFRadiusRectCornerAllCorners;
@@ -479,7 +479,7 @@
         NSString *timeImgPath = [NSString getImagePathWithCurrentBundler:currentBundler PhotoName:self.models.isSelectSecondSection ? @"selectLogo" : @"unSelect" bundlerName:@"WFApplyArea.bundle"];
         [sectionView.timeBtn setImage:[UIImage imageWithContentsOfFile:timeImgPath] forState:0];
         
-        NSString *btnTitle = [NSString stringWithFormat:@"选择充电金额(%ld/6)",self.models.secondSelectNum];
+        NSString *btnTitle = [NSString stringWithFormat:@"选择充电金额(%ld/6)",(long)self.models.secondSelectNum];
         sectionView.title.text = btnTitle;
         //设置圆角
         WFRadiusRectCorner radiusRect = self.models.isOpenSecondSection ? (WFRadiusRectCornerTopLeft | WFRadiusRectCornerTopRight) : WFRadiusRectCornerAllCorners;
