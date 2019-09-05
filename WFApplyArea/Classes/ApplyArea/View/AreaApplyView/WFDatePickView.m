@@ -170,13 +170,14 @@
 - (void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component {
     if (component == 0) {
         self.year = [self.yearArray objectAtIndex:row];
-        self.month = [self.monthArray firstObject];
-        self.day = [self.dayArray firstObject];
         //获取月的数据
         self.monthArray = [self getMonthDataWithIndex:row];
         //获取每个月的天数
         NSString *year = [NSString stringWithFormat:@"%@:%@",[[self getYearData] objectAtIndex:row],[[self getMonthDataWithIndex:row] objectAtIndex:0]];
         self.dayArray = [self getDataCountWithDateString:year];
+        
+        self.month = [NSString stringWithFormat:@"%ld",[[self.monthArray firstObject] integerValue]];
+        self.day = [NSString stringWithFormat:@"%ld",[[self.dayArray firstObject] integerValue]];
         
         [pickerView reloadComponent:1];
         [pickerView reloadComponent:2];

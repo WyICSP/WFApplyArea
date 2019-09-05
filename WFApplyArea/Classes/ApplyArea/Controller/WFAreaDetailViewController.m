@@ -140,7 +140,7 @@
         WFAreaDetailMultipleModel *manyModel = self.mainModels.multipleChargesList.firstObject;
         NSString *manyTitle = manyModel.chargeType == 0 ? @"多次收费/统一收费" : @"多次收费/功率收费";
         [manyFee safeSetObject:manyTitle forKey:@"title"];
-        [manyFee safeSetObject:self.mainModels.singleCharge.chargeType == 0 ? @0 : @1 forKey:@"isShowForm"];
+        [manyFee safeSetObject:manyModel.chargeType == 0 ? @0 : @1 forKey:@"isShowForm"];
         [manyFee safeSetObject:@0 forKey:@"isShowDetail"];
     }else {
         [manyFee safeSetObject:@"多次收费" forKey:@"title"];
