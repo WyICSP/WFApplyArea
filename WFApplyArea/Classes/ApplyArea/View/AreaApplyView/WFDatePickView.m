@@ -157,7 +157,7 @@
 
 - (CGFloat)pickerView:(UIPickerView *)pickerView widthForComponent:(NSInteger)component {
     
-    //这里减五 是为了伟大的"甘肃省临夏回族自治州积石山保安族东乡族撒拉族自治县"等名字长的地方(郭长峰)
+    //这里减五 是为了伟大的"甘肃省临夏回族自治州积石山保安族东乡族撒拉族自治县"等名字长的地方
     CGFloat pickViewWidth = kScreenWidth/3-5;
     
     return pickViewWidth;
@@ -188,6 +188,8 @@
         self.month = [self.monthArray objectAtIndex:row];
         NSString *year = [NSString stringWithFormat:@"%@:%@",self.year,self.month];
         self.dayArray = [self getDataCountWithDateString:year];
+        
+        self.day = [NSString stringWithFormat:@"%ld",[[self.dayArray firstObject] integerValue]];
         
         [pickerView reloadComponent:2];
         [pickerView selectRow:0 inComponent:2 animated:YES];
