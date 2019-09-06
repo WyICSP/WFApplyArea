@@ -150,7 +150,7 @@
         }else {
             //老片区
             WFCurrentWebViewController *web = [[WFCurrentWebViewController alloc] init];
-            web.urlString = [NSString stringWithFormat:@"%@page/areaInfoSetmeals.html?code=%@&uuid=%@",H5_HOST,model.applyGroupId,[UserData userInfo].uuid];
+            web.urlString = [NSString stringWithFormat:@"%@page/areaInfoSetmeals.html?code=%@&uuid=%@",H5_HOST,model.groupId,[UserData userInfo].uuid];
             web.title = @"片区详情";
             [self.navigationController pushViewController:web animated:YES];
         }
