@@ -43,7 +43,7 @@
     [super viewWillDisappear:animated];
     [self.navigationController setNavigationBarHidden:NO animated:animated];
     //清空缓存
-    [self deleteWebCache];
+//    [self deleteWebCache];
     // 开启
     if ([self.navigationController respondsToSelector:@selector(interactivePopGestureRecognizer)]) {
         self.navigationController.interactivePopGestureRecognizer.enabled = YES;
@@ -161,6 +161,7 @@
         _dwebview = [[DWKWebView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, ScreenHeight-TabbarHeight)];
         [_dwebview addJavascriptObject:[[WFJSApiTools alloc] init] namespace:nil];
         [_dwebview loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:self.urlString]]];
+        _dwebview.scrollView.scrollEnabled = NO;
         _dwebview.navigationDelegate = self;
         [_dwebview setDebugMode:true];
     }
