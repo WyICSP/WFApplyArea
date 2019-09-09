@@ -8,6 +8,7 @@
 #import "WFJSApiTools.h"
 #import "WFUserCenterPublicAPI.h"
 #import "WFShareHelpTool.h"
+#import "NSString+Regular.h"
 #import "dsbridge.h"
 #import "YFKeyWindow.h"
 #import "UserData.h"
@@ -121,7 +122,10 @@
 
 - (void)shareWeixinUrl:(NSString *)msg {
     if (msg.length != 0) {
-        [WFShareHelpTool shareImagesToWechatWithUrls:@[[NSURL URLWithString:msg]] successBlock:^{} failBlock:^{}];
+        //当前文件的 bundle
+//        NSBundle *currentBundler = [NSBundle bundleForClass:[self class]];
+//        NSString *showImgPath = [NSString getImagePathWithCurrentBundler:currentBundler PhotoName:@"shareIcon" bundlerName:@"WFApplyArea.bundle"];
+        [WFShareHelpTool shareTextBySystemWithText:@"领取充点券" shareUrl:msg shareImage:[UIImage imageNamed:@"shareIcon"]];
     }
     
 }

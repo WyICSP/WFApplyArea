@@ -45,18 +45,40 @@ static NSString *const cellId = @"WFMyAreaListTableViewCell";
     self.address.text = model.groupAddress;
     //事件
     self.time.text = model.createTime;
-    //状态 0：申请中 1：申请通过 2：申请驳回*/
+    
     self.qrBtn.hidden = model.auditStatus == 2;
-    if (model.auditStatus == 0) {
-        self.state.text = @"审核中";
-        self.state.textColor = NavColor;
-    }else if (model.auditStatus == 1) {
-        self.state.text = @"审核通过";
-        self.state.textColor = UIColorFromRGB(0x333333);
-    }else if (model.auditStatus == 2) {
-        self.state.text = @"审核驳回";
-        self.state.textColor = NavColor;
+    if (model.isNew) {
+        //新片区 状态 0：申请中 1：申请通过 2：申请驳回*/
+        if (model.auditStatus == 0) {
+            self.state.text = @"审核中";
+            self.state.textColor = NavColor;
+        }else if (model.auditStatus == 1) {
+            self.state.text = @"审核通过";
+            self.state.textColor = UIColorFromRGB(0x333333);
+        }else if (model.auditStatus == 2) {
+            self.state.text = @"审核驳回";
+            self.state.textColor = NavColor;
+        }
+    }else {
+        //老片区 0:待处理 1：通过 2:驳回 3：编辑 4：编辑失败
+        if (model.applyGroupStatus == 0) {
+            self.state.text = @"待处理";
+            self.state.textColor = NavColor;
+        }else if (model.auditStatus == 1) {
+            self.state.text = @"审核通过";
+            self.state.textColor = UIColorFromRGB(0x333333);
+        }else if (model.auditStatus == 2) {
+            self.state.text = @"审核驳回";
+            self.state.textColor = NavColor;
+        }else if (model.auditStatus == 3) {
+            self.state.text = @"编辑";
+            self.state.textColor = NavColor;
+        }else if (model.auditStatus == 4) {
+            self.state.text = @"编辑失败";
+            self.state.textColor = NavColor;
+        }
     }
+    
 }
 
 

@@ -8,6 +8,8 @@
 
 #import "WFViewController.h"
 #import "WFMyAreaViewController.h"
+#import "WFShareHelpTool.h"
+#import "NSString+Regular.h"
 
 @interface WFViewController ()
 
@@ -34,9 +36,12 @@
 }
 
 - (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
-    WFMyAreaViewController *area = [[WFMyAreaViewController alloc] init];
-    area.hidesBottomBarWhenPushed = YES;
-    [self.navigationController pushViewController:area animated:YES];
+//    WFMyAreaViewController *area = [[WFMyAreaViewController alloc] init];
+//    area.hidesBottomBarWhenPushed = YES;
+//    [self.navigationController pushViewController:area animated:YES];
+    NSBundle *currentBundler = [NSBundle bundleForClass:[self class]];
+    NSString *showImgPath = [NSString getImagePathWithCurrentBundler:currentBundler PhotoName:@"shareIcon" bundlerName:@"WFApplyArea.bundle"];
+    [WFShareHelpTool shareTextBySystemWithText:@"领取充点券" shareUrl:@"hss" shareImage:[UIImage imageWithContentsOfFile:showImgPath]];
 }
 
 - (void)didReceiveMemoryWarning
