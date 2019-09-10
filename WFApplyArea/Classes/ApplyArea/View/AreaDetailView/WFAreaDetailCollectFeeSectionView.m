@@ -77,7 +77,7 @@
             WFAreaDetailMultipleModel *mModel = [self.model.multipleChargesList firstObject];
             self.formBtn.hidden = mModel.chargeType == 0;
         }
-        [self.formBtn setTitle:@"  功率记次表  " forState:0];
+        [self.formBtn setTitle:@"  功率计次表  " forState:0];
     }else if (self.model.vipCharge.isSelect) {
         self.formBtn.hidden = NO;
         [self.formBtn setTitle:@"  查看会员  " forState:0];

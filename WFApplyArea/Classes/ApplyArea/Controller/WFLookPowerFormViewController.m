@@ -47,7 +47,7 @@
         self.title = @"查看利润计算表";
         [self getProfitTable];
     }else if (self.formType == WFLookFormPowerType){
-        self.title = @"查看功率区间记次表";
+        self.title = @"查看功率区间计次表";
         [self getPowerIntervalTable];
     }else {
         self.title = @"查看会员";

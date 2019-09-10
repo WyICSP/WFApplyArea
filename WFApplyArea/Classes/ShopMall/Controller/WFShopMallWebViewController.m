@@ -40,9 +40,9 @@
     [self.navigationController setNavigationBarHidden:NO animated:NO];
 }
 
-- (UIStatusBarStyle)preferredStatusBarStyle {
-    return UIStatusBarStyleDefault;
-}
+//- (UIStatusBarStyle)preferredStatusBarStyle {
+//    return UIStatusBarStyleDefault;
+//}
 
 
 #pragma mark 设置页面
