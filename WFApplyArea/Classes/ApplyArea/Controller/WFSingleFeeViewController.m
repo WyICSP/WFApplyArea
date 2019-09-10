@@ -8,6 +8,7 @@
 
 #import "WFSingleFeeViewController.h"
 #import "WFLookPowerFormViewController.h"
+#import "WFManyTimeFeeViewController.h"
 #import "WFBilleMethodSectionView.h"
 #import "WFSinglePowerTableViewCell.h"
 #import "WFSingleFeeTableViewCell.h"
@@ -46,7 +47,7 @@
 - (void)setUI {
     self.title = @"单次收费";
     self.view.backgroundColor = UIColorFromRGB(0xF5F5F5);
-    
+        
     if (self.models.count == 0) {
         //获取默认数据
         [self getSingleChargeFee];
@@ -226,15 +227,54 @@
 
 #pragma mark  确定
 - (void)clickConfirmBtn {
+    
+    if (![self isCompleteData]) {
+        [YFToast showMessage:@"请完善单次收费信息" inView:self.view];
+        return;
+    }
+    
     if (self.type == WFUpdateSingleFeeUpdateType) {
         //编辑单次收费
         [self updateSingleFee];
+    }else if (self.type == WFUpdateSingleFeeUpgradeType) {
+        //升级片区 填写多次收费
+        WFManyTimeFeeViewController *manyTime = [[WFManyTimeFeeViewController alloc] init];
+        manyTime.sourceType(WFUpdateManyTimeFeeUpgradeType);
+        [self.navigationController pushViewController:manyTime animated:YES];
     }else {
         //获取默认单次收费
         !self.singleFeeData ? : self.singleFeeData(self.models);
         [self goBack];
     }
 }
+
+/**
+ 是否把信息填写完整
+ 
+ @return YES 是, NO 表示没有
+ */
+- (BOOL)isCompleteData {
+    BOOL isComplete = NO;
+    for (WFDefaultChargeFeeModel *sModel in self.models) {
+        if (sModel.isSelectFirstSection) {
+            //单一收费
+            if (sModel.unifiedPrice.floatValue >= 0 && sModel.unifiedTime > 0) {
+                isComplete = YES;
+            }else {
+                isComplete = NO;
+            }
+        }else if (sModel.isSelectSecondSection) {
+            //统一收费
+            if (sModel.unitPrice.floatValue >= 0 && sModel.salesPrice.floatValue >= 0) {
+                isComplete = YES;
+            }else {
+                isComplete = NO;
+            }
+        }
+    }
+    return isComplete;
+}
+
 
 #pragma mark UITableViewDelegate,UITableViewDataSource
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
@@ -352,7 +392,7 @@
     if (!_confirmBtn) {
         _confirmBtn = [UIButton buttonWithType:UIButtonTypeSystem];
         _confirmBtn.frame = CGRectMake(0, ScreenHeight - KHeight(45.0f) - NavHeight, ScreenWidth, KHeight(45));
-        [_confirmBtn setTitle:self.type == WFUpdateSingleFeeUpdateType ? @"确认修改" : @"完成" forState:0];
+        [_confirmBtn setTitle:[self btnTitle] forState:0];
         [_confirmBtn addTarget:self action:@selector(clickConfirmBtn) forControlEvents:UIControlEventTouchUpInside];
         _confirmBtn.titleLabel.font = [UIFont boldSystemFontOfSize:16.0f];
         [_confirmBtn setTitleColor:UIColor.whiteColor forState:UIControlStateNormal];
@@ -360,6 +400,23 @@
         [self.view addSubview:_confirmBtn];
     }
     return _confirmBtn;
+}
+
+/**
+ 按钮 title
+
+ @return 按钮 title
+ */
+- (NSString *)btnTitle {
+    NSString *title = @"";
+    if (self.type == WFUpdateSingleFeeUpdateType) {
+        title = @"确认修改";
+    }else if (self.type == WFUpdateSingleFeeUpgradeType) {
+        title = @"下一步";
+    }else {
+        title = @"完成";
+    }
+    return title;
 }
 
 #pragma mark 链式编程

@@ -20,6 +20,8 @@
 #import "UserData.h"
 #import "WKHelp.h"
 
+#import "WFEditAreaAddressViewController.h"
+
 @interface WFMyAreaViewController ()<UITableViewDelegate,UITableViewDataSource>
 /**tableView*/
 @property (nonatomic, strong, nullable) UITableView *tableView;
@@ -49,6 +51,7 @@
 - (void)setUI {
     self.title = @"我的片区";
     [self.view addSubview:self.applyBtn];
+    
 }
 
 /**

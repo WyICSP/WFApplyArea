@@ -13,7 +13,8 @@
 
 typedef NS_ENUM(NSInteger, WFUpdateSingleType) {
     WFUpdateSingleFeeApplyType = 0,//申请片区的时候
-    WFUpdateSingleFeeUpdateType //修改片区
+    WFUpdateSingleFeeUpdateType,   //修改片区
+    WFUpdateSingleFeeUpgradeType   //升级片区
 };
 
 NS_ASSUME_NONNULL_BEGIN

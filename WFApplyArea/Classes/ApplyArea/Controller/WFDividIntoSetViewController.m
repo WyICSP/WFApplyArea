@@ -54,13 +54,15 @@
  获取默认分成设置
  */
 - (void)getDividIntoSet {
-    if (self.groupId.length == 0) {
+    if (self.type == WFDividIntoSetApplyType) {
+        //获取默认分成设置
         @weakify(self)
         [WFApplyAreaDataTool getUserDividintoSetWithParams:@{} resultBlock:^(NSArray<WFMyAreaDividIntoSetModel *> * _Nonnull models) {
             @strongify(self)
             [self requestSuccessWithModels:models];
         }];
-    }else {
+    }else if (self.type == WFDividIntoSetUpdateType){
+        //根据片区 Id 获取分成设置
         NSMutableDictionary *params = [NSMutableDictionary dictionary];
         [params safeSetObject:self.groupId forKey:@"groupId"];
         @weakify(self)
@@ -68,6 +70,8 @@
             @strongify(self)
             [self requestSuccessWithModels:models];
         }];
+    }else if (self.type == WFDividIntoSetUpgradeType) {
+        DLog(@"升级片区数据获取");
     }
 }
 
@@ -225,7 +229,7 @@
 
 #pragma mark 完成
 - (void)clickConfirmBtn {
-    if (self.groupId == 0) {
+    if (self.type == WFDividIntoSetApplyType) {
         //判断是否信息是否填写正确
         if (![self isComplete]) return;
         
@@ -233,9 +237,12 @@
         //获取默认设置
         !self.dividIntoDataBlock ? : self.dividIntoDataBlock(self.models);
         [self goBack];
-    }else {
+    }else if (self.type == WFDividIntoSetUpdateType){
         //更新合伙人设置
         [self updateDividIntoSet];
+    }else if (self.type == WFDividIntoSetUpgradeType) {
+        //升级片区
+        DLog(@"1");
     }
 }
 
@@ -326,7 +333,7 @@
     if (!_confirmBtn) {
         _confirmBtn = [UIButton buttonWithType:UIButtonTypeSystem];
         _confirmBtn.frame = CGRectMake(0, ScreenHeight - KHeight(45.0f) - NavHeight, ScreenWidth, KHeight(45));
-        [_confirmBtn setTitle:self.groupId.length != 0 ? @"确认修改" : @"完成" forState:UIControlStateNormal];
+        [_confirmBtn setTitle:[self btnTitle] forState:UIControlStateNormal];
         [_confirmBtn addTarget:self action:@selector(clickConfirmBtn) forControlEvents:UIControlEventTouchUpInside];
         _confirmBtn.titleLabel.font = [UIFont boldSystemFontOfSize:16.0f];
         [_confirmBtn setTitleColor:UIColor.whiteColor forState:UIControlStateNormal];
@@ -334,6 +341,23 @@
         [self.view addSubview:_confirmBtn];
     }
     return _confirmBtn;
+}
+
+/**
+ 按钮 title
+ 
+ @return 按钮 title
+ */
+- (NSString *)btnTitle {
+    NSString *title = @"";
+    if (self.type == WFDividIntoSetUpdateType) {
+        title = @"确认修改";
+    }else if (self.type == WFDividIntoSetUpgradeType) {
+        title = @"下一步";
+    }else {
+        title = @"完成";
+    }
+    return title;
 }
 
 /**
@@ -389,6 +413,13 @@
 - (WFDividIntoSetViewController * _Nonnull (^)(NSString * _Nonnull))chargingModelIds {
     return ^(NSString *chargingModelId) {
         self.chargingModelId = chargingModelId;
+        return self;
+    };
+}
+
+- (WFDividIntoSetViewController * _Nonnull (^)(WFDividIntoSetSourceType))sourceType {
+    return ^(WFDividIntoSetSourceType type) {
+        self.type = type;
         return self;
     };
 }

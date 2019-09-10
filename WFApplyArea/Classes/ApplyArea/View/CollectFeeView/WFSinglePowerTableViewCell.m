@@ -59,8 +59,18 @@ static NSString *const cellId = @"WFSinglePowerTableViewCell";
 
 - (void)setModel:(WFDefaultChargeFeeModel *)model {
     _model = model;
-    self.costPriceLbl.text = [NSString stringWithFormat:@"%@",@(model.unitPrice.floatValue/100)];
-    self.salePriceLbl.text = [NSString stringWithFormat:@"%@",@(model.salesPrice.floatValue/100)];
+    
+    if (model.unitPrice.floatValue < 0) {
+        self.costPriceLbl.text = @"";
+    }else {
+        self.costPriceLbl.text = [NSString stringWithFormat:@"%@",@(model.unitPrice.floatValue/100)];
+    }
+    
+    if (model.salesPrice.floatValue < 0) {
+        self.salePriceLbl.text = @"";
+    }else {
+       self.salePriceLbl.text = [NSString stringWithFormat:@"%@",@(model.salesPrice.floatValue/100)];
+    }
 }
 
 - (IBAction)clickLookForm:(id)sender {
@@ -77,7 +87,14 @@ static NSString *const cellId = @"WFSinglePowerTableViewCell";
         if (loca + 3 < textField.text.length && loca > 0) {
             textField.text = [textField.text substringToIndex:loca + 3];
         }
-        self.model.unitPrice = @(textField.text.floatValue *100);
+        
+        //如果为输入为空的的时候 就给他一个负值,方便区分
+        if (textField.text.length == 0) {
+            self.model.unitPrice = @(-1);
+        }else {
+            self.model.unitPrice = @(textField.text.floatValue *100);
+        }
+        
     }else if (textField == self.salePriceLbl) {
         if (textField.text.doubleValue > 99999)
             textField.text = [textField.text substringWithRange:NSMakeRange(0, 5)];
@@ -87,7 +104,14 @@ static NSString *const cellId = @"WFSinglePowerTableViewCell";
         if (loca + 3 < textField.text.length && loca > 0) {
             textField.text = [textField.text substringToIndex:loca + 3];
         }
-        self.model.salesPrice = @(textField.text.floatValue*100);
+        
+        //如果为输入为空的的时候 就给他一个负值,方便区分
+        if (textField.text.length == 0) {
+            self.model.salesPrice = @(-1);
+        }else {
+            self.model.salesPrice = @(textField.text.floatValue*100);
+        }
+        
     }
     self.model.isChange = YES;
 }

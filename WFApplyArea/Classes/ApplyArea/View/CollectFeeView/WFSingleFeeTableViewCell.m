@@ -55,8 +55,22 @@ static NSString *const cellId = @"WFSingleFeeTableViewCell";
 
 - (void)setModel:(WFDefaultChargeFeeModel *)model {
     _model = model;
-    self.moneyTF.text = [NSString stringWithFormat:@"%@",@(model.unifiedPrice.floatValue/100)];
-    self.countTF.text = [NSString stringWithFormat:@"%ld",(long)model.unifiedTime];
+    
+    //小于 0 的时候不显示
+    if (model.unifiedPrice.floatValue < 0) {
+        self.moneyTF.text = @"";
+    }else {
+        self.moneyTF.text = [NSString stringWithFormat:@"%@",@(model.unifiedPrice.floatValue/100)];
+    }
+    
+    //等于 0 的时候 不显示
+    if (model.unifiedTime == 0) {
+        self.countTF.text = @"";
+    }else {
+        self.countTF.text = [NSString stringWithFormat:@"%ld",(long)model.unifiedTime];
+    }
+    
+    
 }
 
 - (IBAction)textFieldDidChange:(UITextField *)textField {
@@ -69,8 +83,18 @@ static NSString *const cellId = @"WFSingleFeeTableViewCell";
         if (loca + 3 < textField.text.length && loca > 0) {
             textField.text = [textField.text substringToIndex:loca + 3];
         }
-        self.model.unifiedPrice = @(textField.text.floatValue *100);
+        
+        //如果为输入为空的的时候 就给他一个负值,方便区分
+        if (textField.text.length == 0) {
+            self.model.unifiedPrice = @(-1);
+        }else {
+            self.model.unifiedPrice = @(textField.text.floatValue*100);
+        }
+        
     }else if (textField == self.countTF) {
+        //次数不能输入0
+        if (textField.text.integerValue == 0) {textField.text = @"";}
+        
         self.model.unifiedTime = textField.text.integerValue;
     }
 }

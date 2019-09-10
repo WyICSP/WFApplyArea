@@ -10,6 +10,7 @@
 #import "WFManyTimesUnifiedTableViewCell.h"
 #import "WFMantTimesPowerTableViewCell.h"
 #import "WFLookPowerFormViewController.h"
+#import "WFDiscountFeeViewController.h"
 #import "WFManyTimesFooterView.h"
 #import "WFBilleMethodSectionView.h"
 #import "WFApplyAreaDataTool.h"
@@ -249,13 +250,18 @@
         return;
     }
     
-    if (self.groupId.length == 0) {
+    if (self.type == WFUpdateManyTimeFeeApplyType) {
         //获取默认数据
         !self.mainModelBlock ? : self.mainModelBlock(self.mainModel);
         [self goBack];
-    }else if (self.groupId.length != 0){
+    }else if (self.type == WFUpdateManyTimeFeeUpdateType) {
         //修改
         [self updateManyTimeFee];
+    }else if (self.type == WFUpdateManyTimeFeeUpgradeType) {
+        //升级
+        WFDiscountFeeViewController *method = [[WFDiscountFeeViewController alloc] init];
+        method.eType(WFUpdateUserMsgUpgradeType);
+        [self.navigationController pushViewController:method animated:YES];
     }
 }
 
@@ -499,7 +505,7 @@
     if (!_confirmBtn) {
         _confirmBtn = [UIButton buttonWithType:UIButtonTypeSystem];
         _confirmBtn.frame = CGRectMake(0, ScreenHeight - KHeight(45.0f) - NavHeight, ScreenWidth, KHeight(45));
-        [_confirmBtn setTitle:self.groupId.length != 0 ? @"确认修改" : @"完成" forState:UIControlStateNormal];
+        [_confirmBtn setTitle:[self btnTitle] forState:UIControlStateNormal];
         [_confirmBtn addTarget:self action:@selector(clickConfirmBtn) forControlEvents:UIControlEventTouchUpInside];
         _confirmBtn.titleLabel.font = [UIFont boldSystemFontOfSize:16.0f];
         [_confirmBtn setTitleColor:UIColor.whiteColor forState:UIControlStateNormal];
@@ -508,6 +514,24 @@
     }
     return _confirmBtn;
 }
+
+/**
+ 按钮 title
+ 
+ @return 按钮 title
+ */
+- (NSString *)btnTitle {
+    NSString *title = @"";
+    if (self.type == WFUpdateManyTimeFeeUpdateType) {
+        title = @"确认修改";
+    }else if (self.type == WFUpdateManyTimeFeeUpgradeType) {
+        title = @"下一步";
+    }else {
+        title = @"完成";
+    }
+    return title;
+}
+
 
 #pragma mark 链式编程
 - (WFManyTimeFeeViewController * _Nonnull (^)(NSString * _Nonnull))dChargingModePlay {
@@ -548,6 +572,13 @@
 - (WFManyTimeFeeViewController * _Nonnull (^)(NSString * _Nonnull))groupIds {
     return ^(NSString *groupId) {
         self.groupId = groupId;
+        return self;
+    };
+}
+
+- (WFManyTimeFeeViewController * _Nonnull (^)(WFUpdateManyTimeType))sourceType {
+    return ^(WFUpdateManyTimeType type) {
+        self.type = type;
         return self;
     };
 }

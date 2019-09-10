@@ -12,6 +12,12 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+typedef NS_ENUM(NSInteger, WFDividIntoSetSourceType) {
+    WFDividIntoSetApplyType = 0,//申请片区的时候
+    WFDividIntoSetUpdateType,   //修改片区
+    WFDividIntoSetUpgradeType   //升级片区
+};
+
 @interface WFDividIntoSetViewController : YFBaseViewController
 /**数据*/
 @property (nonatomic, strong) NSMutableArray <WFMyAreaDividIntoSetModel *> *models;
@@ -21,10 +27,13 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, copy) NSString *groupId;
 /**chargingModelId*/
 @property (nonatomic, copy) NSString *chargingModelId;
+/**来源*/
+@property (nonatomic, assign) WFDividIntoSetSourceType type;
 
 @property (nonatomic, copy) WFDividIntoSetViewController *(^dividIntoData)(NSMutableArray <WFMyAreaDividIntoSetModel *> *models);
 @property (nonatomic, copy) WFDividIntoSetViewController *(^groupIds)(NSString *groupId);
 @property (nonatomic, copy) WFDividIntoSetViewController *(^chargingModelIds)(NSString *chargingModelId);
+@property (nonatomic, copy) WFDividIntoSetViewController *(^sourceType)(WFDividIntoSetSourceType type);
 @end
 
 NS_ASSUME_NONNULL_END

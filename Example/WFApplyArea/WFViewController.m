@@ -12,7 +12,8 @@
 #import "NSString+Regular.h"
 
 @interface WFViewController ()
-
+@property (nonatomic,strong) NSArray *array1;
+@property (nonatomic,strong) NSMutableArray *array2;
 @end
 
 @implementation WFViewController
@@ -32,6 +33,13 @@
     rightView.backgroundColor = UIColor.blueColor;
     
     
+    self.array1 = @[@"1",@"2",@"3",@"4"];
+    self.array2 = self.array1.mutableCopy;
+    
+    NSString *num = self.array1.firstObject;
+    num = @"33";
+    NSLog(@"%@",self.array2);
+    
     
 }
 
@@ -39,9 +47,10 @@
 //    WFMyAreaViewController *area = [[WFMyAreaViewController alloc] init];
 //    area.hidesBottomBarWhenPushed = YES;
 //    [self.navigationController pushViewController:area animated:YES];
-    NSBundle *currentBundler = [NSBundle bundleForClass:[self class]];
-    NSString *showImgPath = [NSString getImagePathWithCurrentBundler:currentBundler PhotoName:@"shareIcon" bundlerName:@"WFApplyArea.bundle"];
-    [WFShareHelpTool shareTextBySystemWithText:@"领取充点券" shareUrl:@"hss" shareImage:[UIImage imageWithContentsOfFile:showImgPath]];
+//    NSBundle *currentBundler = [NSBundle bundleForClass:[self class]];
+//    NSString *showImgPath = [NSString getImagePathWithCurrentBundler:currentBundler PhotoName:@"shareIcon" bundlerName:@"WFApplyArea.bundle"];
+//    [WFShareHelpTool shareTextBySystemWithText:@"领取充点券" shareUrl:@"hss" shareImage:[UIImage imageWithContentsOfFile:showImgPath]];
+    
 }
 
 - (void)didReceiveMemoryWarning

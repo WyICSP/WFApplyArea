@@ -10,7 +10,6 @@
 #import "WFDividIntoSetViewController.h"
 #import "WFApplyAreaItemTableViewCell.h"
 #import "WFApplyAddressTableViewCell.h"
-#import "WFDividIntoSetViewController.h"
 #import "WFBilleMethodViewController.h"
 #import "WFDiscountFeeViewController.h"
 #import "WFManyTimeFeeViewController.h"
@@ -105,39 +104,48 @@
         return;
     }
     
-    //禁止重复点击
-    self.nextBtn.enabled = NO;
-    
     NSMutableDictionary *params = [NSMutableDictionary dictionary];
     [params safeSetObject:self.addressModel.detailAddress forKey:@"address"];//详细地址
     [params safeSetObject:self.addressModel.addressId forKey:@"areaId"];//区的 Id
     [params safeSetObject:self.addressModel.areaName forKey:@"name"];//片区名
     [params safeSetObject:[self billingPlanIds] forKey:@"billingPlanIds"];//计费方式数组
-    
-    if ([[self multipleChargesList] count] != 0)
-    [params safeSetObject:[self multipleChargesList] forKey:@"multipleChargesList"];//多次收费
-    
-    if (self.discountModels.chargingDefaultConfigId.length != 0)
-    [params safeSetObject:[self vipCharge] forKey:@"vipCharge"];//优惠收费
-    
-    if (self.singleFeeData.count != 0)
-    [params safeSetObject:[self singleCharge] forKey:@"singleCharge"];//单次收费
-    
-    [params safeSetObject:[self partnerPropInfos] forKey:@"partnerPropInfos"];//合伙人分成设置
-    
-    
+    //多次收费
+    if ([[self multipleChargesList] count] != 0) {
+        if ([self isCompleteManyTimeData]) {
+            [params safeSetObject:[self multipleChargesList] forKey:@"multipleChargesList"];
+        }else {
+            [YFToast showMessage:@"请完善多次收费信息" inView:self.view];
+            return;
+        }
+    }
+    //优惠收费
+    if (self.discountModels.chargingDefaultConfigId.length != 0) {
+        if ([self isCompleteDiscountData]) {
+            [params safeSetObject:[self vipCharge] forKey:@"vipCharge"];
+        }else {
+            [YFToast showMessage:@"请完善优惠收费信息" inView:self.view];
+            return;
+        }
+    }
+    //单次收费
+    if (self.singleFeeData.count != 0) {
+        if ([self isCompleteSingleData]) {
+            [params safeSetObject:[self singleCharge] forKey:@"singleCharge"];
+        }else {
+            [YFToast showMessage:@"请完善单次收费信息" inView:self.view];
+            return;
+        }
+    }
+    //合伙人分成设置
+    [params safeSetObject:[self partnerPropInfos] forKey:@"partnerPropInfos"];
     @weakify(self)
     [WFApplyAreaDataTool applyAreaWithParams:params resultBlock:^{
         @strongify(self)
         [self applyAreaSuccess];
-    } failBlock:^{
-        @strongify(self)
-        self.nextBtn.enabled = YES;
-    }];
+    } failBlock:^{}];
 }
 
 - (void)applyAreaSuccess {
-    self.nextBtn.enabled = YES;
     [YFToast showMessage:@"申请成功" inView:self.view];
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         !self.reloadDataBlock ? : self.reloadDataBlock();
@@ -208,6 +216,21 @@
 }
 
 /**
+ 是否把信息填写完整
+ 
+ @return YES 是, NO 表示没有
+ */
+- (BOOL)isCompleteDiscountData {
+    BOOL isComplete = NO;
+    if (self.discountModels.unifiedPrice.floatValue >= 0 && self.discountModels.unifiedTime > 0) {
+        isComplete = YES;
+    }else {
+        isComplete = NO;
+    }
+    return isComplete;
+}
+
+/**
  获取多次收费
 
  @return multipleCharges
@@ -249,6 +272,47 @@
 }
 
 /**
+ 是否把多次收费信息填写完整
+ 
+ @return YES 是, NO 表示没有
+ */
+- (BOOL)isCompleteManyTimeData {
+    BOOL isComplete = NO;
+    if (self.manyTimesModel.isSelectFirstSection) {
+        //统一收费
+        NSInteger complete = 0;
+        for (WFDefaultUnifiedListModel *model in self.manyTimesModel.multipleChargesUnifiedList) {
+            if (model.isSelect) {
+                if (model.proposalPrice.floatValue >= 0 && model.proposalTimes > 0) {
+                    complete = 1;
+                }else {
+                    complete = 0;
+                    break;
+                }
+            }
+        }
+        isComplete = complete == 1 ? YES : NO;
+        
+    }else if (self.manyTimesModel.isSelectSecondSection) {
+        //功率收费
+        NSInteger complete = 0;
+        for (WFDefaultPowerListModel *model in self.manyTimesModel.multipleChargesPowerList) {
+            if (model.isSelect) {
+                if (model.proposalPrice.floatValue >= 0 && model.proposalTimes > 0) {
+                    complete = 1;
+                }else {
+                    complete = 0;
+                    break;
+                }
+            }
+        }
+        isComplete = complete == 1 ? YES : NO;
+    }
+    return isComplete;
+}
+
+
+/**
  获取单次收费 必填
 
  @return singleCharge
@@ -278,6 +342,33 @@
         }
     }
     return dict;
+}
+
+/**
+ 是否把单次收费信息填写完整
+ 
+ @return YES 是, NO 表示没有
+ */
+- (BOOL)isCompleteSingleData {
+    BOOL isComplete = NO;
+    for (WFDefaultChargeFeeModel *sModel in self.singleFeeData) {
+        if (sModel.isSelectFirstSection) {
+            //单一收费
+            if (sModel.unifiedPrice.floatValue >= 0 && sModel.unifiedTime > 0) {
+                isComplete = YES;
+            }else {
+                isComplete = NO;
+            }
+        }else if (sModel.isSelectSecondSection) {
+            //统一收费
+            if (sModel.unitPrice.floatValue >= 0 && sModel.salesPrice.floatValue >= 0) {
+                isComplete = YES;
+            }else {
+                isComplete = NO;
+            }
+        }
+    }
+    return isComplete;
 }
 
 #pragma mark UIScrollViewDelegate
@@ -353,7 +444,7 @@
             //多次收费
             WFManyTimeFeeViewController *many = [[WFManyTimeFeeViewController alloc] init];
             many.dChargingModelId(model.chargeModelId).dChargingModePlay(model.chargingModePlay).
-            dDefaultManyTimesBlock(self.manyTimesModel);
+            dDefaultManyTimesBlock(self.manyTimesModel).sourceType(WFUpdateManyTimeFeeApplyType);
             @weakify(self)
             many.mainModelBlock = ^(WFDefaultManyTimesModel * _Nonnull mainModel) {
                 @strongify(self)
@@ -380,7 +471,7 @@
     }else if (indexPath.section == 2) {
         //计费方式
         WFBilleMethodViewController *method = [[WFBilleMethodViewController alloc] init];
-        method.billMethodModels(self.billMethodModel);
+        method.billMethodModels(self.billMethodModel).sourceType(WFBilleMethodApplyType);
         @weakify(self)
         method.billMethodDataBlock = ^(WFBillMethodModel * _Nonnull datas) {
             @strongify(self)
@@ -392,7 +483,7 @@
     }else if (indexPath.section == 3) {
         //分成设置
         WFDividIntoSetViewController *set = [[WFDividIntoSetViewController alloc] init];
-        set.dividIntoData((NSMutableArray *)self.diviIntoDatas);
+        set.dividIntoData((NSMutableArray *)self.diviIntoDatas).sourceType(WFDividIntoSetApplyType);
         @weakify(self)
         set.dividIntoDataBlock = ^(NSArray<WFMyAreaDividIntoSetModel *> * _Nonnull models) {
             @strongify(self)

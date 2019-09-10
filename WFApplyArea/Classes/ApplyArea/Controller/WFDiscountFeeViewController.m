@@ -9,6 +9,7 @@
 #import "WFDiscountFeeViewController.h"
 #import "WFDisUnifieldFeeTableViewCell.h"
 #import "WFEditVipUserViewController.h"
+#import "WFBilleMethodViewController.h"
 #import "WFAreaVipUsersListTableViewCell.h"
 #import "WFDisUnifieldSectionView.h"
 #import "UITableView+YFExtension.h"
@@ -166,16 +167,40 @@
 #pragma mark 完成
 - (void)clickConfirmBtn {
     [self.view endEditing:YES];
+
+    if (![self isCompleteData]) {
+        [YFToast showMessage:@"请完善优惠收费信息" inView:self.view];
+        return;
+    }
     
     if (self.type == WFUpdateUserMsgUpdateType){
         //修改优化收费
         [self updateVipCollectFee];
-    }else {
+    }else if (self.type == WFUpdateUserMsgApplyType){
         //获取默认
         !self.discountFeeDataBlock ? : self.discountFeeDataBlock(self.mainModel);
         [self goBack];
+    }else if (self.type == WFUpdateUserMsgUpgradeType) {
+        //升级片区
+        WFBilleMethodViewController *method = [[WFBilleMethodViewController alloc] init];
+        method.sourceType(WFBilleMethodUpgradeType);
+        [self.navigationController pushViewController:method animated:YES];
     }
-    
+}
+
+/**
+ 是否把信息填写完整
+ 
+ @return YES 是, NO 表示没有
+ */
+- (BOOL)isCompleteData {
+    BOOL isComplete = NO;
+    if (self.mainModel.unifiedPrice.floatValue >= 0 && self.mainModel.unifiedTime > 0) {
+        isComplete = YES;
+    }else {
+        isComplete = NO;
+    }
+    return isComplete;
 }
 
 /**

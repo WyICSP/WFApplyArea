@@ -64,16 +64,16 @@ static NSString *const cellId = @"WFMyAreaListTableViewCell";
         if (model.applyGroupStatus == 0) {
             self.state.text = @"待处理";
             self.state.textColor = NavColor;
-        }else if (model.auditStatus == 1) {
+        }else if (model.applyGroupStatus == 1) {
             self.state.text = @"审核通过";
             self.state.textColor = UIColorFromRGB(0x333333);
-        }else if (model.auditStatus == 2) {
+        }else if (model.applyGroupStatus == 2) {
             self.state.text = @"审核驳回";
             self.state.textColor = NavColor;
-        }else if (model.auditStatus == 3) {
-            self.state.text = @"编辑";
+        }else if (model.applyGroupStatus == 3) {
+            self.state.text = @"等待审核";
             self.state.textColor = NavColor;
-        }else if (model.auditStatus == 4) {
+        }else if (model.applyGroupStatus == 4) {
             self.state.text = @"编辑失败";
             self.state.textColor = NavColor;
         }

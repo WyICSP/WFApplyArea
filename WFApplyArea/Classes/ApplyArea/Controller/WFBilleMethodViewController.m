@@ -9,6 +9,7 @@
 #import "WFBilleMethodViewController.h"
 #import "WFBilleMethodTimeTableViewCell.h"
 #import "WFBilleMethodMoneyTableViewCell.h"
+#import "WFDividIntoSetViewController.h"
 #import "WFBilleMethodSectionView.h"
 #import "UITableView+YFExtension.h"
 #import "WFApplyAreaDataTool.h"
@@ -401,17 +402,22 @@
         return;
     }
     
-    if (self.groupId.length == 0) {
+    if (self.type == WFBilleMethodApplyType) {
         //默认收费方式
         !self.billMethodDataBlock ? : self.billMethodDataBlock(self.models);
         [self goBack];
-    }else if (self.groupId.length != 0){
+    }else if (self.type == WFBilleMethodUpdateType){
         if (self.models.isChange) {
             //修改收费方式
             [self updateBilleMehtod];
         }else {
             [self goBack];
         }
+    }else if (self.type == WFBilleMethodUpgradeType) {
+        //升级
+        WFDividIntoSetViewController *set = [[WFDividIntoSetViewController alloc] init];
+        set.sourceType(WFDividIntoSetUpgradeType);
+        [self.navigationController pushViewController:set animated:YES];
     }
 }
 
@@ -559,7 +565,7 @@
     if (!_confirmBtn) {
         _confirmBtn = [UIButton buttonWithType:UIButtonTypeSystem];
         _confirmBtn.frame = CGRectMake(0, ScreenHeight - KHeight(45.0f) - NavHeight, ScreenWidth, KHeight(45));
-        [_confirmBtn setTitle:self.groupId.length != 0 ? @"确认修改" : @"完成" forState:UIControlStateNormal];
+        [_confirmBtn setTitle:[self btnTitle] forState:UIControlStateNormal];
         [_confirmBtn addTarget:self action:@selector(clickConfirmBtn) forControlEvents:UIControlEventTouchUpInside];
         _confirmBtn.titleLabel.font = [UIFont boldSystemFontOfSize:16.0f];
         [_confirmBtn setTitleColor:UIColor.whiteColor forState:UIControlStateNormal];
@@ -567,6 +573,23 @@
         [self.view addSubview:_confirmBtn];
     }
     return _confirmBtn;
+}
+
+/**
+ 按钮 title
+ 
+ @return 按钮 title
+ */
+- (NSString *)btnTitle {
+    NSString *title = @"";
+    if (self.type == WFBilleMethodUpdateType) {
+        title = @"确认修改";
+    }else if (self.type == WFBilleMethodUpgradeType) {
+        title = @"下一步";
+    }else {
+        title = @"完成";
+    }
+    return title;
 }
 
 #pragma mark 链式编程
@@ -584,5 +607,11 @@
     };
 }
 
+- (WFBilleMethodViewController * _Nonnull (^)(WFBilleMethodSourceType))sourceType {
+    return ^(WFBilleMethodSourceType type) {
+        self.type = type;
+        return self;
+    };
+}
 
 @end

@@ -13,7 +13,8 @@
 
 typedef NS_ENUM(NSInteger, WFUpdateUserMsgType) {
     WFUpdateUserMsgApplyType = 0,//申请片区的时候
-    WFUpdateUserMsgUpdateType //修改片区
+    WFUpdateUserMsgUpdateType,    //修改片区
+    WFUpdateUserMsgUpgradeType   //升级片区
 };
 
 NS_ASSUME_NONNULL_BEGIN

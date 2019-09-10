@@ -110,25 +110,15 @@
     completionHandler(msg,YES);
 }
 
-/**下载图片*/
-- (void)shareWeixinUrl:(NSString *)msg :(JSCallback) completionHandler
+///**分享领取优惠券*/
+- (void)shareWeixinUrl:(NSString *)msg:(JSCallback) completionHandler
 {
     if (msg.length != 0) {
-        UIImage *image = [UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:msg]]];
-        [WFShareHelpTool saveImageToAlbumWithUrls:@[image]];
+        [WFShareHelpTool shareTextBySystemWithText:@"领取充点券" shareUrl:msg shareImage:[UIImage imageNamed:@"shareIcon"]];
     }
     completionHandler(msg,YES);
 }
 
-- (void)shareWeixinUrl:(NSString *)msg {
-    if (msg.length != 0) {
-        //当前文件的 bundle
-//        NSBundle *currentBundler = [NSBundle bundleForClass:[self class]];
-//        NSString *showImgPath = [NSString getImagePathWithCurrentBundler:currentBundler PhotoName:@"shareIcon" bundlerName:@"WFApplyArea.bundle"];
-        [WFShareHelpTool shareTextBySystemWithText:@"领取充点券" shareUrl:msg shareImage:[UIImage imageNamed:@"shareIcon"]];
-    }
-    
-}
 
 
 

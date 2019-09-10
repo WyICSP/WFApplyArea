@@ -7,6 +7,7 @@
 //
 
 #import "WFEditAreaAddressViewController.h"
+#import "WFSingleFeeViewController.h"
 #import "WFApplyAreaDataTool.h"
 #import "YFAddressPickView.h"
 #import "WFAreaDetailModel.h"
@@ -24,6 +25,8 @@
 @property (weak, nonatomic) IBOutlet UITextField *areaNameTF;
 /**背景*/
 @property (weak, nonatomic) IBOutlet UIView *contentsView;
+@property (weak, nonatomic) IBOutlet UIButton *saveBtn;
+
 /**片区 Id*/
 @property (nonatomic, copy) NSString *areaId;
 
@@ -41,6 +44,9 @@
     self.title = @"片区信息";
     self.contentsView.layer.cornerRadius = 10.0f;
     self.view.backgroundColor = UIColorFromRGB(0xF5F5F5);
+    //设置底部按钮
+    [self.saveBtn setTitle:self.type == WFEditAddressAreaDetailType ? @"确认修改" : @"下一步" forState:0];
+    //赋值
     [self.addressBtn setTitleColor:UIColorFromRGB(0x333333) forState:0];
     [self.addressBtn setTitle:self.models.areaName forState:0];
     self.detailAddressTF.text = self.models.address;
@@ -52,6 +58,7 @@
  选择地址
  */
 - (IBAction)chooseAddressBtn:(id)sender {
+    [self.view endEditing:YES];
     YFAddressPickView *addressPickView = [YFAddressPickView shareInstance];
     addressPickView.addressDatas = [[WFHomeSaveDataTool shareInstance] readAddressFile];
     WS(weakSelf)
@@ -67,7 +74,22 @@
 /**
  确定
  */
-- (IBAction)clickSaveBtn:(id)sender {
+- (IBAction)clickSaveBtn:(UIButton *)sender {
+    if (self.type == WFEditAddressAreaDetailType) {
+        //修改片区信息
+        [self submitAddressData];
+    }else {
+        //升级片区
+        WFSingleFeeViewController *single = [[WFSingleFeeViewController alloc] init];
+        single.sType(WFUpdateSingleFeeUpgradeType);
+        [self.navigationController pushViewController:single animated:YES];
+    }
+}
+
+/**
+ 编辑的时候提交
+ */
+- (void)submitAddressData {
     NSString *alertMsg = @"";
     if (self.detailAddressTF.text.length == 0) {
         alertMsg = @"详细地址，例：16号楼5层501室";
@@ -97,6 +119,21 @@
         [YFNotificationCenter postNotificationName:@"reloadDataKeys" object:nil];
         [self.navigationController popToViewController:[self.navigationController.viewControllers objectAtIndex:2] animated:YES];
     });
+}
+
+#pragma mark 参数
+- (WFEditAreaAddressViewController * _Nonnull (^)(WFAreaDetailModel * _Nonnull))dataModels {
+    return ^(WFAreaDetailModel *models){
+        self.models = models;
+        return self;
+    };
+}
+
+- (WFEditAreaAddressViewController * _Nonnull (^)(WFEditAddressJumpType))sourceType {
+    return ^(WFEditAddressJumpType type) {
+        self.type = type;
+        return self;
+    };
 }
 
 @end

@@ -260,7 +260,7 @@
     if (section == 0) {
         //地址
         WFEditAreaAddressViewController *address = [[WFEditAreaAddressViewController alloc] initWithNibName:@"WFEditAreaAddressViewController" bundle:[NSBundle bundleForClass:[self class]]];
-        address.models = self.mainModels;
+        address.dataModels(self.mainModels).sourceType(WFEditAddressAreaDetailType);
         [self.navigationController pushViewController:address animated:YES];
     }else if (section == 1) {
         //单次收费
@@ -275,7 +275,7 @@
         WFManyTimeFeeViewController *many = [[WFManyTimeFeeViewController alloc] init];
         many.dChargingModePlay(@"2").dChargingModelId(mModel.chargeModelId).
         itemArrays(self.mainModels.multipleChargesList).chargeTypes(mModel.chargeType).groupIds(self.mainModels.groupId).
-        dChargingModelId(self.mainModels.multipleChargeModelId);
+        dChargingModelId(self.mainModels.multipleChargeModelId).sourceType(WFUpdateManyTimeFeeUpdateType);
         [self.navigationController pushViewController:many animated:YES];
     }else if (section == 3) {
         //优惠收费
@@ -287,12 +287,12 @@
     }else if (section == 4) {
         //计费方式
         WFBilleMethodViewController *method = [[WFBilleMethodViewController alloc] init];
-        method.groupIds(self.mainModels.groupId);
+        method.groupIds(self.mainModels.groupId).sourceType(WFBilleMethodUpdateType);
         [self.navigationController pushViewController:method animated:YES];
     }else if (section == 5) {
         //我的合伙人
         WFDividIntoSetViewController *set = [[WFDividIntoSetViewController alloc] init];
-        set.groupIds(self.mainModels.groupId);
+        set.groupIds(self.mainModels.groupId).sourceType(WFDividIntoSetUpdateType);
         [self.navigationController pushViewController:set animated:YES];
     }
 }
