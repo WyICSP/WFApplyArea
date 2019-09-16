@@ -52,4 +52,9 @@ static NSString *const cellId = @"WFApplyAreaItemTableViewCell";
     self.detaillbl.hidden = !model.isNecessary;
 }
 
+- (IBAction)clickExplainBtn:(id)sender {
+    !self.LookFeeExplainBlock ? : self.LookFeeExplainBlock();
+}
+
+
 @end

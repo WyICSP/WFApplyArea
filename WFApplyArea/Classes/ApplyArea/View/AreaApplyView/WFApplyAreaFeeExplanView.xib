@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="WFApplyAreaFeeExplanView">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="896"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xhw-MR-wfK">
+                    <rect key="frame" x="24" y="205.5" width="327" height="485"/>
+                    <subviews>
+                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="WFApplyArea.bundle/feeExplain" translatesAutoresizingMaskIntoConstraints="NO" id="Z1e-KH-BcF">
+                            <rect key="frame" x="0.0" y="0.0" width="327" height="485"/>
+                        </imageView>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cK8-Si-I6K">
+                            <rect key="frame" x="78.5" y="427" width="170" height="40"/>
+                            <color key="backgroundColor" red="0.92549019610000005" green="0.61960784310000006" blue="0.4431372549" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="170" id="Bct-6h-El1"/>
+                                <constraint firstAttribute="height" constant="40" id="NvY-u7-1QS"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" type="boldSystem" pointSize="18"/>
+                            <state key="normal" title="我知道了">
+                                <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </state>
+                            <connections>
+                                <action selector="clickKnowBtn:" destination="iN0-l3-epB" eventType="touchUpInside" id="uL2-SQ-AO1"/>
+                            </connections>
+                        </button>
+                    </subviews>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <constraints>
+                        <constraint firstAttribute="bottom" secondItem="Z1e-KH-BcF" secondAttribute="bottom" id="44c-6o-Nhg"/>
+                        <constraint firstItem="cK8-Si-I6K" firstAttribute="centerX" secondItem="xhw-MR-wfK" secondAttribute="centerX" id="4s7-ta-uch"/>
+                        <constraint firstAttribute="trailing" secondItem="Z1e-KH-BcF" secondAttribute="trailing" id="Az6-Z9-tEm"/>
+                        <constraint firstAttribute="bottom" secondItem="cK8-Si-I6K" secondAttribute="bottom" constant="18" id="Bdn-LM-M6F">
+                            <userDefinedRuntimeAttributes>
+                                <userDefinedRuntimeAttribute type="boolean" keyPath="isAdaptateScreen" value="YES"/>
+                            </userDefinedRuntimeAttributes>
+                        </constraint>
+                        <constraint firstItem="Z1e-KH-BcF" firstAttribute="leading" secondItem="xhw-MR-wfK" secondAttribute="leading" id="M7r-Z5-ZJd"/>
+                        <constraint firstItem="Z1e-KH-BcF" firstAttribute="top" secondItem="xhw-MR-wfK" secondAttribute="top" id="Y9W-6r-9iB"/>
+                        <constraint firstAttribute="width" secondItem="xhw-MR-wfK" secondAttribute="height" multiplier="327:485" id="dE8-aV-kQv"/>
+                    </constraints>
+                </view>
+            </subviews>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <constraints>
+                <constraint firstItem="xhw-MR-wfK" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="OlG-ww-72d"/>
+                <constraint firstItem="xhw-MR-wfK" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="24" id="WY1-UR-gwG">
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="boolean" keyPath="isAdaptateScreen" value="YES"/>
+                    </userDefinedRuntimeAttributes>
+                </constraint>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="xhw-MR-wfK" secondAttribute="trailing" constant="24" id="pA9-RW-pQA">
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="boolean" keyPath="isAdaptateScreen" value="YES"/>
+                    </userDefinedRuntimeAttributes>
+                </constraint>
+                <constraint firstItem="xhw-MR-wfK" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="xIy-NN-Fx1"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
+            <connections>
+                <outlet property="knowBtn" destination="cK8-Si-I6K" id="5Vl-l9-Jn3"/>
+            </connections>
+            <point key="canvasLocation" x="-100" y="101"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="WFApplyArea.bundle/feeExplain" width="16" height="16"/>
+    </resources>
+</document>

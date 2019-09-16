@@ -15,6 +15,7 @@
 #import "WFManyTimeFeeViewController.h"
 #import "WFSingleFeeViewController.h"
 #import "WFDefaultChargeFeeModel.h"
+#import "WFApplyAreaFeeExplanView.h"
 #import "WFApplyAreaHeadView.h"
 #import "WFApplyAreaFooterView.h"
 #import "WFApplyAreaDataTool.h"
@@ -24,12 +25,15 @@
 #import "WFMyAreaListModel.h"
 #import "NSString+Regular.h"
 #import "SKSafeObject.h"
+#import "WFPopTool.h"
 #import "YFToast.h"
 #import "WKHelp.h"
 
 @interface WFApplyAreaViewController ()<UITableViewDelegate,UITableViewDataSource>
 /**scrollView*/
 @property (nonatomic, strong, nullable) UITableView *tableView;
+/**收费说明*/
+@property (nonatomic, strong, nullable) WFApplyAreaFeeExplanView *explanView;
 /**申请片区按钮*/
 @property (nonatomic, strong, nullable) UIButton *nextBtn;
 /**收费方式*/
@@ -392,6 +396,12 @@
         return cell;
     }else if (indexPath.section == 1) {
         WFApplyAreaItemTableViewCell *cell = [WFApplyAreaItemTableViewCell cellWithTableView:tableView indexPath:indexPath dataCount:self.models.count];
+        cell.explainBtn.hidden = indexPath.row != 0;
+        @weakify(self)
+        cell.LookFeeExplainBlock = ^{
+            @strongify(self)
+            [[WFPopTool sharedInstance] popView:self.explanView animated:YES];
+        };
         cell.model = self.models[indexPath.row];
         return cell;
     }
@@ -561,6 +571,18 @@
         _addressModel = [[WFApplyAreaAddressModel alloc] init];
     }
     return _addressModel;
+}
+
+- (WFApplyAreaFeeExplanView *)explanView {
+    if (!_explanView) {
+        _explanView = [[[NSBundle bundleForClass:[self class]] loadNibNamed:@"WFApplyAreaFeeExplanView" owner:nil options:nil] firstObject];
+        @weakify(self)
+        _explanView.clickKnowBtnBlock = ^{
+            @strongify(self)
+            [[WFPopTool sharedInstance] closeAnimated:YES];
+        };
+    }
+    return _explanView;
 }
 
 

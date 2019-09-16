@@ -32,6 +32,7 @@
 #import "WFSavePhotoTool.h"
 #import "WFAddVipCountPickView.h"
 #import "WFApplyAddressTableViewCell.h"
+#import "WFApplyAreaFeeExplanView.h"
 #import "WFApplyAreaFooterView.h"
 #import "WFApplyAreaHeadView.h"
 #import "WFApplyAreaItemTableViewCell.h"

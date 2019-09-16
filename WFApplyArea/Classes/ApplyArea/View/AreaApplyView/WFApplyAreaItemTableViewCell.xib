@@ -51,7 +51,7 @@
                                 </userDefinedRuntimeAttributes>
                             </label>
                             <button opaque="NO" userInteractionEnabled="NO" tag="20" contentMode="scaleToFill" semanticContentAttribute="forceRightToLeft" enabled="NO" contentHorizontalAlignment="right" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3tP-9m-Oef">
-                                <rect key="frame" x="80.5" y="7" width="270.5" height="30"/>
+                                <rect key="frame" x="320" y="7" width="31" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="30" id="S2f-kk-4xU"/>
                                 </constraints>
@@ -68,6 +68,17 @@
                                     <constraint firstAttribute="width" secondItem="mo1-sF-VV4" secondAttribute="height" multiplier="10:9" id="XUP-e9-O4w"/>
                                 </constraints>
                             </imageView>
+                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OMG-26-hcF">
+                                <rect key="frame" x="85.5" y="7" width="30" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="30" id="RT9-00-gMb"/>
+                                    <constraint firstAttribute="height" constant="30" id="uM7-wM-EKH"/>
+                                </constraints>
+                                <state key="normal" image="WFApplyArea.bundle/explainicon"/>
+                                <connections>
+                                    <action selector="clickExplainBtn:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="PZV-4D-CWl"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
@@ -76,9 +87,10 @@
                             <constraint firstItem="3tP-9m-Oef" firstAttribute="centerY" secondItem="eRK-sC-a5h" secondAttribute="centerY" id="2yf-1h-K2n"/>
                             <constraint firstItem="mo1-sF-VV4" firstAttribute="centerX" secondItem="3c2-uw-3LA" secondAttribute="centerX" multiplier="0.9" id="AaS-w9-ZVh"/>
                             <constraint firstItem="mo1-sF-VV4" firstAttribute="centerY" secondItem="eRK-sC-a5h" secondAttribute="centerY" id="Fdd-hw-DKt"/>
+                            <constraint firstItem="OMG-26-hcF" firstAttribute="leading" secondItem="eRK-sC-a5h" secondAttribute="trailing" constant="5" id="KUw-dg-Rno"/>
                             <constraint firstAttribute="trailing" secondItem="kwe-FT-J9G" secondAttribute="trailing" constant="15" id="TFb-pe-L2z"/>
-                            <constraint firstItem="3tP-9m-Oef" firstAttribute="leading" secondItem="eRK-sC-a5h" secondAttribute="trailing" id="WIN-lt-yTd"/>
                             <constraint firstAttribute="bottom" secondItem="kwe-FT-J9G" secondAttribute="bottom" id="aQO-Wj-TyE"/>
+                            <constraint firstItem="OMG-26-hcF" firstAttribute="centerY" secondItem="eRK-sC-a5h" secondAttribute="centerY" id="i1Y-2p-uhj"/>
                             <constraint firstItem="qP5-ps-K2y" firstAttribute="leading" secondItem="3c2-uw-3LA" secondAttribute="leading" constant="15" id="rvA-vN-eRV"/>
                             <constraint firstItem="kwe-FT-J9G" firstAttribute="leading" secondItem="eRK-sC-a5h" secondAttribute="leading" id="wW7-wa-SP9"/>
                             <constraint firstAttribute="trailing" secondItem="3tP-9m-Oef" secondAttribute="trailing" id="yrc-1b-e32"/>
@@ -99,6 +111,7 @@
             <connections>
                 <outlet property="contentsView" destination="3c2-uw-3LA" id="OVy-KU-Vbw"/>
                 <outlet property="detaillbl" destination="qP5-ps-K2y" id="F0M-9i-XNf"/>
+                <outlet property="explainBtn" destination="OMG-26-hcF" id="2nV-bs-Hb6"/>
                 <outlet property="lineLbl" destination="kwe-FT-J9G" id="8Qt-Gi-q1c"/>
                 <outlet property="selectImg" destination="mo1-sF-VV4" id="7el-FZ-4h4"/>
                 <outlet property="title" destination="eRK-sC-a5h" id="oTW-dl-M5m"/>
@@ -107,6 +120,7 @@
         </tableViewCell>
     </objects>
     <resources>
+        <image name="WFApplyArea.bundle/explainicon" width="16" height="16"/>
         <image name="WFApplyArea.bundle/selectItem" width="16" height="16"/>
         <image name="WFApplyArea.bundle/vipNext" width="16" height="16"/>
     </resources>

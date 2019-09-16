@@ -22,7 +22,10 @@ NS_ASSUME_NONNULL_BEGIN
 @property (weak, nonatomic) IBOutlet UILabel *lineLbl;
 /**选中*/
 @property (weak, nonatomic) IBOutlet UIImageView *selectImg;
-
+/**收费说明按钮*/
+@property (weak, nonatomic) IBOutlet UIButton *explainBtn;
+/**收费说明*/
+@property (copy, nonatomic) void (^LookFeeExplainBlock)(void);
 /**赋值*/
 @property (nonatomic, strong) WFApplyChargeMethod *model;
 /**初始化*/
