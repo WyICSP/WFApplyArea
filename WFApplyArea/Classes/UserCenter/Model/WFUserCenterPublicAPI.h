@@ -41,6 +41,13 @@ typedef NS_ENUM(NSInteger, WFUpdatePhotoType) {
 + (void)loginOutAndJumpLogin;
 
 
+/**
+ 升级片区
+
+ @param groupId 片区 Id
+ */
++ (void)upgradeAreaWithGroupId:(NSString *)groupId;
+
 @end
 
 NS_ASSUME_NONNULL_END

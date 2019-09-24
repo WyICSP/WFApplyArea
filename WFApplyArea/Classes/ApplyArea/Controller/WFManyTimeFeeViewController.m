@@ -16,6 +16,9 @@
 #import "WFApplyAreaDataTool.h"
 #import "WFDefaultChargeFeeModel.h"
 #import "WFAreaDetailModel.h"
+#import "WFAreaFeeMsgData.h"
+#import "WFMyAreaListModel.h"
+#import "WFUpgradeAreaData.h"
 
 #import "NSString+Regular.h"
 #import "SKSafeObject.h"
@@ -30,6 +33,8 @@
 @property (nonatomic, strong, nullable) UIButton *confirmBtn;
 /**headView*/
 @property (nonatomic, strong, nullable) UIView *headView;
+/**老片区是否有月卡套餐*/
+@property (nonatomic, assign) BOOL isExist;
 @end
 
 @implementation WFManyTimeFeeViewController
@@ -46,8 +51,28 @@
     self.view.backgroundColor = UIColorFromRGB(0xF5F5F5);
     
     if (!self.mainModel) {
-        //获取默认数据
-        [self getManyTimesDefalutFee];
+        //如果是升级片区
+        if (self.type == WFUpdateManyTimeFeeUpgradeType) {
+            for (WFApplyChargeMethod *model in [WFAreaFeeMsgData shareInstace].feeData) {
+                if (model.chargingModePlay.integerValue == 2) {
+                    //单次收费
+                    self.chargingModePlay = model.chargingModePlay;
+                    self.chargingModelId = model.chargeModelId;
+                }
+            }
+            
+            //获取老片区是否有月卡套餐
+            @weakify(self)
+            [self getOldAreaMonthTaoCanWithSuccessBlock:^(BOOL isExist) {
+                @strongify(self)
+                self.isExist = isExist;
+                //获取默认数据
+                [self getManyTimesDefalutFee];
+            }];
+        }else {
+            //获取默认数据
+            [self getManyTimesDefalutFee];
+        }
     }else {
         //数据回显
         [self.tableView reloadData];
@@ -111,6 +136,17 @@
 }
 
 /**
+ 获取老片区是否有月卡套餐
+ */
+- (void)getOldAreaMonthTaoCanWithSuccessBlock:(void(^)(BOOL isExist))successBlock {
+    NSMutableDictionary *parmas = [NSMutableDictionary dictionary];
+    [parmas safeSetObject:self.groupId forKey:@"groupId"];
+    [WFApplyAreaDataTool getOldAreaMonthTaoCanWithParams:parmas resultBlock:^(BOOL isExist) {
+        successBlock(isExist);
+    }];
+}
+
+/**
  修改多次收费
  */
 - (void)updateManyTimeFee {
@@ -134,7 +170,7 @@
     [YFToast showMessage:@"修改成功" inView:self.view];
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         [YFNotificationCenter postNotificationName:@"reloadDataKeys" object:nil];
-        [self.navigationController popToViewController:[self.navigationController.viewControllers objectAtIndex:2] animated:YES];
+        [self goBack];
     });
 }
 
@@ -239,13 +275,15 @@
 - (void)clickConfirmBtn {
     [self.view endEditing:YES];
     
-    //如果没有选中数据需要提示
-    if ([self getSelectFeeCount] == 0) {
-        [YFToast showMessage:@"请选择具体的收费模式" inView:self.view];
-        return;
+    //如果没有选中数据需要提示 升级片区 而且老片区有套餐的时候必须设置套餐, 没有的套餐的就不是必选的
+    if ((self.type == WFUpdateManyTimeFeeUpgradeType && self.isExist == YES) || self.type != WFUpdateManyTimeFeeUpgradeType) {
+        if ([self getSelectFeeCount] == 0) {
+            [YFToast showMessage:@"请选择具体的收费模式" inView:self.view];
+            return;
+        }
     }
     
-    if (![self isCompleteData]) {
+    if (![self isCompleteData] && [self getSelectFeeCount] != 0) {
         [YFToast showMessage:@"请完善信息" inView:self.view];
         return;
     }
@@ -259,8 +297,12 @@
         [self updateManyTimeFee];
     }else if (self.type == WFUpdateManyTimeFeeUpgradeType) {
         //升级
+        //保存数据
+        [WFUpgradeAreaData shareInstance].multipleChargesList = [self multipleChargesList];
+        
+        //填写优惠收费
         WFDiscountFeeViewController *method = [[WFDiscountFeeViewController alloc] init];
-        method.eType(WFUpdateUserMsgUpgradeType);
+        method.eType(WFUpdateUserMsgUpgradeType).aGroupId(self.groupId);
         [self.navigationController pushViewController:method animated:YES];
     }
 }
@@ -340,7 +382,7 @@
 
 #pragma mark UITableViewDelegate,UITableViewDataSource
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return 2;
+    return self.isExist ? 1 : 2;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
@@ -525,7 +567,7 @@
     if (self.type == WFUpdateManyTimeFeeUpdateType) {
         title = @"确认修改";
     }else if (self.type == WFUpdateManyTimeFeeUpgradeType) {
-        title = @"下一步";
+        title = @"下一步(3/6)";
     }else {
         title = @"完成";
     }

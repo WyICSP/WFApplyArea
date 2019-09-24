@@ -114,9 +114,15 @@
 - (void)shareWeixinUrl:(NSString *)msg:(JSCallback) completionHandler
 {
     if (msg.length != 0) {
-        [WFShareHelpTool shareTextBySystemWithText:@"领取充点券" shareUrl:msg shareImage:[UIImage imageNamed:@"shareIcon"]];
+        [WFShareHelpTool shareTextBySystemWithText:@"领取充电券" shareUrl:msg shareImage:[UIImage imageNamed:@"shareIcon"]];
     }
     completionHandler(msg,YES);
+}
+
+//升级片区
+- (void)upgradeArea:(NSString *)msg
+{
+    [WFUserCenterPublicAPI upgradeAreaWithGroupId:msg];
 }
 
 

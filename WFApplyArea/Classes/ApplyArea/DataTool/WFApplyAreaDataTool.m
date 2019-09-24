@@ -11,6 +11,7 @@
 #import "WFDefaultChargeFeeModel.h"
 #import "WFMyAreaListModel.h"
 #import "WFBillMethodModel.h"
+#import "WFUpgradeAreaModel.h"
 #import "WFPowerIntervalModel.h"
 #import "WFAreaDetailModel.h"
 #import "SKSafeObject.h"
@@ -409,6 +410,69 @@
                          resultBlock:(void(^)(void))resultBlock {
     //接口地址
     NSString *path = [NSString stringWithFormat:@"%@app-partner-group/v1/charging/group/delete/vip/charge",NEW_HOST_URL];
+    [WKRequest postWithURLString:path parameters:params isJson:YES isShowHud:YES success:^(WKBaseModel *baseModel) {
+        if (CODE_ZERO) {
+            resultBlock();
+        }else {
+            [YFToast showMessage:baseModel.message inView:[[YFKeyWindow shareInstance] getCurrentVC].view];
+        }
+    } failure:^(NSError *error) {
+        
+    }];
+}
+
+#pragma mark 升级片区相关接口
+
++ (void)getOldAreaMsgWithParams:(NSDictionary *)params
+                    resultBlock:(void(^)(WFUpgradeAreaModel *models))resultBlock {
+    //接口地址
+    NSString *path = [NSString stringWithFormat:@"%@app-partner-group/v1/update/charging/group/get/old/charging/group/info",NEW_HOST_URL];
+    [WKRequest getWithURLString:path parameters:params isShowHud:YES success:^(WKBaseModel *baseModel) {
+        if (CODE_ZERO) {
+            resultBlock([WFUpgradeAreaModel mj_objectWithKeyValues:baseModel.data]);
+        }else {
+            [YFToast showMessage:baseModel.message inView:[[YFKeyWindow shareInstance] getCurrentVC].view];
+        }
+    } failure:^(NSError *error) {
+        
+    }];
+}
+
++ (void)getOldAreaMonthTaoCanWithParams:(NSDictionary *)params
+                            resultBlock:(void(^)(BOOL isExist))resultBlock {
+    //接口地址
+    NSString *path = [NSString stringWithFormat:@"%@app-partner-group/v1/update/charging/group/check/old/charging/month/taocan",NEW_HOST_URL];
+    [WKRequest getWithURLString:path parameters:params isShowHud:NO success:^(WKBaseModel *baseModel) {
+        if (CODE_ZERO) {
+            BOOL isHave = [[[baseModel.mDictionary safeJsonObjForKey:@"data"] safeJsonObjForKey:@"isExist"] boolValue];
+            resultBlock(isHave);
+        }else {
+            resultBlock(NO);
+            [YFToast showMessage:baseModel.message inView:[[YFKeyWindow shareInstance] getCurrentVC].view];
+        }
+    } failure:^(NSError *error) {
+        resultBlock(NO);
+    }];
+}
+
++ (void)getOldAreaDiscountFeeWithParams:(NSDictionary *)params
+                            resultBlock:(void(^)(WFUpgradeAreaDiscountModel *oldModels))resultBlock {
+    //接口地址
+    NSString *path = [NSString stringWithFormat:@"%@app-partner-group/v1/update/charging/group/check/old/charging/vip/taocan",NEW_HOST_URL];
+    [WKRequest getWithURLString:path parameters:params isShowHud:YES success:^(WKBaseModel *baseModel) {
+        if (CODE_ZERO) {
+            resultBlock([WFUpgradeAreaDiscountModel mj_objectWithKeyValues:baseModel.data]);
+        }else {
+            [YFToast showMessage:baseModel.message inView:[[YFKeyWindow shareInstance] getCurrentVC].view];
+        }
+    } failure:^(NSError *error) {
+    }];
+}
+
++ (void)upgradeOldAreaToNewAreaWithParams:(NSDictionary *)params
+                              resultBlock:(void(^)(void))resultBlock {
+    //接口地址
+    NSString *path = [NSString stringWithFormat:@"%@app-partner-group/v1/update/charging/group/update/old/charging",NEW_HOST_URL];
     [WKRequest postWithURLString:path parameters:params isJson:YES isShowHud:YES success:^(WKBaseModel *baseModel) {
         if (CODE_ZERO) {
             resultBlock();

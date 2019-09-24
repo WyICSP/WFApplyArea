@@ -23,19 +23,19 @@
                         <rect key="frame" x="12" y="0.0" width="296" height="93.5"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="统一收费" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aOa-vM-Adz">
-                                <rect key="frame" x="12" y="15" width="66" height="20"/>
+                                <rect key="frame" x="45" y="12.5" width="66" height="20"/>
                                 <fontDescription key="fontDescription" type="system" weight="heavy" pointSize="16"/>
                                 <color key="textColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="按照每小时收费" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nz8-Sk-cH0">
-                                <rect key="frame" x="198" y="17.5" width="86" height="15"/>
+                                <rect key="frame" x="198" y="15" width="86" height="15"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                 <color key="textColor" red="0.59999999999999998" green="0.59999999999999998" blue="0.59999999999999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="FxK-gS-oFa">
-                                <rect key="frame" x="12" y="52" width="210" height="29"/>
+                                <rect key="frame" x="12" y="49.5" width="210" height="29"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="sGI-Of-mN0">
                                         <rect key="frame" x="0.0" y="0.0" width="71" height="29"/>
@@ -171,22 +171,32 @@
                                     <constraint firstAttribute="bottom" secondItem="sGI-Of-mN0" secondAttribute="bottom" id="v0a-ua-R9o"/>
                                 </constraints>
                             </view>
+                            <button opaque="NO" tag="10" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RXa-uI-Tds">
+                                <rect key="frame" x="0.0" y="0.0" width="45" height="45"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="RXa-uI-Tds" secondAttribute="height" multiplier="1:1" id="VeF-ah-J5I"/>
+                                    <constraint firstAttribute="width" constant="45" id="pkQ-oZ-syn"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="16"/>
+                                <inset key="imageEdgeInsets" minX="15" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                <state key="normal" image="WFApplyArea.bundle/unSelect">
+                                    <color key="titleColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                </state>
+                                <state key="selected" image="WFApplyArea.bundle/selectLogo"/>
+                                <connections>
+                                    <action selector="clickSelectBtn:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="m6O-Zd-EtW"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="nz8-Sk-cH0" firstAttribute="centerY" secondItem="aOa-vM-Adz" secondAttribute="centerY" id="16a-X4-2gJ"/>
-                            <constraint firstItem="FxK-gS-oFa" firstAttribute="leading" secondItem="aOa-vM-Adz" secondAttribute="leading" id="RC2-ws-E16"/>
+                            <constraint firstItem="aOa-vM-Adz" firstAttribute="top" secondItem="UzC-vy-sfU" secondAttribute="top" constant="12.5" id="2xC-6M-TAq"/>
+                            <constraint firstItem="FxK-gS-oFa" firstAttribute="leading" secondItem="UzC-vy-sfU" secondAttribute="leading" constant="12" id="4Ft-sU-aEn"/>
+                            <constraint firstItem="RXa-uI-Tds" firstAttribute="top" secondItem="UzC-vy-sfU" secondAttribute="top" id="Fpc-VP-G3K"/>
+                            <constraint firstItem="RXa-uI-Tds" firstAttribute="leading" secondItem="UzC-vy-sfU" secondAttribute="leading" id="JLE-rL-2Uv"/>
                             <constraint firstItem="FxK-gS-oFa" firstAttribute="top" secondItem="aOa-vM-Adz" secondAttribute="bottom" constant="17" id="jYj-vs-YI7"/>
-                            <constraint firstItem="aOa-vM-Adz" firstAttribute="top" secondItem="UzC-vy-sfU" secondAttribute="top" constant="15" id="o98-Ef-b91">
-                                <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="boolean" keyPath="isAdaptateScreen" value="YES"/>
-                                </userDefinedRuntimeAttributes>
-                            </constraint>
-                            <constraint firstItem="aOa-vM-Adz" firstAttribute="leading" secondItem="UzC-vy-sfU" secondAttribute="leading" constant="12" id="sVx-43-CbA">
-                                <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="boolean" keyPath="isAdaptateScreen" value="YES"/>
-                                </userDefinedRuntimeAttributes>
-                            </constraint>
+                            <constraint firstItem="aOa-vM-Adz" firstAttribute="leading" secondItem="UzC-vy-sfU" secondAttribute="leading" constant="45" id="sVx-43-CbA"/>
                             <constraint firstAttribute="trailing" secondItem="nz8-Sk-cH0" secondAttribute="trailing" constant="12" id="tUh-gF-YS6">
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="boolean" keyPath="isAdaptateScreen" value="YES"/>
@@ -213,8 +223,15 @@
                 <outlet property="moneyView" destination="sGI-Of-mN0" id="ORP-MY-eoP"/>
                 <outlet property="onlyPriceLbl" destination="lmZ-rb-d3T" id="vM9-zf-5He"/>
                 <outlet property="onlyTimeLbl" destination="wtU-Qv-Vs9" id="A3B-rv-Beh"/>
+                <outlet property="selectBtn" destination="RXa-uI-Tds" id="7vG-Y8-gZj"/>
+                <outlet property="selectBtnWidth" destination="pkQ-oZ-syn" id="EYp-90-G8Z"/>
+                <outlet property="titleLeftCons" destination="sVx-43-CbA" id="RIL-uL-fLb"/>
             </connections>
             <point key="canvasLocation" x="-39.130434782608695" y="72.991071428571431"/>
         </tableViewCell>
     </objects>
+    <resources>
+        <image name="WFApplyArea.bundle/selectLogo" width="16" height="16"/>
+        <image name="WFApplyArea.bundle/unSelect" width="16" height="16"/>
+    </resources>
 </document>

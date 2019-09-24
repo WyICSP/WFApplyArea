@@ -29,6 +29,14 @@ NS_ASSUME_NONNULL_BEGIN
 @property (weak, nonatomic) IBOutlet UILabel *onlyPriceLbl;
 /**只读时间*/
 @property (weak, nonatomic) IBOutlet UILabel *onlyTimeLbl;
+/**老片区升级是否选中*/
+@property (weak, nonatomic) IBOutlet UIButton *selectBtn;
+/**title 离左边的间距*/
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *titleLeftCons;
+/**选中按钮的宽度*/
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *selectBtnWidth;
+/**选中效果*/
+@property (nonatomic, copy) void (^clickSelectItemBlock)(BOOL isSelect);
 /**赋值操作*/
 @property (nonatomic, strong) WFDefaultDiscountModel *model;
 /**初始化*/

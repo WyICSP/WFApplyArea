@@ -17,6 +17,10 @@
 #import "WFDiscountFeeAddView.h"
 #import "WFApplyAreaDataTool.h"
 #import "WFAreaDetailModel.h"
+#import "WFAreaFeeMsgData.h"
+#import "WFMyAreaListModel.h"
+#import "WFUpgradeAreaData.h"
+#import "WFUpgradeAreaModel.h"
 
 #import "SKSafeObject.h"
 #import "UIView+Frame.h"
@@ -34,6 +38,10 @@
 @property (nonatomic, strong, nullable) UIButton *confirmBtn;
 /**vip用户*/
 @property (nonatomic, strong, nullable) NSMutableArray <WFGroupVipUserModel *> *vipData;
+/**老片区数据*/
+@property (nonatomic, strong, nullable) WFUpgradeAreaDiscountModel *oldAreaModel;
+/**升级老片区是否开通优惠套餐*/
+@property (nonatomic, assign) BOOL isSelect;
 /**页码*/
 @property (nonatomic, assign) NSInteger pageNo;
 
@@ -57,6 +65,15 @@
     self.pageNo = 1;
     self.view.backgroundColor = UIColorFromRGB(0xF5F5F5);
     if (!self.mainModel) {
+        for (WFApplyChargeMethod *model in [WFAreaFeeMsgData shareInstace].feeData) {
+            if (model.chargingModePlay.integerValue == 3) {
+                //优惠收费
+                self.chargingModePlay = model.chargingModePlay;
+                self.chargingModelId = model.chargeModelId;
+                //获取优惠收费信息
+                [self getOldAreaDiscountFee];
+            }
+        }
         //获取默认的收费
         [self getDefaultDisCountFee];
     }else {
@@ -135,13 +152,15 @@
     } else {
         [self.tableView.mj_footer resetNoMoreData];
     }
-    [self.tableView refreshTableViewWithSection:1];
+    [self.tableView reloadData];
 }
 
 /**
- 更新优惠收费
+ 修改优惠收费参数
+
+ @return 优惠收费数据
  */
-- (void)updateVipCollectFee {
+- (NSDictionary *)discountDataMsg {
     NSMutableDictionary *params = [NSMutableDictionary dictionary];
     [params safeSetObject:self.mainModel.unifiedPrice forKey:@"unifiedPrice"];
     [params safeSetObject:self.applyGroupId forKey:@"groupId"];
@@ -149,8 +168,15 @@
     [params safeSetObject:self.editModel.vipChargeId forKey:@"vipChargeId"];
     [params safeSetObject:self.mainModel.chargingDefaultConfigId forKey:@"chargingDefaultConfigId"];
     [params safeSetObject:self.mainModel.chargeModelId forKey:@"chargeModelId"];
+    return params;
+}
+
+/**
+ 更新优惠收费
+ */
+- (void)updateVipCollectFee {
     @weakify(self)
-    [WFApplyAreaDataTool updateVipCollectFeeWithParams:params resultBlock:^{
+    [WFApplyAreaDataTool updateVipCollectFeeWithParams:[self discountDataMsg] resultBlock:^{
         @strongify(self)
         [self updateSuccess];
     }];
@@ -160,16 +186,41 @@
     [YFToast showMessage:@"修改成功" inView:self.view];
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         [YFNotificationCenter postNotificationName:@"reloadDataKeys" object:nil];
-        [self.navigationController popToViewController:[self.navigationController.viewControllers objectAtIndex:2] animated:YES];
+        [self goBack];
     });
+}
+
+/**
+ 老片区 获取用户 vip 用户
+ */
+- (void)getOldAreaDiscountFee {
+    NSMutableDictionary *params = [NSMutableDictionary dictionary];
+    [params safeSetObject:self.applyGroupId forKey:@"groupId"];
+    @weakify(self)
+    [WFApplyAreaDataTool getOldAreaDiscountFeeWithParams:params resultBlock:^(WFUpgradeAreaDiscountModel * _Nonnull oldModels) {
+        @strongify(self)
+        self.oldAreaModel = oldModels;
+        self.isSelect = oldModels.isExist;
+        [self requestVipDataSuccessWith:oldModels.vipMemberList];
+    }];
 }
 
 #pragma mark 完成
 - (void)clickConfirmBtn {
     [self.view endEditing:YES];
-
-    if (![self isCompleteData]) {
-        [YFToast showMessage:@"请完善优惠收费信息" inView:self.view];
+    
+    NSString *alertMsg = @"";
+    if (self.type == WFUpdateUserMsgUpgradeType) {
+        if (self.oldAreaModel.isExist || self.isSelect) {
+            //老片区有优惠套餐必须要选中
+            alertMsg = ![self isCompleteData] ? @"请完善优惠收费信息" : @"";
+        }
+    }else {
+        alertMsg = ![self isCompleteData] ? @"请完善优惠收费信息" : @"";
+    }
+    
+    if (alertMsg.length != 0) {
+        [YFToast showMessage:alertMsg inView:self.view];
         return;
     }
     
@@ -182,8 +233,13 @@
         [self goBack];
     }else if (self.type == WFUpdateUserMsgUpgradeType) {
         //升级片区
+        //保存优惠收费数据
+        if (self.isSelect)
+        [WFUpgradeAreaData shareInstance].discountFee = [self discountDataMsg];
+        
+        //收货方式
         WFBilleMethodViewController *method = [[WFBilleMethodViewController alloc] init];
-        method.sourceType(WFBilleMethodUpgradeType);
+        method.sourceType(WFBilleMethodUpgradeType).groupIds(self.applyGroupId);
         [self.navigationController pushViewController:method animated:YES];
     }
 }
@@ -239,12 +295,27 @@
     if (indexPath.section == 0) {
         WFDisUnifieldFeeTableViewCell *cell = [WFDisUnifieldFeeTableViewCell cellWithTableView:tableView];
         cell.isOnlyReadView.hidden = !self.isNotAllow;
+        if (self.type == WFUpdateUserMsgUpgradeType) {
+            //升级老片区
+            cell.selectBtnWidth.constant = cell.titleLeftCons.constant = 45.0f;
+            cell.selectBtn.selected = self.oldAreaModel.isExist;
+            //如果isExist 为 yes 则必须选中
+            cell.selectBtn.userInteractionEnabled = !self.oldAreaModel.isExist;
+        }else {
+            cell.selectBtnWidth.constant = 0.0f;
+            cell.titleLeftCons.constant = 12.0f;
+        }
+        @weakify(self)
+        cell.clickSelectItemBlock = ^(BOOL isSelect) {
+            @strongify(self)
+            self.isSelect = isSelect;
+        };
         cell.model = self.mainModel;
         return cell;
     }else {
         WFAreaVipUsersListTableViewCell *cell = [WFAreaVipUsersListTableViewCell cellWithTableView:tableView];
         cell.model = self.vipData[indexPath.row];
-        cell.editBtn.hidden = NO;
+        cell.editBtn.hidden = self.type == WFUpdateUserMsgUpgradeType;
         @weakify(self)
         cell.editUserMsgBlock = ^{
             @strongify(self)
@@ -267,12 +338,12 @@
             [self handleEditMsgIsEdit:NO index:0];
         };
         
-        return (self.type == WFUpdateUserMsgUpdateType && self.editModel.vipChargeId.length == 0) ? [UIView new] : sectionView;
+        return ((self.type == WFUpdateUserMsgUpdateType && self.editModel.vipChargeId.length == 0) || (self.type == WFUpdateUserMsgUpgradeType)) ? [UIView new] : sectionView;
     }
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
-    return section == 0 ? 10.0f : ((self.type == WFUpdateUserMsgUpdateType && self.editModel.vipChargeId.length == 0) ? CGFLOAT_MIN : 50.0f) ;
+    return section == 0 ? 10.0f : (((self.type == WFUpdateUserMsgUpdateType && self.editModel.vipChargeId.length == 0) || (self.type == WFUpdateUserMsgUpgradeType)) ? CGFLOAT_MIN : 50.0f) ;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
@@ -280,7 +351,7 @@
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    return indexPath.section == 0 ? KHeight(94.0f) : 140.0f;
+    return indexPath.section == 0 ? 94.0f : 140.0f;
 }
 
 #pragma mark get set
@@ -325,6 +396,23 @@
 }
 
 /**
+ 按钮 title
+ 
+ @return 按钮 title
+ */
+- (NSString *)btnTitle {
+    NSString *title = @"";
+    if (self.type == WFUpdateUserMsgUpdateType) {
+        title = @"确认修改";
+    }else if (self.type == WFUpdateUserMsgUpgradeType) {
+        title = @"下一步(4/6)";
+    }else {
+        title = @"完成";
+    }
+    return title;
+}
+
+/**
  完成按钮
  
  @return applyBtn
@@ -333,7 +421,7 @@
     if (!_confirmBtn) {
         _confirmBtn = [UIButton buttonWithType:UIButtonTypeSystem];
         _confirmBtn.frame = CGRectMake(0, ScreenHeight - KHeight(45.0f) - NavHeight, ScreenWidth, self.isNotAllow ? 0.0f : KHeight(45));
-        [_confirmBtn setTitle:self.type == WFUpdateUserMsgUpdateType ? @"确认修改" : @"完成" forState:UIControlStateNormal];
+        [_confirmBtn setTitle:[self btnTitle] forState:UIControlStateNormal];
         [_confirmBtn addTarget:self action:@selector(clickConfirmBtn) forControlEvents:UIControlEventTouchUpInside];
         _confirmBtn.titleLabel.font = [UIFont boldSystemFontOfSize:16.0f];
         [_confirmBtn setTitleColor:UIColor.whiteColor forState:UIControlStateNormal];

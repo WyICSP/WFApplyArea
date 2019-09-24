@@ -10,9 +10,11 @@
 #import "WFDividIntoSetTableViewCell.h"
 #import "WFDiviIntoSetEditTableViewCell.h"
 #import "WFDiviIntoSetHeadTableViewCell.h"
+#import "WFAreaDetailViewController.h"
 #import "UITableView+YFExtension.h"
 #import "WFMyAreaListModel.h"
 #import "WFApplyAreaDataTool.h"
+#import "WFUpgradeAreaData.h"
 #import "NSString+Regular.h"
 #import "SKSafeObject.h"
 #import "YFToast.h"
@@ -54,7 +56,7 @@
  获取默认分成设置
  */
 - (void)getDividIntoSet {
-    if (self.type == WFDividIntoSetApplyType) {
+    if (self.type == WFDividIntoSetApplyType || self.type == WFDividIntoSetUpgradeType) {
         //获取默认分成设置
         @weakify(self)
         [WFApplyAreaDataTool getUserDividintoSetWithParams:@{} resultBlock:^(NSArray<WFMyAreaDividIntoSetModel *> * _Nonnull models) {
@@ -70,8 +72,6 @@
             @strongify(self)
             [self requestSuccessWithModels:models];
         }];
-    }else if (self.type == WFDividIntoSetUpgradeType) {
-        DLog(@"升级片区数据获取");
     }
 }
 
@@ -103,7 +103,7 @@
     [YFToast showMessage:@"更新成功" inView:self.view];
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         [YFNotificationCenter postNotificationName:@"reloadDataKeys" object:nil];
-        [self.navigationController popToViewController:[self.navigationController.viewControllers objectAtIndex:2] animated:YES];
+        [self goBack];
     });
 }
 
@@ -227,6 +227,52 @@
     return dArray;
 }
 
+/**
+ 老片区升级成为新片区
+ */
+- (void)upgradeOldAreaToNewArea {
+    //片区详细地址
+    NSString *address = [NSString stringWithFormat:@"%@",[[WFUpgradeAreaData shareInstance].addressMsg safeJsonObjForKey:@"address"]];
+    //片区省市区 Id
+    NSString *areaId = [NSString stringWithFormat:@"%@",[[WFUpgradeAreaData shareInstance].addressMsg safeJsonObjForKey:@"areaId"]];
+    //片区名
+    NSString *name = [NSString stringWithFormat:@"%@",[[WFUpgradeAreaData shareInstance].addressMsg safeJsonObjForKey:@"name"]];
+    //重组数据
+    NSMutableDictionary *params = [NSMutableDictionary dictionary];
+    [params safeSetObject:address forKey:@"address"];//地址
+    [params safeSetObject:areaId forKey:@"areaId"];//地址
+    [params safeSetObject:name forKey:@"name"];//片区名
+    [params safeSetObject:self.groupId forKey:@"groupId"];//片区 Id
+    if ([WFUpgradeAreaData shareInstance].multipleChargesList.count != 0) {
+        //多次收费
+        [params safeSetObject:[WFUpgradeAreaData shareInstance].multipleChargesList forKey:@"multipleChargesList"];
+    }
+    if ([WFUpgradeAreaData shareInstance].discountFee.count != 0) {
+        //vip 设置
+        [params safeSetObject:[WFUpgradeAreaData shareInstance].discountFee forKey:@"vipCharge"];
+    }
+    [params safeSetObject:[WFUpgradeAreaData shareInstance].billingPlanIds forKey:@"billingPlanIds"];//收费方式
+    [params safeSetObject:[WFUpgradeAreaData shareInstance].partnerPropInfos forKey:@"partnerPropInfos"];//分成设置
+    [params safeSetObject:[WFUpgradeAreaData shareInstance].singleCharge forKey:@"singleCharge"];//单次收费
+    
+    @weakify(self)
+    [WFApplyAreaDataTool upgradeOldAreaToNewAreaWithParams:params resultBlock:^{
+        @strongify(self)
+        [self oldAreaUpgradeSuccess];
+    }];
+}
+
+- (void)oldAreaUpgradeSuccess {
+    [YFToast showMessage:@"升级成功" inView:self.view];
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        WFAreaDetailViewController *detail = [[WFAreaDetailViewController alloc] init];
+        detail.groupId = self.groupId;
+        detail.jumpType = WFAreaDetailJumpAreaType;
+        detail.isUpgradeType = YES;
+        [self.navigationController pushViewController:detail animated:YES];
+    });
+}
+
 #pragma mark 完成
 - (void)clickConfirmBtn {
     if (self.type == WFDividIntoSetApplyType) {
@@ -241,8 +287,10 @@
         //更新合伙人设置
         [self updateDividIntoSet];
     }else if (self.type == WFDividIntoSetUpgradeType) {
+        //保存数据
+        [WFUpgradeAreaData shareInstance].partnerPropInfos = [self partnerPropInfos];
         //升级片区
-        DLog(@"1");
+        [self upgradeOldAreaToNewArea];
     }
 }
 
@@ -353,7 +401,7 @@
     if (self.type == WFDividIntoSetUpdateType) {
         title = @"确认修改";
     }else if (self.type == WFDividIntoSetUpgradeType) {
-        title = @"下一步";
+        title = @"下一步(6/6)";
     }else {
         title = @"完成";
     }

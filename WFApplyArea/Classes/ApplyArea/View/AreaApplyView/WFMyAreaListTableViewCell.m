@@ -50,7 +50,7 @@ static NSString *const cellId = @"WFMyAreaListTableViewCell";
     if (model.isNew) {
         //新片区 状态 0：申请中 1：申请通过 2：申请驳回*/
         if (model.auditStatus == 0) {
-            self.state.text = @"审核中";
+            self.state.text = @"使用中";
             self.state.textColor = NavColor;
         }else if (model.auditStatus == 1) {
             self.state.text = @"审核通过";

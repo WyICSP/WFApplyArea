@@ -20,8 +20,6 @@
 #import "UserData.h"
 #import "WKHelp.h"
 
-#import "WFEditAreaAddressViewController.h"
-
 @interface WFMyAreaViewController ()<UITableViewDelegate,UITableViewDataSource>
 /**tableView*/
 @property (nonatomic, strong, nullable) UITableView *tableView;
@@ -51,10 +49,9 @@
 - (void)setUI {
     self.title = @"我的片区";
     [self.view addSubview:self.applyBtn];
-    
 }
 
-/**
+/** 5
  获取我的片区数据
  */
 - (void)getAreaList {
@@ -139,7 +136,7 @@
     }else {
         //老片区
         WFCurrentWebViewController *web = [[WFCurrentWebViewController alloc] init];
-        web.urlString = [NSString stringWithFormat:@"%@page/areaInfoSetmealsDetail.html?areaId=%@&uuid=%@",H5_HOST,itemModel.applyGroupId,USER_UUID];
+        web.urlString = [NSString stringWithFormat:@"%@page/areaInfoSetmealsDetail.html?areaId=%@&uuid=%@&groupId=%@",H5_HOST,itemModel.applyGroupId,USER_UUID,itemModel.groupId];
         [self.navigationController pushViewController:web animated:YES];
     }
 }

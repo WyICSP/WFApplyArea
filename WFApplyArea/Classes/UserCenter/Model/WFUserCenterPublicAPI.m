@@ -7,6 +7,7 @@
 
 #import "WFUserCenterPublicAPI.h"
 #import <TZImagePickerController/TZImagePickerController.h>
+#import "WFEditAreaAddressViewController.h"
 #import "WFMyChargePileDataTool.h"
 #import "YFMediatorManager+WFUser.h"
 #import "JMUpdataImage.h"
@@ -101,5 +102,18 @@
     //跳转登录
     [YFMediatorManager loginOutByOpenLoginCtrl];
 }
+
+/**
+ 升级片区
+ 
+ @param groupId 片区 Id
+ */
++ (void)upgradeAreaWithGroupId:(NSString *)groupId {
+    WFEditAreaAddressViewController *edit = [[WFEditAreaAddressViewController alloc] initWithNibName:@"WFEditAreaAddressViewController" bundle:[NSBundle bundleForClass:[self class]]];
+    edit.sourceType(WFEditAddressAreauUpgradeType).areaGroupId(groupId);
+    [[[YFKeyWindow shareInstance] getCurrentVC].navigationController pushViewController:edit animated:YES];
+}
+
+
 
 @end

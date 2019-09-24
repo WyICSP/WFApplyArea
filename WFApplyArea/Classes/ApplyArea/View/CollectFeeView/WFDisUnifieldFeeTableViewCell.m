@@ -99,5 +99,11 @@ static NSString *const cellId = @"WFDisUnifieldFeeTableViewCell";
     [self.moneyTF removeObserver:self forKeyPath:@"text"];
 }
 
+- (IBAction)clickSelectBtn:(UIButton *)sender {
+    sender.selected = !sender.selected;
+    !self.clickSelectItemBlock ? : self.clickSelectItemBlock(sender.selected);
+}
+
+
 
 @end

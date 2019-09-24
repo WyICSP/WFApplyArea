@@ -14,6 +14,7 @@
 #import "UITableView+YFExtension.h"
 #import "WFApplyAreaDataTool.h"
 #import "WFBillMethodModel.h"
+#import "WFUpgradeAreaData.h"
 #import "NSString+Regular.h"
 #import "SKSafeObject.h"
 #import "UIView+Frame.h"
@@ -83,7 +84,7 @@
 #pragma mark 获取计费方式
 - (void)getBillMethod {
     NSMutableDictionary *params = [NSMutableDictionary dictionary];
-    [params safeSetObject:self.groupId forKey:@"groupId"];
+    [params safeSetObject:self.type == WFBilleMethodUpgradeType ?  @"" : self.groupId forKey:@"groupId"];
     @weakify(self)
     [WFApplyAreaDataTool getBillingMethodWithParams:params resultBlock:^(WFBillMethodModel * _Nonnull models) {
         @strongify(self)
@@ -144,7 +145,7 @@
     [YFToast showMessage:@"修改成功" inView:self.view];
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         [YFNotificationCenter postNotificationName:@"reloadDataKeys" object:nil];
-        [self.navigationController popToViewController:[self.navigationController.viewControllers objectAtIndex:2] animated:YES];
+        [self goBack];
     });
 }
 
@@ -415,8 +416,11 @@
         }
     }else if (self.type == WFBilleMethodUpgradeType) {
         //升级
+        //保存收费方式数据
+        [WFUpgradeAreaData shareInstance].billingPlanIds = [self billingPlanIds];
+        //去编辑分成设置
         WFDividIntoSetViewController *set = [[WFDividIntoSetViewController alloc] init];
-        set.sourceType(WFDividIntoSetUpgradeType);
+        set.sourceType(WFDividIntoSetUpgradeType).groupIds(self.groupId);
         [self.navigationController pushViewController:set animated:YES];
     }
 }
@@ -585,7 +589,7 @@
     if (self.type == WFBilleMethodUpdateType) {
         title = @"确认修改";
     }else if (self.type == WFBilleMethodUpgradeType) {
-        title = @"下一步";
+        title = @"下一步(5/6)";
     }else {
         title = @"完成";
     }

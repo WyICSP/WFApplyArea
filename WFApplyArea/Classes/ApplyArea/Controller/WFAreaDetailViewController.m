@@ -66,6 +66,22 @@
     [self setUI];
 }
 
+- (void)viewWillDisappear:(BOOL)animated{
+    [super viewWillDisappear:animated];
+    // 开启
+    if ([self.navigationController respondsToSelector:@selector(interactivePopGestureRecognizer)]) {
+        self.navigationController.interactivePopGestureRecognizer.enabled = YES;
+    }
+}
+
+- (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+    // 禁用返回手势
+    if ([self.navigationController respondsToSelector:@selector(interactivePopGestureRecognizer)] && self.isUpgradeType) {
+        self.navigationController.interactivePopGestureRecognizer.enabled = NO;
+    }
+}
+
 - (void)dealloc {
     [YFNotificationCenter removeObserver:self name:@"reloadDataKeys" object:nil];
 }
@@ -371,6 +387,14 @@
 
 - (void)deleteSuccess {
     [self getAreaDetailMsg];
+}
+
+- (void)goBack {
+    if (self.isUpgradeType) {
+        [self.navigationController popToRootViewControllerAnimated:YES];
+    }else {
+        [self.navigationController popViewControllerAnimated:YES];
+    }
 }
 
 #pragma mark UITableViewDelegate,UITableViewDataSource

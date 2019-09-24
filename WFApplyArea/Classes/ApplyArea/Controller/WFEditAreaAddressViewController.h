@@ -22,9 +22,12 @@ typedef NS_ENUM(NSUInteger, WFEditAddressJumpType) {
 @property (nonatomic, strong) WFAreaDetailModel *models;
 /**来源 type*/
 @property (nonatomic, assign) WFEditAddressJumpType type;
+/**片区 id*/
+@property (nonatomic, copy) NSString *groupId;
 
 @property (nonatomic, copy) WFEditAreaAddressViewController *(^dataModels)(WFAreaDetailModel *models);
 @property (nonatomic, copy) WFEditAreaAddressViewController *(^sourceType)(WFEditAddressJumpType type);
+@property (nonatomic, copy) WFEditAreaAddressViewController *(^areaGroupId)(NSString *groupId);
 @end
 
 NS_ASSUME_NONNULL_END

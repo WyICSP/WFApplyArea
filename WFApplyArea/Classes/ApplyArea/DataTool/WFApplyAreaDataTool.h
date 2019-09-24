@@ -21,6 +21,8 @@
 @class WFProfitTableModel;
 @class WFAreaDetailModel;
 @class WFGroupVipUserModel;
+@class WFUpgradeAreaModel;
+@class WFUpgradeAreaDiscountModel;
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -290,6 +292,44 @@ NS_ASSUME_NONNULL_BEGIN
 + (void)deleteVipChargeFeeWithParams:(NSDictionary *)params
                          resultBlock:(void(^)(void))resultBlock;
 
+
+#pragma mark 升级片区相关接口
+/**
+ 获取老片区信息接口
+
+ @param params 参数
+ @param resultBlock 返回结果
+ */
++ (void)getOldAreaMsgWithParams:(NSDictionary *)params
+                    resultBlock:(void(^)(WFUpgradeAreaModel *models))resultBlock;
+
+/**
+ 获取老片区是否有月卡套餐
+
+ @param params 参数
+ @param resultBlock 返回结果
+ */
++ (void)getOldAreaMonthTaoCanWithParams:(NSDictionary *)params
+                            resultBlock:(void(^)(BOOL isExist))resultBlock;
+
+/**
+ 获取老片区是否有优惠套餐
+
+ @param params 参数
+ @param resultBlock 返回
+ */
++ (void)getOldAreaDiscountFeeWithParams:(NSDictionary *)params
+                            resultBlock:(void(^)(WFUpgradeAreaDiscountModel *oldModels))resultBlock;
+
+
+/**
+ 老片区升级新片区
+
+ @param params 参数
+ @param resultBlock 返回结果
+ */
++ (void)upgradeOldAreaToNewAreaWithParams:(NSDictionary *)params
+                              resultBlock:(void(^)(void))resultBlock;
 
 @end
 

@@ -15,6 +15,7 @@
 #import "WFDefaultChargeFeeModel.h"
 #import "WFApplyAreaDataTool.h"
 #import "WFAreaDetailModel.h"
+#import "WFUpgradeAreaData.h"
 
 #import "NSString+Regular.h"
 #import "UIView+Frame.h"
@@ -82,7 +83,7 @@
     self.models = models;
     
     for (WFDefaultChargeFeeModel *itemModel in self.models) {
-        if (self.type == WFUpdateSingleFeeApplyType) {
+        if (self.type == WFUpdateSingleFeeApplyType || self.type == WFUpdateSingleFeeUpgradeType) {
             //获取默认的时候默认选中第一个
             if (itemModel.chargeType == 0) {
                 //统一收费
@@ -143,7 +144,7 @@
     [YFToast showMessage:@"修改成功" inView:self.view];
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         [YFNotificationCenter postNotificationName:@"reloadDataKeys" object:nil];
-        [self.navigationController popToViewController:[self.navigationController.viewControllers objectAtIndex:2] animated:YES];
+        [self goBack];
     });
 }
 
@@ -237,9 +238,12 @@
         //编辑单次收费
         [self updateSingleFee];
     }else if (self.type == WFUpdateSingleFeeUpgradeType) {
-        //升级片区 填写多次收费
+        //升级片区
+        //保存数据
+        [WFUpgradeAreaData shareInstance].singleCharge = [self singleCharge];
+        //去填写多次收费
         WFManyTimeFeeViewController *manyTime = [[WFManyTimeFeeViewController alloc] init];
-        manyTime.sourceType(WFUpdateManyTimeFeeUpgradeType);
+        manyTime.sourceType(WFUpdateManyTimeFeeUpgradeType).groupIds(self.groupId);
         [self.navigationController pushViewController:manyTime animated:YES];
     }else {
         //获取默认单次收费
@@ -412,7 +416,7 @@
     if (self.type == WFUpdateSingleFeeUpdateType) {
         title = @"确认修改";
     }else if (self.type == WFUpdateSingleFeeUpgradeType) {
-        title = @"下一步";
+        title = @"下一步(2/6)";
     }else {
         title = @"完成";
     }

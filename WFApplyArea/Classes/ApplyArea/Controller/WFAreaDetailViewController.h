@@ -18,7 +18,8 @@ typedef NS_ENUM(NSUInteger, WFAreaDetailShowType) {
 
 typedef NS_ENUM(NSInteger, WFAreaDetailJumpType) {
     WFAreaDetailJumpAreaType = 0,//片区
-    WFAreaDetailJumpPileType//我的充电桩
+    WFAreaDetailJumpPileType,//我的充电桩
+    WFAreaDetailJumpUpgradeType //升级片区跳转
 };
 
 @interface WFAreaDetailViewController : YFBaseViewController
@@ -26,6 +27,8 @@ typedef NS_ENUM(NSInteger, WFAreaDetailJumpType) {
 @property (nonatomic, assign) WFAreaDetailShowType showType;
 /**跳转Type*/
 @property (nonatomic, assign) WFAreaDetailJumpType jumpType;
+/**升级片区*/
+@property (nonatomic, assign) BOOL isUpgradeType;
 /**片区Id*/
 @property (nonatomic, copy) NSString *groupId;
 @end
