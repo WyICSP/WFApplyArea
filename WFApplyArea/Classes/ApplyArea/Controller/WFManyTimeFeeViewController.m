@@ -65,7 +65,7 @@
             @weakify(self)
             [self getOldAreaMonthTaoCanWithSuccessBlock:^(BOOL isExist) {
                 @strongify(self)
-                self.isExist = isExist;
+                self.isExist = [WFUpgradeAreaData shareInstance].isExistence = isExist;
                 //获取默认数据
                 [self getManyTimesDefalutFee];
             }];

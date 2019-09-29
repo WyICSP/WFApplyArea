@@ -10,6 +10,7 @@
 #import "WFBilleMethodCollectionViewCell.h"
 #import "WFBilleMethodCollectionReusableView.h"
 #import "WFBillMethodModel.h"
+#import "WFUpgradeAreaData.h"
 #import "UIView+Frame.h"
 #import "YFKeyWindow.h"
 #import "YFToast.h"
@@ -75,6 +76,10 @@ static NSString *const cellId = @"WFBilleMethodTimeTableViewCell";
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
     //将当前的转态置为相反转态
     WFBillingTimeMethodModel *model = self.models[indexPath.row];
+    //升级片区 如果是充满自停, 老片区拥有多次收费 或者优惠收费 必须选择充满自停
+    if (model.isDefault == 2 && [WFUpgradeAreaData shareInstance].isExistence && model.isSelect) {
+        return;
+    }
     model.isSelect = !model.isSelect;
     //选中的数据计数
    NSInteger selectNum = 0;

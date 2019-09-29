@@ -39,13 +39,12 @@
 ////趣商城 链接 测试
 //#define H5_SHOP_URL         @"http://39.106.62.16/"
 
-//
 ////老接口域名 正式
 //#define HOST_URL          @"http://yzcapp.jx9n.com/api/"
 ////新接口域名 正式
 //#define NEW_HOST_URL      @"https://prod.jx9n.com/"
 ////合作版 H5 网页
-//#define H5_HOST           @"https://prod.h5.jx9n.com/yzc_app/"
+//#define H5_HOST           @"https://prod.h5.jx9n.com/yzc_business_h5/"
 //////合作版商城
 //#define H5_SHOP_URL       @"http://prod.h5.jx9n.com/yzc-union-fe/"
 

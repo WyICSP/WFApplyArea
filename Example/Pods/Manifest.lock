@@ -23,7 +23,7 @@ PODS:
   - SDWebImage/Core (5.1.0)
   - SVProgressHUD (2.2.5)
   - TZImagePickerController (3.2.1)
-  - WFApplyArea (0.3.6):
+  - WFApplyArea (0.3.7):
     - IQKeyboardManager
     - MJRefresh
     - TZImagePickerController
@@ -31,13 +31,13 @@ PODS:
     - WFKitLogin
     - WFKitMain
     - WKFunComponents
-  - WFBasics (0.2.4):
+  - WFBasics (0.2.5):
     - AFNetworking
     - SVProgressHUD
     - WYAutoLayout
   - WFHomeAddress (0.1.4):
     - MJExtension
-  - WFKitLogin (0.3.0):
+  - WFKitLogin (0.3.5):
     - dsBridge
     - MJExtension
     - MJRefresh
@@ -45,7 +45,7 @@ PODS:
     - WFHomeAddress
     - WFKitMain
     - WKFunComponents
-  - WFKitMain (0.1.4):
+  - WFKitMain (0.1.6):
     - WFBasics
   - WKFunComponents (0.1.0)
   - WYAutoLayout (1.0.1)
@@ -84,11 +84,11 @@ SPEC CHECKSUMS:
   SDWebImage: fb387001955223213dde14bc08c8b73f371f8d8f
   SVProgressHUD: 1428aafac632c1f86f62aa4243ec12008d7a51d6
   TZImagePickerController: bf4c57b98d8707fce41ea6be872414a71c7a8c9d
-  WFApplyArea: 206a3d8ea7d51767d725554e1c196eb8f54d2aac
-  WFBasics: 353ddd9b81f6ffa4185ebd8ffb2bf3e7a9a72e77
+  WFApplyArea: 7c1c0f8eef9d86a65a67ab9234051c63f9ff7d71
+  WFBasics: 8080166577974ed22ec1b3d43c2835eac09de89b
   WFHomeAddress: 5f910d0370e0b8b3c62f5b3cc5cd03a800b84125
-  WFKitLogin: b3aedff89d49915a0dc4fc0399c2f36cb82152d6
-  WFKitMain: b9ce18e2cbcae63b919b40ced3adbe0d2ed5591b
+  WFKitLogin: c255bb52d3d86c3b9249ff1edef217bea25a98e6
+  WFKitMain: 848dc7678e716b4d84b62270b81dfb9ddf51a6e4
   WKFunComponents: a4cde3e92b1c5841be91a9eefd7968c8ce903f73
   WYAutoLayout: 3cb136ddc2efa9faaecf15876e6a9b2a6fd7c6cb
 

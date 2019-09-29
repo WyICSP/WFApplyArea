@@ -67,7 +67,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, assign) CGFloat elec;
 /**是否选中*/
 @property (nonatomic, assign) BOOL isSelect;
-/**是否是充满自停*/
+/**是否是充满自停 2 是充满自停*/
 @property (nonatomic, assign) NSInteger isDefault;
 @end
 

@@ -18,6 +18,9 @@ NS_ASSUME_NONNULL_BEGIN
  */
 @property (nonatomic, copy) NSString *groupId;
 
+///  是否存在单次收费或者多次收费
+@property (nonatomic, assign) BOOL isExistence;
+
 /**
  地址信息
  */

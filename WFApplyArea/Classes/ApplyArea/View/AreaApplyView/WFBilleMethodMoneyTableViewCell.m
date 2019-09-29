@@ -10,6 +10,7 @@
 #import "WFBilleMethodCollectionViewCell.h"
 #import "UITextField+RYNumberKeyboard.h"
 #import "WFBillMethodModel.h"
+#import "WFUpgradeAreaData.h"
 #import "UIView+Frame.h"
 #import "YFKeyWindow.h"
 #import "YFToast.h"
@@ -127,6 +128,10 @@ static NSString *const cellId = @"WFBilleMethodMoneyTableViewCell";
         //自定义金额
         [self showCustusmAction];
     }else {
+        //升级片区 如果是充满自停, 老片区拥有多次收费 或者优惠收费 必须选择充满自停
+        if (model.isDefault == 2 && [WFUpgradeAreaData shareInstance].isExistence && model.isSelect) {
+            return;
+        }
         //选中其他的数据
         model.isSelect = !model.isSelect;
         //选中的数据计数

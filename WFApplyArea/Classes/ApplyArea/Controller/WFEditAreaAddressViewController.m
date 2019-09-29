@@ -93,7 +93,7 @@
 }
 
 /**
- 获取收费信息
+ 获取收费信息 
  */
 - (void)getChargeMthod {
     @weakify(self)
@@ -112,6 +112,29 @@
             self.chargeModelId = model.chargeModelId;
         }
     }
+}
+
+/// 验证片区名是否可用
+- (void)verificationAreaName {
+    NSMutableDictionary *params = [NSMutableDictionary dictionary];
+    [params safeSetObject:self.groupId forKey:@"groupId"];
+    [params safeSetObject:self.areaNameTF.text forKey:@"name"];
+    @weakify(self)
+    [WFApplyAreaDataTool verificationAreaNameWithParams:params resultBlock:^{
+        @strongify(self)
+        [self goSetFee];
+    }];
+}
+
+/// 名称可用 去设置收费
+- (void)goSetFee {
+    //升级片区 保存数据
+    [WFUpgradeAreaData shareInstance].addressMsg = [self addressMsg];
+    //去选择单次收费
+    WFSingleFeeViewController *single = [[WFSingleFeeViewController alloc] init];
+    single.sType(WFUpdateSingleFeeUpgradeType).dChargingModePlay(self.chargingModePlay).
+    dChargingModelId(self.chargeModelId).groupIds(self.groupId);
+    [self.navigationController pushViewController:single animated:YES];
 }
 
 /**
@@ -140,7 +163,7 @@
     if (self.areaId.length == 0) {
         alertMsg = @"请选择省市区";
     }else if (self.detailAddressTF.text.length == 0) {
-        alertMsg = @"详细地址，例：16号楼5层501室";
+        alertMsg = @"请输入详细地址";
     }else if (self.areaNameTF.text.length == 0) {
         alertMsg = @"请输入市+区+小区名";
     }
@@ -154,13 +177,8 @@
         //修改片区信息
         [self submitAddressData];
     }else {
-        //升级片区 保存数据
-        [WFUpgradeAreaData shareInstance].addressMsg = [self addressMsg];
-        //去选择单次收费
-        WFSingleFeeViewController *single = [[WFSingleFeeViewController alloc] init];
-        single.sType(WFUpdateSingleFeeUpgradeType).dChargingModePlay(self.chargingModePlay).
-        dChargingModelId(self.chargeModelId).groupIds(self.groupId);
-        [self.navigationController pushViewController:single animated:YES];
+        //升级片区
+        [self verificationAreaName];
     }
 }
 

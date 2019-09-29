@@ -200,7 +200,7 @@
     [WFApplyAreaDataTool getOldAreaDiscountFeeWithParams:params resultBlock:^(WFUpgradeAreaDiscountModel * _Nonnull oldModels) {
         @strongify(self)
         self.oldAreaModel = oldModels;
-        self.isSelect = oldModels.isExist;
+        self.isSelect = [WFUpgradeAreaData shareInstance].isExistence = oldModels.isExist;
         [self requestVipDataSuccessWith:oldModels.vipMemberList];
     }];
 }

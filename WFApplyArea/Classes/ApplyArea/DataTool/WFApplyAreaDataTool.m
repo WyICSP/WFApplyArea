@@ -484,4 +484,19 @@
     }];
 }
 
++ (void)verificationAreaNameWithParams:(NSDictionary *)params
+                           resultBlock:(void(^)(void))resultBlock {
+    //接口地址
+    NSString *path = [NSString stringWithFormat:@"%@app-partner-group/v1/update/charging/group/check/charging/group/name",NEW_HOST_URL];
+    [WKRequest getWithURLString:path parameters:params isShowHud:YES success:^(WKBaseModel *baseModel) {
+        if (CODE_ZERO) {
+            resultBlock();
+        }else {
+            [YFToast showMessage:baseModel.message inView:[[YFKeyWindow shareInstance] getCurrentVC].view];
+        }
+    } failure:^(NSError *error) {
+        
+    }];
+}
+
 @end

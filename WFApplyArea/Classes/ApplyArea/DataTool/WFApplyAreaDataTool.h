@@ -331,6 +331,12 @@ NS_ASSUME_NONNULL_BEGIN
 + (void)upgradeOldAreaToNewAreaWithParams:(NSDictionary *)params
                               resultBlock:(void(^)(void))resultBlock;
 
+/// 验证老片区名是否重复
+/// @param params 参数
+/// @param resultBlock 返回结果
++ (void)verificationAreaNameWithParams:(NSDictionary *)params
+                           resultBlock:(void(^)(void))resultBlock;
+
 @end
 
 NS_ASSUME_NONNULL_END

@@ -31,6 +31,7 @@ static dispatch_once_t onceToken;
     self.billingPlanIds = nil;
     self.partnerPropInfos = nil;
     self.groupId = nil;
+    self.isExistence = nil;
 }
 
 

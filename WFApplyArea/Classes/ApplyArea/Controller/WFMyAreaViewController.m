@@ -20,6 +20,8 @@
 #import "UserData.h"
 #import "WKHelp.h"
 
+#import "WFEditAreaAddressViewController.h"
+
 @interface WFMyAreaViewController ()<UITableViewDelegate,UITableViewDataSource>
 /**tableView*/
 @property (nonatomic, strong, nullable) UITableView *tableView;
@@ -51,7 +53,7 @@
     [self.view addSubview:self.applyBtn];
 }
 
-/** 5
+/**
  获取我的片区数据
  */
 - (void)getAreaList {

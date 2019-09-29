@@ -93,7 +93,7 @@ static NSString *const cellId = @"WFSingleFeeTableViewCell";
         
     }else if (textField == self.countTF) {
         //次数不能输入0
-        if (textField.text.integerValue == 0) {textField.text = @"";}
+        if (textField.text.integerValue == 0 || [textField.text containsString:@"."]) {textField.text = @"";}
         
         self.model.unifiedTime = textField.text.integerValue;
     }
