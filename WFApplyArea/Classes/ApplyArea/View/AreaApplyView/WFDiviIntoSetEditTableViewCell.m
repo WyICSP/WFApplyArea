@@ -67,9 +67,9 @@ static NSString *const cellId = @"WFDiviIntoSetEditTableViewCell";
         if (!position) {
             if (textField.text.length > 6) {
                 textField.text = [textField.text substringToIndex:6];
-                self.model.name = textField.text;
              }
         }
+        self.model.name = textField.text;
     }else if (textField == self.phoneTF) {
         //电话
         if (textField == self.phoneTF && textField.text.length > 11)
