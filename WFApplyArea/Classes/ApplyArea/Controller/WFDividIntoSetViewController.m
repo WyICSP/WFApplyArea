@@ -30,6 +30,8 @@
 @property (nonatomic, strong, nullable) WFMyAreaDividIntoSetModel *comModel;
 /**合伙人占比*/
 @property (nonatomic, strong, nullable) WFMyAreaDividIntoSetModel *parModel;
+/// 合伙人显示在第几个区域
+@property (nonatomic, assign) NSInteger parIndexl;
 @end
 
 @implementation WFDividIntoSetViewController
@@ -185,7 +187,7 @@
     }else {
         selectModel.rate = present;
         //刷新合伙人那一行
-        [self.tableView refreshTableViewWithSection:0 indexPath:2];
+        [self.tableView refreshTableViewWithSection:0 indexPath:self.parIndexl];
     }
 }
 
@@ -331,7 +333,6 @@
     }
     WFDiviIntoSetEditTableViewCell *cell = [WFDiviIntoSetEditTableViewCell cellWithTableView:tableView indexPath:indexPath dataCount:self.models.count+2];
     [cell bindToCellWithModel:self.models[indexPath.row-2] maxPresent:self.parModel];
-    
     WS(weakSelf)
     cell.deleteItemBlock = ^{
         //删除数据
@@ -428,8 +429,11 @@
  @return parModel
  */
 - (WFMyAreaDividIntoSetModel *)parModel {
-    for (WFMyAreaDividIntoSetModel *cModel in self.models) {
+    
+    for (int i = 0; i < self.models.count; i ++) {
+        WFMyAreaDividIntoSetModel *cModel = self.models[i];
         if (cModel.chargePersonFlag == 1) {
+            self.parIndexl = i + 2;
             return cModel;
         }
     }

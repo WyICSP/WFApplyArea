@@ -61,11 +61,15 @@ static NSString *const cellId = @"WFDiviIntoSetEditTableViewCell";
 
 - (IBAction)textFieldDidChange:(UITextField *)textField {
     if (textField  == self.nameTF) {
-        //姓名
-        if (textField == self.nameTF && textField.text.length > 6)
-            textField.text = [textField.text substringWithRange:NSMakeRange(0, 6)];
-        
-        self.model.name = textField.text;
+        UITextRange *selectedRange = [textField markedTextRange];
+        UITextPosition *position = [textField positionFromPosition:selectedRange.start offset:0];
+        // 没有高亮选择的字，则对已输入的文字进行字数统计和限制
+        if (!position) {
+            if (textField.text.length > 6) {
+                textField.text = [textField.text substringToIndex:6];
+                self.model.name = textField.text;
+             }
+        }
     }else if (textField == self.phoneTF) {
         //电话
         if (textField == self.phoneTF && textField.text.length > 11)
