@@ -117,6 +117,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, copy) NSString *expireTime;
 /**vipId*/
 @property (nonatomic, copy) NSString *vipId;
+/// 是否过期
+@property (nonatomic, assign) BOOL isValid;
 @end
 
 

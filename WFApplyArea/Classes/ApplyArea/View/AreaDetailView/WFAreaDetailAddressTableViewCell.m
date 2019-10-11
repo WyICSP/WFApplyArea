@@ -41,7 +41,7 @@ static NSString *const cellId = @"WFAreaDetailAddressTableViewCell";
     self.editBtn.hidden = !model.isUpdate;
     //0：申请中 1：申请通过 2：申请驳回
     if (model.auditStatus == 0) {
-        self.status.text = @"审核中";
+        self.status.text = @"使用中";
     }else if (model.auditStatus == 1) {
         self.status.text = @"审核通过";
     }else {

@@ -25,7 +25,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property (weak, nonatomic) IBOutlet UILabel *time;
 /**编辑按钮*/
 @property (weak, nonatomic) IBOutlet UIButton *editBtn;
-
+/// 是否失效
+@property (weak, nonatomic) IBOutlet UIImageView *invalidImg;
 
 /**背景*/
 @property (weak, nonatomic) IBOutlet UIView *contentsView;
