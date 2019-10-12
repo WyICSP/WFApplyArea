@@ -79,8 +79,8 @@ static NSString *const cellId = @"WFSinglePowerTableViewCell";
 
 - (IBAction)textFieldDidChange:(UITextField *)textField {
     if (textField == self.costPriceLbl) {
-        if (textField.text.doubleValue > 99999)
-            textField.text = [textField.text substringWithRange:NSMakeRange(0, 5)];
+        if (textField.text.doubleValue > 10)
+            textField.text = @"9.99";
         
         //发现包含小数点，并且小数点在倒数第三位就，如果再多就截掉。
         NSInteger loca = [textField.text rangeOfString:@"."].location;
@@ -96,8 +96,8 @@ static NSString *const cellId = @"WFSinglePowerTableViewCell";
         }
         
     }else if (textField == self.salePriceLbl) {
-        if (textField.text.doubleValue > 99999)
-            textField.text = [textField.text substringWithRange:NSMakeRange(0, 5)];
+        if (textField.text.doubleValue > 10)
+            textField.text = @"9.99";
         
         //发现包含小数点，并且小数点在倒数第三位就，如果再多就截掉。
         NSInteger loca = [textField.text rangeOfString:@"."].location;

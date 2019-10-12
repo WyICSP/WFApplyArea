@@ -40,7 +40,7 @@ static NSString *const cellId = @"WFAreaVipUsersListTableViewCell";
     self.totalCount.text = [NSString stringWithFormat:@"总次数: %ld",(long)model.giveCount];
     self.surplusCount.text = [NSString stringWithFormat:@"%ld",(long)model.remainCount];
     self.time.text = [NSString stringWithFormat:@"到期时间: %@",model.expireTime];
-    self.invalidImg.hidden = !model.isValid;
+    self.invalidImg.hidden = model.isValid;
 }
 
 - (IBAction)gotoEditBtn:(id)sender {
