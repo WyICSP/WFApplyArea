@@ -9,6 +9,7 @@
 #import "WFApplyAreaPublicAPI.h"
 #import "WFMyAreaViewController.h"
 #import "WFMyChargePileViewController.h"
+#import "WFShareHelpTool.h"
 
 @implementation WFApplyAreaPublicAPI
 

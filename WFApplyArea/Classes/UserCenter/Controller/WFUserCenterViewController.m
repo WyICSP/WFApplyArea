@@ -63,7 +63,7 @@
     //注册通知：监听充电时间变化
     [YFNotificationCenter addObserver:self selector:@selector(reloadWebData) name:@"reloadUserCnter" object:nil];
     //拼接 url
-    self.urlString = [NSString stringWithFormat:@"%@page/menu.html?uuid=%@&appVersion=v%@",H5_HOST,USER_UUID,APP_VERSION];
+    self.urlString = [NSString stringWithFormat:@"%@yzc_business_h5/page/menu.html?uuid=%@&appVersion=v%@",H5_HOST,USER_UUID,APP_VERSION];
     //添加 webview
     [self.view addSubview:self.dwebview];
     //添加进度条
@@ -120,7 +120,7 @@
  */
 - (void)reloadWebData {
     //url
-    self.urlString = [NSString stringWithFormat:@"%@page/menu.html?uuid=%@&appVersion=v%@",H5_HOST,USER_UUID,APP_VERSION];
+    self.urlString = [NSString stringWithFormat:@"%@yzc_business_h5/page/menu.html?uuid=%@&appVersion=v%@",H5_HOST,USER_UUID,APP_VERSION];
     //重新加载
     [self.dwebview loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:self.urlString]]];
 }

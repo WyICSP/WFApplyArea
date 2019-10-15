@@ -106,7 +106,7 @@
 // */
 //- (void)reloadWebData {
 //    //url
-//    self.urlString = [NSString stringWithFormat:@"%@page/menu.html?uuid=%@&appVersion=v%@",H5_HOST,USER_UUID,APP_VERSION];
+//    self.urlString = [NSString stringWithFormat:@"%@yzc_business_h5/page/menu.html?uuid=%@&appVersion=v%@",H5_HOST,USER_UUID,APP_VERSION];
 //    //重新加载
 //    [self.dwebview loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:self.urlString]]];
 //}

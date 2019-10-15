@@ -1,6 +1,6 @@
 {
   "name": "WFApplyArea",
-  "version": "0.4.2",
+  "version": "0.4.4",
   "summary": "WFApplyArea申请片区",
   "description": "WFApplyArea申请片区的组件,合伙人使用的功能",
   "homepage": "https://github.com/WyICSP/WFApplyArea",
@@ -13,7 +13,7 @@
   },
   "source": {
     "git": "https://github.com/WyICSP/WFApplyArea.git",
-    "tag": "0.4.2"
+    "tag": "0.4.4"
   },
   "platforms": {
     "ios": "9.0"

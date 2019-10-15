@@ -1,11 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
-    <device id="retina5_5" orientation="portrait">
-        <adaptation id="fullscreen"/>
-    </device>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="15400" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina5_5" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15404"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -16,14 +14,14 @@
             <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
-                <rect key="frame" x="0.0" y="0.0" width="375" height="43.666666666666664"/>
+                <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="FWk-f1-Tmp">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="43.666666666666664"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="44.666666666666664"/>
                         <subviews>
                             <button opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="c1z-mm-wpa">
-                                <rect key="frame" x="0.0" y="0.0" width="42" height="43.666666666666664"/>
+                                <rect key="frame" x="0.0" y="0.0" width="42" height="44.666666666666664"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="42" id="NhT-QF-bkC">
                                         <userDefinedRuntimeAttributes>
@@ -36,7 +34,7 @@
                                 <state key="selected" image="WFApplyArea.bundle/selectLogo"/>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="包半年" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QWO-uf-N32">
-                                <rect key="frame" x="42" y="13.333333333333336" width="45" height="17"/>
+                                <rect key="frame" x="42" y="13.666666666666664" width="45" height="17"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="45" id="sET-W2-Jpo">
                                         <userDefinedRuntimeAttributes>
@@ -52,7 +50,7 @@
                                 </userDefinedRuntimeAttributes>
                             </label>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="o3Z-pF-k25">
-                                <rect key="frame" x="97" y="7.3333333333333321" width="200" height="28.999999999999996"/>
+                                <rect key="frame" x="97" y="7.6666666666666679" width="200" height="29.000000000000004"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="d2t-sn-WGv">
                                         <rect key="frame" x="0.0" y="0.0" width="73.333333333333329" height="29"/>
@@ -157,7 +155,7 @@
                 </subviews>
                 <constraints>
                     <constraint firstAttribute="trailing" secondItem="FWk-f1-Tmp" secondAttribute="trailing" id="0mE-i8-5yU"/>
-                    <constraint firstAttribute="bottom" secondItem="FWk-f1-Tmp" secondAttribute="bottom" id="HdO-Yb-caC"/>
+                    <constraint firstAttribute="bottom" secondItem="FWk-f1-Tmp" secondAttribute="bottom" constant="-0.5" id="HdO-Yb-caC"/>
                     <constraint firstItem="FWk-f1-Tmp" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="M4l-hE-IPq"/>
                     <constraint firstItem="FWk-f1-Tmp" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="nGz-bl-YtW"/>
                 </constraints>
