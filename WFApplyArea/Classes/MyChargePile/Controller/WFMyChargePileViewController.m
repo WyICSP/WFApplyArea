@@ -87,6 +87,8 @@
 - (void)rightImageButtonClick:(UIButton *)sender {
     sender.selected = !sender.selected;
     self.myType = sender.selected ? 1 : 0;
+    // 重置数据
+    [self resetData];
     //当前文件的 bundle
     NSBundle *currentBundler = [NSBundle bundleForClass:[self class]];
     NSString *normalImg = [NSString getImagePathWithCurrentBundler:currentBundler PhotoName:@"screen_all" bundlerName:@"WFApplyArea.bundle"];
@@ -95,6 +97,14 @@
     [self.rightImageBtn setImage:[UIImage imageWithContentsOfFile:select_Img] forState:UIControlStateSelected];
  
     [self getMyChargePile];
+}
+
+/// 重置数据
+- (void)resetData {
+    // 设置默认不选中 搜索
+    self.isNomSearch =  self.isabmSearch = self.isNoInsSearch = NO;
+    // 重置搜索框
+    self.numSearchKey = self.abmSearchKey = self.noInsSearchKey = self.searchView.textField.text = @"";
 }
 
 /**
