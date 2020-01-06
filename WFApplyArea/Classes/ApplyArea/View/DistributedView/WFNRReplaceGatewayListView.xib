@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="15400" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15404"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="WFNRReplaceGatewayListView">
+            <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bac-H2-emE">
+                    <rect key="frame" x="0.0" y="428" width="414" height="468"/>
+                    <subviews>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="请选择需要替换的网关" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4QS-NW-UVd">
+                            <rect key="frame" x="115" y="16" width="184" height="22"/>
+                            <fontDescription key="fontDescription" type="boldSystem" pointSize="18"/>
+                            <color key="textColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="*温馨提示：如果需要替换多个网关，请逐一替换" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zfk-Pw-Tfa">
+                            <rect key="frame" x="75.5" y="63" width="263" height="14.5"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                            <color key="textColor" red="0.96862745100000003" green="0.52156862749999999" blue="0.33725490200000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="JEz-aG-iU2">
+                            <rect key="frame" x="0.0" y="102.5" width="414" height="365.5"/>
+                            <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        </tableView>
+                    </subviews>
+                    <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                    <constraints>
+                        <constraint firstItem="zfk-Pw-Tfa" firstAttribute="centerX" secondItem="4QS-NW-UVd" secondAttribute="centerX" id="03Q-2C-wHM"/>
+                        <constraint firstItem="4QS-NW-UVd" firstAttribute="centerX" secondItem="bac-H2-emE" secondAttribute="centerX" id="J79-PV-p0Q"/>
+                        <constraint firstAttribute="height" constant="468" id="Ptz-Q0-sml"/>
+                        <constraint firstAttribute="bottom" secondItem="JEz-aG-iU2" secondAttribute="bottom" id="RSz-DN-SHQ"/>
+                        <constraint firstItem="4QS-NW-UVd" firstAttribute="top" secondItem="bac-H2-emE" secondAttribute="top" constant="16" id="WDj-of-6Mc"/>
+                        <constraint firstAttribute="trailing" secondItem="JEz-aG-iU2" secondAttribute="trailing" id="XVn-51-ny0"/>
+                        <constraint firstItem="JEz-aG-iU2" firstAttribute="top" secondItem="zfk-Pw-Tfa" secondAttribute="bottom" constant="25" id="bLH-lh-TqK"/>
+                        <constraint firstItem="JEz-aG-iU2" firstAttribute="leading" secondItem="bac-H2-emE" secondAttribute="leading" id="eGN-1V-3qr"/>
+                        <constraint firstItem="zfk-Pw-Tfa" firstAttribute="top" secondItem="4QS-NW-UVd" secondAttribute="bottom" constant="25" id="utV-Py-oNq"/>
+                    </constraints>
+                </view>
+            </subviews>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <constraints>
+                <constraint firstItem="bac-H2-emE" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="7mE-CB-kCZ"/>
+                <constraint firstAttribute="trailing" secondItem="bac-H2-emE" secondAttribute="trailing" id="7sr-rH-i3p"/>
+                <constraint firstAttribute="bottom" secondItem="bac-H2-emE" secondAttribute="bottom" id="VhH-MT-1Va"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <connections>
+                <outlet property="contentsView" destination="bac-H2-emE" id="Jwp-lM-weW"/>
+                <outlet property="tableView" destination="JEz-aG-iU2" id="bLo-kf-sfN"/>
+            </connections>
+            <point key="canvasLocation" x="137.68115942028987" y="110.49107142857143"/>
+        </view>
+    </objects>
+</document>

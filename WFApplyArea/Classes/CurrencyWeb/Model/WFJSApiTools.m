@@ -119,12 +119,16 @@
     completionHandler(msg,YES);
 }
 
-//升级片区
+///升级片区
 - (void)upgradeArea:(NSString *)msg
 {
     [WFUserCenterPublicAPI upgradeAreaWithGroupId:msg];
 }
 
+- (void)changePassword:(NSString *)msg:(JSCallback) completionHandler {
+    [WFUserCenterPublicAPI changePassword];
+    completionHandler(msg,YES);
+}
 
 
 @end

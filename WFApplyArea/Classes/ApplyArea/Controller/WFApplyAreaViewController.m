@@ -10,11 +10,14 @@
 #import "WFDividIntoSetViewController.h"
 #import "WFApplyAreaItemTableViewCell.h"
 #import "WFApplyAddressTableViewCell.h"
+#import "WFApplyAreaOtherTableViewCell.h"
+#import <IQKeyboardManager/IQKeyboardManager.h>
 #import "WFBilleMethodViewController.h"
 #import "WFDiscountFeeViewController.h"
 #import "WFManyTimeFeeViewController.h"
 #import "WFSingleFeeViewController.h"
 #import "WFDefaultChargeFeeModel.h"
+#import "WFApplyAreaOtherConfigModel.h"
 #import "WFApplyAreaFeeExplanView.h"
 #import "WFApplyAreaHeadView.h"
 #import "WFApplyAreaFooterView.h"
@@ -23,11 +26,9 @@
 #import "WFPowerIntervalModel.h"
 #import "WFBillMethodModel.h"
 #import "WFMyAreaListModel.h"
-#import "NSString+Regular.h"
-#import "SKSafeObject.h"
-#import "WFPopTool.h"
-#import "YFToast.h"
-#import "WKHelp.h"
+#import "WKConfig.h"
+
+#import "WFUserCenterPublicAPI.H"
 
 @interface WFApplyAreaViewController ()<UITableViewDelegate,UITableViewDataSource>
 /**scrollView*/
@@ -52,6 +53,8 @@
 @property (nonatomic, strong, nullable) WFDefaultManyTimesModel *manyTimesModel;
 /**单次收费数据*/
 @property (nonatomic, strong, nullable) NSArray <WFDefaultChargeFeeModel *> *singleFeeData;
+/// 其他设置配置
+@property (nonatomic, strong, nullable) WFApplyAreaOtherConfigModel *otherConfigModel;
 @end
 
 @implementation WFApplyAreaViewController
@@ -62,11 +65,24 @@
     [self setUI];
 }
 
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    [[IQKeyboardManager sharedManager] setEnable:NO];
+}
+
+- (void)viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
+    [[IQKeyboardManager sharedManager] setEnable:YES];
+}
+
 #pragma mark 私有方法
 - (void)setUI {
     self.title = @"申请片区";
-    self.headTitleArrays = @[@"片区信息",@"收费方式",@"计费方式",@"分成设置"];
+    self.headTitleArrays = @[@"片区信息",@"收费方式",@"计费方式",@"分成设置",@"充满自停设置"];
+    //收费信息
     [self getChargeMthod];
+    //其他设置的默认配置
+    [self getOtherDefaultConfig];
 }
 
 /**
@@ -85,9 +101,18 @@
     [self.tableView reloadData];
 }
 
+/// 获取其他默认配置
+- (void)getOtherDefaultConfig {
+    @weakify(self)
+    [WFApplyAreaDataTool getOtherDefaultConfigWithParams:@{} resultBlock:^(WFApplyAreaOtherConfigModel * _Nonnull models) {
+        @strongify(self)
+        self.otherConfigModel = models;
+        [self.tableView reloadData];
+    }];
+}
+
 #pragma mark 提交申请片区
 - (void)clickNextBtn {
-    
     NSString *alertMsg = @"";
     if ([NSString isBlankString:self.addressModel.addressId]) {
         alertMsg = @"请选择省市区";
@@ -140,8 +165,18 @@
             return;
         }
     }
+    
+    if (![self isOtherConfigComplete]) {
+        [YFToast showMessage:@"请正确填写其他设置" inView:self.view];
+        return;
+    }
+    
     //合伙人分成设置
     [params safeSetObject:[self partnerPropInfos] forKey:@"partnerPropInfos"];
+    //起步价
+    [params safeSetObject:self.otherConfigModel.startPrice.defaultValue forKey:@"startPrice"];
+    //最大时长
+    [params safeSetObject:self.otherConfigModel.maxChargingTime.defaultValue forKey:@"maxChargingTime"];
     @weakify(self)
     [WFApplyAreaDataTool applyAreaWithParams:params resultBlock:^{
         @strongify(self)
@@ -155,7 +190,6 @@
         !self.reloadDataBlock ? : self.reloadDataBlock();
         [self goBack];
     });
-    
 }
 
 #pragma mark 申请片区的数据组合
@@ -326,15 +360,6 @@
     NSMutableDictionary *dict = [NSMutableDictionary dictionary];
     for (WFDefaultChargeFeeModel *sModel in self.singleFeeData) {
         if (sModel.isSelectFirstSection) {
-            //单一收费
-            [dict safeSetObject:sModel.chargeModelId forKey:@"chargeModelId"];
-            [dict safeSetObject:@(sModel.chargeType) forKey:@"chargeType"];
-            [dict safeSetObject:@(sModel.salesPrice.integerValue) forKey:@"salesPrice"];
-            [dict safeSetObject:sModel.chargingDefaultConfigId forKey:@"chargingDefaultConfigId"];
-            [dict safeSetObject:@(sModel.unifiedPrice.integerValue) forKey:@"unifiedPrice"];
-            [dict safeSetObject:@(sModel.unifiedTime) forKey:@"unifiedTime"];
-            [dict safeSetObject:@(sModel.unitPrice.integerValue) forKey:@"unitPrice"];
-        }else if (sModel.isSelectSecondSection) {
             //统一收费
             [dict safeSetObject:sModel.chargeModelId forKey:@"chargeModelId"];
             [dict safeSetObject:@(sModel.chargeType) forKey:@"chargeType"];
@@ -343,9 +368,37 @@
             [dict safeSetObject:@(sModel.unifiedPrice.integerValue) forKey:@"unifiedPrice"];
             [dict safeSetObject:@(sModel.unifiedTime) forKey:@"unifiedTime"];
             [dict safeSetObject:@(sModel.unitPrice.integerValue) forKey:@"unitPrice"];
+            NSArray *powerConfigArray = [self getSingleFeeConfigWithSmodel:sModel];
+            [dict safeSetObject:powerConfigArray forKey:@"powerIntervalConfig"];
+        }else if (sModel.isSelectSecondSection) {
+            //功率收费
+            [dict safeSetObject:sModel.chargeModelId forKey:@"chargeModelId"];
+            [dict safeSetObject:@(sModel.chargeType) forKey:@"chargeType"];
+            [dict safeSetObject:@(sModel.salesPrice.integerValue) forKey:@"salesPrice"];
+            [dict safeSetObject:sModel.chargingDefaultConfigId forKey:@"chargingDefaultConfigId"];
+            [dict safeSetObject:@(sModel.unifiedPrice.integerValue) forKey:@"unifiedPrice"];
+            [dict safeSetObject:@(sModel.unifiedTime) forKey:@"unifiedTime"];
+            [dict safeSetObject:@(sModel.unitPrice.integerValue) forKey:@"unitPrice"];
+            [dict safeSetObject:@[] forKey:@"powerIntervalConfig"];
         }
     }
     return dict;
+}
+
+/// 获取单次收费功能配置信息
+- (NSMutableArray *)getSingleFeeConfigWithSmodel:(WFDefaultChargeFeeModel *)sModel {
+    NSMutableArray *array = [[NSMutableArray alloc] init];
+    for (WFChargeFeePowerConfigModel *pModel in sModel.powerIntervalConfig) {
+        NSMutableDictionary *dict = [NSMutableDictionary dictionary];
+        [dict safeSetObject:@(pModel.maxPower) forKey:@"maxPower"];
+        [dict safeSetObject:@(pModel.minPower) forKey:@"minPower"];
+        [dict safeSetObject:pModel.price forKey:@"price"];
+        [dict safeSetObject:pModel.singleChargingPowerIntervalConfigId forKey:@"singleChargingPowerIntervalConfigId"];
+        [dict safeSetObject:@(pModel.time) forKey:@"time"];
+        [dict safeSetObject:@(pModel.proportion) forKey:@"proportion"];
+        [array addObject:dict];
+    }
+    return array;
 }
 
 /**
@@ -361,7 +414,15 @@
             if (sModel.unifiedPrice.floatValue >= 0 && sModel.unifiedTime > 0) {
                 isComplete = YES;
             }else {
-                isComplete = NO;
+                return NO;
+            }
+            //下面的功率
+            for (WFChargeFeePowerConfigModel *cModel in sModel.powerIntervalConfig) {
+                if (cModel.price >= 0 && cModel.time > 0) {
+                    isComplete = YES;
+                }else {
+                    return NO;
+                }
             }
         }else if (sModel.isSelectSecondSection) {
             //统一收费
@@ -375,14 +436,35 @@
     return isComplete;
 }
 
-#pragma mark UIScrollViewDelegate
-- (void)scrollViewDidScroll:(UIScrollView *)scrollView {
-    [self.view endEditing:YES];
+/// 判断其他设置是否填写正确
+- (BOOL)isOtherConfigComplete {
+    BOOL isComplete = YES;
+    if (self.otherConfigModel.maxChargingTime.defaultValue.length == 0 || self.otherConfigModel.maxChargingTime.defaultValue.doubleValue < self.otherConfigModel.maxChargingTime.minValue || self.otherConfigModel.maxChargingTime.defaultValue.doubleValue > self.otherConfigModel.maxChargingTime.maxValue) {
+        isComplete = NO;
+    }else if (self.otherConfigModel.startPrice.defaultValue.doubleValue < self.otherConfigModel.startPrice.minValue || self.otherConfigModel.startPrice.defaultValue.doubleValue > self.otherConfigModel.startPrice.maxValue) {
+        isComplete = NO;
+    }
+    return isComplete;
+}
+
+
+/// 改变 tableView 的 fream
+/// @param edit  yes 编辑中 no 结束编辑
+- (void)modifyFreamWithEdit:(BOOL)edit {
+    if (edit) {
+        [UIView animateWithDuration:0.25 animations:^{
+            self.tableView.y = -262.0f;
+        }];
+    }else {
+        [UIView animateWithDuration:0.25 animations:^{
+             self.tableView.y = 0.0f;
+         }];
+    }
 }
 
 #pragma mark UITableViewDelegate,UITableViewDataSource
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return 4;
+    return self.headTitleArrays.count;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
@@ -391,10 +473,12 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.section == 0) {
+        //地址
         WFApplyAddressTableViewCell *cell = [WFApplyAddressTableViewCell cellWithTableView:tableView];
         cell.model = self.addressModel;
         return cell;
     }else if (indexPath.section == 1) {
+        //收费方式
         WFApplyAreaItemTableViewCell *cell = [WFApplyAreaItemTableViewCell cellWithTableView:tableView indexPath:indexPath dataCount:self.models.count];
         cell.explainBtn.hidden = indexPath.row != 0;
         @weakify(self)
@@ -403,6 +487,16 @@
             [[WFPopTool sharedInstance] popView:self.explanView animated:YES];
         };
         cell.model = self.models[indexPath.row];
+        return cell;
+    }else if (indexPath.section == 4) {
+        //其他设置
+        WFApplyAreaOtherTableViewCell *cell = [WFApplyAreaOtherTableViewCell cellWithTableView:tableView];
+        cell.mdoels = self.otherConfigModel;
+        @weakify(self)
+        cell.textFieldInputTypeBlock = ^(BOOL isEdit) {
+            @strongify(self)
+            [self modifyFreamWithEdit:isEdit];
+        };
         return cell;
     }
     WFApplyAreaItemTableViewCell *cell = [WFApplyAreaItemTableViewCell cellWithTableView:tableView indexPath:indexPath dataCount:0];
@@ -414,6 +508,8 @@
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.section == 0) {
         return ISIPHONEX ? KHeight(120.0f) + 8.0f : KHeight(120.0f);
+    }else if (indexPath.section == 4) {
+        return KHeight(88.0f);
     }
     return KHeight(44.0f);
 }
@@ -429,7 +525,7 @@
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
-    return CGFLOAT_MIN;
+    return section == 4 ? 20.0f : CGFLOAT_MIN;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -520,7 +616,7 @@
 #pragma mark get set
 - (UITableView *)tableView {
     if (!_tableView) {
-        _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, ScreenHeight - NavHeight - self.nextBtn.height) style:UITableViewStyleGrouped];
+        _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, ScreenHeight - NavHeight - self.nextBtn.height-SafeAreaBottom) style:UITableViewStyleGrouped];
         _tableView.delegate = self;
         _tableView.dataSource = self;
         _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
@@ -542,7 +638,7 @@
 - (UIButton *)nextBtn {
     if (!_nextBtn) {
         _nextBtn = [UIButton buttonWithType:UIButtonTypeSystem];
-        _nextBtn.frame = CGRectMake(0, ScreenHeight - KHeight(45.0f) - NavHeight, ScreenWidth, KHeight(45));
+        _nextBtn.frame = CGRectMake(0, ScreenHeight - KHeight(45.0f) - NavHeight-SafeAreaBottom, ScreenWidth, KHeight(45));
         [_nextBtn setTitle:@"提交" forState:UIControlStateNormal];
         [_nextBtn addTarget:self action:@selector(clickNextBtn) forControlEvents:UIControlEventTouchUpInside];
         _nextBtn.titleLabel.font = [UIFont boldSystemFontOfSize:16.0f];
@@ -584,7 +680,5 @@
     }
     return _explanView;
 }
-
-
 
 @end

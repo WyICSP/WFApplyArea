@@ -56,7 +56,7 @@
     self.contentsView.layer.cornerRadius = 10.0f;
     self.view.backgroundColor = UIColorFromRGB(0xF5F5F5);
     //设置底部按钮
-    [self.saveBtn setTitle:self.type == WFEditAddressAreaDetailType ? @"确认修改" : @"下一步(1/6)" forState:0];
+    [self.saveBtn setTitle:self.type == WFEditAddressAreaDetailType ? @"确认修改" : @"下一步(1/7)" forState:0];
     //升级片区获取收费信息
     if (self.type == WFEditAddressAreauUpgradeType) {
         //获取老片区信息

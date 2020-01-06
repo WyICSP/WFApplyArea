@@ -30,8 +30,8 @@ static NSString *const cellId = @"WFSinglePowerTableViewCell";
     self.lookBtn.layer.cornerRadius = self.lookBtn.frame.size.height/2;
     self.lookBtn.layer.borderWidth = 0.5;
     self.lookBtn.layer.borderColor = UIColorFromRGB(0xE4E4E4).CGColor;
-    self.backgroundColor = UIColor.clearColor;
-    [self.contentsView setRounderCornerWithRadius:10.0f rectCorner:WFRadiusRectCornerBottomLeft | WFRadiusRectCornerBottomRight imageColor:UIColor.whiteColor size:CGSizeMake(ScreenWidth-KWidth(24.0f), KHeight(135.0f))];
+    self.contentsView.backgroundColor = UIColor.clearColor;
+    [self.contentsView setRounderCornerWithRadius:10.0f rectCorner:WFRadiusRectCornerBottomLeft | WFRadiusRectCornerBottomRight imageColor:UIColor.whiteColor size:CGSizeMake(ScreenWidth-KWidth(24.0f), 135.0f)];
     [self.costPriceLbl setMoneyKeyboard];
     [self.salePriceLbl setMoneyKeyboard];
     //通过 KVC 监听 moneyTF 的 text

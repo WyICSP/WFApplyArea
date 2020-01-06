@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14868" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="15702" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14824"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15704"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -112,10 +113,10 @@
                     </constraints>
                 </view>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7ua-86-xUA">
-                    <rect key="frame" x="0.0" y="851" width="414" height="45"/>
+                    <rect key="frame" x="0.0" y="817" width="414" height="45"/>
                     <color key="backgroundColor" red="0.96862745098039216" green="0.52156862745098043" blue="0.33725490196078434" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <constraints>
-                        <constraint firstAttribute="height" constant="45" id="UDb-6r-Ueq"/>
+                        <constraint firstAttribute="height" constant="45" id="3e7-Va-6bF"/>
                     </constraints>
                     <fontDescription key="fontDescription" type="boldSystem" pointSize="16"/>
                     <state key="normal" title="确认修改">
@@ -129,13 +130,13 @@
             <color key="backgroundColor" red="0.96078431372549022" green="0.96078431372549022" blue="0.96078431372549022" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
                 <constraint firstAttribute="trailing" secondItem="aZ2-bp-kPH" secondAttribute="trailing" constant="12" id="2e6-ul-5em"/>
-                <constraint firstItem="7ua-86-xUA" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="A0Z-Ba-se4"/>
-                <constraint firstAttribute="trailing" secondItem="7ua-86-xUA" secondAttribute="trailing" id="QoE-Cc-QuS"/>
                 <constraint firstItem="aZ2-bp-kPH" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="12" id="SW0-wO-KLs"/>
-                <constraint firstAttribute="bottom" secondItem="7ua-86-xUA" secondAttribute="bottom" id="XkS-DD-Yuu"/>
+                <constraint firstItem="zfw-ry-2Es" firstAttribute="bottom" secondItem="7ua-86-xUA" secondAttribute="bottom" id="Tb8-ln-LNF"/>
+                <constraint firstItem="zfw-ry-2Es" firstAttribute="trailing" secondItem="7ua-86-xUA" secondAttribute="trailing" id="g6g-6D-QEa"/>
                 <constraint firstItem="aZ2-bp-kPH" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="12" id="kQX-OM-hLm"/>
+                <constraint firstItem="7ua-86-xUA" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="pky-La-A6V"/>
             </constraints>
-            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <viewLayoutGuide key="safeArea" id="zfw-ry-2Es"/>
             <point key="canvasLocation" x="-57.971014492753625" y="105.80357142857143"/>
         </view>
     </objects>

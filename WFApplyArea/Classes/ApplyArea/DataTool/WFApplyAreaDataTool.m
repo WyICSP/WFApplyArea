@@ -9,6 +9,7 @@
 #import "WFApplyAreaDataTool.h"
 #import <MJExtension/MJExtension.h>
 #import "WFDefaultChargeFeeModel.h"
+#import "WFApplyAreaOtherConfigModel.h"
 #import "WFMyAreaListModel.h"
 #import "WFBillMethodModel.h"
 #import "WFUpgradeAreaModel.h"
@@ -55,7 +56,7 @@
     }];
 }
 
-#pragma mark 收费方式接口
+#pragma mark 收费方式 和其他默认设置接口
 + (void)getChargeMethodWithParams:(NSDictionary *)params
                       resultBlock:(void(^)(NSArray <WFApplyChargeMethod *> *models))resultBlock {
     //接口地址
@@ -63,6 +64,21 @@
     [WKRequest getWithURLString:path parameters:params isShowHud:YES success:^(WKBaseModel *baseModel) {
         if (CODE_ZERO) {
             resultBlock([WFApplyChargeMethod mj_objectArrayWithKeyValuesArray:baseModel.data]);
+        }else {
+            [YFToast showMessage:baseModel.message inView:[[YFKeyWindow shareInstance] getCurrentVC].view];
+        }
+    } failure:^(NSError *error) {
+        
+    }];
+}
+
++ (void)getOtherDefaultConfigWithParams:(NSDictionary *)params
+                            resultBlock:(void(^)(WFApplyAreaOtherConfigModel *models))resultBlock {
+    //接口地址
+    NSString *path = [NSString stringWithFormat:@"%@app-partner-group/v1/charging/group/get/other/default/config",NEW_HOST_URL];
+    [WKRequest getWithURLString:path parameters:params isShowHud:NO success:^(WKBaseModel *baseModel) {
+        if (CODE_ZERO) {
+            resultBlock([WFApplyAreaOtherConfigModel mj_objectWithKeyValues:baseModel.data]);
         }else {
             [YFToast showMessage:baseModel.message inView:[[YFKeyWindow shareInstance] getCurrentVC].view];
         }
@@ -117,6 +133,21 @@
     }];
 }
 
++ (void)getUserInfoByMobileWithParams:(NSDictionary *)params
+                          resultBlock:(void(^)(NSDictionary *info))resultBlock {
+    //接口地址
+    NSString *path = [NSString stringWithFormat:@"%@app-partner-group/v1/charging/group/get/admin/info",NEW_HOST_URL];
+    [WKRequest getWithURLString:path parameters:params isShowHud:YES success:^(WKBaseModel *baseModel) {
+        if (CODE_ZERO) {
+            resultBlock(baseModel.mDictionary);
+        }else {
+//            [YFToast showMessage:baseModel.message inView:[[YFKeyWindow shareInstance] getCurrentVC].view];
+        }
+    } failure:^(NSError *error) {
+        
+    }];
+}
+
 #pragma mark 优惠收费相关接口
 + (void)addDiscountUserWithParams:(NSDictionary *)params
                       resultBlock:(void(^)(void))resultBlock {
@@ -163,6 +194,21 @@
         }
     } failure:^(NSError *error) {
         failBlock();
+    }];
+}
+
++ (void)deleteVipUserWithParams:(NSDictionary *)params
+                    resultBlock:(void(^)(void))resultBlock {
+    //接口地址
+    NSString *path = [NSString stringWithFormat:@"%@app-partner-group/v1/charging/group/delete/vip",NEW_HOST_URL];
+    [WKRequest postWithURLString:path parameters:params isJson:YES isShowHud:YES success:^(WKBaseModel *baseModel) {
+        if (CODE_ZERO) {
+            resultBlock();
+        }else {
+            [YFToast showMessage:baseModel.message inView:[[YFKeyWindow shareInstance] getCurrentVC].view];
+        }
+    } failure:^(NSError *error) {
+        
     }];
 }
 
@@ -297,12 +343,12 @@
 
 
 + (void)getAreaDetailWithParams:(NSDictionary *)params
-                    resultBlock:(void(^)(WFAreaDetailModel *models))resultBlock {
+                    resultBlock:(void(^)(NSDictionary *models))resultBlock {
     //接口地址
     NSString *path = [NSString stringWithFormat:@"%@app-partner-group/v1/charging/group/get/group/info",NEW_HOST_URL];
     [WKRequest getWithURLString:path parameters:params isShowHud:YES success:^(WKBaseModel *baseModel) {
         if (CODE_ZERO) {
-            resultBlock([WFAreaDetailModel mj_objectWithKeyValues:baseModel.data]);
+            resultBlock((NSDictionary *)baseModel.data);
         }else {
             [YFToast showMessage:baseModel.message inView:[[YFKeyWindow shareInstance] getCurrentVC].view];
         }
@@ -377,6 +423,21 @@
                          resultBlock:(void(^)(void))resultBlock {
     //接口地址
     NSString *path = [NSString stringWithFormat:@"%@app-partner-group/v1/charging/group/update/multiple/charge",NEW_HOST_URL];
+    [WKRequest postWithURLString:path parameters:params isJson:YES isShowHud:YES success:^(WKBaseModel *baseModel) {
+        if (CODE_ZERO) {
+            resultBlock();
+        }else {
+            [YFToast showMessage:baseModel.message inView:[[YFKeyWindow shareInstance] getCurrentVC].view];
+        }
+    } failure:^(NSError *error) {
+        
+    }];
+}
+
++ (void)updateOtherSetWithParams:(NSDictionary *)params
+                     resultBlock:(void(^)(void))resultBlock {
+    //接口地址
+    NSString *path = [NSString stringWithFormat:@"%@app-partner-group/v1/charging/group/update/other/config",NEW_HOST_URL];
     [WKRequest postWithURLString:path parameters:params isJson:YES isShowHud:YES success:^(WKBaseModel *baseModel) {
         if (CODE_ZERO) {
             resultBlock();
@@ -491,6 +552,37 @@
     [WKRequest getWithURLString:path parameters:params isShowHud:YES success:^(WKBaseModel *baseModel) {
         if (CODE_ZERO) {
             resultBlock();
+        }else {
+            [YFToast showMessage:baseModel.message inView:[[YFKeyWindow shareInstance] getCurrentVC].view];
+        }
+    } failure:^(NSError *error) {
+        
+    }];
+}
+
+#pragma mark 搜索片区和会员
++ (void)getSearchAreaListWithParams:(NSDictionary *)params
+                        resultBlock:(void(^)(NSArray <WFMyAreaListModel *> *models))resultBlock {
+    //接口地址
+    NSString *path = [NSString stringWithFormat:@"%@app-partner/applyGroupTemplate/searchGroupByUuid",NEW_HOST_URL];
+    [WKRequest postWithURLString:path parameters:params isJson:YES isShowHud:YES success:^(WKBaseModel *baseModel) {
+        if (CODE_ZERO) {
+            resultBlock([WFMyAreaListModel mj_objectArrayWithKeyValuesArray:baseModel.data]);
+        }else {
+            [YFToast showMessage:baseModel.message inView:[[YFKeyWindow shareInstance] getCurrentVC].view];
+        }
+    } failure:^(NSError *error) {
+        
+    }];
+}
+
++ (void)getSearchVipListWithParams:(NSDictionary *)params
+                       resultBlock:(void(^)(NSArray <WFGroupVipUserModel *> *models))resultBlock {
+    //接口地址
+    NSString *path = [NSString stringWithFormat:@"%@app-partner/applyGroupTemplate/searchMemberBy",NEW_HOST_URL];
+    [WKRequest postWithURLString:path parameters:params isJson:YES isShowHud:YES success:^(WKBaseModel *baseModel) {
+        if (CODE_ZERO) {
+            resultBlock([WFGroupVipUserModel mj_objectArrayWithKeyValuesArray:baseModel.data]);
         }else {
             [YFToast showMessage:baseModel.message inView:[[YFKeyWindow shareInstance] getCurrentVC].view];
         }

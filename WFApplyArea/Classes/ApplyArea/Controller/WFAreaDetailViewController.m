@@ -14,6 +14,8 @@
 #import "WFAreaDetailTimeTableViewCell.h"
 #import "WFMyAreaAddressTableViewCell.h"
 #import "WFAreaDetailPartnerTableViewCell.h"
+#import "WFAreaDetailOtherSetTableViewCell.h"
+#import "WFAreaOtherSetViewController.h"
 #import "WFNotHaveFeeTableViewCell.h"
 #import "WFSingleFeeViewController.h"
 #import "WFManyTimeFeeViewController.h"
@@ -32,6 +34,7 @@
 #import "WFMyAreaDetailHeadView.h"
 #import "WFApplyAreaDataTool.h"
 #import "WFMyAreaChargePileView.h"
+#import "WFGatewayListView.h"
 #import "WFAreaDetailModel.h"
 #import "NSString+Regular.h"
 #import "SKSafeObject.h"
@@ -42,12 +45,16 @@
 @property (nonatomic, strong, nullable) UITableView *tableView;
 /**数据*/
 @property (nonatomic, strong, nullable) WFAreaDetailModel *mainModels;
+/// 防止修改的时候再次查看的时候会保留未保存的数据
+@property (nonatomic, strong, nullable) WFAreaDetailModel *showModels;
 /**title*/
 @property (nonatomic, strong, nullable) NSArray <WFAreaDetailSectionTitleModel *> *sectionTitles;
 /**我的充电桩过来的需要显示的*/
 @property (nonatomic, strong, nullable) WFMyAreaDetailHeadView *headView;
 /**充电桩信号强度*/
 @property (nonatomic, strong, nullable) WFMyAreaChargePileView *chargePileView;
+/// 分布式 view
+@property (nonatomic, strong, nullable) WFGatewayListView *gatewayListView;
 /**计费类型，1:小时计费 2:金额计费*/
 @property (nonatomic, assign) NSInteger billingPlay;
 /** 多次收费*/
@@ -56,6 +63,10 @@
 @property (nonatomic, assign) BOOL isHaveDiscountFee;
 /**是否显示合伙人*/
 @property (nonatomic, assign) BOOL isPartner;
+/// 是否选中充电桩
+@property (nonatomic, assign) BOOL isSelectPile;
+/// 是否选中网关
+@property (nonatomic, assign) BOOL isSelectGateway;
 @end
 
 @implementation WFAreaDetailViewController
@@ -64,6 +75,11 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self setUI];
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    self.mainModels = self.showModels;
 }
 
 - (void)viewWillDisappear:(BOOL)animated{
@@ -90,10 +106,30 @@
 - (void)setUI {
     self.title = @"片区详情";
     self.view.backgroundColor = UIColorFromRGB(0xF5F5F5);
+    
+    //添加按钮
+    [self addRightTitleBtn:@""];
+    self.rightTitleBtn.width = 60.0f;
+    [self.rightTitleBtn setTitleColor:UIColorFromRGB(0x666666) forState:0];
+    
     //获取片区详情
     [self getAreaDetailMsg];
     //注册通知：监听充电时间变化
     [YFNotificationCenter addObserver:self selector:@selector(getAreaDetailMsg) name:@"reloadDataKeys" object:nil];
+}
+
+- (void)rightTitleButtonClick:(UIButton *)sender {
+    [self.view endEditing:YES];
+    sender.selected = !sender.selected;
+    if (self.isSelectPile) {
+        //充电桩
+        [self.rightTitleBtn setTitle:sender.selected ? @"取消" : @"选择解绑" forState:0];
+        [self.chargePileView reloadDataWithEditType:sender.selected];
+    } else if (self.isSelectGateway) {
+        //网关
+        [self.rightTitleBtn setTitle:sender.selected ? @"取消" : @"网关编辑" forState:0];
+        self.gatewayListView.index = sender.selected ? 1 : 0;
+    }
 }
 
 /**
@@ -103,14 +139,15 @@
     NSMutableDictionary *params = [NSMutableDictionary dictionary];
     [params safeSetObject:self.groupId forKey:@"groupId"];
     @weakify(self)
-    [WFApplyAreaDataTool getAreaDetailWithParams:params resultBlock:^(WFAreaDetailModel * _Nonnull models) {
+    [WFApplyAreaDataTool getAreaDetailWithParams:params resultBlock:^(NSDictionary * _Nonnull models) {
         @strongify(self)
         [self requestSuccessWithModels:models];
     }];
 }
 
-- (void)requestSuccessWithModels:(WFAreaDetailModel * _Nonnull)models {
-    self.mainModels = models;
+- (void)requestSuccessWithModels:(NSDictionary * _Nonnull)models {
+    self.mainModels = [WFAreaDetailModel mj_objectWithKeyValues:models];
+    self.showModels = [WFAreaDetailModel mj_objectWithKeyValues:models];
     //是否有多次收费
     self.isHaveManyFee = self.mainModels.multipleChargesList.count != 0 ? YES : NO;
     //是否有单次收费
@@ -223,22 +260,55 @@
     [partner safeSetObject:@"" forKey:@"detailTitle"];
     [titles addObject:partner];
     
+    NSMutableDictionary *otherSet = [NSMutableDictionary dictionary];
+    [otherSet safeSetObject:@"充满自停设置" forKey:@"title"];
+    [otherSet safeSetObject:@0 forKey:@"isShowForm"];
+    [otherSet safeSetObject:@0 forKey:@"isShowDetail"];
+    if (self.jumpType == WFAreaDetailJumpAreaType) {
+        [otherSet safeSetObject:self.mainModels.isUpdate ? @1 : @0 forKey:@"isShowEditBtn"];
+    }else {
+        [otherSet safeSetObject:@0 forKey:@"isShowEditBtn"];
+    }
+    [otherSet safeSetObject:@"" forKey:@"formTitle"];
+    [otherSet safeSetObject:@"" forKey:@"detailTitle"];
+    [titles addObject:otherSet];
+    
     self.sectionTitles = [WFAreaDetailSectionTitleModel mj_objectArrayWithKeyValuesArray:titles];
 }
 
 /**
  显示片区还是显示信号强度
 
- @param tag 100 收费按钮 200 充电桩按钮
+ @param tag 100 收费按钮 200 充电桩按钮 300 网关
  */
 - (void)handleAreaOrPileWithTag:(NSInteger)tag {
     if (tag == 100) {
+        //片区信息
+        //隐藏右侧按钮
+        self.rightTitleBtn.hidden = YES;
         self.tableView.hidden = NO;
-        self.chargePileView.hidden = YES;
+        self.chargePileView.hidden = _gatewayListView.hidden = YES;
     }else if (tag == 200) {
-        self.chargePileView.hidden = NO;
-        self.tableView.hidden = YES;
+        //充电桩按钮
+        //显示右侧按钮
+        self.rightTitleBtn.hidden = self.rightTitleBtn.selected = NO;
+        [self.rightTitleBtn setTitle:@"选择解绑" forState:0];
+        
+        self.chargePileView.hidden = self.isSelectGateway = NO;
+        [self.chargePileView reloadDataWithEditType:NO];
+        self.tableView.hidden = _gatewayListView.hidden = self.isSelectPile = YES;
+    }else {
+        //网关
+        //显示右侧按钮
+        self.rightTitleBtn.hidden = self.rightTitleBtn.selected = NO;
+        self.gatewayListView.index = 0;
+        [self.rightTitleBtn setTitle:@"网关编辑" forState:0];
+        
+        self.gatewayListView.hidden = self.isSelectPile = NO;
+        self.tableView.hidden = _chargePileView.hidden = self.isSelectGateway = YES;
     }
+
+    [self.view endEditing:YES];
 }
 
 /**
@@ -291,7 +361,8 @@
         WFManyTimeFeeViewController *many = [[WFManyTimeFeeViewController alloc] init];
         many.dChargingModePlay(@"2").dChargingModelId(mModel.chargeModelId).
         itemArrays(self.mainModels.multipleChargesList).chargeTypes(mModel.chargeType).groupIds(self.mainModels.groupId).
-        dChargingModelId(self.mainModels.multipleChargeModelId).sourceType(WFUpdateManyTimeFeeUpdateType);
+        dChargingModelId(self.mainModels.multipleChargeModelId).sourceType(WFUpdateManyTimeFeeUpdateType).
+        isShow(self.mainModels.isMultipleChargeShow);
         [self.navigationController pushViewController:many animated:YES];
     }else if (section == 3) {
         //优惠收费
@@ -310,6 +381,10 @@
         WFDividIntoSetViewController *set = [[WFDividIntoSetViewController alloc] init];
         set.groupIds(self.mainModels.groupId).sourceType(WFDividIntoSetUpdateType);
         [self.navigationController pushViewController:set animated:YES];
+    }else if (section == 6) {
+        WFAreaOtherSetViewController *other = [[WFAreaOtherSetViewController alloc] initWithNibName:@"WFAreaOtherSetViewController" bundle:[NSBundle bundleForClass:[self class]]];
+        other.groupIds(self.mainModels.groupId).sourceType(WFOtherSetUpdateAreaType).dataModels(self.mainModels);
+        [self.navigationController pushViewController:other animated:YES];
     }
 }
 //
@@ -399,7 +474,7 @@
 
 #pragma mark UITableViewDelegate,UITableViewDataSource
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return 6;
+    return 7;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
@@ -484,6 +559,11 @@
         WFAreaDetailTimeTableViewCell *cell = [WFAreaDetailTimeTableViewCell cellWithTableView:tableView];
         [cell bindToCell:self.mainModels.billingInfos cellHeight:[self getBillHeight]];
         return cell;
+    }else if (indexPath.section == 6) {
+        //充满自停设置
+        WFAreaDetailOtherSetTableViewCell *cell = [WFAreaDetailOtherSetTableViewCell cellWithTableView:tableView];
+        cell.models = self.mainModels;
+        return cell;
     }
     //合伙人设置
     if (indexPath.row == 0) {
@@ -511,6 +591,9 @@
     }else if (indexPath.section == 4) {
         //计费方式
         return [self getBillHeight];
+    }else if (indexPath.section == 6) {
+        //充满自停设置
+        return 70.0f;
     }
     return KHeight(44.0f);
 }
@@ -598,9 +681,32 @@
         _chargePileView = [[[NSBundle bundleForClass:[self class]] loadNibNamed:@"WFMyAreaChargePileView" owner:nil options:nil] firstObject];
         _chargePileView.frame = CGRectMake(0, CGRectGetMaxY(self.headView.frame), ScreenWidth, ScreenHeight - NavHeight - self.headView.frame.size.height);
         _chargePileView.groupId = self.groupId;
+        _chargePileView.superVC = self;
+        @weakify(self)
+        _chargePileView.resetEditBlock = ^{
+            @strongify(self)
+            self.rightTitleBtn.selected = NO;
+            [self.rightTitleBtn setTitle:@"选择解绑" forState:0];
+        };
         [self.view addSubview:_chargePileView];
     }
     return _chargePileView;
+}
+
+/// 分布式
+- (WFGatewayListView *)gatewayListView {
+    if (!_gatewayListView) {
+        _gatewayListView = [[WFGatewayListView alloc] initWithGroupId:self.groupId];
+        _gatewayListView.frame = CGRectMake(0, CGRectGetMaxY(self.headView.frame), ScreenWidth, ScreenHeight - NavHeight - self.headView.frame.size.height);
+        @weakify(self)
+        _gatewayListView.resetEditBlock = ^{
+            @strongify(self)
+            self.rightTitleBtn.selected = NO;
+            [self.rightTitleBtn setTitle:@"网关编辑" forState:0];
+        };
+        [self.view addSubview:_gatewayListView];
+    }
+    return _gatewayListView;
 }
 
 

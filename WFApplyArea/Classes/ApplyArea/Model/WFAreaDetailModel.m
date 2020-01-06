@@ -8,8 +8,17 @@
 
 #import "WFAreaDetailModel.h"
 #import <MJExtension/MJExtension.h>
+#import "WFDefaultChargeFeeModel.h"
 
 @implementation WFAreaDetailSingleChargeModel
+
++ (NSDictionary *)mj_replacedKeyFromPropertyName {
+    return @{@"powerIntervalConfig":@"powerIntervalList"};
+}
+
++ (NSDictionary *)mj_objectClassInArray {
+    return @{@"powerIntervalConfig":@"WFChargeFeePowerConfigModel"};
+}
 
 @end
 

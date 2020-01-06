@@ -11,6 +11,15 @@
 
 @implementation WFDefaultChargeFeeModel
 
++ (NSDictionary *)mj_objectClassInArray {
+    return @{@"powerIntervalConfig":@"WFChargeFeePowerConfigModel"};
+}
+
+@end
+
+@implementation WFChargeFeePowerConfigModel
+
+
 @end
 
 @implementation WFDefaultDiscountModel

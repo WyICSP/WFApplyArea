@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="15400" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15404"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="WFMyAreaSearchHeadView">
+            <rect key="frame" x="0.0" y="0.0" width="414" height="55"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="AyR-Ks-qKf">
+                    <rect key="frame" x="0.0" y="0.0" width="414" height="55"/>
+                    <subviews>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="SZO-SL-C04">
+                            <rect key="frame" x="12" y="10" width="390" height="35"/>
+                            <subviews>
+                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="WFApplyArea.bundle/searchLeft" translatesAutoresizingMaskIntoConstraints="NO" id="6BN-J1-J25">
+                                    <rect key="frame" x="12" y="11.5" width="12" height="12"/>
+                                    <constraints>
+                                        <constraint firstAttribute="height" constant="12" id="kRM-0N-cR7"/>
+                                        <constraint firstAttribute="width" constant="12" id="lYo-bW-Xe1"/>
+                                    </constraints>
+                                </imageView>
+                                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="请输入片区名称" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="1st-yq-2UP">
+                                    <rect key="frame" x="34" y="0.0" width="344" height="35"/>
+                                    <color key="textColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                    <textInputTraits key="textInputTraits" returnKeyType="search"/>
+                                    <connections>
+                                        <action selector="textFieldDidChange:" destination="iN0-l3-epB" eventType="editingChanged" id="osw-Pi-P6q"/>
+                                    </connections>
+                                </textField>
+                            </subviews>
+                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <constraints>
+                                <constraint firstAttribute="trailing" secondItem="1st-yq-2UP" secondAttribute="trailing" constant="12" id="HV2-dY-2Y4"/>
+                                <constraint firstAttribute="bottom" secondItem="1st-yq-2UP" secondAttribute="bottom" id="LAg-90-j5r"/>
+                                <constraint firstItem="6BN-J1-J25" firstAttribute="centerY" secondItem="SZO-SL-C04" secondAttribute="centerY" id="QUg-px-W1S"/>
+                                <constraint firstItem="1st-yq-2UP" firstAttribute="top" secondItem="SZO-SL-C04" secondAttribute="top" id="Wg1-Wo-Mjq"/>
+                                <constraint firstItem="1st-yq-2UP" firstAttribute="leading" secondItem="6BN-J1-J25" secondAttribute="trailing" constant="10" id="ZjN-xX-XhN"/>
+                                <constraint firstItem="6BN-J1-J25" firstAttribute="leading" secondItem="SZO-SL-C04" secondAttribute="leading" constant="12" id="zTy-Vb-dAO"/>
+                            </constraints>
+                        </view>
+                    </subviews>
+                    <color key="backgroundColor" red="0.96078431372549022" green="0.96078431372549022" blue="0.96078431372549022" alpha="1" colorSpace="calibratedRGB"/>
+                    <constraints>
+                        <constraint firstItem="SZO-SL-C04" firstAttribute="leading" secondItem="AyR-Ks-qKf" secondAttribute="leading" constant="12" id="Z38-vT-xpY"/>
+                        <constraint firstAttribute="bottom" secondItem="SZO-SL-C04" secondAttribute="bottom" constant="10" id="hTx-QE-Gnn"/>
+                        <constraint firstItem="SZO-SL-C04" firstAttribute="top" secondItem="AyR-Ks-qKf" secondAttribute="top" constant="10" id="k26-iU-Lw1"/>
+                        <constraint firstAttribute="trailing" secondItem="SZO-SL-C04" secondAttribute="trailing" constant="12" id="wto-nR-h0t"/>
+                    </constraints>
+                </view>
+            </subviews>
+            <color key="backgroundColor" red="0.96078431372549022" green="0.96078431372549022" blue="0.96078431372549022" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstAttribute="trailing" secondItem="AyR-Ks-qKf" secondAttribute="trailing" id="1rb-9p-pF3"/>
+                <constraint firstItem="AyR-Ks-qKf" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="7eS-sv-aqb"/>
+                <constraint firstAttribute="bottom" secondItem="AyR-Ks-qKf" secondAttribute="bottom" id="Cu3-K0-yb9"/>
+                <constraint firstItem="AyR-Ks-qKf" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="wsK-Eu-BN4"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <connections>
+                <outlet property="contentsView" destination="SZO-SL-C04" id="LeY-me-ced"/>
+                <outlet property="textField" destination="1st-yq-2UP" id="prT-jR-dOG"/>
+            </connections>
+            <point key="canvasLocation" x="-39.130434782608695" y="-34.486607142857139"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="WFApplyArea.bundle/searchLeft" width="16" height="16"/>
+    </resources>
+</document>

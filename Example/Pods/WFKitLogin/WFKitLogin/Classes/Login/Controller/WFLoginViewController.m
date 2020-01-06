@@ -299,8 +299,8 @@
     [YFMediatorManager setGlobalBackGroundColor:UIColor.whiteColor];
     [YFMediatorManager setTabbarTitleColor:NavColor titleFont:11];
     
-    NSArray *ClassArray = [NSArray arrayWithObjects:@"WFHomeViewController",@"WFBuseSchViewController",@"WFBusSchoolViewController",@"WFUserCenterViewController", nil];
-    NSArray *titleArray = [NSArray arrayWithObjects:@"首页",@"商城",@"商学院",@"我的", nil];
+    NSArray *ClassArray = [NSArray arrayWithObjects:@"WFHomeViewController",@"WFShopMallViewController",@"WFBusSchoolViewController",@"WFUserCenterViewController", nil];
+    NSArray *titleArray = [NSArray arrayWithObjects:@"首页",@"服务",@"商学院",@"我的", nil];
     NSArray *normalImgArray = [NSArray arrayWithObjects:@"homeNoSelect",@"shopNoSelect",@"schoolNoSelect",@"mineNoSelect", nil];
     NSArray *selectImgArray = [NSArray arrayWithObjects:@"homeSelect",@"shopSelect",@"schoolSelect",@"mineSelect", nil];
     for (int i = 0; i < ClassArray.count; i++) {

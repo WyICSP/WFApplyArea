@@ -1,12 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
-    <device id="retina6_1" orientation="portrait">
-        <adaptation id="fullscreen"/>
-    </device>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="15400" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
-        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15404"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -15,9 +12,45 @@
         <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="WFMyAreaChargePileView">
             <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fqv-NJ-dJc">
+                    <rect key="frame" x="0.0" y="852" width="414" height="44"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="44" id="8sw-fp-RT5"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" weight="medium" pointSize="16"/>
+                    <state key="normal" title="解绑">
+                        <color key="titleColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    </state>
+                    <connections>
+                        <action selector="clickUntyingBtn:" destination="iN0-l3-epB" eventType="touchUpInside" id="PVb-VO-Rlf"/>
+                    </connections>
+                </button>
+                <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MsQ-SC-01G">
+                    <rect key="frame" x="0.0" y="851.5" width="414" height="0.5"/>
+                    <color key="backgroundColor" red="0.89411764709999997" green="0.89411764709999997" blue="0.89411764709999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="0.5" id="5X7-Ru-LYD"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <nil key="textColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+            </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstAttribute="trailing" secondItem="fqv-NJ-dJc" secondAttribute="trailing" id="DNt-nJ-pZP"/>
+                <constraint firstItem="MsQ-SC-01G" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="FbR-Vi-lE1"/>
+                <constraint firstItem="fqv-NJ-dJc" firstAttribute="top" secondItem="MsQ-SC-01G" secondAttribute="bottom" id="NFJ-5n-dzx"/>
+                <constraint firstAttribute="bottom" secondItem="fqv-NJ-dJc" secondAttribute="bottom" id="j7Y-XN-cni"/>
+                <constraint firstItem="fqv-NJ-dJc" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="v1N-c5-jfn"/>
+                <constraint firstAttribute="trailing" secondItem="MsQ-SC-01G" secondAttribute="trailing" id="xlh-MS-MMn"/>
+            </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
-            <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
+            <connections>
+                <outlet property="line" destination="MsQ-SC-01G" id="cXz-1Q-DM5"/>
+                <outlet property="untyingBtn" destination="fqv-NJ-dJc" id="Noz-H6-lTO"/>
+            </connections>
             <point key="canvasLocation" x="-101" y="103"/>
         </view>
     </objects>

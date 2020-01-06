@@ -15,6 +15,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, copy) NSString *chargeModelId;
 /**默认Id*/
 @property (nonatomic, copy) NSString *chargingDefaultConfigId;
+/// 功率区间
+@property (nonatomic, strong) NSArray *powerIntervalConfig;
 /**0:统一收费 1:功率收费*/
 @property (nonatomic, assign) NSInteger chargeType;
 /**片区id*/
@@ -66,6 +68,10 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, copy) NSString *multipleChargeModelId;
 /**优惠收费默认Id*/
 @property (nonatomic, copy) NSString *vipChargeModelId;
+/// 最大充电时长
+@property (nonatomic, copy) NSString *maxChargingTime;
+/// 充电起步价
+@property (nonatomic, strong) NSNumber *startPrice;
 /**是否选中多次*/
 @property (nonatomic, assign) BOOL isSelectMany;
 /**是否有单次收费*/
@@ -76,6 +82,10 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, assign) BOOL isHaveVip;
 /**是否可以编辑*/
 @property (nonatomic, assign) BOOL isUpdate;
+/// 是否显示多次收费
+@property (nonatomic, assign) BOOL isMultipleChargeShow;
+/// 0:停用 1:启用
+@property (nonatomic, assign) BOOL status;
 /**状态0：申请中 1：申请通过 2：申请驳回*/
 @property (nonatomic, assign) NSInteger auditStatus;
 /**计费方式数据*/

@@ -28,6 +28,8 @@ typedef NS_ENUM(NSInteger, WFUpdateManyTimeType) {
 @property (nonatomic, strong) NSArray <WFAreaDetailMultipleModel *> *itemArray;
 /**修改多次收费的时候判断是统一收费还是功率收费 0 是统一, 1 功率收费*/
 @property (nonatomic, assign) NSInteger chargeType;
+/// 是否显示多次收费开关
+@property (nonatomic, assign) BOOL isMultipleChargeShow;
 /**片区 Id*/
 @property (nonatomic, copy) NSString *groupId;
 /**默认数据*/
@@ -43,6 +45,7 @@ typedef NS_ENUM(NSInteger, WFUpdateManyTimeType) {
 @property (nonatomic, copy) WFManyTimeFeeViewController *(^chargeTypes)(NSInteger chargeType);
 @property (nonatomic, copy) WFManyTimeFeeViewController *(^groupIds)(NSString *groupId);
 @property (nonatomic, copy) WFManyTimeFeeViewController *(^sourceType)(WFUpdateManyTimeType type);
+@property (nonatomic, copy) WFManyTimeFeeViewController *(^isShow)(BOOL isMultipleChargeShow);
 @end
 
 NS_ASSUME_NONNULL_END

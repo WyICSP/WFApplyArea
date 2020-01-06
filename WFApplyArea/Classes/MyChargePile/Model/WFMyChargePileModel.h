@@ -77,9 +77,26 @@ NS_ASSUME_NONNULL_BEGIN
 @interface WFSignleIntensityListModel : NSObject
 /**桩号*/
 @property (nonatomic, copy) NSString *shellId;
+/// 桩号 ID
+@property (nonatomic, copy) NSString *Id;
 /**信号强度*/
 @property (nonatomic, assign) NSInteger qos;
 /**1在线 2离线*/
+@property (nonatomic, assign) NSInteger status;
+/// 子设备
+@property (nonatomic, strong) NSArray *socketParamVOS;
+/// 开始编辑
+@property (nonatomic, assign) BOOL isEdit;
+/// 是否选中
+@property (nonatomic, assign) BOOL isSelect;
+/// 是否打开
+@property (nonatomic, assign) BOOL isOpen;
+@end
+
+@interface WFPileSocketParamVOSModel : NSObject
+/// 编号
+@property (nonatomic, assign) NSInteger socketNo;
+/// 1 未充电 2 标识在充电
 @property (nonatomic, assign) NSInteger status;
 @end
 

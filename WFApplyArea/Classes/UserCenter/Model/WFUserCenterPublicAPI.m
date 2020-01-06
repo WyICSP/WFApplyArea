@@ -103,6 +103,11 @@
     [YFMediatorManager loginOutByOpenLoginCtrl];
 }
 
++ (void)changePassword {
+    //跳转修改密码
+    [YFMediatorManager changePassword];
+}
+
 /**
  升级片区
  

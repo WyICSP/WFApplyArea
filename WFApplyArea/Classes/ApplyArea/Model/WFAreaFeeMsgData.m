@@ -7,6 +7,7 @@
 
 #import "WFAreaFeeMsgData.h"
 #import "WFMyAreaListModel.h"
+#import "WFAreaDetailModel.h"
 
 @implementation WFAreaFeeMsgData
 

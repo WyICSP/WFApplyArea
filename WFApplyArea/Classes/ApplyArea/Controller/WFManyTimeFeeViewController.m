@@ -33,6 +33,8 @@
 @property (nonatomic, strong, nullable) UIButton *confirmBtn;
 /**headView*/
 @property (nonatomic, strong, nullable) UIView *headView;
+/// 多次收费开关
+@property (nonatomic, strong, nullable) UISwitch *switchBtn;
 /**老片区是否有月卡套餐*/
 @property (nonatomic, assign) BOOL isExist;
 @end
@@ -49,6 +51,11 @@
 - (void)setUI {
     self.title = @"多次收费";
     self.view.backgroundColor = UIColorFromRGB(0xF5F5F5);
+    /// 只有修改的时候出现
+    if (self.type == WFUpdateManyTimeFeeUpdateType) {
+        UIBarButtonItem *item = [[UIBarButtonItem alloc] initWithCustomView:self.switchBtn];
+        self.navigationItem.rightBarButtonItem = item;
+    }
     
     if (!self.mainModel) {
         //如果是升级片区
@@ -96,14 +103,14 @@
 - (void)requestSuccessWithModels:(WFDefaultManyTimesModel *)models {
     self.mainModel = models;
     if (self.itemArray.count == 0) {
-        //默认设置统一收费打开 并把第一个区域选中
-        self.mainModel.isOpenFirstSection = YES;
+        //都打开
+        self.mainModel.isOpenFirstSection = self.mainModel.isOpenSecondSection = YES;
         self.mainModel.isSelectFirstSection = YES;
     }else if (self.itemArray.count != 0) {
         //修改多次收费回显
         if (self.chargeType == 0) {
             //统一收费
-            self.mainModel.isOpenFirstSection = YES;
+            self.mainModel.isOpenFirstSection = self.mainModel.isOpenSecondSection = YES;
             self.mainModel.isSelectFirstSection = YES;
             //遍历去选中数据
             for (WFAreaDetailMultipleModel *dModel in self.itemArray) {
@@ -157,6 +164,7 @@
     
     NSMutableDictionary *params = [NSMutableDictionary dictionary];
     [params safeSetObject:self.groupId forKey:@"groupId"];
+    [params safeSetObject:self.switchBtn.selected ? @"0" : @"1" forKey:@"isShow"];
     [params safeSetObject:[self multipleChargesList] forKey:@"multipleChargesList"];
     
     @weakify(self)
@@ -174,6 +182,12 @@
     });
 }
 
+/// 多次收费开关
+- (void)clickSwitch:(UISwitch *)switchBtn {
+    switchBtn.selected = !switchBtn.selected;
+    DLog(@"%ld",switchBtn.selected);
+}
+
 /**
  处理打开或者隐藏的逻辑的方法
  
@@ -186,7 +200,7 @@
         //控制选中未选中
         if (section == 0) {
             //打开次区域
-            self.mainModel.isOpenFirstSection = YES;
+            self.mainModel.isOpenFirstSection = self.mainModel.isOpenSecondSection = YES;
             //选中此区域
             self.mainModel.isSelectFirstSection = YES;
             self.mainModel.isSelectSecondSection = NO;
@@ -508,7 +522,7 @@
 #pragma mark get set
 - (UITableView *)tableView {
     if (!_tableView) {
-        _tableView = [[UITableView alloc] initWithFrame:CGRectMake(KWidth(12.0f), 0, ScreenWidth-KWidth(24.0f), ScreenHeight - NavHeight - self.confirmBtn.height) style:UITableViewStyleGrouped];
+        _tableView = [[UITableView alloc] initWithFrame:CGRectMake(KWidth(12.0f), 0, ScreenWidth-KWidth(24.0f), ScreenHeight - NavHeight - self.confirmBtn.height-SafeAreaBottom) style:UITableViewStyleGrouped];
         _tableView.delegate = self;
         _tableView.dataSource = self;
         _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
@@ -546,7 +560,7 @@
 - (UIButton *)confirmBtn {
     if (!_confirmBtn) {
         _confirmBtn = [UIButton buttonWithType:UIButtonTypeSystem];
-        _confirmBtn.frame = CGRectMake(0, ScreenHeight - KHeight(45.0f) - NavHeight, ScreenWidth, KHeight(45));
+        _confirmBtn.frame = CGRectMake(0, ScreenHeight - KHeight(45.0f) - NavHeight-SafeAreaBottom, ScreenWidth, KHeight(45));
         [_confirmBtn setTitle:[self btnTitle] forState:UIControlStateNormal];
         [_confirmBtn addTarget:self action:@selector(clickConfirmBtn) forControlEvents:UIControlEventTouchUpInside];
         _confirmBtn.titleLabel.font = [UIFont boldSystemFontOfSize:16.0f];
@@ -555,6 +569,18 @@
         [self.view addSubview:_confirmBtn];
     }
     return _confirmBtn;
+}
+
+/// 开关
+- (UISwitch *)switchBtn {
+    if (!_switchBtn) {
+        _switchBtn = [[UISwitch alloc] initWithFrame:CGRectMake(0, 0, 37.0f, 22.0f)];
+        [_switchBtn addTarget:self action:@selector(clickSwitch:) forControlEvents:UIControlEventValueChanged];
+        _switchBtn.transform = CGAffineTransformMakeScale(0.9,0.9);
+        _switchBtn.on = self.switchBtn.selected = !self.isMultipleChargeShow;
+        _switchBtn.onTintColor = UIColorFromRGB(0xF78556);
+    }
+    return _switchBtn;
 }
 
 /**
@@ -567,7 +593,7 @@
     if (self.type == WFUpdateManyTimeFeeUpdateType) {
         title = @"确认修改";
     }else if (self.type == WFUpdateManyTimeFeeUpgradeType) {
-        title = @"下一步(3/6)";
+        title = @"下一步(3/7)";
     }else {
         title = @"完成";
     }
@@ -621,6 +647,13 @@
 - (WFManyTimeFeeViewController * _Nonnull (^)(WFUpdateManyTimeType))sourceType {
     return ^(WFUpdateManyTimeType type) {
         self.type = type;
+        return self;
+    };
+}
+
+- (WFManyTimeFeeViewController * _Nonnull (^)(BOOL))isShow {
+    return ^(BOOL isMultipleChargeShow){
+        self.isMultipleChargeShow = isMultipleChargeShow;
         return self;
     };
 }

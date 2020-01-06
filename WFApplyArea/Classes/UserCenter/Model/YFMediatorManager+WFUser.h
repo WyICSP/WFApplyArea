@@ -16,6 +16,10 @@ NS_ASSUME_NONNULL_BEGIN
  */
 + (void)loginOutByOpenLoginCtrl;
 
+
+/// 修改密码
++ (void)changePassword;
+
 @end
 
 NS_ASSUME_NONNULL_END

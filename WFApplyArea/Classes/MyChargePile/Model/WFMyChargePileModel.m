@@ -37,4 +37,18 @@
 
 @implementation WFSignleIntensityListModel
 
++ (NSDictionary *)mj_replacedKeyFromPropertyName {
+    return @{@"Id":@"id"};
+}
+
++ (NSDictionary *)mj_objectClassInArray {
+    return @{@"socketParamVOS":@"WFPileSocketParamVOSModel"};
+}
+
+
+@end
+
+@implementation WFPileSocketParamVOSModel
+
+
 @end

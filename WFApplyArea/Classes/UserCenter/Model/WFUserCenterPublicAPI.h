@@ -40,6 +40,8 @@ typedef NS_ENUM(NSInteger, WFUpdatePhotoType) {
  */
 + (void)loginOutAndJumpLogin;
 
+/// 修改密码
++ (void)changePassword;
 
 /**
  升级片区

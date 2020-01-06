@@ -25,6 +25,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong) NSNumber *unitPrice;
 /**售价*/
 @property (nonatomic, strong) NSNumber *salesPrice;
+/// 功率默认配置
+@property (nonatomic, strong) NSArray *powerIntervalConfig;
 /**是否打开第一个区域*/
 @property (nonatomic, assign) BOOL isOpenFirstSection;
 /**是否选中第一个区域的头视图*/
@@ -35,6 +37,23 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, assign) BOOL isSelectSecondSection;
 /**是否有更换数据*/
 @property (nonatomic, assign) BOOL isChange;
+@end
+
+@interface WFChargeFeePowerConfigModel : NSObject
+/// 最大功率
+@property (nonatomic, assign) NSInteger maxPower;
+/// 最小功率
+@property (nonatomic, assign) NSInteger minPower;
+/// 价格
+@property (nonatomic, strong) NSNumber *price;
+/// 默认配置id
+@property (nonatomic, copy) NSString *singleChargingPowerIntervalConfigId;
+/// 已经配置的 id
+@property (nonatomic, copy) NSString *singleChargingPowerIntervalId;
+///  时间
+@property (nonatomic, assign) double time;
+/// 倍率
+@property (nonatomic, assign) double proportion;
 @end
 
 

@@ -10,8 +10,10 @@
 #import "WFDividIntoSetTableViewCell.h"
 #import "WFDiviIntoSetEditTableViewCell.h"
 #import "WFDiviIntoSetHeadTableViewCell.h"
+#import "WFAreaOtherSetViewController.h"
 #import "WFAreaDetailViewController.h"
 #import "UITableView+YFExtension.h"
+#import "SVProgressHUD+YFHud.h"
 #import "WFMyAreaListModel.h"
 #import "WFApplyAreaDataTool.h"
 #import "WFUpgradeAreaData.h"
@@ -109,6 +111,48 @@
     });
 }
 
+/// 根据手机号获取名字
+/// @param phone 手机号
+/// @param currentModel 当前 model 数据
+- (void)getAdminInfoWithPhone:(NSString *)phone
+                 currentModel:(WFMyAreaDividIntoSetModel *)currentModel {
+    NSMutableDictionary *params = [NSMutableDictionary dictionary];
+    [params safeSetObject:phone forKey:@"phone"];
+    @weakify(self)
+    [WFApplyAreaDataTool getUserInfoByMobileWithParams:params resultBlock:^(NSDictionary * _Nonnull info) {
+        @strongify(self)
+        [self replaceUserMsgWithInfo:info currentModel:currentModel];
+    }];
+}
+
+- (void)replaceUserMsgWithInfo:(NSDictionary *)info
+                  currentModel:(WFMyAreaDividIntoSetModel *)currentModel {
+    //真实姓名
+    NSString *realName = [NSString stringWithFormat:@"%@",[[info safeJsonObjForKey:@"data"] safeJsonObjForKey:@"realName"]];
+    //查询成功之后 把 isadd 修改成 no
+    currentModel.isAdd = currentModel.isAllowEditName = NO;
+    if (currentModel.name.length == 0) {
+        currentModel.name = realName;
+        [self.tableView reloadData];
+    }else if (currentModel.name.length != 0) {
+        //如果名字是相同的
+        if (![currentModel.name isEqualToString:realName]) {
+            [self.view endEditing:YES];
+            NSString *alertMsg = [NSString stringWithFormat:@"手机号已注册,对应的姓名是%@",realName];
+             UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"姓名与手机号不匹配" message:alertMsg preferredStyle:UIAlertControllerStyleAlert];
+             //增加确定按钮；
+             [alertController addAction:[UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+                 currentModel.name = realName;
+                 [self.tableView reloadData];
+             }]];
+             [self presentViewController:alertController animated:true completion:nil];
+        }else {
+            //刷新页面, 使名字不让编辑
+            [self.tableView reloadData];
+        }
+    }
+}
+
 /**
  添加数据
  */
@@ -126,6 +170,7 @@
     WFMyAreaDividIntoSetModel *itemModel = [[WFMyAreaDividIntoSetModel alloc] init];
     itemModel.rate = 10;
     itemModel.chargePersonFlag = 2;//标记
+    itemModel.isAdd = itemModel.isAllowEditName = YES;
     firstModel.rate -= 10;
     [itemArray addObject:itemModel];
     [self.models addObjectsFromArray:itemArray];
@@ -188,6 +233,29 @@
         selectModel.rate = present;
         //刷新合伙人那一行
         [self.tableView refreshTableViewWithSection:0 indexPath:self.parIndexl];
+    }
+}
+
+/// 验证手机号是否重复
+/// @param phone 手机号
+/// @param index 修改的位置
+- (void)verificationPhoneRepeatWithPhone:(NSString *)phone index:(NSInteger)index {
+    BOOL isRepeat = NO;
+    //判断是否存在重复的电话号码
+    for (WFMyAreaDividIntoSetModel *model in self.models) {
+        if ([model.phone isEqualToString:phone] && !model.isAdd) {
+            isRepeat = YES;
+            WFMyAreaDividIntoSetModel *sModel = self.models[index];
+            sModel.phone = @"";
+            [YFToast showMessage:@"该手机号已存在,请重新输入" inView:self.view];
+            [self.tableView reloadData];
+            break;
+        }
+    }
+    
+    //如果没有存在的 那么就通过手机号获取姓名
+    if (!isRepeat) {
+        [self getAdminInfoWithPhone:phone currentModel:self.models[index]];
     }
 }
 
@@ -281,7 +349,6 @@
         //判断是否信息是否填写正确
         if (![self isComplete]) return;
         
-        
         //获取默认设置
         !self.dividIntoDataBlock ? : self.dividIntoDataBlock(self.models);
         [self goBack];
@@ -289,10 +356,12 @@
         //更新合伙人设置
         [self updateDividIntoSet];
     }else if (self.type == WFDividIntoSetUpgradeType) {
-        //保存数据
+//        //保存数据
         [WFUpgradeAreaData shareInstance].partnerPropInfos = [self partnerPropInfos];
-        //升级片区
-        [self upgradeOldAreaToNewArea];
+        //设置其他设置
+        WFAreaOtherSetViewController *other = [[WFAreaOtherSetViewController alloc] initWithNibName:@"WFAreaOtherSetViewController" bundle:[NSBundle bundleForClass:[self class]]];
+        other.groupId = self.groupId;
+        [self.navigationController pushViewController:other animated:YES];
     }
 }
 
@@ -342,6 +411,10 @@
         //检查输入值的有效性
         [weakSelf checkInputTextWithPresent:present index:indexPath.row-2];
     };
+    cell.verificationPhoneBlock = ^(NSString * _Nonnull phone) {
+        //验证手机号是否重复
+        [weakSelf verificationPhoneRepeatWithPhone:phone index:indexPath.row-2];
+    };
     return cell;
 }
 
@@ -355,10 +428,11 @@
     return KHeight(12.0f);
 }
 
+
 #pragma mark get set
 - (UITableView *)tableView {
     if (!_tableView) {
-        _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, ScreenHeight - NavHeight - self.confirmBtn.height) style:UITableViewStyleGrouped];
+        _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, ScreenHeight - NavHeight - self.confirmBtn.height-SafeAreaBottom) style:UITableViewStyleGrouped];
         _tableView.delegate = self;
         _tableView.dataSource = self;
         _tableView.rowHeight = KHeight(44.0f);
@@ -381,7 +455,7 @@
 - (UIButton *)confirmBtn {
     if (!_confirmBtn) {
         _confirmBtn = [UIButton buttonWithType:UIButtonTypeSystem];
-        _confirmBtn.frame = CGRectMake(0, ScreenHeight - KHeight(45.0f) - NavHeight, ScreenWidth, KHeight(45));
+        _confirmBtn.frame = CGRectMake(0, ScreenHeight - KHeight(45.0f) - NavHeight - SafeAreaBottom, ScreenWidth, KHeight(45));
         [_confirmBtn setTitle:[self btnTitle] forState:UIControlStateNormal];
         [_confirmBtn addTarget:self action:@selector(clickConfirmBtn) forControlEvents:UIControlEventTouchUpInside];
         _confirmBtn.titleLabel.font = [UIFont boldSystemFontOfSize:16.0f];
@@ -402,7 +476,7 @@
     if (self.type == WFDividIntoSetUpdateType) {
         title = @"确认修改";
     }else if (self.type == WFDividIntoSetUpgradeType) {
-        title = @"下一步(6/6)";
+        title = @"下一步(6/7)";
     }else {
         title = @"完成";
     }

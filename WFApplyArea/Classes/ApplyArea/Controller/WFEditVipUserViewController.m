@@ -211,6 +211,12 @@
         if (textField.text.length > 11) {
             textField.text = [textField.text substringWithRange:NSMakeRange(0, 11)];
         }
+    }else if (textField == self.countTF) {
+        if (textField.text.integerValue <= 0) {
+            textField.text = @"";
+        }else if (textField.text.integerValue > 9999) {
+            textField.text = [textField.text substringWithRange:NSMakeRange(0, 4)];
+        }
     }
 }
 

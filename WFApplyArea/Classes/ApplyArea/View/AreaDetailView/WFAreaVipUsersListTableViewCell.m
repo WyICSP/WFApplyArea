@@ -25,7 +25,6 @@ static NSString *const cellId = @"WFAreaVipUsersListTableViewCell";
     [super awakeFromNib];
     self.selectionStyle = 0;
     self.contentsView.layer.cornerRadius = 10.0f;
-    // Initialization code
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {

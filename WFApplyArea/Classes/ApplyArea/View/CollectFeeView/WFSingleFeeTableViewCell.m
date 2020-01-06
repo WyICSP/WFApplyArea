@@ -9,17 +9,24 @@
 #import "WFSingleFeeTableViewCell.h"
 #import "WFDefaultChargeFeeModel.h"
 #import "UITextField+RYNumberKeyboard.h"
-#import "UIView+Frame.h"
-#import "WKHelp.h"
+#import "WKConfig.h"
 
 @implementation WFSingleFeeTableViewCell
 
 static NSString *const cellId = @"WFSingleFeeTableViewCell";
 
-+ (instancetype)cellWithTableView:(UITableView *)tableView {
++ (instancetype)cellWithTableView:(UITableView *)tableView
+                        indexPath:(NSIndexPath *)indexPath
+                        dataCount:(NSInteger)dataCount {
     WFSingleFeeTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellId];
     if (cell == nil) {
         cell = [[[NSBundle bundleForClass:[self class]] loadNibNamed:@"WFSingleFeeTableViewCell" owner:nil options:nil] firstObject];
+    }
+    if (dataCount != 0 && indexPath.row == dataCount - 1) {
+        cell.contentsView.backgroundColor = UIColor.clearColor;
+        [cell.contentsView setRounderCornerWithRadius:10.0f rectCorner:WFRadiusRectCornerBottomLeft | WFRadiusRectCornerBottomRight imageColor:UIColor.whiteColor size:CGSizeMake(ScreenWidth-KWidth(24.0f), 50.0f)];
+    }else {
+        cell.contentsView.backgroundColor = UIColor.whiteColor;
     }
     return cell;
 }
@@ -30,7 +37,7 @@ static NSString *const cellId = @"WFSingleFeeTableViewCell";
     self.moneyView.layer.cornerRadius = 14.5f;
     self.countView.layer.cornerRadius = 14.5f;
     self.contentsView.backgroundColor = UIColor.clearColor;
-    [self.contentsView setRounderCornerWithRadius:10.0f rectCorner:WFRadiusRectCornerBottomLeft | WFRadiusRectCornerBottomRight imageColor:UIColor.whiteColor size:CGSizeMake(ScreenWidth-KWidth(24.0f), 50.0f)];
+    
     [self.moneyTF setMoneyKeyboard];
     //通过 KVC 监听 moneyTF 的 text
     [self.moneyTF addObserver:self forKeyPath:@"text" options:NSKeyValueObservingOptionNew context:NULL];
@@ -53,24 +60,25 @@ static NSString *const cellId = @"WFSingleFeeTableViewCell";
     // Configure the view for the selected state
 }
 
-- (void)setModel:(WFDefaultChargeFeeModel *)model {
+- (void)setModel:(WFChargeFeePowerConfigModel *)model {
     _model = model;
+    //功率
+    self.powerLbl.text = [NSString stringWithFormat:@"%ld-%ldw",(long)model.minPower,(long)model.maxPower];
     
     //小于 0 的时候不显示
-    if (model.unifiedPrice.floatValue < 0) {
-        self.moneyTF.text = @"";
+    if (model.price.floatValue <= 0) {
+        self.moneyTF.text = @"0";
     }else {
-        self.moneyTF.text = [NSString stringWithFormat:@"%@",@(model.unifiedPrice.floatValue/100)];
+        self.moneyTF.text = [NSString stringWithFormat:@"%@",@(model.price.doubleValue/100.0f)];
     }
-    
     //等于 0 的时候 不显示
-    if (model.unifiedTime == 0) {
-        self.countTF.text = @"";
+    if (model.time == 0) {
+        self.countTF.text = @"0";
     }else {
-        self.countTF.text = [NSString stringWithFormat:@"%ld",(long)model.unifiedTime];
+        NSString *newTime = [NSString stringWithFormat:@"%.1f",model.time];
+        NSNumber *numTime = @(newTime.doubleValue);
+        self.countTF.text = [NSString stringWithFormat:@"%@",numTime];
     }
-    
-    
 }
 
 - (IBAction)textFieldDidChange:(UITextField *)textField {
@@ -86,16 +94,17 @@ static NSString *const cellId = @"WFSingleFeeTableViewCell";
         
         //如果为输入为空的的时候 就给他一个负值,方便区分
         if (textField.text.length == 0) {
-            self.model.unifiedPrice = @(-1);
+            self.model.price = @(-1);
         }else {
-            self.model.unifiedPrice = @(textField.text.floatValue*100);
+            self.model.price = @(textField.text.floatValue*100);
         }
         
     }else if (textField == self.countTF) {
         //次数不能输入0
-        if (textField.text.integerValue == 0 || [textField.text containsString:@"."]) {textField.text = @"";}
-        
-        self.model.unifiedTime = textField.text.integerValue;
+        if (textField.text.doubleValue == 0 && textField.text.length > 2) {
+            textField.text = @"0";
+        }        
+        self.model.time = textField.text.doubleValue;
     }
 }
 

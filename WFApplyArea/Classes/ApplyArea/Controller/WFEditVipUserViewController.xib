@@ -1,11 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
-    <device id="retina6_1" orientation="portrait">
-        <adaptation id="fullscreen"/>
-    </device>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="15702" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15704"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -15,7 +13,7 @@
                 <outlet property="addBtn" destination="ZZd-g8-cJU" id="dcz-RN-gSQ"/>
                 <outlet property="btnCons" destination="hNj-ji-FlL" id="iDx-dr-Ztb"/>
                 <outlet property="contentsView" destination="5hL-D7-WSD" id="984-aq-nMj"/>
-                <outlet property="countTF" destination="K7T-LI-kPk" id="Y6E-gC-UJu"/>
+                <outlet property="countTF" destination="BZx-i2-dgG" id="bKc-t3-Don"/>
                 <outlet property="nameTF" destination="Iza-34-gVb" id="X6G-WI-S9i"/>
                 <outlet property="phoneTF" destination="8XH-ji-SdS" id="tmV-5j-DdX"/>
                 <outlet property="timetTF" destination="vep-P2-gfF" id="HLW-Pt-stN"/>
@@ -117,28 +115,12 @@
                                 <action selector="textFieldDidChange:" destination="-1" eventType="editingChanged" id="XYf-wa-rJI"/>
                             </connections>
                         </textField>
-                        <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="30" placeholder="请选择次数" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="K7T-LI-kPk">
-                            <rect key="frame" x="95" y="102.5" width="75.5" height="17"/>
-                            <color key="textColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                            <textInputTraits key="textInputTraits"/>
-                        </textField>
                         <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="请选择到期时间" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="vep-P2-gfF">
-                            <rect key="frame" x="95" y="147" width="104" height="17"/>
+                            <rect key="frame" x="95" y="147" width="280" height="17"/>
                             <color key="textColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                             <textInputTraits key="textInputTraits"/>
                         </textField>
-                        <button opaque="NO" tag="10" contentMode="scaleToFill" contentHorizontalAlignment="right" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mbv-WY-wh7">
-                            <rect key="frame" x="95" y="96" width="280" height="30"/>
-                            <constraints>
-                                <constraint firstAttribute="height" constant="30" id="4Dz-Mz-wu9"/>
-                            </constraints>
-                            <state key="normal" image="WFApplyArea.bundle/vipNext"/>
-                            <connections>
-                                <action selector="clickAddBtn:" destination="-1" eventType="touchUpInside" id="6PK-sv-cG4"/>
-                            </connections>
-                        </button>
                         <button opaque="NO" tag="20" contentMode="scaleToFill" contentHorizontalAlignment="right" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Nlo-KM-bXh">
                             <rect key="frame" x="95" y="140.5" width="280" height="30"/>
                             <constraints>
@@ -149,26 +131,33 @@
                                 <action selector="clickAddBtn:" destination="-1" eventType="touchUpInside" id="z1O-8F-eqI"/>
                             </connections>
                         </button>
+                        <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="请输入总次数" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="BZx-i2-dgG">
+                            <rect key="frame" x="95" y="101.5" width="280" height="19"/>
+                            <color key="textColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                            <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
+                            <connections>
+                                <action selector="textFieldDidChange:" destination="-1" eventType="editingChanged" id="0v1-6c-rHn"/>
+                            </connections>
+                        </textField>
                     </subviews>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <constraints>
-                        <constraint firstItem="Nlo-KM-bXh" firstAttribute="leading" secondItem="mbv-WY-wh7" secondAttribute="leading" id="0lT-qN-W0n"/>
                         <constraint firstItem="vep-P2-gfF" firstAttribute="centerY" secondItem="MIx-6r-58m" secondAttribute="centerY" id="0wr-c2-v7Q"/>
                         <constraint firstItem="cHi-pa-5lR" firstAttribute="top" secondItem="5hL-D7-WSD" secondAttribute="top" constant="13.5" id="1fi-oC-MDa">
                             <userDefinedRuntimeAttributes>
                                 <userDefinedRuntimeAttribute type="boolean" keyPath="isAdaptateScreen" value="YES"/>
                             </userDefinedRuntimeAttributes>
                         </constraint>
-                        <constraint firstItem="8XH-ji-SdS" firstAttribute="leading" secondItem="K7T-LI-kPk" secondAttribute="leading" id="38O-kM-Aa5"/>
                         <constraint firstItem="BFs-xp-0hK" firstAttribute="top" secondItem="5hL-D7-WSD" secondAttribute="top" constant="44" id="3EV-qk-xUx">
                             <userDefinedRuntimeAttributes>
                                 <userDefinedRuntimeAttribute type="boolean" keyPath="isAdaptateScreen" value="YES"/>
                             </userDefinedRuntimeAttributes>
                         </constraint>
-                        <constraint firstItem="Nlo-KM-bXh" firstAttribute="trailing" secondItem="mbv-WY-wh7" secondAttribute="trailing" id="3RE-PV-KvZ"/>
-                        <constraint firstItem="K7T-LI-kPk" firstAttribute="centerY" secondItem="LyS-KF-Qz6" secondAttribute="centerY" id="6Da-dB-0r9"/>
+                        <constraint firstItem="BZx-i2-dgG" firstAttribute="centerY" secondItem="LyS-KF-Qz6" secondAttribute="centerY" id="3Yu-uG-Eom"/>
                         <constraint firstAttribute="trailing" secondItem="BFs-xp-0hK" secondAttribute="trailing" id="8A1-Tq-iVS"/>
                         <constraint firstItem="BFs-xp-0hK" firstAttribute="leading" secondItem="5hL-D7-WSD" secondAttribute="leading" id="9pw-zz-8W7"/>
+                        <constraint firstItem="Nlo-KM-bXh" firstAttribute="leading" secondItem="BZx-i2-dgG" secondAttribute="leading" id="A37-RL-XQ9"/>
                         <constraint firstAttribute="trailing" secondItem="im1-za-B7I" secondAttribute="trailing" id="AP0-VG-NUV"/>
                         <constraint firstAttribute="trailing" secondItem="8XH-ji-SdS" secondAttribute="trailing" constant="15" id="DMA-ea-WzX"/>
                         <constraint firstItem="MIx-6r-58m" firstAttribute="top" secondItem="im1-za-B7I" secondAttribute="bottom" constant="13.5" id="IBu-y5-6ZV">
@@ -187,16 +176,15 @@
                                 <userDefinedRuntimeAttribute type="boolean" keyPath="isAdaptateScreen" value="YES"/>
                             </userDefinedRuntimeAttributes>
                         </constraint>
-                        <constraint firstItem="vep-P2-gfF" firstAttribute="leading" secondItem="K7T-LI-kPk" secondAttribute="leading" id="Qry-me-EAt"/>
                         <constraint firstAttribute="height" constant="175" id="R5V-df-RA6">
                             <userDefinedRuntimeAttributes>
                                 <userDefinedRuntimeAttribute type="boolean" keyPath="isAdaptateScreen" value="YES"/>
                             </userDefinedRuntimeAttributes>
                         </constraint>
                         <constraint firstItem="im1-za-B7I" firstAttribute="leading" secondItem="5hL-D7-WSD" secondAttribute="leading" id="UJW-LW-J3F"/>
-                        <constraint firstItem="K7T-LI-kPk" firstAttribute="leading" secondItem="LyS-KF-Qz6" secondAttribute="trailing" constant="38" id="VKt-de-ALi"/>
                         <constraint firstItem="8XH-ji-SdS" firstAttribute="centerY" secondItem="5D8-mC-3ND" secondAttribute="centerY" id="YR3-T5-By6"/>
                         <constraint firstAttribute="trailing" secondItem="wqI-5E-XhU" secondAttribute="trailing" id="ba3-Vs-IpT"/>
+                        <constraint firstItem="BZx-i2-dgG" firstAttribute="leading" secondItem="LyS-KF-Qz6" secondAttribute="trailing" constant="38" id="deY-S5-0Ue"/>
                         <constraint firstItem="LyS-KF-Qz6" firstAttribute="leading" secondItem="5D8-mC-3ND" secondAttribute="leading" id="ejK-G0-cah"/>
                         <constraint firstItem="LyS-KF-Qz6" firstAttribute="top" secondItem="wqI-5E-XhU" secondAttribute="bottom" constant="13.5" id="evm-Dr-sEL">
                             <userDefinedRuntimeAttributes>
@@ -204,21 +192,23 @@
                             </userDefinedRuntimeAttributes>
                         </constraint>
                         <constraint firstItem="Iza-34-gVb" firstAttribute="trailing" secondItem="8XH-ji-SdS" secondAttribute="trailing" id="ggK-SC-J24"/>
+                        <constraint firstItem="vep-P2-gfF" firstAttribute="leading" secondItem="BZx-i2-dgG" secondAttribute="leading" id="glA-nc-m4L"/>
                         <constraint firstItem="Iza-34-gVb" firstAttribute="leading" secondItem="8XH-ji-SdS" secondAttribute="leading" id="h0D-V5-vj2"/>
                         <constraint firstItem="Nlo-KM-bXh" firstAttribute="centerY" secondItem="MIx-6r-58m" secondAttribute="centerY" id="iAx-Jv-qli"/>
                         <constraint firstItem="Iza-34-gVb" firstAttribute="centerY" secondItem="cHi-pa-5lR" secondAttribute="centerY" id="iHz-5S-cL2"/>
+                        <constraint firstItem="vep-P2-gfF" firstAttribute="trailing" secondItem="BZx-i2-dgG" secondAttribute="trailing" id="j06-h0-yo3"/>
                         <constraint firstItem="cHi-pa-5lR" firstAttribute="leading" secondItem="5hL-D7-WSD" secondAttribute="leading" constant="14" id="jUD-mY-Sl6">
                             <userDefinedRuntimeAttributes>
                                 <userDefinedRuntimeAttribute type="boolean" keyPath="isAdaptateScreen" value="YES"/>
                             </userDefinedRuntimeAttributes>
                         </constraint>
-                        <constraint firstItem="mbv-WY-wh7" firstAttribute="leading" secondItem="8XH-ji-SdS" secondAttribute="leading" id="jsx-b6-Xwd"/>
                         <constraint firstItem="im1-za-B7I" firstAttribute="top" secondItem="wqI-5E-XhU" secondAttribute="bottom" constant="44" id="kRy-UG-qr6"/>
-                        <constraint firstItem="mbv-WY-wh7" firstAttribute="trailing" secondItem="8XH-ji-SdS" secondAttribute="trailing" id="tTB-HO-bcd"/>
+                        <constraint firstItem="8XH-ji-SdS" firstAttribute="leading" secondItem="BZx-i2-dgG" secondAttribute="leading" id="oK2-aY-dgS"/>
+                        <constraint firstItem="Nlo-KM-bXh" firstAttribute="trailing" secondItem="BZx-i2-dgG" secondAttribute="trailing" id="uAk-Kd-HOV"/>
                         <constraint firstItem="Iza-34-gVb" firstAttribute="height" secondItem="8XH-ji-SdS" secondAttribute="height" id="xTQ-Rb-h67"/>
                         <constraint firstItem="wqI-5E-XhU" firstAttribute="leading" secondItem="5hL-D7-WSD" secondAttribute="leading" id="yA8-mp-HpK"/>
+                        <constraint firstItem="BZx-i2-dgG" firstAttribute="trailing" secondItem="8XH-ji-SdS" secondAttribute="trailing" id="yTK-f9-zRC"/>
                         <constraint firstItem="MIx-6r-58m" firstAttribute="leading" secondItem="LyS-KF-Qz6" secondAttribute="leading" id="yv8-Vb-WHq"/>
-                        <constraint firstItem="mbv-WY-wh7" firstAttribute="centerY" secondItem="LyS-KF-Qz6" secondAttribute="centerY" id="zOC-rW-aC1"/>
                     </constraints>
                 </view>
                 <button opaque="NO" tag="30" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZZd-g8-cJU">

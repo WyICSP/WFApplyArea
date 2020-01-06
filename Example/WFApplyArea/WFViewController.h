@@ -6,8 +6,9 @@
 //  Copyright (c) 2019 wyxlh. All rights reserved.
 //
 
+#import "YFBaseViewController.h"
 @import UIKit;
 
-@interface WFViewController : UIViewController
+@interface WFViewController : YFBaseViewController
 
 @end

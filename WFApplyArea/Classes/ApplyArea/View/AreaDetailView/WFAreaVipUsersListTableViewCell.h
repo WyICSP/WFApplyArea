@@ -27,9 +27,10 @@ NS_ASSUME_NONNULL_BEGIN
 @property (weak, nonatomic) IBOutlet UIButton *editBtn;
 /// 是否失效
 @property (weak, nonatomic) IBOutlet UIImageView *invalidImg;
-
 /**背景*/
 @property (weak, nonatomic) IBOutlet UIView *contentsView;
+/// 分割线的高度
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *lineHeight;
 /**赋值*/
 @property (nonatomic, strong) WFGroupVipUserModel *model;
 /**去编辑*/

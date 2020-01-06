@@ -108,7 +108,7 @@
         }
     }
     //如果不等于 0 那么久应该打开
-    self.models.isSelectFirstSection = self.models.isOpenFirstSection = self.models.firstSelectNum != 0;
+    self.models.isSelectFirstSection = self.models.firstSelectNum != 0;
     
     //计算充电金额选中的个数
     for (WFBillingPriceMethodModel *pModel in self.models.billingPriceMethods) {
@@ -117,8 +117,8 @@
         }
     }
     //如果不等于 0 那么久应该打开
-    self.models.isSelectSecondSection = self.models.isOpenSecondSection = self.models.secondSelectNum != 0;
-    
+    self.models.isSelectSecondSection =  self.models.secondSelectNum != 0;
+    self.models.isOpenFirstSection = self.models.isOpenSecondSection = YES;
     //获取充电时间高度
     self.billMethodTimeHeight = [self getTimeHeight];
     //获取充电金额高度
@@ -518,7 +518,7 @@
 #pragma mark get set
 - (UITableView *)tableView {
     if (!_tableView) {
-        _tableView = [[UITableView alloc] initWithFrame:CGRectMake(KWidth(12.0f), 0, ScreenWidth-KWidth(24.0f), ScreenHeight - NavHeight - self.confirmBtn.height) style:UITableViewStyleGrouped];
+        _tableView = [[UITableView alloc] initWithFrame:CGRectMake(KWidth(12.0f), 0, ScreenWidth-KWidth(24.0f), ScreenHeight - NavHeight - self.confirmBtn.height-SafeAreaBottom) style:UITableViewStyleGrouped];
         _tableView.delegate = self;
         _tableView.dataSource = self;
         _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
@@ -568,7 +568,7 @@
 - (UIButton *)confirmBtn {
     if (!_confirmBtn) {
         _confirmBtn = [UIButton buttonWithType:UIButtonTypeSystem];
-        _confirmBtn.frame = CGRectMake(0, ScreenHeight - KHeight(45.0f) - NavHeight, ScreenWidth, KHeight(45));
+        _confirmBtn.frame = CGRectMake(0, ScreenHeight - KHeight(45.0f) - NavHeight - SafeAreaBottom, ScreenWidth, KHeight(45));
         [_confirmBtn setTitle:[self btnTitle] forState:UIControlStateNormal];
         [_confirmBtn addTarget:self action:@selector(clickConfirmBtn) forControlEvents:UIControlEventTouchUpInside];
         _confirmBtn.titleLabel.font = [UIFont boldSystemFontOfSize:16.0f];
@@ -589,7 +589,7 @@
     if (self.type == WFBilleMethodUpdateType) {
         title = @"确认修改";
     }else if (self.type == WFBilleMethodUpgradeType) {
-        title = @"下一步(5/6)";
+        title = @"下一步(5/7)";
     }else {
         title = @"完成";
     }

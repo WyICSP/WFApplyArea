@@ -21,6 +21,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, copy) NSString *groupAddress;
 /**片区名称*/
 @property (nonatomic, copy) NSString *groupName;
+/// 0:停用 1:启用
+@property (nonatomic, assign) BOOL status;
 /**是否新片区*/
 @property (nonatomic, assign) BOOL isNew;
 /**片区审核状态 0：申请中 1：申请通过 2：申请驳回*/
@@ -49,6 +51,10 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, assign) NSInteger rate;
 /**1是合伙人 0 公司 2 是其他*/
 @property (nonatomic, assign) NSInteger chargePersonFlag;
+/// 是否是新增的
+@property (nonatomic, assign) BOOL isAdd;
+/// 是否允许编辑
+@property (nonatomic, assign) BOOL isAllowEditName;
 @end
 
 

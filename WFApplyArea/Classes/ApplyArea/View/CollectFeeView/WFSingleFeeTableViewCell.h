@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@class WFDefaultChargeFeeModel;
+@class WFChargeFeePowerConfigModel;
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -22,10 +22,14 @@ NS_ASSUME_NONNULL_BEGIN
 @property (weak, nonatomic) IBOutlet UITextField *moneyTF;
 /**次数输入框*/
 @property (weak, nonatomic) IBOutlet UITextField *countTF;
+/// 功率
+@property (weak, nonatomic) IBOutlet UILabel *powerLbl;
 /**赋值操作*/
-@property (nonatomic, strong) WFDefaultChargeFeeModel *model;
+@property (nonatomic, strong) WFChargeFeePowerConfigModel *model;
 /**初始化*/
-+ (instancetype)cellWithTableView:(UITableView *)tableView;
++ (instancetype)cellWithTableView:(UITableView *)tableView
+                        indexPath:(NSIndexPath *)indexPath
+                        dataCount:(NSInteger)dataCount;
 @end
 
 NS_ASSUME_NONNULL_END

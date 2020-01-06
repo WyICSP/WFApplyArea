@@ -23,6 +23,7 @@
 @class WFGroupVipUserModel;
 @class WFUpgradeAreaModel;
 @class WFUpgradeAreaDiscountModel;
+@class WFApplyAreaOtherConfigModel;
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -52,7 +53,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 
 
-#pragma mark 收费方式接口
+#pragma mark 收费方式 和其他默认设置接口
 /**
  获取收费信息
 
@@ -61,6 +62,13 @@ NS_ASSUME_NONNULL_BEGIN
  */
 + (void)getChargeMethodWithParams:(NSDictionary *)params
                       resultBlock:(void(^)(NSArray <WFApplyChargeMethod *> *models))resultBlock;
+
+
+/// 获取其他默认设置接口
+/// @param params 参数
+/// @param resultBlock 返回结果
++ (void)getOtherDefaultConfigWithParams:(NSDictionary *)params
+                            resultBlock:(void(^)(WFApplyAreaOtherConfigModel *models))resultBlock;
 
 #pragma mark 分成设置
 /**
@@ -93,6 +101,13 @@ NS_ASSUME_NONNULL_BEGIN
                          resultBlock:(void(^)(void))resultBlock;
 
 
+/// 根据手机号 获取合伙人信息
+/// @param params 参数
+/// @param resultBlock 返回结果
++ (void)getUserInfoByMobileWithParams:(NSDictionary *)params
+                          resultBlock:(void(^)(NSDictionary *info))resultBlock;
+
+
 #pragma mark 优惠收费相关接口
 /**
  添加vip手机号
@@ -123,6 +138,13 @@ NS_ASSUME_NONNULL_BEGIN
 + (void)getVipUserWithParams:(NSDictionary *)params
                  resultBlock:(void(^)(NSArray <WFGroupVipUserModel *> *models))resultBlock
                    failBlock:(void(^)(void))failBlock;
+
+
+/// 删除 vip 用户
+/// @param params 参数
+/// @param resultBlock 返回结果
++ (void)deleteVipUserWithParams:(NSDictionary *)params
+                    resultBlock:(void(^)(void))resultBlock;
 
 
 #pragma mark 获取计费方式
@@ -218,7 +240,7 @@ NS_ASSUME_NONNULL_BEGIN
  @param resultBlock 返回结果
  */
 + (void)getAreaDetailWithParams:(NSDictionary *)params
-                    resultBlock:(void(^)(WFAreaDetailModel *models))resultBlock;
+                    resultBlock:(void(^)(NSDictionary *models))resultBlock;
 
 
 #pragma mark  编辑计费方式 和收费方式
@@ -269,6 +291,13 @@ NS_ASSUME_NONNULL_BEGIN
  */
 + (void)updateManyTimeFeeWithPamrams:(NSDictionary *)params
                          resultBlock:(void(^)(void))resultBlock;
+
+
+/// 修改充满自停设置
+/// @param params 参数
+/// @param resultBlock 返回结果
++ (void)updateOtherSetWithParams:(NSDictionary *)params
+                     resultBlock:(void(^)(void))resultBlock;
 
 
 #pragma mark 删除多次收费 和单次收费
@@ -336,6 +365,20 @@ NS_ASSUME_NONNULL_BEGIN
 /// @param resultBlock 返回结果
 + (void)verificationAreaNameWithParams:(NSDictionary *)params
                            resultBlock:(void(^)(void))resultBlock;
+
+
+#pragma mark 搜索片区和会员
+/// 搜索片区
+/// @param params 参数
+/// @param resultBlock 返回结果
++ (void)getSearchAreaListWithParams:(NSDictionary *)params
+                        resultBlock:(void(^)(NSArray <WFMyAreaListModel *> *models))resultBlock;
+
+/// 搜索vip
+/// @param params 参数
+/// @param resultBlock 返回结果
++ (void)getSearchVipListWithParams:(NSDictionary *)params
+                        resultBlock:(void(^)(NSArray <WFGroupVipUserModel *> *models))resultBlock;
 
 @end
 

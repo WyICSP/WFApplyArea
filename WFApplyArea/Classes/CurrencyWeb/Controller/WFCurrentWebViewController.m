@@ -62,6 +62,9 @@
 
 #pragma mark 设置页面
 - (void)setUI {
+    //统一把 uuid 和 APPversion 拼接在链接后面
+    self.urlString = [NSString stringWithFormat:@"%@&uuid=%@&appVersion=%@",self.urlString,USER_UUID,APP_VERSION];
+    DLog(@"%@",self.urlString);
     //添加 webview
     [self.view addSubview:self.dwebview];
     //添加进度条

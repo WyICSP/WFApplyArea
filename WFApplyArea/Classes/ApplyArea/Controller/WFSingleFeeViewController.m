@@ -10,6 +10,7 @@
 #import "WFLookPowerFormViewController.h"
 #import "WFManyTimeFeeViewController.h"
 #import "WFBilleMethodSectionView.h"
+#import "WFSingleFeeUnifiedView.h"
 #import "WFSinglePowerTableViewCell.h"
 #import "WFSingleFeeTableViewCell.h"
 #import "WFDefaultChargeFeeModel.h"
@@ -84,7 +85,6 @@
     
     for (WFDefaultChargeFeeModel *itemModel in self.models) {
         if (self.type == WFUpdateSingleFeeApplyType || self.type == WFUpdateSingleFeeUpgradeType) {
-            //获取默认的时候默认选中第一个
             if (itemModel.chargeType == 0) {
                 //统一收费
                 self.unifiedModel = itemModel;
@@ -93,6 +93,7 @@
             }else if (itemModel.chargeType == 1) {
                 //功率收费
                 self.powerModel = itemModel;
+                self.powerModel.isOpenSecondSection = YES;
             }
         }else if (self.type == WFUpdateSingleFeeUpdateType){
             //修改回显的时候
@@ -102,10 +103,12 @@
                     self.unifiedModel = itemModel;
                     self.unifiedModel.unifiedPrice = self.editModel.unifiedPrice;
                     self.unifiedModel.unifiedTime = self.editModel.unifiedTime;
+                    self.unifiedModel.powerIntervalConfig = self.editModel.powerIntervalConfig;
                     self.unifiedModel.isSelectFirstSection = self.unifiedModel.isOpenFirstSection = YES;
                 }else if (itemModel.chargeType == 1) {
                     //功率收费
                     self.powerModel = itemModel;
+                    self.powerModel.isOpenSecondSection = YES;
                 }
             }else if (self.editModel.chargeType == 1){
                 if (itemModel.chargeType == 1) {
@@ -117,6 +120,7 @@
                 }else if (itemModel.chargeType == 0) {
                     //统一收费
                     self.unifiedModel = itemModel;
+                    self.unifiedModel.isOpenFirstSection = YES;
                 }
             }
         }
@@ -167,6 +171,8 @@
             [dict safeSetObject:@(sModel.unifiedPrice.integerValue) forKey:@"unifiedPrice"];
             [dict safeSetObject:@(sModel.unifiedTime) forKey:@"unifiedTime"];
             [dict safeSetObject:@(sModel.unitPrice.doubleValue) forKey:@"unitPrice"];
+            NSArray *powerConfigArray = [self getSingleFeeConfigWithSmodel:sModel];
+            [dict safeSetObject:powerConfigArray forKey:@"powerIntervalList"];
         }else if (sModel.isSelectSecondSection) {
             //统一收费
             [dict safeSetObject:@(sModel.chargeType) forKey:@"chargeType"];
@@ -177,10 +183,26 @@
             [dict safeSetObject:@(sModel.unifiedPrice.integerValue) forKey:@"unifiedPrice"];
             [dict safeSetObject:@(sModel.unifiedTime) forKey:@"unifiedTime"];
             [dict safeSetObject:@(sModel.unitPrice.doubleValue) forKey:@"unitPrice"];
-            
+            [dict safeSetObject:@[] forKey:@"powerIntervalList"];
         }
     }
     return dict;
+}
+
+/// 获取单次收费功能配置信息
+- (NSMutableArray *)getSingleFeeConfigWithSmodel:(WFDefaultChargeFeeModel *)sModel {
+    NSMutableArray *array = [[NSMutableArray alloc] init];
+    for (WFChargeFeePowerConfigModel *pModel in sModel.powerIntervalConfig) {
+        NSMutableDictionary *dict = [NSMutableDictionary dictionary];
+        [dict safeSetObject:@(pModel.maxPower) forKey:@"maxPower"];
+        [dict safeSetObject:@(pModel.minPower) forKey:@"minPower"];
+        [dict safeSetObject:pModel.price forKey:@"price"];
+        [dict safeSetObject:pModel.singleChargingPowerIntervalId forKey:@"singleChargingPowerIntervalConfigId"];
+        [dict safeSetObject:@(pModel.time) forKey:@"time"];
+        [dict safeSetObject:@(pModel.proportion) forKey:@"proportion"];
+        [array addObject:dict];
+    }
+    return array;
 }
 
 /**
@@ -212,6 +234,24 @@
             self.unifiedModel.isOpenFirstSection = !self.unifiedModel.isOpenFirstSection;
         }else if (section == 1) {
             self.powerModel.isOpenSecondSection = !self.powerModel.isOpenSecondSection;
+        }
+    }
+    [self.tableView reloadData];
+}
+
+
+/// 刷新数据
+/// @param time 时间
+/// @param type 1 时间, 2 价格
+/// @param price 价格
+- (void)updatePowerTimeWithTime:(double)time
+                           type:(NSInteger)type
+                          price:(NSNumber *)price {
+    for (WFChargeFeePowerConfigModel *pModel in self.unifiedModel.powerIntervalConfig) {
+        if (type == 1) {
+            pModel.time = pModel.proportion *time;
+        }else {
+            pModel.price = @(pModel.proportion *price.doubleValue);
         }
     }
     [self.tableView reloadData];
@@ -265,7 +305,15 @@
             if (sModel.unifiedPrice.floatValue >= 0 && sModel.unifiedTime > 0) {
                 isComplete = YES;
             }else {
-                isComplete = NO;
+                return NO;
+            }
+            //下面的功率
+            for (WFChargeFeePowerConfigModel *cModel in sModel.powerIntervalConfig) {
+                if (cModel.price.floatValue >= 0 && cModel.time > 0) {
+                    isComplete = YES;
+                }else {
+                    return NO;
+                }
             }
         }else if (sModel.isSelectSecondSection) {
             //统一收费
@@ -286,13 +334,13 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return section == 0 ? self.unifiedModel.isOpenFirstSection : self.powerModel.isOpenSecondSection;
+    return section == 0 ? self.unifiedModel.powerIntervalConfig.count : self.powerModel.isOpenSecondSection;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.section == 0) {
-        WFSingleFeeTableViewCell *cell = [WFSingleFeeTableViewCell cellWithTableView:tableView];
-        cell.model = self.unifiedModel;
+        WFSingleFeeTableViewCell *cell = [WFSingleFeeTableViewCell cellWithTableView:tableView indexPath:indexPath dataCount:self.unifiedModel.powerIntervalConfig.count];
+        cell.model = [self.unifiedModel.powerIntervalConfig safeObjectAtIndex:indexPath.row];
         return cell;
     }
     WFSinglePowerTableViewCell *cell = [WFSinglePowerTableViewCell cellWithTableView:tableView];
@@ -306,22 +354,29 @@
 }
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
-    WFBilleMethodSectionView *sectionView = [[[NSBundle bundleForClass:[self class]] loadNibNamed:@"WFBilleMethodSectionView" owner:nil options:nil] firstObject];
-    sectionView.title.text = section == 0 ? @"统一收费" : @"功率收费";
+    
     //当前文件的 bundle
     NSBundle *currentBundler = [NSBundle bundleForClass:[self class]];
     if (section == 0) {
         //得到图片的路径
-        NSString *showImgPath = [NSString getImagePathWithCurrentBundler:currentBundler PhotoName:self.unifiedModel.isOpenFirstSection ? @"showTop" : @"showBottom" bundlerName:@"WFApplyArea.bundle"];
-        [sectionView.showImgBtn setImage:[UIImage imageWithContentsOfFile:showImgPath] forState:0];
+        WFSingleFeeUnifiedView *unifiedView = [[currentBundler loadNibNamed:@"WFSingleFeeUnifiedView" owner:nil options:nil] firstObject];
+        unifiedView.model = self.unifiedModel;
         //得到图片的路径
         NSString *timeImgPath = [NSString getImagePathWithCurrentBundler:currentBundler PhotoName:self.unifiedModel.isSelectFirstSection ? @"selectLogo" : @"unSelect" bundlerName:@"WFApplyArea.bundle"];
-        [sectionView.timeBtn setImage:[UIImage imageWithContentsOfFile:timeImgPath] forState:0];
-        //设置圆角
-        WFRadiusRectCorner radiusRect = self.unifiedModel.isOpenFirstSection ? (WFRadiusRectCornerTopLeft | WFRadiusRectCornerTopRight) : WFRadiusRectCornerAllCorners;
-        [sectionView.contentsView setRounderCornerWithRadius:10.0f rectCorner:radiusRect imageColor:UIColor.whiteColor size:CGSizeMake(ScreenWidth-KWidth(24.0f), KHeight(50.0f))];
-        [sectionView.showImgBtn setTitle:@"按照每小时收费" forState:0];
+        [unifiedView.timeBtn setImage:[UIImage imageWithContentsOfFile:timeImgPath] forState:0];
+        @weakify(self)
+        unifiedView.clickSectionBlock = ^(NSInteger index) {
+            @strongify(self)
+            [self handleOpenOrChoseSectionViewWithSection:section index:index];
+        };
+        unifiedView.reloadTimePriceBlock = ^(NSInteger time, NSInteger type, NSNumber * _Nonnull price) {
+            @strongify(self)
+            [self updatePowerTimeWithTime:time type:type price:price];
+        };
+        return unifiedView;
     }else if (section == 1) {
+        WFBilleMethodSectionView *sectionView = [[[NSBundle bundleForClass:[self class]] loadNibNamed:@"WFBilleMethodSectionView" owner:nil options:nil] firstObject];
+        sectionView.title.text = @"功率收费";
         //得到图片的路径
         NSString *showImgPath = [NSString getImagePathWithCurrentBundler:currentBundler PhotoName:self.powerModel.isOpenSecondSection ? @"showTop" : @"showBottom" bundlerName:@"WFApplyArea.bundle"];
         [sectionView.showImgBtn setImage:[UIImage imageWithContentsOfFile:showImgPath] forState:0];
@@ -332,14 +387,15 @@
         WFRadiusRectCorner radiusRect = self.powerModel.isOpenSecondSection ? (WFRadiusRectCornerTopLeft | WFRadiusRectCornerTopRight) : WFRadiusRectCornerAllCorners;
         [sectionView.contentsView setRounderCornerWithRadius:10.0f rectCorner:radiusRect imageColor:UIColor.whiteColor size:CGSizeMake(ScreenWidth-KWidth(24.0f), KHeight(50.0f))];
         [sectionView.showImgBtn setTitle:@"" forState:0];
+        @weakify(self)
+        sectionView.clickSectionBlock = ^(NSInteger index){
+            @strongify(self)
+            [self handleOpenOrChoseSectionViewWithSection:section index:index];
+        };
+        return sectionView;
     }
-    
-    @weakify(self)
-    sectionView.clickSectionBlock = ^(NSInteger index){
-        @strongify(self)
-        [self handleOpenOrChoseSectionViewWithSection:section index:index];
-    };
-    return sectionView;
+    return [UIView new];
+   
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
@@ -358,7 +414,7 @@
 #pragma mark get set
 - (UITableView *)tableView {
     if (!_tableView) {
-        _tableView = [[UITableView alloc] initWithFrame:CGRectMake(KWidth(12.0f), 0, ScreenWidth-KWidth(24.0f), ScreenHeight - NavHeight - self.confirmBtn.height) style:UITableViewStyleGrouped];
+        _tableView = [[UITableView alloc] initWithFrame:CGRectMake(KWidth(12.0f), 0, ScreenWidth-KWidth(24.0f), ScreenHeight - NavHeight - self.confirmBtn.height-SafeAreaBottom) style:UITableViewStyleGrouped];
         _tableView.delegate = self;
         _tableView.dataSource = self;
         _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
@@ -395,7 +451,7 @@
 - (UIButton *)confirmBtn {
     if (!_confirmBtn) {
         _confirmBtn = [UIButton buttonWithType:UIButtonTypeSystem];
-        _confirmBtn.frame = CGRectMake(0, ScreenHeight - KHeight(45.0f) - NavHeight, ScreenWidth, KHeight(45));
+        _confirmBtn.frame = CGRectMake(0, ScreenHeight - KHeight(45.0f) - NavHeight - SafeAreaBottom, ScreenWidth, KHeight(45));
         [_confirmBtn setTitle:[self btnTitle] forState:0];
         [_confirmBtn addTarget:self action:@selector(clickConfirmBtn) forControlEvents:UIControlEventTouchUpInside];
         _confirmBtn.titleLabel.font = [UIFont boldSystemFontOfSize:16.0f];
@@ -416,7 +472,7 @@
     if (self.type == WFUpdateSingleFeeUpdateType) {
         title = @"确认修改";
     }else if (self.type == WFUpdateSingleFeeUpgradeType) {
-        title = @"下一步(2/6)";
+        title = @"下一步(2/7)";
     }else {
         title = @"完成";
     }
@@ -465,5 +521,6 @@
         return self;
     };
 }
+
 
 @end

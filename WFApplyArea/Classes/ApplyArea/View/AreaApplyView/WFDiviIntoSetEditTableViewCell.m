@@ -54,7 +54,15 @@ static NSString *const cellId = @"WFDiviIntoSetEditTableViewCell";
     self.nameTF.text = model.name;
     self.phoneTF.text = model.phone;
     self.percentTF.text = [NSString stringWithFormat:@"%ld",(long)model.rate];
-    self.nameTF.enabled = self.phoneTF.enabled = self.percentTF.enabled =model.chargePersonFlag == 2;
+    if (model.chargePersonFlag == 2) {
+        //允许编辑
+        self.nameTF.enabled = self.phoneTF.enabled = self.percentTF.enabled = YES;
+        //重新设置 name 能否修改
+        self.nameTF.enabled = model.isAllowEditName;
+    }else {
+        //不允许编辑
+        self.nameTF.enabled = self.phoneTF.enabled = self.percentTF.enabled = NO;
+    }
     self.deleteBtn.hidden = model.chargePersonFlag != 2;
     self.percentTF.backgroundColor = model.chargePersonFlag == 2 ? UIColorFromRGB(0xF5F5F5) : UIColor.whiteColor;
 }
@@ -74,8 +82,14 @@ static NSString *const cellId = @"WFDiviIntoSetEditTableViewCell";
         //电话
         if (textField == self.phoneTF && textField.text.length > 11)
             textField.text = [textField.text substringWithRange:NSMakeRange(0, 11)];
-        
+                
         self.model.phone = textField.text;
+        //只要处于变化 那么就需要把 isadd ,isAllowEditName 置为 YES 并且名字要设为可编辑
+        self.model.isAdd = self.model.isAllowEditName = self.nameTF.enabled = YES;
+        //如果是 11 位的时候 需要验证手机号是否重复
+        if (textField.text.length == 11) {
+            !self.verificationPhoneBlock ? : self.verificationPhoneBlock(textField.text);
+        }
     }else if (textField == self.percentTF) {
         
         if (textField.text.integerValue > 0) {

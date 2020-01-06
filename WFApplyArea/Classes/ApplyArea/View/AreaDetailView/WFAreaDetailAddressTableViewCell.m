@@ -27,6 +27,7 @@ static NSString *const cellId = @"WFAreaDetailAddressTableViewCell";
     self.selectionStyle = 0;
     self.contentsView.layer.cornerRadius = 10.0f;
     self.topBgView.backgroundColor = NavColor;
+    self.detailAddress.adjustsFontSizeToFitWidth = YES;
     // Initialization code
 }
 
@@ -39,14 +40,19 @@ static NSString *const cellId = @"WFAreaDetailAddressTableViewCell";
 - (void)bindToCell:(WFAreaDetailModel *)model {
     
     self.editBtn.hidden = !model.isUpdate;
-    //0：申请中 1：申请通过 2：申请驳回
-    if (model.auditStatus == 0) {
-        self.status.text = @"使用中";
-    }else if (model.auditStatus == 1) {
-        self.status.text = @"审核通过";
+    if (model.status) {
+        //0：申请中 1：申请通过 2：申请驳回
+        if (model.auditStatus == 0) {
+            self.status.text = @"使用中";
+        }else if (model.auditStatus == 1) {
+            self.status.text = @"审核通过";
+        }else {
+            self.status.text = @"审核驳回";
+        }
     }else {
-        self.status.text = @"审核驳回";
+        self.status.text = @"已停用";
     }
+    
     
     self.address.text = model.areaName;
     self.detailAddress.text = model.address;

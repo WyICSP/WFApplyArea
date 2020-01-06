@@ -15,9 +15,12 @@ NS_ASSUME_NONNULL_BEGIN
 @property (weak, nonatomic) IBOutlet UIButton *feeBtn;
 /**充电桩*/
 @property (weak, nonatomic) IBOutlet UIButton *pileBtn;
+/// 网关
+@property (weak, nonatomic) IBOutlet UIButton *getewayBtn;
 /**左边的一个脚*/
 @property (weak, nonatomic) IBOutlet UIImageView *leftFoot;
 /**右边的一个脚*/
+@property (weak, nonatomic) IBOutlet UIImageView *centerFoot;
 @property (weak, nonatomic) IBOutlet UIImageView *rightFoot;
 /**按钮点击事件*/
 @property (nonatomic, copy) void (^clickBtnBlock)(NSInteger tag);

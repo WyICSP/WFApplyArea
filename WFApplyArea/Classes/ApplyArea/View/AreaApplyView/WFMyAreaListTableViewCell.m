@@ -47,40 +47,43 @@ static NSString *const cellId = @"WFMyAreaListTableViewCell";
     self.time.text = model.createTime;
     
     self.qrBtn.hidden = model.auditStatus == 2;
-    if (model.isNew) {
-        //新片区 状态 0：申请中 1：申请通过 2：申请驳回*/
-        if (model.auditStatus == 0) {
-            self.state.text = @"使用中";
-            self.state.textColor = NavColor;
-        }else if (model.auditStatus == 1) {
-            self.state.text = @"审核通过";
-            self.state.textColor = UIColorFromRGB(0x333333);
-        }else if (model.auditStatus == 2) {
-            self.state.text = @"审核驳回";
-            self.state.textColor = NavColor;
+    if (model.status) {
+        if (model.isNew) {
+            //新片区 状态 0：申请中 1：申请通过 2：申请驳回*/
+            if (model.auditStatus == 0) {
+                self.state.text = @"使用中";
+                self.state.textColor = NavColor;
+            }else if (model.auditStatus == 1) {
+                self.state.text = @"审核通过";
+                self.state.textColor = UIColorFromRGB(0x333333);
+            }else if (model.auditStatus == 2) {
+                self.state.text = @"审核驳回";
+                self.state.textColor = NavColor;
+            }
+        }else {
+            //老片区 0:待处理 1：通过 2:驳回 3：编辑 4：编辑失败
+            if (model.applyGroupStatus == 0) {
+                self.state.text = @"待处理";
+                self.state.textColor = NavColor;
+            }else if (model.applyGroupStatus == 1) {
+                self.state.text = @"审核通过";
+                self.state.textColor = UIColorFromRGB(0x333333);
+            }else if (model.applyGroupStatus == 2) {
+                self.state.text = @"审核驳回";
+                self.state.textColor = NavColor;
+            }else if (model.applyGroupStatus == 3) {
+                self.state.text = @"等待审核";
+                self.state.textColor = NavColor;
+            }else if (model.applyGroupStatus == 4) {
+                self.state.text = @"编辑失败";
+                self.state.textColor = NavColor;
+            }
         }
     }else {
-        //老片区 0:待处理 1：通过 2:驳回 3：编辑 4：编辑失败
-        if (model.applyGroupStatus == 0) {
-            self.state.text = @"待处理";
-            self.state.textColor = NavColor;
-        }else if (model.applyGroupStatus == 1) {
-            self.state.text = @"审核通过";
-            self.state.textColor = UIColorFromRGB(0x333333);
-        }else if (model.applyGroupStatus == 2) {
-            self.state.text = @"审核驳回";
-            self.state.textColor = NavColor;
-        }else if (model.applyGroupStatus == 3) {
-            self.state.text = @"等待审核";
-            self.state.textColor = NavColor;
-        }else if (model.applyGroupStatus == 4) {
-            self.state.text = @"编辑失败";
-            self.state.textColor = NavColor;
-        }
+        self.state.text = @"已停用";
+        self.state.textColor = NavColor;
     }
-    
 }
-
 
 - (IBAction)clickBtn:(id)sender {
     !self.showQRCodeBlock ? : self.showQRCodeBlock();

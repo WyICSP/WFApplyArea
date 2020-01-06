@@ -27,6 +27,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, copy) void (^deleteItemBlock)(void);
 /**占比*/
 @property (nonatomic, copy) void (^checkPresentBlock)(NSInteger present);
+/// 验证输入的手机号是否重复
+@property (nonatomic, copy) void (^verificationPhoneBlock)(NSString *phone);
 /**赋值*/
 @property (nonatomic, strong) WFMyAreaDividIntoSetModel *model;
 /**最大值*/
