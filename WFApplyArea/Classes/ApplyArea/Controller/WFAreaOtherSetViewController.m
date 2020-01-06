@@ -21,6 +21,8 @@
 @property (weak, nonatomic) IBOutlet UITextField *startPriceTF;
 /// 确认按钮
 @property (weak, nonatomic) IBOutlet UIButton *comfireBtn;
+/// 提示语
+@property (weak, nonatomic) IBOutlet UILabel *markLbl;
 /// 其他设置配置
 @property (nonatomic, strong, nullable) WFApplyAreaOtherConfigModel *otherConfigModel;
 
@@ -36,7 +38,7 @@
 
 #pragma mark 私有方法
 - (void)setUI {
-    self.title = @"其他设置";
+    self.title = @"充满自停设置";
     self.contentViews.layer.cornerRadius = 10.0f;
     self.startPriceTF.delegate = self;
     self.view.backgroundColor = UIColorFromRGB(0xF5F5F5);
@@ -88,7 +90,7 @@
 - (void)updateOtherSet {
     
     if (![self isOtherConfigComplete]) {
-        [YFToast showMessage:@"请正确填写其他设置" inView:self.view];
+        [YFToast showMessage:@"请正确填写充满自停设置" inView:self.view];
         return;
     }
     
@@ -117,7 +119,7 @@
 - (void)upgradeOldAreaToNewArea {
     
     if (![self isOtherConfigComplete]) {
-        [YFToast showMessage:@"请正确填写其他设置" inView:self.view];
+        [YFToast showMessage:@"请正确填写充满自停设置" inView:self.view];
         return;
     }
     //片区详细地址
@@ -172,7 +174,7 @@
     //起步价
     if (textField == self.startPriceTF) {
         if (textField.text.doubleValue == 0) {
-            self.startPriceTF.text = @"";
+            self.startPriceTF.text = @"0";
         }
     }
 }
@@ -186,6 +188,8 @@
         }else if (textField.text.intValue < 1) {
             textField.text = @"";
         }
+        //提示语的显示与隐藏
+        self.markLbl.hidden = textField.text.intValue < 6 ? NO : YES;
     }else if (self.startPriceTF == textField) {
         //最低消费
         if (textField.text.doubleValue > 1) {

@@ -167,7 +167,7 @@
     }
     
     if (![self isOtherConfigComplete]) {
-        [YFToast showMessage:@"请正确填写其他设置" inView:self.view];
+        [YFToast showMessage:@"请正确填写充满自停设置" inView:self.view];
         return;
     }
     

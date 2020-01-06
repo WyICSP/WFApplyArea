@@ -92,7 +92,7 @@
                                     <action selector="textFieldDidChange:" destination="KGk-i7-Jjw" eventType="editingChanged" id="J6i-ry-vrT"/>
                                 </connections>
                             </textField>
-                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="请输入充电起步价" textAlignment="right" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ynJ-jf-Fls">
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="请填写 0-1的正整数" textAlignment="right" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ynJ-jf-Fls">
                                 <rect key="frame" x="125" y="56.5" width="185" height="18.5"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" keyboardType="decimalPad"/>
@@ -100,7 +100,7 @@
                                     <action selector="textFieldDidChange:" destination="KGk-i7-Jjw" eventType="editingChanged" id="3gV-Gd-NDr"/>
                                 </connections>
                             </textField>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="请填写6-12的正整数" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7VK-8B-N96">
+                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="请填写6-12的正整数" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7VK-8B-N96">
                                 <rect key="frame" x="260.5" y="39.5" width="75.5" height="10"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="8"/>
                                 <color key="textColor" red="0.92549019607843142" green="0.50588235294117645" blue="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -147,6 +147,7 @@
             <viewLayoutGuide key="safeArea" id="aW0-zy-SZf"/>
             <connections>
                 <outlet property="contentsView" destination="aTZ-k6-g6f" id="Rv4-tV-GCz"/>
+                <outlet property="markLbl" destination="7VK-8B-N96" id="pxb-Az-ZuS"/>
                 <outlet property="maxTimeTF" destination="lz2-Uk-UJg" id="Hze-cL-Q4v"/>
                 <outlet property="moneyTF" destination="ynJ-jf-Fls" id="CcK-lN-Jan"/>
             </connections>

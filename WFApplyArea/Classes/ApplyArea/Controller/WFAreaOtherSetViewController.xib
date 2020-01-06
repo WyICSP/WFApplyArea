@@ -12,6 +12,7 @@
             <connections>
                 <outlet property="comfireBtn" destination="iKC-6r-Oci" id="7KB-4W-a6r"/>
                 <outlet property="contentViews" destination="Q8z-4Z-XC2" id="2nH-Su-7jk"/>
+                <outlet property="markLbl" destination="RXM-7i-DOl" id="Jit-Hh-LqG"/>
                 <outlet property="maxTimeTF" destination="Czn-MO-5mR" id="1xF-3z-5o0"/>
                 <outlet property="startPriceTF" destination="LUq-ev-YMK" id="FsZ-Pd-wXz"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
@@ -114,7 +115,7 @@
                                 <action selector="textFieldDidChange:" destination="-1" eventType="editingChanged" id="bCv-5Y-zB8"/>
                             </connections>
                         </textField>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="请填写6-12的正整数" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RXM-7i-DOl">
+                        <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="请填写6-12的正整数" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RXM-7i-DOl">
                             <rect key="frame" x="302.5" y="76.5" width="75.5" height="10"/>
                             <fontDescription key="fontDescription" type="system" pointSize="8"/>
                             <color key="textColor" red="0.92549019610000005" green="0.50588235290000005" blue="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

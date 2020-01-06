@@ -60,7 +60,7 @@ static NSString *const cellId = @"WFApplyAreaOtherTableViewCell";
     //起步价
     if (textField == self.moneyTF) {
         if (textField.text.doubleValue == 0) {
-            self.moneyTF.text = @"";
+            self.moneyTF.text = @"0";
         }
     }
 }
@@ -75,6 +75,9 @@ static NSString *const cellId = @"WFApplyAreaOtherTableViewCell";
         }else if (textField.text.intValue < 1) {
             textField.text = @"";
         }
+        //提示语的显示与隐藏
+        self.markLbl.hidden = textField.text.intValue < 6 ? NO : YES;
+        //赋值
         self.mdoels.maxChargingTime.defaultValue = textField.text;
     }else if (self.moneyTF == textField) {
         //最低消费

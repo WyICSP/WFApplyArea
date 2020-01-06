@@ -251,7 +251,7 @@
         if (type == 1) {
             pModel.time = pModel.proportion *time;
         }else {
-            pModel.price = @(pModel.proportion *price.doubleValue);
+            pModel.price = price;
         }
     }
     [self.tableView reloadData];
