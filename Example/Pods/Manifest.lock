@@ -23,7 +23,7 @@ PODS:
   - SDWebImage/Core (5.3.1)
   - SVProgressHUD (2.2.5)
   - TZImagePickerController (3.2.7)
-  - WFApplyArea (0.4.8):
+  - WFApplyArea (0.4.9):
     - IQKeyboardManager
     - MJRefresh
     - TZImagePickerController
@@ -85,7 +85,7 @@ SPEC CHECKSUMS:
   SDWebImage: 7137d57385fb632129838c1e6ab9528a22c666cc
   SVProgressHUD: 1428aafac632c1f86f62aa4243ec12008d7a51d6
   TZImagePickerController: 821b81f83594a736e831a018f2a2ce31822ddf0b
-  WFApplyArea: a90fb6acf99cdd32029013801dd8be4163b54ac2
+  WFApplyArea: 8ed0503c86a052171d18384ef363433205bf0406
   WFBasics: 823e6c493f61b14e94814f8dd645510c000b9d4d
   WFHomeAddress: 4eb27df8a873af9161d147f8b10a1d50ba725467
   WFKitLogin: d766ecef306ddf426a87df37cf0d036426bca8a4
@@ -93,6 +93,6 @@ SPEC CHECKSUMS:
   WKFunComponents: a4cde3e92b1c5841be91a9eefd7968c8ce903f73
   WYAutoLayout: 3cb136ddc2efa9faaecf15876e6a9b2a6fd7c6cb
 
-PODFILE CHECKSUM: 54122df2aa37b6465f631860c595223bf2ad3b2d
+PODFILE CHECKSUM: 472aff1d85bf4435d93c4fa70278448847f4e9c3
 
 COCOAPODS: 1.7.3

@@ -29,6 +29,7 @@
 //    // Override point for customization after application launch.
     [self createTabbar];
     [self configureKeyboardManager];
+        
     return YES;
 }
 

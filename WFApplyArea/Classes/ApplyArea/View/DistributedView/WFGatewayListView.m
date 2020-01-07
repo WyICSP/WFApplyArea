@@ -80,7 +80,7 @@
         @strongify(self)
         [self requestVipDataSuccessWith:models];
     } failBlock:^{
-        @strongify(self)
+//        @strongify(self)
     }];
 }
 

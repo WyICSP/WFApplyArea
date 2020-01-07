@@ -104,7 +104,7 @@
 }
 
 - (void)requestSuccessWithModels:(NSArray <WFApplyChargeMethod *> *)models {
-    [WFAreaFeeMsgData shareInstace].feeData = models;
+    [WFAreaFeeMsgData shareInstace].feeData = (NSMutableArray *)models;
     for (WFApplyChargeMethod *model in models) {
         if (model.chargingModePlay.integerValue == 1) {
             //单次收费

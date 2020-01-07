@@ -21,7 +21,7 @@
 #import "UserData.h"
 #import "WKHelp.h"
 
-@interface WFMyAreaViewController ()<UITableViewDelegate,UITableViewDataSource,UISearchControllerDelegate,UISearchResultsUpdating,UITextFieldDelegate>
+@interface WFMyAreaViewController ()<UITableViewDelegate,UITableViewDataSource,UISearchControllerDelegate,UISearchResultsUpdating,UISearchBarDelegate>
 ///searchController
 @property (nonatomic,retain) UISearchController *searchController;
 /**tableView*/
@@ -126,6 +126,9 @@
 
 #pragma mark UITableViewDelegate,UITableViewDataSource
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
+    if (self.isBeginEdit && self.searchModels.count == 0) {
+        return self.models.count;
+    }
     return self.isBeginEdit ? self.searchModels.count : self.models.count;
 }
 
@@ -135,7 +138,12 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     WFMyAreaListTableViewCell *cell = [WFMyAreaListTableViewCell cellWithTableView:tableView];
-    WFMyAreaListModel *itemModel = self.isBeginEdit ? [self.searchModels safeObjectAtIndex:indexPath.section] : [self.models safeObjectAtIndex:indexPath.section];
+    WFMyAreaListModel *itemModel = nil;
+    if (self.isBeginEdit && self.searchModels.count == 0) {
+        itemModel = [self.models safeObjectAtIndex:indexPath.section];
+    }else {
+        itemModel = self.isBeginEdit ? [self.searchModels safeObjectAtIndex:indexPath.section] : [self.models safeObjectAtIndex:indexPath.section];
+    }
     cell.model = itemModel;
     @weakify(self)
     cell.showQRCodeBlock = ^{
@@ -178,8 +186,8 @@
 
 //谓词搜索过滤
 -(void)updateSearchResultsForSearchController:(UISearchController *)searchController {
-    NSString *searchString = [self.searchController.searchBar text];
-    NSPredicate *preicate = [NSPredicate predicateWithFormat:@"SELF CONTAINS[c] %@", searchString];
+//    NSString *searchString = [self.searchController.searchBar text];
+//    NSPredicate *preicate = [NSPredicate predicateWithFormat:@"SELF CONTAINS[c] %@", searchString];
     //刷新表格
 //    [self.tableView reloadData];
 }
@@ -208,14 +216,13 @@
     [self.searchController.searchBar setPositionAdjustment:UIOffsetZero forSearchBarIcon:UISearchBarIconSearch];
 }
 
-- (void)textFieldDidBeginEditing:(UITextField *)textField {
+- (void)searchBarTextDidBeginEditing:(UISearchBar *)searchBar {
     self.applyBtn.hidden = self.isBeginEdit = YES;
 }
 
-- (void)textFieldDidEndEditing:(UITextField *)textField {
-    
-    if (textField.text.length != 0)
-    [self getSearchAreaListWithKey:textField.text];
+- (void)searchBarTextDidEndEditing:(UISearchBar *)searchBar {
+    if (searchBar.text.length != 0)
+    [self getSearchAreaListWithKey:searchBar.text];
 }
 
 #pragma mark get set
@@ -244,13 +251,17 @@
         //设置代理
         _searchController.delegate = self;
         _searchController.searchResultsUpdater = self;
+        _searchController.searchBar.delegate = self;
         //包着搜索框外层的颜色
         _searchController.searchBar.barTintColor = UIColorFromRGB(0xF5F5F5);
         [[UIBarButtonItem appearanceWhenContainedIn: [UISearchBar class], nil] setTintColor:NavColor];
         [[UIBarButtonItem appearanceWhenContainedIn: [UISearchBar class], nil] setTitle:@"取消"];
-        UITextField *searchField = [_searchController.searchBar valueForKey:@"searchField"];
-        searchField.backgroundColor = UIColor.whiteColor;
-        searchField.delegate = self;
+        if (@available(iOS 13.0, *)) {
+            _searchController.searchBar.searchTextField.backgroundColor = UIColor.whiteColor;
+        }else {
+            UITextField *searchField = [_searchController.searchBar valueForKey:@"searchField"];
+            searchField.backgroundColor = UIColor.whiteColor;
+        }
         //提醒字眼
         _searchController.searchBar.placeholder= @"搜索片区";
         //设置内容居中
@@ -268,7 +279,7 @@
 //            self.searchController.hidesNavigationBarDuringPresentation = NO;
         //位置
         _searchController.searchBar.frame = CGRectMake(_searchController.searchBar.frame.origin.x, 0, _searchController.searchBar.frame.size.width, 55.0);
-#warning 如果进入预编辑状态,searchBar消失(UISearchController套到TabBarController可能会出现这个情况),请添加下边这句话
+//#warning 如果进入预编辑状态,searchBar消失(UISearchController套到TabBarController可能会出现这个情况),请添加下边这句话
         self.definesPresentationContext=YES;
     }
     return _searchController;

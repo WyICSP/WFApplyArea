@@ -75,9 +75,7 @@ static NSString *const cellId = @"WFSingleFeeTableViewCell";
     if (model.time == 0) {
         self.countTF.text = @"0";
     }else {
-        NSString *newTime = [NSString stringWithFormat:@"%.1f",model.time];
-        NSNumber *numTime = @(newTime.doubleValue);
-        self.countTF.text = [NSString stringWithFormat:@"%@",numTime];
+        self.countTF.text = [self notRounding:model.time afterPoint:1];
     }
 }
 
@@ -108,9 +106,24 @@ static NSString *const cellId = @"WFSingleFeeTableViewCell";
     }
 }
 
+/// 向上 四舍五入
+/// @param price 数字
+/// @param position 保留的小数位数
+- (NSString *)notRounding:(double)price afterPoint:(int)position{
+    //向上四舍五入
+    NSDecimalNumberHandler* roundingBehavior = [NSDecimalNumberHandler decimalNumberHandlerWithRoundingMode:NSRoundPlain scale:position raiseOnExactness:NO raiseOnOverflow:NO raiseOnUnderflow:NO raiseOnDivideByZero:NO];
+    NSDecimalNumber *ouncesDecimal;
+    NSDecimalNumber *roundedOunces;
+    ouncesDecimal = [[NSDecimalNumber alloc] initWithFloat:price];
+    roundedOunces = [ouncesDecimal decimalNumberByRoundingAccordingToBehavior:roundingBehavior];
+    return [NSString stringWithFormat:@"%@",roundedOunces];
+}
+
 - (void)dealloc {
     [self.moneyTF removeObserver:self forKeyPath:@"text"];
 }
+
+
 
 
 @end

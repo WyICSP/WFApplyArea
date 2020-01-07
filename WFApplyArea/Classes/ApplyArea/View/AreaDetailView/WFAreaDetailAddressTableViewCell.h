@@ -38,7 +38,6 @@ NS_ASSUME_NONNULL_BEGIN
  绑定数据
 
  @param model 数据源
- @param addressHeight 地址高度
  */
 - (void)bindToCell:(WFAreaDetailModel *)model;
 @end

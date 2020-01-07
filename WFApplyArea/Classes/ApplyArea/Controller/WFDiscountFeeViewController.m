@@ -30,7 +30,7 @@
 #import "YFToast.h"
 #import "WKHelp.h"
 
-@interface WFDiscountFeeViewController ()<UITableViewDelegate,UITableViewDataSource,UISearchControllerDelegate,UISearchResultsUpdating,UITextFieldDelegate>
+@interface WFDiscountFeeViewController ()<UITableViewDelegate,UITableViewDataSource,UISearchControllerDelegate,UISearchResultsUpdating,UISearchBarDelegate>
 ///searchController
 @property (nonatomic,retain) UISearchController *searchController;
 /**tableView*/
@@ -42,7 +42,7 @@
 /**vip用户*/
 @property (nonatomic, strong, nullable) NSMutableArray <WFGroupVipUserModel *> *vipData;
 /// vip 搜索数据
-@property (nonatomic, strong, nullable) NSMutableArray <WFGroupVipUserModel *> *vipSearchData;
+@property (nonatomic, strong, nullable) NSArray <WFGroupVipUserModel *> *vipSearchData;
 /**老片区数据*/
 @property (nonatomic, strong, nullable) WFUpgradeAreaDiscountModel *oldAreaModel;
 /// 是否处于编辑
@@ -350,8 +350,18 @@
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     if (self.type == WFUpdateUserMsgApplyType) {
         return 1;
+    }else {
+        if (section == 0) {
+            return 1;
+        }else {
+            if (self.isBeginEdit && self.vipSearchData.count == 0) {
+                //如果在搜索 但是没有数据
+                return self.vipData.count;
+            }
+            return self.isBeginEdit ? self.vipSearchData.count : self.vipData.count;
+        }
     }
-    return section == 0 ? 1 : (self.isBeginEdit ? self.vipSearchData.count : self.vipData.count);
+//    return section == 0 ? 1 : (self.isBeginEdit ? self.vipSearchData.count : self.vipData.count);
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -377,8 +387,14 @@
         return cell;
     }else {
         WFAreaVipUsersListTableViewCell *cell = [WFAreaVipUsersListTableViewCell cellWithTableView:tableView];
-        WFGroupVipUserModel *model = self.isBeginEdit ? [self.vipSearchData safeObjectAtIndex:indexPath.row] : [self.vipData safeObjectAtIndex:indexPath.row];
-        cell.model = model;
+//        WFGroupVipUserModel *model = self.isBeginEdit ? [self.vipSearchData safeObjectAtIndex:indexPath.row] : [self.vipData safeObjectAtIndex:indexPath.row];
+        WFGroupVipUserModel *itemModel = nil;
+        if (self.isBeginEdit && self.vipSearchData.count == 0) {
+            itemModel = [self.vipData safeObjectAtIndex:indexPath.row];
+        }else {
+            itemModel = self.isBeginEdit ? [self.vipSearchData safeObjectAtIndex:indexPath.row] : [self.vipData safeObjectAtIndex:indexPath.row];
+        }
+        cell.model = itemModel;
         cell.editBtn.hidden = self.type == WFUpdateUserMsgUpgradeType;
         @weakify(self)
         cell.editUserMsgBlock = ^{
@@ -462,13 +478,13 @@
     [self.searchController.searchBar setPositionAdjustment:UIOffsetZero forSearchBarIcon:UISearchBarIconSearch];
 }
 
-- (void)textFieldDidBeginEditing:(UITextField *)textField {
+- (void)searchBarTextDidBeginEditing:(UISearchBar *)searchBar {
     self.confirmBtn.hidden = self.isBeginEdit = self.tableView.mj_footer.hidden = YES;
 }
 
-- (void)textFieldDidEndEditing:(UITextField *)textField {
-    if (textField.text.length != 0)
-    [self getSearchVipListWithKey:textField.text];
+- (void)searchBarTextDidEndEditing:(UISearchBar *)searchBar {
+    if (searchBar.text.length != 0)
+    [self getSearchVipListWithKey:searchBar.text];
 }
 
 
@@ -506,11 +522,15 @@
         //设置代理
         _searchController.delegate = self;
         _searchController.searchResultsUpdater = self;
+        _searchController.searchBar.delegate = self;
         //包着搜索框外层的颜色
         _searchController.searchBar.barTintColor = UIColorFromRGB(0xF5F5F5);
-        UITextField *searchField = [_searchController.searchBar valueForKey:@"searchField"];
-        searchField.backgroundColor = UIColor.whiteColor;
-        searchField.delegate = self;
+        if (@available(iOS 13.0, *)) {
+            _searchController.searchBar.searchTextField.backgroundColor = UIColor.whiteColor;
+        }else {
+            UITextField *searchField = [_searchController.searchBar valueForKey:@"searchField"];
+            searchField.backgroundColor = UIColor.whiteColor;
+        }
         //提醒字眼
         _searchController.searchBar.placeholder= @"搜索会员";
         //设置内容居中
@@ -528,7 +548,7 @@
         //    self.searchController.hidesNavigationBarDuringPresentation = NO;
         //位置
         _searchController.searchBar.frame = CGRectMake(_searchController.searchBar.frame.origin.x, _searchController.searchBar.frame.origin.y, _searchController.searchBar.frame.size.width, 55.0);
-#warning 如果进入预编辑状态,searchBar消失(UISearchController套到TabBarController可能会出现这个情况),请添加下边这句话
+//#warning 如果进入预编辑状态,searchBar消失(UISearchController套到TabBarController可能会出现这个情况),请添加下边这句话
         self.definesPresentationContext=YES;
     }
     return _searchController;

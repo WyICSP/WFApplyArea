@@ -91,9 +91,9 @@
 - (void)copyUrl:(NSString *)msg :(JSCallback) completionHandler
 {
     if (msg.length != 0) {
-        @weakify(self)
+//        @weakify(self)
         [WFShareHelpTool copyByContentText:msg resultBlock:^{
-            @strongify(self)
+//            @strongify(self)
             [YFToast showMessage:@"复制成功" inView:[[YFKeyWindow shareInstance] getCurrentVC].view];
         }];
     }
@@ -111,7 +111,7 @@
 }
 
 ///**分享领取优惠券*/
-- (void)shareWeixinUrl:(NSString *)msg:(JSCallback) completionHandler
+- (void)shareWeixinUrl:(NSString *)msg :(JSCallback) completionHandler
 {
     if (msg.length != 0) {
         [WFShareHelpTool shareTextBySystemWithText:@"领取充电券" shareUrl:msg shareImage:[UIImage imageNamed:@"shareIcon"]];
@@ -125,7 +125,7 @@
     [WFUserCenterPublicAPI upgradeAreaWithGroupId:msg];
 }
 
-- (void)changePassword:(NSString *)msg:(JSCallback) completionHandler {
+- (void)changePassword:(NSString *)msg :(JSCallback) completionHandler {
     [WFUserCenterPublicAPI changePassword];
     completionHandler(msg,YES);
 }

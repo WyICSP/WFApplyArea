@@ -453,7 +453,7 @@
 - (void)modifyFreamWithEdit:(BOOL)edit {
     if (edit) {
         [UIView animateWithDuration:0.25 animations:^{
-            self.tableView.y = -262.0f;
+            self.tableView.y = ISIPHONEX ? -262.0f : -220.0f;
         }];
     }else {
         [UIView animateWithDuration:0.25 animations:^{
@@ -509,7 +509,7 @@
     if (indexPath.section == 0) {
         return ISIPHONEX ? KHeight(120.0f) + 8.0f : KHeight(120.0f);
     }else if (indexPath.section == 4) {
-        return KHeight(88.0f);
+        return KHeight(94.0f);
     }
     return KHeight(44.0f);
 }
@@ -672,9 +672,9 @@
 - (WFApplyAreaFeeExplanView *)explanView {
     if (!_explanView) {
         _explanView = [[[NSBundle bundleForClass:[self class]] loadNibNamed:@"WFApplyAreaFeeExplanView" owner:nil options:nil] firstObject];
-        @weakify(self)
+//        @weakify(self)
         _explanView.clickKnowBtnBlock = ^{
-            @strongify(self)
+//            @strongify(self)
             [[WFPopTool sharedInstance] closeAnimated:YES];
         };
     }

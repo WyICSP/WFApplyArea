@@ -185,7 +185,6 @@
 /// 多次收费开关
 - (void)clickSwitch:(UISwitch *)switchBtn {
     switchBtn.selected = !switchBtn.selected;
-    DLog(@"%ld",switchBtn.selected);
 }
 
 /**
