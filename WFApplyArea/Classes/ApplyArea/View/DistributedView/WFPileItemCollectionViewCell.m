@@ -30,7 +30,7 @@ static NSString *const cellId = @"WFPileItemCollectionViewCell";
 
 - (void)setSModel:(WFPileSocketParamVOSModel *)sModel {
     self.title.text = [NSString stringWithFormat:@"%ld",(long)sModel.socketNo];
-    if (sModel.status == 1) {
+    if (sModel.status != 1) {
         //未充电
         self.title.layer.backgroundColor = UIColorFromRGB(0x52AE82).CGColor;
         self.title.textColor = UIColor.whiteColor;

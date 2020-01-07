@@ -48,6 +48,7 @@ static NSString *const cellId = @"WFApplyAreaOtherTableViewCell";
     //充电起步价
     self.moneyTF.text = mdoels.startPrice.defaultValue;
     self.moneyTF.placeholder = mdoels.startPrice.tips;
+    self.markPriceLbl.text = mdoels.startPrice.tips;
 }
 
 #pragma mark UITextFieldDelegate
@@ -84,6 +85,9 @@ static NSString *const cellId = @"WFApplyAreaOtherTableViewCell";
         if (textField.text.doubleValue > 1) {
             textField.text = @"1";
         }
+        //提示语的显示与隐藏
+        self.markPriceLbl.hidden = (textField.text.doubleValue > 1 || textField.text.doubleValue < 0) ? NO : YES;
+        //赋值
         self.mdoels.startPrice.defaultValue = textField.text;
     }
 }

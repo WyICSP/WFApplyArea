@@ -20,6 +20,9 @@ NS_ASSUME_NONNULL_BEGIN
 @property (weak, nonatomic) IBOutlet UITextField *moneyTF;
 /// 提示语
 @property (weak, nonatomic) IBOutlet UILabel *markLbl;
+/// 起步价
+@property (weak, nonatomic) IBOutlet UILabel *markPriceLbl;
+
 /// 是否编辑
 @property (copy, nonatomic) void (^textFieldInputTypeBlock)(BOOL isEdit);
 /// 赋值操作

@@ -106,9 +106,16 @@
                                 <color key="textColor" red="0.92549019607843142" green="0.50588235294117645" blue="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="请填写 0-1的正整数" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WAb-re-dE5">
+                                <rect key="frame" x="263" y="77" width="73" height="10"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="8"/>
+                                <color key="textColor" red="0.92549019610000005" green="0.50588235290000005" blue="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
+                            <constraint firstItem="WAb-re-dE5" firstAttribute="trailing" secondItem="7VK-8B-N96" secondAttribute="trailing" id="3bR-dh-VGm"/>
                             <constraint firstItem="i02-FB-jlb" firstAttribute="leading" secondItem="ouQ-pX-bQe" secondAttribute="trailing" id="48W-QR-SnE"/>
                             <constraint firstItem="5au-nN-qrJ" firstAttribute="centerY" secondItem="i02-FB-jlb" secondAttribute="centerY" id="9J7-J8-7J0"/>
                             <constraint firstItem="7VK-8B-N96" firstAttribute="top" secondItem="lz2-Uk-UJg" secondAttribute="bottom" constant="2" id="AbU-mN-9WY"/>
@@ -125,6 +132,7 @@
                                     <userDefinedRuntimeAttribute type="boolean" keyPath="isAdaptateScreen" value="YES"/>
                                 </userDefinedRuntimeAttributes>
                             </constraint>
+                            <constraint firstItem="WAb-re-dE5" firstAttribute="top" secondItem="ynJ-jf-Fls" secondAttribute="bottom" constant="2" id="iIo-m6-oDO"/>
                             <constraint firstItem="XPe-Di-QXT" firstAttribute="leading" secondItem="Kmb-ff-Lzh" secondAttribute="trailing" id="jAb-Ft-UVZ"/>
                             <constraint firstItem="ouQ-pX-bQe" firstAttribute="leading" secondItem="Kmb-ff-Lzh" secondAttribute="leading" id="jjw-dt-bhQ"/>
                             <constraint firstItem="ouQ-pX-bQe" firstAttribute="top" secondItem="Kmb-ff-Lzh" secondAttribute="bottom" constant="25" id="oeS-gq-GGn"/>
@@ -148,6 +156,7 @@
             <connections>
                 <outlet property="contentsView" destination="aTZ-k6-g6f" id="Rv4-tV-GCz"/>
                 <outlet property="markLbl" destination="7VK-8B-N96" id="pxb-Az-ZuS"/>
+                <outlet property="markPriceLbl" destination="WAb-re-dE5" id="34x-HK-Xll"/>
                 <outlet property="maxTimeTF" destination="lz2-Uk-UJg" id="Hze-cL-Q4v"/>
                 <outlet property="moneyTF" destination="ynJ-jf-Fls" id="CcK-lN-Jan"/>
             </connections>

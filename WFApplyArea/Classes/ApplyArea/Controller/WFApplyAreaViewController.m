@@ -489,7 +489,7 @@
         cell.model = self.models[indexPath.row];
         return cell;
     }else if (indexPath.section == 4) {
-        //其他设置
+        //充满自停设置
         WFApplyAreaOtherTableViewCell *cell = [WFApplyAreaOtherTableViewCell cellWithTableView:tableView];
         cell.mdoels = self.otherConfigModel;
         @weakify(self)
