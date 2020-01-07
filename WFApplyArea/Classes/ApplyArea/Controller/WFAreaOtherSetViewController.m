@@ -23,6 +23,9 @@
 @property (weak, nonatomic) IBOutlet UIButton *comfireBtn;
 /// 提示语
 @property (weak, nonatomic) IBOutlet UILabel *markLbl;
+/// 起步价提示
+@property (weak, nonatomic) IBOutlet UILabel *markPriceLbl;
+
 /// 其他设置配置
 @property (nonatomic, strong, nullable) WFApplyAreaOtherConfigModel *otherConfigModel;
 
@@ -195,6 +198,8 @@
         if (textField.text.doubleValue > 1) {
             textField.text = @"1";
         }
+        //提示语的显示与隐藏
+        self.markPriceLbl.hidden = (textField.text.doubleValue > 1 || textField.text.doubleValue < 0) ? NO : YES;
     }
 }
 

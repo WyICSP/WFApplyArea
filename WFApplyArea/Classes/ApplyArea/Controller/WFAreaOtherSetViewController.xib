@@ -13,6 +13,7 @@
                 <outlet property="comfireBtn" destination="iKC-6r-Oci" id="7KB-4W-a6r"/>
                 <outlet property="contentViews" destination="Q8z-4Z-XC2" id="2nH-Su-7jk"/>
                 <outlet property="markLbl" destination="RXM-7i-DOl" id="Jit-Hh-LqG"/>
+                <outlet property="markPriceLbl" destination="doe-Zy-aqS" id="Zrx-uh-1Gf"/>
                 <outlet property="maxTimeTF" destination="Czn-MO-5mR" id="1xF-3z-5o0"/>
                 <outlet property="startPriceTF" destination="LUq-ev-YMK" id="FsZ-Pd-wXz"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
@@ -104,7 +105,7 @@
                                 <action selector="textFieldDidChange:" destination="-1" eventType="editingChanged" id="s6u-Is-TPa"/>
                             </connections>
                         </textField>
-                        <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="请输入充电起步价" textAlignment="right" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="LUq-ev-YMK">
+                        <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="请输入0-1的正整数" textAlignment="right" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="LUq-ev-YMK">
                             <rect key="frame" x="125" y="85.5" width="227" height="24"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="24" id="Bp5-Pp-6Th"/>
@@ -121,6 +122,12 @@
                             <color key="textColor" red="0.92549019610000005" green="0.50588235290000005" blue="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <nil key="highlightedColor"/>
                         </label>
+                        <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="请输入0-1的正整数" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="doe-Zy-aqS">
+                            <rect key="frame" x="307" y="108" width="71" height="10"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="8"/>
+                            <color key="textColor" red="0.92549019610000005" green="0.50588235290000005" blue="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <nil key="highlightedColor"/>
+                        </label>
                     </subviews>
                     <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                     <constraints>
@@ -130,6 +137,7 @@
                         <constraint firstItem="D8N-Yf-6xF" firstAttribute="leading" secondItem="Q8z-4Z-XC2" secondAttribute="leading" constant="15" id="75f-y7-n9O"/>
                         <constraint firstItem="lac-Cf-bDV" firstAttribute="leading" secondItem="jgc-0z-4LX" secondAttribute="trailing" id="82s-cr-Art"/>
                         <constraint firstItem="JcL-ip-acc" firstAttribute="leading" secondItem="Czn-MO-5mR" secondAttribute="trailing" constant="8" id="9Qk-K7-LU9"/>
+                        <constraint firstItem="doe-Zy-aqS" firstAttribute="trailing" secondItem="RXM-7i-DOl" secondAttribute="trailing" id="DtC-tw-rqM"/>
                         <constraint firstItem="Zqa-Mt-13E" firstAttribute="trailing" secondItem="JcL-ip-acc" secondAttribute="trailing" id="EvS-O9-FRU"/>
                         <constraint firstItem="Czn-MO-5mR" firstAttribute="leading" secondItem="bZt-si-qH7" secondAttribute="trailing" constant="20" id="GaP-Il-8rg"/>
                         <constraint firstItem="LUq-ev-YMK" firstAttribute="leading" secondItem="lac-Cf-bDV" secondAttribute="trailing" constant="20" id="Joi-sn-yDk"/>
@@ -137,6 +145,7 @@
                         <constraint firstItem="Zqa-Mt-13E" firstAttribute="leading" secondItem="LUq-ev-YMK" secondAttribute="trailing" constant="8" id="QoE-up-PaP"/>
                         <constraint firstItem="Zqa-Mt-13E" firstAttribute="centerY" secondItem="lac-Cf-bDV" secondAttribute="centerY" id="Rzi-mZ-AJ1"/>
                         <constraint firstItem="LUq-ev-YMK" firstAttribute="centerY" secondItem="Zqa-Mt-13E" secondAttribute="centerY" id="Tgh-25-4Km"/>
+                        <constraint firstItem="doe-Zy-aqS" firstAttribute="top" secondItem="Zqa-Mt-13E" secondAttribute="bottom" constant="2" id="W66-YR-MNG"/>
                         <constraint firstItem="bZt-si-qH7" firstAttribute="centerY" secondItem="BMi-AQ-FRa" secondAttribute="centerY" id="h2t-5d-811"/>
                         <constraint firstItem="D8N-Yf-6xF" firstAttribute="top" secondItem="Q8z-4Z-XC2" secondAttribute="top" constant="15" id="hhK-kp-kDN"/>
                         <constraint firstAttribute="trailing" secondItem="JcL-ip-acc" secondAttribute="trailing" constant="12" id="imc-UA-Yer"/>
