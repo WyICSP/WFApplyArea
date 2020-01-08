@@ -81,13 +81,16 @@
                             </connections>
                         </button>
                         <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="请输入详细地址" textAlignment="right" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Wtm-x9-4a6">
-                            <rect key="frame" x="278" y="81" width="100" height="17"/>
+                            <rect key="frame" x="278" y="77" width="100" height="25"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="25" id="d0m-2v-SBD"/>
+                            </constraints>
                             <color key="textColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                             <textInputTraits key="textInputTraits"/>
                         </textField>
                         <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="请输入小区名" textAlignment="right" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="tWe-Fu-YA0">
-                            <rect key="frame" x="278" y="122.5" width="100" height="17"/>
+                            <rect key="frame" x="278" y="118.5" width="100" height="25"/>
                             <color key="textColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                             <textInputTraits key="textInputTraits"/>
@@ -110,6 +113,7 @@
                         <constraint firstItem="Fy7-qu-VuF" firstAttribute="top" secondItem="9w3-yY-ctz" secondAttribute="bottom" constant="12" id="g8l-25-itf"/>
                         <constraint firstAttribute="trailing" secondItem="ceF-Wd-B5d" secondAttribute="trailing" constant="12" id="gZz-Pc-bGy"/>
                         <constraint firstItem="tWe-Fu-YA0" firstAttribute="leading" secondItem="Wtm-x9-4a6" secondAttribute="leading" id="jmn-AP-UNC"/>
+                        <constraint firstItem="tWe-Fu-YA0" firstAttribute="height" secondItem="Wtm-x9-4a6" secondAttribute="height" id="ngx-Ia-F6j"/>
                         <constraint firstItem="9w3-yY-ctz" firstAttribute="top" secondItem="5h8-3p-sdb" secondAttribute="bottom" constant="20" id="oHr-vz-fca"/>
                         <constraint firstAttribute="trailing" secondItem="xAZ-Q1-oE1" secondAttribute="trailing" constant="15" id="ohU-Cc-ICb"/>
                         <constraint firstItem="Wtm-x9-4a6" firstAttribute="centerY" secondItem="Fy7-qu-VuF" secondAttribute="centerY" id="ot9-eY-r4l"/>

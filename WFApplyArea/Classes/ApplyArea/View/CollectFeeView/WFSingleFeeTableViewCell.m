@@ -63,7 +63,7 @@ static NSString *const cellId = @"WFSingleFeeTableViewCell";
 - (void)setModel:(WFChargeFeePowerConfigModel *)model {
     _model = model;
     //功率
-    self.powerLbl.text = [NSString stringWithFormat:@"%ld-%ldw",(long)model.minPower,(long)model.maxPower];
+    self.powerLbl.text = [NSString stringWithFormat:@"%ld-%ldW",(long)model.minPower,(long)model.maxPower];
     
     //小于 0 的时候不显示
     if (model.price.floatValue <= 0) {

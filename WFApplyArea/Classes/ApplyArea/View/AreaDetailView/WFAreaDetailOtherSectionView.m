@@ -49,6 +49,12 @@
         self.lookBtn.hidden = !model.isShowForm;
     }
     
+    //多次收费的状态
+    if (model.isShowManyType) {
+        [self.editVipBtn setTitle:model.showManyType forState:0];
+        self.editVipBtn.hidden = NO;
+    }
+    
 }
 
 

@@ -44,6 +44,7 @@
 #import "WFApplyAreaHeadView.h"
 #import "WFApplyAreaItemTableViewCell.h"
 #import "WFApplyAreaOtherTableViewCell.h"
+#import "WFAreaDetailSinglePowerTableViewCell.h"
 #import "WFBilleMethodCollectionReusableView.h"
 #import "WFBilleMethodCollectionViewCell.h"
 #import "WFBilleMethodMoneyTableViewCell.h"

@@ -124,7 +124,7 @@
             }
         }else {
             //功率收费
-            self.mainModel.isOpenSecondSection = YES;
+            self.mainModel.isOpenSecondSection = self.mainModel.isOpenFirstSection = YES;
             self.mainModel.isSelectSecondSection = YES;
             //遍历去选中数据
             for (WFAreaDetailMultipleModel *dModel in self.itemArray) {

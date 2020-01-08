@@ -15,6 +15,7 @@
 #import "WFMyAreaAddressTableViewCell.h"
 #import "WFAreaDetailPartnerTableViewCell.h"
 #import "WFAreaDetailOtherSetTableViewCell.h"
+#import "WFAreaDetailSinglePowerTableViewCell.h"
 #import "WFAreaOtherSetViewController.h"
 #import "WFNotHaveFeeTableViewCell.h"
 #import "WFSingleFeeViewController.h"
@@ -211,6 +212,8 @@
         }
     }else {
         [manyFee safeSetObject:@0 forKey:@"isShowEditBtn"];
+        [manyFee safeSetObject:@"   隐 藏   " forKey:@"showManyType"];
+        [manyFee safeSetObject:@(self.mainModels.isMultipleChargeShow) forKey:@"isShowManyType"];
     }
     [titles addObject:manyFee];
     //优惠收费
@@ -482,6 +485,8 @@
         return self.isHaveManyFee ? self.mainModels.multipleChargesList.count : 1;
     }else if (section == 5) {
         return self.isPartner ? self.mainModels.partnerPropInfos.count + 1 : 0;
+    }else if (section == 1) {
+        return self.mainModels.singleCharge.powerIntervalConfig.count + 1;
     }
     return 1;
 }
@@ -506,9 +511,15 @@
         //单次收费
         if (self.mainModels.singleCharge.chargeType == 0) {
             //统一收费
-            WFAreaDetailDiscountTableViewCell *cell = [WFAreaDetailDiscountTableViewCell cellWithTableView:tableView];
-            cell.singleModel = self.mainModels.singleCharge;
+            if (indexPath.row == 0) {
+                WFAreaDetailDiscountTableViewCell *cell = [WFAreaDetailDiscountTableViewCell cellWithTableView:tableView];
+                cell.singleModel = self.mainModels.singleCharge;
+                return cell;
+            }
+            WFAreaDetailSinglePowerTableViewCell *cell = [WFAreaDetailSinglePowerTableViewCell cellWithTableView:tableView];
+            cell.model = [self.mainModels.singleCharge.powerIntervalConfig safeObjectAtIndex:indexPath.row-1];
             return cell;
+            
         }
         WFAreaDetailSingleTableViewCell *cell = [WFAreaDetailSingleTableViewCell cellWithTableView:tableView];
         cell.model = self.mainModels.singleCharge;

@@ -157,10 +157,14 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, assign) BOOL isShowDetail;
 /**是否显示编辑按钮*/
 @property (nonatomic, assign) BOOL isShowEditBtn;
+/// 是否显示多次收费隐藏按钮
+@property (nonatomic, assign) BOOL isShowManyType;
 /**按钮 title*/
 @property (nonatomic, copy) NSString *formTitle;
 /**详细 title*/
 @property (nonatomic, copy) NSString *detailTitle;
+/// 多次收费
+@property (nonatomic, copy) NSString *showManyType;
 @end
 
 NS_ASSUME_NONNULL_END
