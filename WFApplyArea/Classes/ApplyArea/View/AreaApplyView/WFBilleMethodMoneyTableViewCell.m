@@ -125,6 +125,18 @@ static NSString *const cellId = @"WFBilleMethodMoneyTableViewCell";
     //将当前的转态置为相反转态
     WFBillingPriceMethodModel *model = self.models[indexPath.row];
     if ([model.billingName isEqualToString:@"其他"]) {
+        //选中的数据计数
+        NSInteger selectNum = 0;
+        for (WFBillingTimeMethodModel *sModel in self.models) {
+            if (sModel.isSelect) {
+                selectNum ++;
+            }
+        }
+        //最多就 6 条数据
+        if (selectNum >= 6) {
+            [YFToast showMessage:@"最多只能选择6个" inView:[[YFKeyWindow shareInstance] getCurrentVC].view];
+            return;
+        }
         //自定义金额
         [self showCustusmAction];
     }else {

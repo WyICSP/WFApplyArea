@@ -39,7 +39,10 @@
                             <nil key="highlightedColor"/>
                         </label>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="具体地址" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Fy7-qu-VuF">
-                            <rect key="frame" x="15" y="81" width="58" height="17"/>
+                            <rect key="frame" x="15" y="81" width="63" height="17"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="63" id="ChX-8Z-DRI"/>
+                            </constraints>
                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                             <color key="textColor" red="0.40000000000000002" green="0.40000000000000002" blue="0.40000000000000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <nil key="highlightedColor"/>
@@ -55,7 +58,10 @@
                             <nil key="highlightedColor"/>
                         </label>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="片区名称" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PrH-cF-X9v">
-                            <rect key="frame" x="15" y="122.5" width="58" height="17"/>
+                            <rect key="frame" x="15" y="122.5" width="63" height="17"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="63" id="Rpt-SR-JAT"/>
+                            </constraints>
                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                             <color key="textColor" red="0.40000000000000002" green="0.40000000000000002" blue="0.40000000000000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <nil key="highlightedColor"/>
@@ -75,13 +81,13 @@
                             </connections>
                         </button>
                         <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="请输入详细地址" textAlignment="right" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Wtm-x9-4a6">
-                            <rect key="frame" x="103" y="81" width="275" height="17"/>
+                            <rect key="frame" x="278" y="81" width="100" height="17"/>
                             <color key="textColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                             <textInputTraits key="textInputTraits"/>
                         </textField>
                         <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="请输入小区名" textAlignment="right" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="tWe-Fu-YA0">
-                            <rect key="frame" x="103" y="122.5" width="275" height="17"/>
+                            <rect key="frame" x="278" y="122.5" width="100" height="17"/>
                             <color key="textColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                             <textInputTraits key="textInputTraits"/>
@@ -98,7 +104,7 @@
                         <constraint firstItem="ceF-Wd-B5d" firstAttribute="leading" secondItem="9w3-yY-ctz" secondAttribute="trailing" constant="30" id="VtT-4g-CPo"/>
                         <constraint firstItem="tWe-Fu-YA0" firstAttribute="trailing" secondItem="Wtm-x9-4a6" secondAttribute="trailing" id="WHd-ae-da5"/>
                         <constraint firstItem="5h8-3p-sdb" firstAttribute="leading" secondItem="aZ2-bp-kPH" secondAttribute="leading" constant="15" id="XZM-Dj-nzO"/>
-                        <constraint firstItem="Wtm-x9-4a6" firstAttribute="leading" secondItem="Fy7-qu-VuF" secondAttribute="trailing" constant="30" id="ZJi-iK-pao"/>
+                        <constraint firstItem="Wtm-x9-4a6" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="Fy7-qu-VuF" secondAttribute="trailing" constant="20" id="ZJi-iK-pao"/>
                         <constraint firstItem="9w3-yY-ctz" firstAttribute="leading" secondItem="5h8-3p-sdb" secondAttribute="leading" id="eH3-EO-TDh"/>
                         <constraint firstItem="5h8-3p-sdb" firstAttribute="top" secondItem="aZ2-bp-kPH" secondAttribute="top" constant="15" id="g29-36-BGx"/>
                         <constraint firstItem="Fy7-qu-VuF" firstAttribute="top" secondItem="9w3-yY-ctz" secondAttribute="bottom" constant="12" id="g8l-25-itf"/>

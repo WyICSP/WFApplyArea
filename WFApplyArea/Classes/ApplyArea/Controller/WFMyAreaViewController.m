@@ -108,6 +108,7 @@
     [WFApplyAreaDataTool getSearchAreaListWithParams:params resultBlock:^(NSArray<WFMyAreaListModel *> * _Nonnull models) {
         @strongify(self)
         self.searchModels = models;
+        self.isBeginEdit = YES;
         [self.tableView reloadData];
     }];
 }
@@ -199,7 +200,6 @@
                     self.isBeginEdit = NO;
                     [self.tableView reloadData];
                 }else {
-                    self.isBeginEdit = YES;
                     [self getSearchAreaListWithKey:searchKeys];
                 }
             };

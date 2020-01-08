@@ -38,7 +38,7 @@
 /// 搜索sectionView
 @property (nonatomic, strong, nullable) WFMyAreaSearchHeadView *searchView;
 /// 是否处于编辑 是否已经编辑
-@property (nonatomic, assign) BOOL isBeginEdit,isAlreadySearch;
+@property (nonatomic, assign) BOOL isBeginEdit;
 /**页码*/
 @property (nonatomic, assign) NSInteger pageNo;
 @end
@@ -149,7 +149,7 @@
     [WFApplyAreaDataTool getSearchVipListWithParams:params resultBlock:^(NSArray<WFGroupVipUserModel *> * _Nonnull models) {
         @strongify(self)
         self.vipSearchData = models;
-        self.isAlreadySearch = YES;
+        self.isBeginEdit = self.tableView.mj_header.hidden = YES;
         [self.tableView reloadData];
     }];
 }
@@ -246,7 +246,6 @@
                     self.isBeginEdit = self.tableView.mj_header.hidden = NO;
                     [self.tableView reloadData];
                 }else {
-                    self.isBeginEdit = self.tableView.mj_header.hidden = YES;
                     [self getSearchVipListWithKey:searchKeys];
                 }
             };
