@@ -59,6 +59,7 @@ static NSString *const cellId = @"WFMyAreaPileListTableViewCell";
 - (void)setModel:(WFSignleIntensityListModel *)model {
     _model = model;
     self.shellId.text = model.shellId.length ==  0 ? @" " : model.shellId;
+    self.itemViewHeight.constant = self.model.isOpen ? 116.0f : CGFLOAT_MIN;
     if (model.shellId.length == 0) 
         self.selectImg.hidden = self.yuanView.hidden = YES;
     //在线 //离线

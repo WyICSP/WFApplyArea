@@ -327,6 +327,7 @@
 - (WFMyAreaSearchHeadView *)searchView {
     if (!_searchView) {
         _searchView = [[[NSBundle bundleForClass:[self class]] loadNibNamed:@"WFMyAreaSearchHeadView" owner:nil options:nil] firstObject];
+        _searchView.rType = WFAreaSearchRadiusLineType;
             @weakify(self)
             _searchView.searchResultBlock = ^(NSString * _Nonnull searchKeys) {
                 @strongify(self)

@@ -197,6 +197,8 @@
         //最低消费
         if (textField.text.doubleValue > 1) {
             textField.text = @"1";
+        }else if (textField.text.length > 3) {
+            textField.text = [textField.text substringWithRange:NSMakeRange(0, 3)];
         }
         //提示语的显示与隐藏
         self.markPriceLbl.hidden = (textField.text.doubleValue > 1 || textField.text.doubleValue < 0) ? NO : YES;

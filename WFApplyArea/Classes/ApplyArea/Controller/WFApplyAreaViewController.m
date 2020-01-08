@@ -501,7 +501,7 @@
     }
     WFApplyAreaItemTableViewCell *cell = [WFApplyAreaItemTableViewCell cellWithTableView:tableView indexPath:indexPath dataCount:0];
     cell.lineLbl.hidden = YES;
-    cell.title.text = indexPath.section == 2 ? @"选择计费方式" : @"合伙人分成设置";
+    cell.title.text = indexPath.section == 2 ? @"计费方式" : @"合伙人分成设置";
     return cell;
 }
 

@@ -13,7 +13,7 @@
 - (void)awakeFromNib {
     [super awakeFromNib];
     self.textField.delegate = self;
-    SKViewsBorder(self.contentsView, 15.0f, 0.5, UIColorFromRGB(0xE4E4E4));
+    
 }
 
 - (IBAction)textFieldDidChange:(UITextField *)textField {
@@ -26,6 +26,14 @@
     [textField resignFirstResponder];
     !self.searchResultBlock ? : self.searchResultBlock(textField.text);
     return YES;
+}
+
+- (void)setRType:(WFAreaSearchRadiusType *)rType {
+    if (rType == WFAreaSearchRadiusLineType) {
+        SKViewsBorder(self.contentsView, 15.0f, 0.5, UIColorFromRGB(0xE4E4E4));
+    }else {
+        SKViewsBorder(self.contentsView, 15.0f, 0, UIColorFromRGB(0xE4E4E4));
+    }
 }
 
 

@@ -176,7 +176,6 @@
     }
 }
 
-
 #pragma mark UITableViewDelegate,UITableViewDataSource
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     return self.isSearch ? self.searchModels.count : self.models.count;
