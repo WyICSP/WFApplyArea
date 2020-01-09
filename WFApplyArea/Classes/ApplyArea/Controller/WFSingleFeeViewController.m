@@ -172,7 +172,13 @@
             [dict safeSetObject:@(sModel.unifiedTime) forKey:@"unifiedTime"];
             [dict safeSetObject:@(sModel.unitPrice.doubleValue) forKey:@"unitPrice"];
             NSArray *powerConfigArray = [self getSingleFeeConfigWithSmodel:sModel];
-            [dict safeSetObject:powerConfigArray forKey:@"powerIntervalList"];
+            if (self.type == WFUpdateSingleFeeUpgradeType) {
+                //升级
+                [dict safeSetObject:powerConfigArray forKey:@"powerIntervalConfig"];
+            }else {
+                //申请或者修改
+                [dict safeSetObject:powerConfigArray forKey:@"powerIntervalList"];
+            }
         }else if (sModel.isSelectSecondSection) {
             //统一收费
             [dict safeSetObject:@(sModel.chargeType) forKey:@"chargeType"];
@@ -183,7 +189,13 @@
             [dict safeSetObject:@(sModel.unifiedPrice.integerValue) forKey:@"unifiedPrice"];
             [dict safeSetObject:@(sModel.unifiedTime) forKey:@"unifiedTime"];
             [dict safeSetObject:@(sModel.unitPrice.doubleValue) forKey:@"unitPrice"];
-            [dict safeSetObject:@[] forKey:@"powerIntervalList"];
+            if (self.type == WFUpdateSingleFeeUpgradeType) {
+                //升级
+                [dict safeSetObject:@[] forKey:@"powerIntervalConfig"];
+            }else {
+                //申请或者修改
+                [dict safeSetObject:@[] forKey:@"powerIntervalList"];
+            }
         }
     }
     return dict;
