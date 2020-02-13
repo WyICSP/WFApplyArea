@@ -27,7 +27,7 @@ static NSString *const cellId = @"WFCreditApplyNumTableViewCell";
 - (void)awakeFromNib {
     [super awakeFromNib];
     self.selectionStyle = 0;
-    self.num = 1;
+    self.countTF.delegate = self;
     self.contentsView.layer.cornerRadius = 10.0f;
     self.countView.layer.borderWidth = 0.5;
     self.countView.layer.borderColor = UIColorFromRGB(0xDCDCDC).CGColor;
@@ -43,6 +43,8 @@ static NSString *const cellId = @"WFCreditApplyNumTableViewCell";
 - (void)setModel:(WFCreditPayModel *)model {
     _model = model;
     self.itemPrice.text = [NSString stringWithFormat:@"*每台设备保证金为%@元",@(self.model.devicePrice.doubleValue/100.0f)];
+    self.num = self.model.deviceNum;
+    self.countTF.text = [NSString stringWithFormat:@"%ld",(long)self.num];
     // 获取总价*每台设备保证金为100元
     [self getTotalPrice];
 }
@@ -80,5 +82,18 @@ static NSString *const cellId = @"WFCreditApplyNumTableViewCell";
     self.model.deviceNum = self.num;
 }
 
+#pragma mark UITextFieldDelegate
+- (void)textFieldDidEndEditing:(UITextField *)textField {
+    if (textField.text.integerValue == 0) {
+        textField.text = @"1";
+        self.num = 1;
+        [self getTotalPrice];
+    }
+}
+
+- (IBAction)textFieldDidChange:(UITextField *)sender {
+    self.num = sender.text.integerValue;
+    [self getTotalPrice];
+}
 
 @end

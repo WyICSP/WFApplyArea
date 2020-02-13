@@ -12,7 +12,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface WFCreditApplyNumTableViewCell : UITableViewCell
+@interface WFCreditApplyNumTableViewCell : UITableViewCell<UITextFieldDelegate>
 /// contentView
 @property (weak, nonatomic) IBOutlet UIView *contentsView;
 /// 单价

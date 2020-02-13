@@ -46,6 +46,9 @@
     [WFMyChargePileDataTool adminCreditTemplateWithParams:@{} resultBlock:^(WFCreditPayModel * _Nonnull models) {
         @strongify(self)
         self.models = models;
+        //初始数量为 1 台
+        self.models.deviceNum = 1;
+        // 默认选中第一种支付方式
         if (self.models.creditPaymentVOList.count != 0) {
             WFCreditPaymentVOListModel *model = self.models.creditPaymentVOList.firstObject;
             model.isSelect = YES;
