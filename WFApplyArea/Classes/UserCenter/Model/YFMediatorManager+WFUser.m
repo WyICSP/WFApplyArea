@@ -18,4 +18,8 @@
     [self performTarget:@"WFLoginPublicAPI" action:@"changePassword" params:nil isRequiredReturnValue:NO];
 }
 
++ (void)gotoPayFreightWithParams:(NSDictionary *)params {
+    [self performTarget:@"WFPayPublicAPI" action:@"gotoPayWithParams:" params:params isRequiredReturnValue:NO];
+}
+
 @end

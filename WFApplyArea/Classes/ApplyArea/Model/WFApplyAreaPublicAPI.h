@@ -25,6 +25,10 @@ NS_ASSUME_NONNULL_BEGIN
  */
 + (void)openMyChargePileCtrlWithController:(UIViewController *)controller;
 
+/// 打开授信充值页面
+/// @param controller 上一个页面
++ (void)openCreditPayCtrlWithController:(UIViewController *)controller;
+
 @end
 
 NS_ASSUME_NONNULL_END

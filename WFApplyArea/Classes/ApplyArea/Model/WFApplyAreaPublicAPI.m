@@ -9,6 +9,7 @@
 #import "WFApplyAreaPublicAPI.h"
 #import "WFMyAreaViewController.h"
 #import "WFMyChargePileViewController.h"
+#import "WFCreditPayViewController.h"
 #import "WFShareHelpTool.h"
 
 @implementation WFApplyAreaPublicAPI
@@ -30,6 +31,13 @@
     WFMyChargePileViewController *area = [[WFMyChargePileViewController alloc] init];
     area.hidesBottomBarWhenPushed = YES;
     [controller.navigationController pushViewController:area animated:YES];
+}
+
+/// 打开授信充值页面
++ (void)openCreditPayCtrlWithController:(UIViewController *)controller {
+    WFCreditPayViewController *cred = [[WFCreditPayViewController alloc] init];
+    cred.hidesBottomBarWhenPushed = YES;
+    [controller.navigationController pushViewController:cred animated:YES];
 }
 
 @end

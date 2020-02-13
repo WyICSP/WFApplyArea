@@ -20,6 +20,13 @@ NS_ASSUME_NONNULL_BEGIN
 /// 修改密码
 + (void)changePassword;
 
+/**
+ 去支付
+
+ @param params 支付相关数据
+ */
++ (void)gotoPayFreightWithParams:(NSDictionary *)params;
+
 @end
 
 NS_ASSUME_NONNULL_END

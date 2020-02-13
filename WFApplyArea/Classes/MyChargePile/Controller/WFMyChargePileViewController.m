@@ -189,6 +189,7 @@
  @param index 10 充电桩详情 20 异常充电桩 30 未安装
  */
 - (void)handleSectionWithIndex:(NSInteger)index {
+    [self.view endEditing:YES];
     if (index == 10) {
         self.type = 0;
         //切换赋值

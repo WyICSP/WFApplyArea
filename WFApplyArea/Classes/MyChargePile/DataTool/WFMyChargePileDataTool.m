@@ -9,6 +9,7 @@
 #import "WFMyChargePileDataTool.h"
 #import <MJExtension/MJExtension.h>
 #import "WFMyChargePileModel.h"
+#import "WFCreditPayModel.h"
 #import "WKRequest.h"
 #import "YFKeyWindow.h"
 #import "WKSetting.h"
@@ -70,6 +71,37 @@
     [WKRequest postWithURLString:path parameters:params isJson:NO isShowHud:YES success:^(WKBaseModel *baseModel) {
         if (CODE_ZERO) {
             resultBlock(baseModel.data);
+        }else {
+            [YFToast showMessage:baseModel.message inView:[[YFKeyWindow shareInstance] getCurrentVC].view];
+        }
+    } failure:^(NSError *error) {
+        
+    }];
+}
+
+#pragma mark 授信相关接口
++ (void)adminCreditTemplateWithParams:(NSDictionary *)params
+                          resultBlock:(void(^)(WFCreditPayModel *models))resultBlock {
+    //接口地址
+    NSString *path = [NSString stringWithFormat:@"%@app-partner/adminCreditTemplate/adminDeposit",NEW_HOST_URL];
+    [WKRequest getWithURLString:path parameters:params isShowHud:YES success:^(WKBaseModel *baseModel) {
+        if (CODE_ZERO) {
+            resultBlock([WFCreditPayModel mj_objectWithKeyValues:baseModel.data]);
+        }else {
+            [YFToast showMessage:baseModel.message inView:[[YFKeyWindow shareInstance] getCurrentVC].view];
+        }
+    } failure:^(NSError *error) {
+        
+    }];
+}
+
++ (void)addAdminCreditTemplAteadminDepositWithParams:(NSDictionary *)params
+                                         resultBlock:(void(^)(WFCheditPayMothedModel *models))resultBlock {
+    //接口地址POST
+    NSString *path = [NSString stringWithFormat:@"%@app-partner/adminCreditTemplate/adminDeposit",NEW_HOST_URL];
+    [WKRequest postWithURLString:path parameters:params isJson:YES isShowHud:YES success:^(WKBaseModel *baseModel) {
+        if (CODE_ZERO) {
+            resultBlock([WFCheditPayMothedModel mj_objectWithKeyValues:baseModel.data]);
         }else {
             [YFToast showMessage:baseModel.message inView:[[YFKeyWindow shareInstance] getCurrentVC].view];
         }

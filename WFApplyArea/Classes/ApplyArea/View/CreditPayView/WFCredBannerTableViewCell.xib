@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="KGk-i7-Jjw" customClass="WFCredBannerTableViewCell">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="137"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="375" height="137"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="nxF-7n-fOv">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="100"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    </imageView>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ng6-oi-PMD">
+                        <rect key="frame" x="0.0" y="100" width="375" height="37"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="j8B-Nq-XIM">
+                                <rect key="frame" x="15" y="9.5" width="18" height="18"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="18" id="Ga5-2D-lBA"/>
+                                    <constraint firstAttribute="width" constant="18" id="ZY1-Wz-LTq"/>
+                                </constraints>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="赚钱要点：少安装、少投入，多占点，多宣传，多服务。" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VNe-MJ-5Bo">
+                                <rect key="frame" x="38" y="11" width="322" height="15"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                <color key="textColor" red="1" green="0.42745098040000001" blue="0.12549019610000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="VNe-MJ-5Bo" firstAttribute="top" secondItem="ng6-oi-PMD" secondAttribute="top" constant="11" id="2HB-q6-KWY"/>
+                            <constraint firstItem="j8B-Nq-XIM" firstAttribute="leading" secondItem="ng6-oi-PMD" secondAttribute="leading" constant="15" id="709-bM-4CZ"/>
+                            <constraint firstAttribute="trailing" secondItem="VNe-MJ-5Bo" secondAttribute="trailing" constant="15" id="73f-Y4-HYk"/>
+                            <constraint firstItem="j8B-Nq-XIM" firstAttribute="centerY" secondItem="ng6-oi-PMD" secondAttribute="centerY" id="fOz-M3-lUL"/>
+                            <constraint firstItem="VNe-MJ-5Bo" firstAttribute="leading" secondItem="j8B-Nq-XIM" secondAttribute="trailing" constant="5" id="hUY-Xt-pBZ"/>
+                            <constraint firstItem="VNe-MJ-5Bo" firstAttribute="centerY" secondItem="j8B-Nq-XIM" secondAttribute="centerY" id="pgx-ks-sbH"/>
+                        </constraints>
+                    </view>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="nxF-7n-fOv" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="G59-aS-FzF"/>
+                    <constraint firstItem="nxF-7n-fOv" firstAttribute="width" secondItem="nxF-7n-fOv" secondAttribute="height" multiplier="15:4" id="Gtd-rZ-hPg"/>
+                    <constraint firstItem="ng6-oi-PMD" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="TfY-nH-MH8"/>
+                    <constraint firstAttribute="trailing" secondItem="nxF-7n-fOv" secondAttribute="trailing" id="WJk-Ir-hHG"/>
+                    <constraint firstItem="nxF-7n-fOv" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="e83-ZP-Nj1"/>
+                    <constraint firstAttribute="bottom" secondItem="ng6-oi-PMD" secondAttribute="bottom" id="eqP-Rg-Ki1"/>
+                    <constraint firstAttribute="trailing" secondItem="ng6-oi-PMD" secondAttribute="trailing" id="fnC-Jm-Ivy"/>
+                    <constraint firstItem="ng6-oi-PMD" firstAttribute="top" secondItem="nxF-7n-fOv" secondAttribute="bottom" id="zUX-Jp-ySv"/>
+                </constraints>
+            </tableViewCellContentView>
+            <viewLayoutGuide key="safeArea" id="aW0-zy-SZf"/>
+            <connections>
+                <outlet property="bannerImgView" destination="nxF-7n-fOv" id="21W-xy-y7K"/>
+                <outlet property="explanLbl" destination="VNe-MJ-5Bo" id="wZo-iM-4TT"/>
+            </connections>
+            <point key="canvasLocation" x="139" y="117"/>
+        </tableViewCell>
+    </objects>
+</document>

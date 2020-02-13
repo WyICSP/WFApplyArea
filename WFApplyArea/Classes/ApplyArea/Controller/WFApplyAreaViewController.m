@@ -28,7 +28,6 @@
 #import "WFMyAreaListModel.h"
 #import "WKConfig.h"
 
-#import "WFUserCenterPublicAPI.H"
 
 @interface WFApplyAreaViewController ()<UITableViewDelegate,UITableViewDataSource>
 /**scrollView*/

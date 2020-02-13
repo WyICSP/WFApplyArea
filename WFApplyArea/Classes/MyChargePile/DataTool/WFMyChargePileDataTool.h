@@ -11,6 +11,8 @@
 @class WFMyChargePileModel;
 @class WFAbnormalPileListModel;
 @class WFSignleIntensityListModel;
+@class WFCreditPayModel;
+@class WFCheditPayMothedModel;
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -56,6 +58,20 @@ NS_ASSUME_NONNULL_BEGIN
  */
 + (void)uploadModHeadWithParams:(NSDictionary *)params
                     resultBlock:(void (^)(NSString *str))resultBlock;
+
+#pragma mark  授信相关接口
+/// 授信接口
+/// @param params 参数
+/// @param resultBlock 返回数据
++ (void)adminCreditTemplateWithParams:(NSDictionary *)params
+                          resultBlock:(void(^)(WFCreditPayModel *models))resultBlock;
+
+
+/// 授信充值
+/// @param params 参数
+/// @param resultBlock 返回数据
++ (void)addAdminCreditTemplAteadminDepositWithParams:(NSDictionary *)params
+                                         resultBlock:(void(^)(WFCheditPayMothedModel *models))resultBlock;
 
 @end
 
