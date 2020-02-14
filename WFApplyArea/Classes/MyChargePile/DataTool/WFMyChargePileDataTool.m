@@ -83,7 +83,7 @@
 + (void)adminCreditTemplateWithParams:(NSDictionary *)params
                           resultBlock:(void(^)(WFCreditPayModel *models))resultBlock {
     //接口地址
-    NSString *path = [NSString stringWithFormat:@"%@app-partner/adminCreditTemplate/adminDeposit",NEW_HOST_URL];
+    NSString *path = [NSString stringWithFormat:@"%@app-partner/adminCreditTemplate/getAdminPayMethod",NEW_HOST_URL];
     [WKRequest getWithURLString:path parameters:params isShowHud:YES success:^(WKBaseModel *baseModel) {
         if (CODE_ZERO) {
             resultBlock([WFCreditPayModel mj_objectWithKeyValues:baseModel.data]);
@@ -98,7 +98,7 @@
 + (void)addAdminCreditTemplAteadminDepositWithParams:(NSDictionary *)params
                                          resultBlock:(void(^)(WFCheditPayMothedModel *models))resultBlock {
     //接口地址POST
-    NSString *path = [NSString stringWithFormat:@"%@app-partner/adminCreditTemplate/getAdminPayMethod",NEW_HOST_URL];
+    NSString *path = [NSString stringWithFormat:@"%@app-partner/adminCreditTemplate/adminDeposit",NEW_HOST_URL];
     [WKRequest postWithURLString:path parameters:params isJson:YES isShowHud:YES success:^(WKBaseModel *baseModel) {
         if (CODE_ZERO) {
             resultBlock([WFCheditPayMothedModel mj_objectWithKeyValues:baseModel.data]);
