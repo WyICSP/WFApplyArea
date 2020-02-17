@@ -18,14 +18,14 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="nxF-7n-fOv">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="100"/>
+                        <rect key="frame" x="-2" y="0.0" width="379" height="101"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </imageView>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ng6-oi-PMD">
-                        <rect key="frame" x="0.0" y="100" width="375" height="37"/>
+                        <rect key="frame" x="0.0" y="101" width="375" height="36"/>
                         <subviews>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="WFApplyArea.bundle/cred_horn" translatesAutoresizingMaskIntoConstraints="NO" id="j8B-Nq-XIM">
-                                <rect key="frame" x="15" y="9.5" width="18" height="18"/>
+                                <rect key="frame" x="15" y="9" width="18" height="18"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="18" id="Ga5-2D-lBA"/>
@@ -33,7 +33,7 @@
                                 </constraints>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="赚钱要点：少安装、少投入，多占点，多宣传，多服务。" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VNe-MJ-5Bo">
-                                <rect key="frame" x="38" y="11" width="322" height="15"/>
+                                <rect key="frame" x="38" y="11" width="322" height="14"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                 <color key="textColor" red="1" green="0.42745098040000001" blue="0.12549019610000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
@@ -54,8 +54,8 @@
                     <constraint firstItem="nxF-7n-fOv" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="G59-aS-FzF"/>
                     <constraint firstItem="nxF-7n-fOv" firstAttribute="width" secondItem="nxF-7n-fOv" secondAttribute="height" multiplier="15:4" id="Gtd-rZ-hPg"/>
                     <constraint firstItem="ng6-oi-PMD" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="TfY-nH-MH8"/>
-                    <constraint firstAttribute="trailing" secondItem="nxF-7n-fOv" secondAttribute="trailing" id="WJk-Ir-hHG"/>
-                    <constraint firstItem="nxF-7n-fOv" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="e83-ZP-Nj1"/>
+                    <constraint firstAttribute="trailing" secondItem="nxF-7n-fOv" secondAttribute="trailing" constant="-2" id="WJk-Ir-hHG"/>
+                    <constraint firstItem="nxF-7n-fOv" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="-2" id="e83-ZP-Nj1"/>
                     <constraint firstAttribute="bottom" secondItem="ng6-oi-PMD" secondAttribute="bottom" id="eqP-Rg-Ki1"/>
                     <constraint firstAttribute="trailing" secondItem="ng6-oi-PMD" secondAttribute="trailing" id="fnC-Jm-Ivy"/>
                     <constraint firstItem="ng6-oi-PMD" firstAttribute="top" secondItem="nxF-7n-fOv" secondAttribute="bottom" id="zUX-Jp-ySv"/>

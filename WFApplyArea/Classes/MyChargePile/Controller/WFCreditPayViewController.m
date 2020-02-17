@@ -47,7 +47,7 @@
         @strongify(self)
         self.models = models;
         //初始数量为 1 台
-        self.models.deviceNum = 1;
+        self.models.deviceNum = 0;
         // 默认选中第一种支付方式
         if (self.models.creditPaymentVOList.count != 0) {
             WFCreditPaymentVOListModel *model = self.models.creditPaymentVOList.firstObject;
@@ -60,6 +60,12 @@
 
 /// 充值
 - (void)clickAddBtn {
+    
+    if (self.models.deviceNum <= 0) {
+        [YFToast showMessage:@"请添加需要充值的设备数量" inView:self.view];
+        return;
+    }
+    
     NSMutableDictionary *params = [NSMutableDictionary dictionary];
     [params safeSetObject:@(self.models.deviceNum) forKey:@"deviceNum"];
     [params safeSetObject:@(self.models.money) forKey:@"money"];

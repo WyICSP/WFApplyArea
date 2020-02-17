@@ -55,7 +55,7 @@ static NSString *const cellId = @"WFCreditApplyNumTableViewCell";
     if (sender.tag == 10) {
         self.num -= 1;
         // num 不能为 0
-        if (self.num == 0)self.num = 1;
+        if (self.num <= 0)self.num = 0;
     }else if (sender.tag == 20) {
         self.num += 1;
     }
@@ -84,9 +84,7 @@ static NSString *const cellId = @"WFCreditApplyNumTableViewCell";
 
 #pragma mark UITextFieldDelegate
 - (void)textFieldDidEndEditing:(UITextField *)textField {
-    if (textField.text.integerValue == 0) {
-        textField.text = @"1";
-        self.num = 1;
+    if (textField.text.integerValue <= 0) {
         [self getTotalPrice];
     }
 }

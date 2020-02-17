@@ -25,6 +25,8 @@ static NSString *const cellId = @"WFCredBannerTableViewCell";
 - (void)awakeFromNib {
     [super awakeFromNib];
     self.selectionStyle = 0;
+    self.explanLbl.adjustsFontSizeToFitWidth = YES;
+    self.explanLbl.minimumScaleFactor = 0.5;
     // Initialization code
 }
 
