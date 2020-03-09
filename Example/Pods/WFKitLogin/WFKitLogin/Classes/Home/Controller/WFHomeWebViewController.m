@@ -36,7 +36,7 @@
     [super viewWillDisappear:animated];
     [self.navigationController setNavigationBarHidden:NO animated:animated];
     //清空缓存
-    [self deleteWebCache];
+//    [self deleteWebCache];
     // 开启
     if ([self.navigationController respondsToSelector:@selector(interactivePopGestureRecognizer)]) {
         self.navigationController.interactivePopGestureRecognizer.enabled = YES;
@@ -63,6 +63,13 @@
     [self.view addSubview:self.dwebview];
     //添加进度条
     [self.view.layer addSublayer:self.webProgressLayer];
+    //刷新数据
+    [YFNotificationCenter addObserver:self selector:@selector(reloadWebData) name:@"reloadApplyPileKeys" object:nil];
+}
+
+/// 刷新数据
+- (void)reloadWebData {
+    [self.dwebview reload];
 }
 
 - (void)deleteWebCache {

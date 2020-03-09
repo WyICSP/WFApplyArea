@@ -34,6 +34,11 @@
     return ISIPHONEX ? @"1" : @"0";
 }
 
+- (NSString *)getAppVersion:(NSString *)msg
+{
+    return APP_VERSION;
+}
+
 
 /**返回*/
 - (void)goBack:(NSString *)msg :(JSCallback) completionHandler
@@ -84,6 +89,13 @@
 - (void)openCreditPay:(NSString *)msg :(JSCallback) completionHandler
 {
     [WFLoginPublicAPI openCreditPayCtrl];
+    completionHandler(msg,YES);
+}
+
+/**打开奖励收入*/
+- (void)toAwardsMoney:(NSString *)msg :(JSCallback) completionHandler
+{
+    [WFLoginPublicAPI openRewardCtrl];
     completionHandler(msg,YES);
 }
 

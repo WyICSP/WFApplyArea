@@ -37,7 +37,8 @@ static NSString *const cellId = @"WFCredBannerTableViewCell";
 }
 
 - (void)setModel:(WFCreditPayModel *)model {
-    [self.bannerImgView sd_setImageWithURL:[NSURL URLWithString:model.pageUrl] placeholderImage:[UIImage imageNamed:@"chang"]];
+    NSString *path = [model.pageUrl stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]];
+    [self.bannerImgView sd_setImageWithURL:[NSURL URLWithString:path] placeholderImage:[UIImage imageNamed:@"chang"]];
     self.explanLbl.text = model.advertisingLanguage;
 }
 
