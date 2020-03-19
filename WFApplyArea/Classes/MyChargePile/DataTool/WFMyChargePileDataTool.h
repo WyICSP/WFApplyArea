@@ -70,8 +70,10 @@ NS_ASSUME_NONNULL_BEGIN
 /// 授信充值
 /// @param params 参数
 /// @param resultBlock 返回数据
+/// @param changeBlock 价格改变 block
 + (void)addAdminCreditTemplAteadminDepositWithParams:(NSDictionary *)params
-                                         resultBlock:(void(^)(WFCheditPayMothedModel *models))resultBlock;
+                                         resultBlock:(void(^)(WFCheditPayMothedModel *models))resultBlock
+                                         changeBlock:(void(^)(NSInteger money))changeBlock;
 
 @end
 

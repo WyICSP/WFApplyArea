@@ -6,6 +6,9 @@
 //  Copyright © 2019 wyxlh. All rights reserved.
 //
 
+// 授信充值 改变的时候返回 code
+#define CHANGEkEY baseModel.code.intValue == 10044
+
 #import "WFMyChargePileDataTool.h"
 #import <MJExtension/MJExtension.h>
 #import "WFMyChargePileModel.h"
@@ -96,12 +99,16 @@
 }
 
 + (void)addAdminCreditTemplAteadminDepositWithParams:(NSDictionary *)params
-                                         resultBlock:(void(^)(WFCheditPayMothedModel *models))resultBlock {
+                                         resultBlock:(void(^)(WFCheditPayMothedModel *models))resultBlock
+                                         changeBlock:(void(^)(NSInteger money))changeBlock {
     //接口地址POST
     NSString *path = [NSString stringWithFormat:@"%@app-partner/adminCreditTemplate/adminDeposit",NEW_HOST_URL];
     [WKRequest postWithURLString:path parameters:params isJson:YES isShowHud:YES success:^(WKBaseModel *baseModel) {
         if (CODE_ZERO) {
             resultBlock([WFCheditPayMothedModel mj_objectWithKeyValues:baseModel.data]);
+        }else if (CHANGEkEY){
+            //价格有变化
+            changeBlock(baseModel.data.integerValue);
         }else {
             [YFToast showMessage:baseModel.message inView:[[YFKeyWindow shareInstance] getCurrentVC].view];
         }

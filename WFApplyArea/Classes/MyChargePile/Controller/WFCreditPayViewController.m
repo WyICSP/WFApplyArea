@@ -74,6 +74,9 @@
     [WFMyChargePileDataTool addAdminCreditTemplAteadminDepositWithParams:params resultBlock:^(WFCheditPayMothedModel * _Nonnull models) {
         @strongify(self)
         [self completionHandlerWith:models];
+    } changeBlock:^(NSInteger money) {
+        @strongify(self)
+        [self changeFeeResultWithMoney:money];
     }];
 }
 
@@ -92,6 +95,27 @@
     [params safeSetObject:models.aliPay forKey:@"aliPayJson"];
     //调用支付
     [YFMediatorManager gotoPayFreightWithParams:params];
+}
+
+/// 价格改变之后走的方法
+/// @param money 改变后的价格
+- (void)changeFeeResultWithMoney:(NSInteger)devicePrice {
+    NSString *alertMsg = [NSString stringWithFormat:@"当前设备保证金变更为%ld元/台",(long)devicePrice/100];
+    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:alertMsg message:nil preferredStyle:UIAlertControllerStyleAlert];
+    //增加取消按钮；
+    [alertController addAction:[UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleDefault handler:nil]];
+    //增加确定按钮；
+    [alertController addAction:[UIAlertAction actionWithTitle:@"继续" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        // 修改过的价格
+        self.models.devicePrice = @(devicePrice);
+        // 重新刷新下页面 第二个
+        NSIndexSet *indexSet=[[NSIndexSet alloc] initWithIndex:1];
+        [self.tableView reloadSections:indexSet withRowAnimation:UITableViewRowAnimationNone];
+        // 重新支付
+        [self clickAddBtn];
+    }]];
+    
+    [self presentViewController:alertController animated:true completion:nil];
 }
 
 #pragma mark UITableViewDataSource,UITableViewDelegate
@@ -132,15 +156,6 @@
     return fView;
 }
 
-- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (indexPath.section == 0) {
-        return KHeight(100.0f)+36.0f;
-    }else if (indexPath.section == 1) {
-        return 73.0f;
-    }
-    return 60.0f;
-}
-
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.section == 2) {
         for (WFCreditPaymentVOListModel *itemModel in self.models.creditPaymentVOList) {
@@ -161,7 +176,7 @@
         _tableView.delegate = self;
         _tableView.dataSource = self;
         _tableView.separatorStyle = 0;
-        _tableView.estimatedRowHeight = 0.0f;
+        _tableView.estimatedRowHeight = 60.0f;
         _tableView.backgroundColor = UIColorFromRGB(0xF5F5F5);
         _tableView.estimatedSectionFooterHeight = 0.0f;
         _tableView.estimatedSectionHeaderHeight = 0.0f;
