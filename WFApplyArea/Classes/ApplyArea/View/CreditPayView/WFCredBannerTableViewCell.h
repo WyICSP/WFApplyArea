@@ -14,8 +14,10 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface WFCredBannerTableViewCell : UITableViewCell
 @property (weak, nonatomic) IBOutlet UIImageView *bannerImgView;
-@property (weak, nonatomic) IBOutlet UILabel *explanLbl;
-
+/// img
+@property (weak, nonatomic) IBOutlet UIImageView *img;
+/// 跑马灯 view
+@property (weak, nonatomic) IBOutlet UIView *lblContentsView;
 /// 赋值
 @property (nonatomic, strong) WFCreditPayModel *model;
 /**初始化*/

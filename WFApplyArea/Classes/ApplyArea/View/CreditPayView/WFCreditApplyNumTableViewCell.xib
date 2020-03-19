@@ -41,7 +41,7 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2Gv-x9-BF5">
                                 <rect key="frame" x="266" y="11.5" width="70" height="22"/>
                                 <subviews>
-                                    <button opaque="NO" tag="10" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zuz-st-4i8">
+                                    <button opaque="NO" tag="10" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zuz-st-4i8">
                                         <rect key="frame" x="0.0" y="0.0" width="22" height="22"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
@@ -50,7 +50,7 @@
                                         <fontDescription key="fontDescription" type="system" pointSize="21"/>
                                         <inset key="titleEdgeInsets" minX="0.0" minY="-3" maxX="0.0" maxY="0.0"/>
                                         <state key="normal" title="-">
-                                            <color key="titleColor" red="0.96862745100000003" green="0.52156862749999999" blue="0.33725490200000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <color key="titleColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </state>
                                         <connections>
                                             <action selector="clickBtn:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="jYa-hU-7So"/>
@@ -70,7 +70,7 @@
                                         <rect key="frame" x="22.5" y="0.0" width="25" height="22"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="12"/>
-                                        <textInputTraits key="textInputTraits"/>
+                                        <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
                                         <connections>
                                             <action selector="textFieldDidChange:" destination="KGk-i7-Jjw" eventType="editingChanged" id="waA-Pg-CbI"/>
                                         </connections>
@@ -160,6 +160,7 @@
                 <outlet property="countTF" destination="0H4-Jn-rgp" id="wE4-VQ-n4l"/>
                 <outlet property="countView" destination="2Gv-x9-BF5" id="bCh-j3-Tee"/>
                 <outlet property="itemPrice" destination="s33-E4-8K1" id="1th-B7-aDS"/>
+                <outlet property="reduceBtn" destination="zuz-st-4i8" id="Kwp-Ry-5Er"/>
                 <outlet property="totalPrice" destination="cUF-aB-mKE" id="ABG-Rj-DLv"/>
             </connections>
             <point key="canvasLocation" x="138.40579710144928" y="110.82589285714285"/>

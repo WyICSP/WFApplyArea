@@ -47,7 +47,7 @@
         @strongify(self)
         self.models = models;
         //初始数量为 1 台
-        self.models.deviceNum = 0;
+        self.models.deviceNum = 1;
         // 默认选中第一种支付方式
         if (self.models.creditPaymentVOList.count != 0) {
             WFCreditPaymentVOListModel *model = self.models.creditPaymentVOList.firstObject;
@@ -93,6 +93,7 @@
     [params safeSetObject:models.partnerKey forKey:@"wxPartnerKey"];
     [params safeSetObject:models.prepayid forKey:@"wxOrderNum"];
     [params safeSetObject:models.aliPay forKey:@"aliPayJson"];
+    [params safeSetObject:@(1) forKey:@"paySource"];// 表示直接从首页进入授信页面进行充值
     //调用支付
     [YFMediatorManager gotoPayFreightWithParams:params];
 }
@@ -103,19 +104,29 @@
     NSString *alertMsg = [NSString stringWithFormat:@"当前设备保证金变更为%ld元/台",(long)devicePrice/100];
     UIAlertController *alertController = [UIAlertController alertControllerWithTitle:alertMsg message:nil preferredStyle:UIAlertControllerStyleAlert];
     //增加取消按钮；
-    [alertController addAction:[UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleDefault handler:nil]];
+    [alertController addAction:[UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        // 修改过的价格
+        self.models.devicePrice = @(devicePrice);
+        // 刷新
+        [self reloadSection];
+    }]];
     //增加确定按钮；
     [alertController addAction:[UIAlertAction actionWithTitle:@"继续" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
         // 修改过的价格
         self.models.devicePrice = @(devicePrice);
-        // 重新刷新下页面 第二个
-        NSIndexSet *indexSet=[[NSIndexSet alloc] initWithIndex:1];
-        [self.tableView reloadSections:indexSet withRowAnimation:UITableViewRowAnimationNone];
+        // 刷新
+        [self reloadSection];
         // 重新支付
         [self clickAddBtn];
     }]];
     
     [self presentViewController:alertController animated:true completion:nil];
+}
+
+// 重新刷新下页面 第二个
+- (void)reloadSection {
+    NSIndexSet *indexSet=[[NSIndexSet alloc] initWithIndex:1];
+    [self.tableView reloadSections:indexSet withRowAnimation:UITableViewRowAnimationNone];
 }
 
 #pragma mark UITableViewDataSource,UITableViewDelegate

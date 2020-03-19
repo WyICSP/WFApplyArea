@@ -6,15 +6,12 @@
 //  Copyright © 2019 wyxlh. All rights reserved.
 //
 
-#import <WFKitMain/YFBaseViewController.h>
+#import <WFKitMain/WFBaseNoNavWebViewController.h>
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface WFCurrentWebViewController : YFBaseViewController
-/**
- 加载url
- */
-@property (nonatomic, copy) NSString *urlString;
+@interface WFCurrentWebViewController : WFBaseNoNavWebViewController
+
 @end
 
 NS_ASSUME_NONNULL_END

@@ -9,6 +9,14 @@
 #import "WFCredBannerTableViewCell.h"
 #import <SDWebImage/UIImageView+WebCache.h>
 #import "WFCreditPayModel.h"
+#import "WFHorseRaceLamp.h"
+#import "WKHelp.h"
+
+@interface WFCredBannerTableViewCell()
+
+@property (nonatomic, weak) WFHorseRaceLamp *marqueeControl;
+
+@end
 
 @implementation WFCredBannerTableViewCell
 
@@ -25,8 +33,6 @@ static NSString *const cellId = @"WFCredBannerTableViewCell";
 - (void)awakeFromNib {
     [super awakeFromNib];
     self.selectionStyle = 0;
-    self.explanLbl.adjustsFontSizeToFitWidth = YES;
-    self.explanLbl.minimumScaleFactor = 0.5;
     // Initialization code
 }
 
@@ -36,10 +42,28 @@ static NSString *const cellId = @"WFCredBannerTableViewCell";
     // Configure the view for the selected state
 }
 
+
+#pragma mark - Getter Setter
 - (void)setModel:(WFCreditPayModel *)model {
     NSString *path = [model.pageUrl stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]];
     [self.bannerImgView sd_setImageWithURL:[NSURL URLWithString:path] placeholderImage:[UIImage imageNamed:@"chang"]];
-    self.explanLbl.text = model.advertisingLanguage;
+    self.marqueeControl.marqueeLabel.text = model.advertisingLanguage;
+}
+
+
+
+- (WFHorseRaceLamp *)marqueeControl {
+    if (!_marqueeControl) {
+        WFHorseRaceLamp *control = [[WFHorseRaceLamp alloc] initWithFrame:CGRectMake(CGRectGetMaxX(self.img.frame) + 5.0f, 0, ScreenWidth-60.0f, 36.f)];
+        control.backgroundColor = [UIColor whiteColor];
+        control.marqueeLabel.textColor = NavColor;
+        control.marqueeLabel.font = [UIFont systemFontOfSize:12.0f];
+        [self.lblContentsView addSubview:control];
+        
+        _marqueeControl = control;
+    }
+    
+    return _marqueeControl;
 }
 
 @end

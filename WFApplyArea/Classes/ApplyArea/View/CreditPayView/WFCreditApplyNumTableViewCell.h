@@ -23,6 +23,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property (weak, nonatomic) IBOutlet UILabel *totalPrice;
 /// 改变数量的 view
 @property (weak, nonatomic) IBOutlet UIView *countView;
+/// 减
+@property (weak, nonatomic) IBOutlet UIButton *reduceBtn;
 /// 初始化数量
 @property (nonatomic, assign) NSInteger num;
 /// 赋值

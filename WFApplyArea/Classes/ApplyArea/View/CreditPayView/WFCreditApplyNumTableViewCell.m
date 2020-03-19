@@ -55,9 +55,15 @@ static NSString *const cellId = @"WFCreditApplyNumTableViewCell";
     if (sender.tag == 10) {
         self.num -= 1;
         // num 不能为 0
-        if (self.num <= 0)self.num = 0;
+        if (self.num <= 1) {
+            self.num = 1;
+            self.reduceBtn.enabled = NO;
+            [self.reduceBtn setTitleColor:UIColor.grayColor forState:0];
+        }
     }else if (sender.tag == 20) {
         self.num += 1;
+        self.reduceBtn.enabled = YES;
+        [self.reduceBtn setTitleColor:NavColor forState:0];
     }
     self.countTF.text = [NSString stringWithFormat:@"%ld",(long)self.num];
     // 获取总价
@@ -84,12 +90,25 @@ static NSString *const cellId = @"WFCreditApplyNumTableViewCell";
 
 #pragma mark UITextFieldDelegate
 - (void)textFieldDidEndEditing:(UITextField *)textField {
-    if (textField.text.integerValue <= 0) {
+    
+    if ([textField.text isEqualToString:@"0"]) textField.text = @"1";
+    //最长 5 位
+    if (textField.text.length > 5) {
+        textField.text = [textField.text substringWithRange:NSMakeRange(0, 5)];
+    }
+    
+    if (textField.text.integerValue <= 1) {
         [self getTotalPrice];
     }
 }
 
 - (IBAction)textFieldDidChange:(UITextField *)sender {
+    if ([sender.text isEqualToString:@"0"]) sender.text = @"1";
+    //最长 5 位
+    if (sender.text.length > 5) {
+        sender.text = [sender.text substringWithRange:NSMakeRange(0, 5)];
+    }
+
     self.num = sender.text.integerValue;
     [self getTotalPrice];
 }

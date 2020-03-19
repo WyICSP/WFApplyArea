@@ -7,6 +7,7 @@
 
 #import "WFJSApiTools.h"
 #import "WFUserCenterPublicAPI.h"
+#import "WKTabbarController.h"
 #import "WFShareHelpTool.h"
 #import "NSString+Regular.h"
 #import "dsbridge.h"
@@ -33,6 +34,18 @@
 - (void)goBack:(NSString *)msg :(JSCallback) completionHandler
 {
     [[[YFKeyWindow shareInstance] getCurrentVC].navigationController popViewControllerAnimated:YES];
+    completionHandler(msg,YES);
+    
+}
+
+/**返回*/
+- (void)goBackToRoot:(NSString *)msg :(JSCallback) completionHandler
+{
+    NSArray *controllers = [WKTabbarController shareInstance].selectedViewController.childViewControllers;
+    if (controllers.count != 0) {
+        UIViewController *controller = controllers.lastObject;
+        [controller.navigationController popToRootViewControllerAnimated:YES];
+    }
     completionHandler(msg,YES);
     
 }
