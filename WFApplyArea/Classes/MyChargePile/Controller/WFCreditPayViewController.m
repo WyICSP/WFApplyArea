@@ -93,7 +93,7 @@
     [params safeSetObject:models.partnerKey forKey:@"wxPartnerKey"];
     [params safeSetObject:models.prepayid forKey:@"wxOrderNum"];
     [params safeSetObject:models.aliPay forKey:@"aliPayJson"];
-    [params safeSetObject:@(1) forKey:@"paySource"];// 表示直接从首页进入授信页面进行充值
+    [params safeSetObject:@(self.sourceType) forKey:@"paySource"];// 表示直接从首页进入授信页面进行充值
     //调用支付
     [YFMediatorManager gotoPayFreightWithParams:params];
 }
@@ -101,7 +101,7 @@
 /// 价格改变之后走的方法
 /// @param money 改变后的价格
 - (void)changeFeeResultWithMoney:(NSInteger)devicePrice {
-    NSString *alertMsg = [NSString stringWithFormat:@"当前设备保证金变更为%ld元/台",(long)devicePrice/100];
+    NSString *alertMsg = [NSString stringWithFormat:@"当前设备保证金变更为%@元/台",@(devicePrice/100.0f)];
     UIAlertController *alertController = [UIAlertController alertControllerWithTitle:alertMsg message:nil preferredStyle:UIAlertControllerStyleAlert];
     //增加取消按钮；
     [alertController addAction:[UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {

@@ -34,10 +34,18 @@
 }
 
 /// 打开授信充值页面
-+ (void)openCreditPayCtrlWithController:(UIViewController *)controller {
-    WFCreditPayViewController *cred = [[WFCreditPayViewController alloc] init];
-    cred.hidesBottomBarWhenPushed = YES;
-    [controller.navigationController pushViewController:cred animated:YES];
++ (void)openCreditPayCtrlWithController:(NSArray *)params {
+    if (params.count == 2) {
+        // 获取controller
+        UIViewController *controller = params.firstObject;
+        // 获取来源
+        NSInteger type = [params.lastObject integerValue];
+        WFCreditPayViewController *cred = [[WFCreditPayViewController alloc] init];
+        cred.hidesBottomBarWhenPushed = YES;
+        cred.sourceType = type;
+        [controller.navigationController pushViewController:cred animated:YES];
+    }
+    
 }
 
 @end
