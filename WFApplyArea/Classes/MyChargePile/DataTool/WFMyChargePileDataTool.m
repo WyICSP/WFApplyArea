@@ -13,6 +13,7 @@
 #import <MJExtension/MJExtension.h>
 #import "WFMyChargePileModel.h"
 #import "WFCreditPayModel.h"
+#import "WFUserCenterModel.h"
 #import "WKRequest.h"
 #import "YFKeyWindow.h"
 #import "WKSetting.h"
@@ -111,6 +112,30 @@
             changeBlock(baseModel.data.integerValue);
         }else {
             [YFToast showMessage:baseModel.message inView:[[YFKeyWindow shareInstance] getCurrentVC].view];
+        }
+    } failure:^(NSError *error) {
+        
+    }];
+}
+
++ (void)getUserInfoWithParams:(NSDictionary *)params
+                  resultBlock:(void(^)(WFUserCenterModel *models))resultBlock {
+    NSString *path = [NSString stringWithFormat:@"%@app-partner-setmeal/v1/home/pageInfo/getAdminInfo",NEW_HOST_URL];
+    [WKRequest getWithURLString:path parameters:nil isShowHud:NO success:^(WKBaseModel *baseModel) {
+        if (CODE_ZERO) {
+            resultBlock([WFUserCenterModel mj_objectWithKeyValues:baseModel.data]);
+        }
+    } failure:^(NSError *error) {
+        
+    }];
+}
+
++ (void)getCustomerServiceWithParams:(NSDictionary *)params
+                         resultBlock:(void(^)(WFMineCustomerServicModel *cModel))resultBlock {
+    NSString *path = [NSString stringWithFormat:@"%@app-partner-setmeal/v1/home/pageInfo/headAd",NEW_HOST_URL];
+    [WKRequest getWithURLString:path parameters:nil isShowHud:NO success:^(WKBaseModel *baseModel) {
+        if (CODE_ZERO) {
+            resultBlock([WFMineCustomerServicModel mj_objectWithKeyValues:baseModel.data]);
         }
     } failure:^(NSError *error) {
         

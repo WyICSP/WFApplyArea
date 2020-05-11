@@ -10,17 +10,26 @@
 #import "WFMyAreaViewController.h"
 #import "WFMyChargePileViewController.h"
 #import "WFCreditPayViewController.h"
+#import "WFApplyAreaViewController.h"
 #import "WFShareHelpTool.h"
 
 @implementation WFApplyAreaPublicAPI
 
 /**
- 打开片区申请页面
+ 打开我的片区页面
  */
 + (void)openApplyAreaCtrlWithController:(UIViewController *)controller {
     WFMyAreaViewController *area = [[WFMyAreaViewController alloc] init];
     area.hidesBottomBarWhenPushed = YES;
     [controller.navigationController pushViewController:area animated:YES];
+}
+
+/// 打开申请片区
+/// @param controller 当前页面
++ (void)gotoAppleAreaCtrlWithController:(UIViewController *)controller {
+    WFApplyAreaViewController *apply = [[WFApplyAreaViewController alloc] init];
+    apply.hidesBottomBarWhenPushed = YES;
+    [controller.navigationController pushViewController:apply animated:YES];
 }
 
 /**

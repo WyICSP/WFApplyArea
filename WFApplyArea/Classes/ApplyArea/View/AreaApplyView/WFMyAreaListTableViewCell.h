@@ -27,8 +27,10 @@ NS_ASSUME_NONNULL_BEGIN
 @property (weak, nonatomic) IBOutlet UILabel *state;
 /**二维码*/
 @property (weak, nonatomic) IBOutlet UIButton *qrBtn;
+/// 移动
+@property (weak, nonatomic) IBOutlet UIButton *moveBtn;
 /**显示二维码*/
-@property (nonatomic, copy) void (^showQRCodeBlock)(void);
+@property (nonatomic, copy) void (^showQRCodeBlock)(NSInteger tag);
 /**赋值操作*/
 @property (nonatomic, strong) WFMyAreaListModel *model;
 /**初始化*/

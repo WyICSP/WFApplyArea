@@ -13,6 +13,7 @@
 #import "WFMyAreaListTableViewCell.h"
 #import <IQKeyboardManager/IQKeyboardManager.h>
 #import "WFMyAreaSearchHeadView.h"
+#import "WFMoreEquViewController.h"
 #import "WFApplyAreaDataTool.h"
 #import "WFMyAreaListModel.h"
 #import "WFMyAreaQRCodeView.h"
@@ -99,6 +100,13 @@
     }];
 }
 
+///  移入设备
+- (void)moveEquipmentCtrlWithGroupId:(NSString *)groupId {
+    WFMoreEquViewController *move = [[WFMoreEquViewController alloc] init];
+    move.groupId = groupId;
+    [self.navigationController pushViewController:move animated:YES];
+}
+
 /// 搜索片区
 /// @param key 搜索关键字
 - (void)getSearchAreaListWithKey:(NSString *)key {
@@ -139,9 +147,13 @@
     WFMyAreaListModel *itemModel = self.isBeginEdit ? [self.searchModels safeObjectAtIndex:indexPath.section] : [self.models safeObjectAtIndex:indexPath.section];
     cell.model = itemModel;
     @weakify(self)
-    cell.showQRCodeBlock = ^{
-        @strongify(self)
-        [self getAreaQRcodeWithAreaId:itemModel.groupId areaName:itemModel.groupName];
+    cell.showQRCodeBlock = ^(NSInteger tag) {
+        if (tag == 100) {
+            @strongify(self)
+            [self getAreaQRcodeWithAreaId:itemModel.groupId areaName:itemModel.groupName];
+        }else {
+            [self moveEquipmentCtrlWithGroupId:itemModel.groupId];
+        }
     };
     return cell;
 }

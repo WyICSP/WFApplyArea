@@ -20,7 +20,8 @@
 #import "WFShopMallWebViewController.h"
 #import "NSString+Regular.h"
 #import "WKNavigationController.h"
-#import "WFUserCenterViewController.h"
+#import "WFPersonCenterViewController.h"
+#import "WFNewHomeViewController.h"
 #import "WFHomeViewController.h"
 #import "UserData.h"
 #import "IQKeyboardManager.h"
@@ -85,7 +86,8 @@
             UITabBarController *rootVC        = [YFMainPublicModelAPI rootTabBarCcontroller];
             [YFMainPublicModelAPI addChildVC:[WFHomeViewController new] normalImageName:@"" selectedImageName:@"" title:@"登录"];
             [YFMainPublicModelAPI addChildVC:[WFShopMallWebViewController new] normalImageName:@"" selectedImageName:@"" title:@"我的片区"];
-            [YFMainPublicModelAPI addChildVC:[WFUserCenterViewController new] normalImageName:@"" selectedImageName:@"" title:@"我的"];
+            [YFMainPublicModelAPI addChildVC:[WFPersonCenterViewController new] normalImageName:@"" selectedImageName:@"" title:@"我的"];
+            [YFMainPublicModelAPI addChildVC:[WFNewHomeViewController new] normalImageName:@"" selectedImageName:@"" title:@"首页"];
             [YFMainPublicModelAPI setGlobalBackGroundColor:[UIColor whiteColor]];
             [YFMainPublicModelAPI setNarBarGlobalTextColor:[UIColor blackColor] andFontSize:18];
             

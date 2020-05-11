@@ -43,49 +43,49 @@
     [super viewWillDisappear:animated];
     [self.navigationController setNavigationBarHidden:NO animated:animated];
     //清空缓存
-//    [self deleteWebCache];
+    [self deleteWebCache];
     // 开启
-    if ([self.navigationController respondsToSelector:@selector(interactivePopGestureRecognizer)]) {
-        self.navigationController.interactivePopGestureRecognizer.enabled = YES;
-    }
+//    if ([self.navigationController respondsToSelector:@selector(interactivePopGestureRecognizer)]) {
+//        self.navigationController.interactivePopGestureRecognizer.enabled = YES;
+//    }
 }
 
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
     // 禁用返回手势
-    if ([self.navigationController respondsToSelector:@selector(interactivePopGestureRecognizer)]) {
-        self.navigationController.interactivePopGestureRecognizer.enabled = NO;
-    }
+//    if ([self.navigationController respondsToSelector:@selector(interactivePopGestureRecognizer)]) {
+//        self.navigationController.interactivePopGestureRecognizer.enabled = NO;
+//    }
 }
 
 #pragma mark 设置页面
 - (void)setUI {
     //注册通知：监听充电时间变化
-    [YFNotificationCenter addObserver:self selector:@selector(reloadWebData) name:@"reloadUserCnter" object:nil];
+//    [YFNotificationCenter addObserver:self selector:@selector(reloadWebData) name:@"reloadUserCnter" object:nil];
     //拼接 url
-    self.urlString = [NSString stringWithFormat:@"%@yzc_business_h5/page/menu.html?uuid=%@&appVersion=v%@",H5_HOST,USER_UUID,APP_VERSION];
+    self.urlString = [NSString stringWithFormat:@"%@?uuid=%@&appVersion=",self.urlString,USER_UUID,APP_VERSION];
     //添加 webview
     [self.view addSubview:self.dwebview];
     //添加进度条
     [self.view.layer addSublayer:self.webProgressLayer];
 }
 
-- (void)webView:(WKWebView *)webView decidePolicyForNavigationAction:(WKNavigationAction *)navigationAction decisionHandler:(void (^)(WKNavigationActionPolicy))decisionHandler {
-    NSString *urlString =navigationAction.request.URL.absoluteString;
-    if ([urlString containsString:@"page/menu.html"]) {
-        //个人中心
-        [self hideTabbar:NO];
-    } else{
-        //其他页面
-        [self hideTabbar:YES];
-    }
-    
-    if (navigationAction.targetFrame == nil) {
-        //如果说有的网页点击数据点不了 就重新加载下这个页面
-        [webView loadRequest:navigationAction.request];
-    }
-    decisionHandler(WKNavigationActionPolicyAllow);
-}
+//- (void)webView:(WKWebView *)webView decidePolicyForNavigationAction:(WKNavigationAction *)navigationAction decisionHandler:(void (^)(WKNavigationActionPolicy))decisionHandler {
+//    NSString *urlString =navigationAction.request.URL.absoluteString;
+//    if ([urlString containsString:@"page/menu.html"]) {
+//        //个人中心
+//        [self hideTabbar:NO];
+//    } else{
+//        //其他页面
+//        [self hideTabbar:YES];
+//    }
+//    
+//    if (navigationAction.targetFrame == nil) {
+//        //如果说有的网页点击数据点不了 就重新加载下这个页面
+//        [webView loadRequest:navigationAction.request];
+//    }
+//    decisionHandler(WKNavigationActionPolicyAllow);
+//}
 
 /**
  隐藏 tabbar
@@ -115,15 +115,15 @@
     }
 }
 
-/**
- 刷新数据
- */
-- (void)reloadWebData {
-    //url
-    self.urlString = [NSString stringWithFormat:@"%@yzc_business_h5/page/menu.html?uuid=%@&appVersion=v%@",H5_HOST,USER_UUID,APP_VERSION];
-    //重新加载
-    [self.dwebview loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:self.urlString]]];
-}
+///**
+// 刷新数据
+// */
+//- (void)reloadWebData {
+//    //url
+//    self.urlString = [NSString stringWithFormat:@"%@yzc_business_h5/page/menu.html?uuid=%@&appVersion=v%@",H5_HOST,USER_UUID,APP_VERSION];
+//    //重新加载
+//    [self.dwebview loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:self.urlString]]];
+//}
 
 - (void)deleteWebCache {
     //allWebsiteDataTypes清除所有缓存
@@ -172,7 +172,7 @@
 -(YukiWebProgressLayer *)webProgressLayer{
     if (!_webProgressLayer) {
         _webProgressLayer = [[YukiWebProgressLayer alloc]init];
-        _webProgressLayer.frame = CGRectMake(0, 42, ScreenWidth, 3);
+        _webProgressLayer.frame = CGRectMake(0, NavHeight-5, ScreenWidth, 5);
         _webProgressLayer.strokeColor = NavColor.CGColor;
     }
     return _webProgressLayer;
@@ -186,7 +186,7 @@
     [self.webProgressLayer closeTimer];
     [_webProgressLayer removeFromSuperlayer];
     _webProgressLayer = nil;
-    [YFNotificationCenter removeObserver:self name:@"reloadUserCnter" object:nil];
+//    [YFNotificationCenter removeObserver:self name:@"reloadUserCnter" object:nil];
 }
 
 

@@ -24,6 +24,7 @@
 @class WFUpgradeAreaModel;
 @class WFUpgradeAreaDiscountModel;
 @class WFApplyAreaOtherConfigModel;
+@class WFRemoveEquModel;
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -379,6 +380,21 @@ NS_ASSUME_NONNULL_BEGIN
 /// @param resultBlock 返回结果
 + (void)getSearchVipListWithParams:(NSDictionary *)params
                         resultBlock:(void(^)(NSArray <WFGroupVipUserModel *> *models))resultBlock;
+
+
+
+#pragma mark 设备移入和移除
+/// 获取片区可移入设备
+/// @param params 参数
+/// @param resultBlock 返回结果
++ (void)getGroupCanEquWithParams:(NSDictionary *)params
+                     resultBlock:(void(^)(WFRemoveEquModel *models))resultBlock;
+
+/// 移入设备
+/// @param params 参数
+/// @param resultBlock 返回结果
++ (void)removeEquWithParams:(NSDictionary *)params
+                resultBlock:(void(^)(void))resultBlock;
 
 @end
 

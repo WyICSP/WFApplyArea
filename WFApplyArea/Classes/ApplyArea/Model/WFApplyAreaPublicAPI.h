@@ -29,6 +29,10 @@ NS_ASSUME_NONNULL_BEGIN
 /// @param NSArray 上一个页面相关数据
 + (void)openCreditPayCtrlWithController:(NSArray *)params;
 
+/// 打开申请片区
+/// @param params 参数
++ (void)gotoAppleAreaCtrlWithController:(UIViewController *)controller;
+
 @end
 
 NS_ASSUME_NONNULL_END

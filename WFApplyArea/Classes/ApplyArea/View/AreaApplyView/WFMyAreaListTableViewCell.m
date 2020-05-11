@@ -29,6 +29,9 @@ static NSString *const cellId = @"WFMyAreaListTableViewCell";
     self.qrBtn.layer.borderColor = UIColorFromRGB(0xE4E4E4).CGColor;
     self.qrBtn.layer.borderWidth = 0.7f;
     self.qrBtn.layer.cornerRadius = self.qrBtn.frame.size.height / 2;
+    
+    SKViewsBorder(self.moveBtn, self.moveBtn.frame.size.height / 2, 0.7f, UIColorFromRGB(0xE4E4E4));
+    
     // Initialization code
 }
 
@@ -85,8 +88,8 @@ static NSString *const cellId = @"WFMyAreaListTableViewCell";
     }
 }
 
-- (IBAction)clickBtn:(id)sender {
-    !self.showQRCodeBlock ? : self.showQRCodeBlock();
+- (IBAction)clickBtn:(UIButton *)sender {
+    !self.showQRCodeBlock ? : self.showQRCodeBlock(sender.tag);
 }
 
 

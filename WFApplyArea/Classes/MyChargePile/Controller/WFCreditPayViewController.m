@@ -161,6 +161,15 @@
     return CGFLOAT_MIN;
 }
 
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    if (indexPath.section == 0) {
+        return KHeight(100.0f) + 36.0f;
+    }else if (indexPath.section == 1) {
+        return 73.0f;
+    }
+    return 60.0f;
+}
+
 - (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section {
     UIView *fView = [[UIView alloc] init];
     fView.backgroundColor = UIColorFromRGB(0xF5F5F5);
@@ -187,7 +196,7 @@
         _tableView.delegate = self;
         _tableView.dataSource = self;
         _tableView.separatorStyle = 0;
-        _tableView.estimatedRowHeight = 60.0f;
+        _tableView.estimatedRowHeight = 0.0f;
         _tableView.backgroundColor = UIColorFromRGB(0xF5F5F5);
         _tableView.estimatedSectionFooterHeight = 0.0f;
         _tableView.estimatedSectionHeaderHeight = 0.0f;

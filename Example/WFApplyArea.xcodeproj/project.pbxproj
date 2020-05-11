@@ -566,7 +566,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "WFApplyArea/WFApplyArea-Prefix.pch";
 				INFOPLIST_FILE = "WFApplyArea/WFApplyArea-Info.plist";
-				MARKETING_VERSION = 4.0.7;
+				MARKETING_VERSION = 4.0.6;
 				MODULE_NAME = ExampleApp;
 				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.demo.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -584,7 +584,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "WFApplyArea/WFApplyArea-Prefix.pch";
 				INFOPLIST_FILE = "WFApplyArea/WFApplyArea-Info.plist";
-				MARKETING_VERSION = 4.0.7;
+				MARKETING_VERSION = 4.0.6;
 				MODULE_NAME = ExampleApp;
 				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.demo.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";

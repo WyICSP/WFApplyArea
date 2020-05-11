@@ -21,8 +21,10 @@
 }
 
 /// 打开授信充值页面
-+ (void)openCreditPayCtrlWithController:(UIViewController *)controller {
-    [self performTarget:@"WFApplyAreaPublicAPI" action:@"openCreditPayCtrlWithController:" params:controller isRequiredReturnValue:NO];
++ (void)openCreditPayCtrlWithController:(UIViewController *)controller
+                                   type:(NSInteger)type {
+    NSArray *params = @[controller,@(type)];
+    [self performTarget:@"WFApplyAreaPublicAPI" action:@"openCreditPayCtrlWithController:" params:params isRequiredReturnValue:NO];
 }
 
 /// 打开奖励中心页面
@@ -36,6 +38,11 @@
                                           type:(NSInteger)type {
     NSArray *params = @[controller,@(type)];
     [self performTarget:@"WFRewardPublicAPI" action:@"openActivityOrRewardCtrlWithParams:" params:params isRequiredReturnValue:NO];
+}
+
+/// 直接打开申请片区
++ (void)gotoAppleAreaCtrlWithController:(UIViewController *)controller {
+    [self performTarget:@"WFApplyAreaPublicAPI" action:@"gotoAppleAreaCtrlWithController:" params:controller isRequiredReturnValue:NO];
 }
 
 + (void)gotoPayFreightWithParams:(NSDictionary *)params {

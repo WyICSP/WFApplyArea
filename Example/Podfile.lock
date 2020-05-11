@@ -1,29 +1,29 @@
 PODS:
-  - AFNetworking (3.2.1):
-    - AFNetworking/NSURLSession (= 3.2.1)
-    - AFNetworking/Reachability (= 3.2.1)
-    - AFNetworking/Security (= 3.2.1)
-    - AFNetworking/Serialization (= 3.2.1)
-    - AFNetworking/UIKit (= 3.2.1)
-  - AFNetworking/NSURLSession (3.2.1):
+  - AFNetworking (4.0.1):
+    - AFNetworking/NSURLSession (= 4.0.1)
+    - AFNetworking/Reachability (= 4.0.1)
+    - AFNetworking/Security (= 4.0.1)
+    - AFNetworking/Serialization (= 4.0.1)
+    - AFNetworking/UIKit (= 4.0.1)
+  - AFNetworking/NSURLSession (4.0.1):
     - AFNetworking/Reachability
     - AFNetworking/Security
     - AFNetworking/Serialization
-  - AFNetworking/Reachability (3.2.1)
-  - AFNetworking/Security (3.2.1)
-  - AFNetworking/Serialization (3.2.1)
-  - AFNetworking/UIKit (3.2.1):
+  - AFNetworking/Reachability (4.0.1)
+  - AFNetworking/Security (4.0.1)
+  - AFNetworking/Serialization (4.0.1)
+  - AFNetworking/UIKit (4.0.1):
     - AFNetworking/NSURLSession
   - dsBridge (3.0.6)
   - IQKeyboardManager (6.5.4)
   - MJExtension (3.2.1)
   - MJRefresh (3.2.2)
-  - SDWebImage (5.3.1):
-    - SDWebImage/Core (= 5.3.1)
-  - SDWebImage/Core (5.3.1)
+  - SDWebImage (5.7.4):
+    - SDWebImage/Core (= 5.7.4)
+  - SDWebImage/Core (5.7.4)
   - SVProgressHUD (2.2.5)
   - TZImagePickerController (3.2.7)
-  - WFApplyArea (0.6.3):
+  - WFApplyArea (0.6.4):
     - IQKeyboardManager
     - MJRefresh
     - TZImagePickerController
@@ -31,13 +31,13 @@ PODS:
     - WFKitLogin
     - WFKitMain
     - WKFunComponents
-  - WFBasics (0.3.4):
+  - WFBasics (0.3.6):
     - AFNetworking
     - SVProgressHUD
     - WYAutoLayout
   - WFHomeAddress (0.1.5):
     - MJExtension
-  - WFKitLogin (0.6.0):
+  - WFKitLogin (0.6.5):
     - dsBridge
     - MJExtension
     - MJRefresh
@@ -49,7 +49,7 @@ PODS:
     - dsBridge
     - WFBasics
   - WKFunComponents (0.1.1)
-  - WYAutoLayout (1.0.1)
+  - WYAutoLayout (1.1.0)
 
 DEPENDENCIES:
   - WFApplyArea (from `../`)
@@ -77,21 +77,21 @@ EXTERNAL SOURCES:
     :path: "../"
 
 SPEC CHECKSUMS:
-  AFNetworking: b6f891fdfaed196b46c7a83cf209e09697b94057
+  AFNetworking: 7864c38297c79aaca1500c33288e429c3451fdce
   dsBridge: 48b62ee8a411ad601a88d6f6c8cf6cb634b206b7
   IQKeyboardManager: 72b359cd7e777e3a984cedbe05f8da45320cbb63
   MJExtension: 635f2c663dcb1bf76fa4b715b2570a5710aec545
   MJRefresh: 72a46ecaa2a0feaf48fc5198dff95f25f8bb27c6
-  SDWebImage: 7137d57385fb632129838c1e6ab9528a22c666cc
+  SDWebImage: 48b88379b798fd1e4298f95bb25d2cdabbf4deb3
   SVProgressHUD: 1428aafac632c1f86f62aa4243ec12008d7a51d6
   TZImagePickerController: 821b81f83594a736e831a018f2a2ce31822ddf0b
-  WFApplyArea: 0c1aede07cac7ac01d081a340ff4b203207c2a50
-  WFBasics: 82a564c21b6e3cbb5e31731d4662dd0863688b76
+  WFApplyArea: a1f623ddffad2ff167ea9228fc426c6dbd228564
+  WFBasics: c3366758f139a46e33df0845d4d41bee2d9a13d6
   WFHomeAddress: 4eb27df8a873af9161d147f8b10a1d50ba725467
-  WFKitLogin: c3a7ca468c7b4aff6f2e15ff9d14d0d51d7740f4
+  WFKitLogin: 18470f94811a8d151417c6bdc6d08ff15cf798e2
   WFKitMain: 9fa8a908105ce2f9ace575538ae280eef5a94fc6
   WKFunComponents: 359e5059c096338eee60fee1d7146b701ed30372
-  WYAutoLayout: 3cb136ddc2efa9faaecf15876e6a9b2a6fd7c6cb
+  WYAutoLayout: 7bc596f94be915e1f690f316ac859287c8ec9d51
 
 PODFILE CHECKSUM: 54122df2aa37b6465f631860c595223bf2ad3b2d
 

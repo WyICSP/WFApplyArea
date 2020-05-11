@@ -91,7 +91,7 @@ static NSString *const cellId = @"WFCreditApplyNumTableViewCell";
 #pragma mark UITextFieldDelegate
 - (void)textFieldDidEndEditing:(UITextField *)textField {
     
-    if ([textField.text isEqualToString:@"0"]) textField.text = @"1";
+    if ([textField.text isEqualToString:@"0"]) textField.text = @"";
     //最长 5 位
     if (textField.text.length > 5) {
         textField.text = [textField.text substringWithRange:NSMakeRange(0, 5)];
@@ -103,11 +103,14 @@ static NSString *const cellId = @"WFCreditApplyNumTableViewCell";
 }
 
 - (IBAction)textFieldDidChange:(UITextField *)sender {
-    if ([sender.text isEqualToString:@"0"]) sender.text = @"1";
+    if ([sender.text isEqualToString:@"0"]) sender.text = @"";
     //最长 5 位
     if (sender.text.length > 5) {
         sender.text = [sender.text substringWithRange:NSMakeRange(0, 5)];
     }
+    
+    self.reduceBtn.enabled = sender.text.integerValue > 1 ? YES : NO;
+    [self.reduceBtn setTitleColor:sender.text.integerValue > 1 ? NavColor : UIColor.grayColor forState:0];
 
     self.num = sender.text.integerValue;
     [self getTotalPrice];

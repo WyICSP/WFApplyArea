@@ -14,6 +14,7 @@
 #import "WFBillMethodModel.h"
 #import "WFUpgradeAreaModel.h"
 #import "WFPowerIntervalModel.h"
+#import "WFRemoveEquModel.h"
 #import "WFAreaDetailModel.h"
 #import "SKSafeObject.h"
 #import "YFKeyWindow.h"
@@ -583,6 +584,37 @@
     [WKRequest postWithURLString:path parameters:params isJson:YES isShowHud:YES success:^(WKBaseModel *baseModel) {
         if (CODE_ZERO) {
             resultBlock([WFGroupVipUserModel mj_objectArrayWithKeyValuesArray:baseModel.data]);
+        }else {
+            [YFToast showMessage:baseModel.message inView:[[YFKeyWindow shareInstance] getCurrentVC].view];
+        }
+    } failure:^(NSError *error) {
+        
+    }];
+}
+
+#pragma mark 设备移入和移除
++ (void)getGroupCanEquWithParams:(NSDictionary *)params
+                     resultBlock:(void(^)(WFRemoveEquModel *models))resultBlock {
+    //接口地址
+    NSString *path = [NSString stringWithFormat:@"%@app-partner-setmeal/v1/home/pageInfo/getNotInstallCdz",NEW_HOST_URL];
+    [WKRequest postWithURLString:path parameters:params isJson:YES isShowHud:YES success:^(WKBaseModel *baseModel) {
+        if (CODE_ZERO) {
+            resultBlock([WFRemoveEquModel mj_objectWithKeyValues:baseModel.data]);
+        }else {
+            [YFToast showMessage:baseModel.message inView:[[YFKeyWindow shareInstance] getCurrentVC].view];
+        }
+    } failure:^(NSError *error) {
+        
+    }];
+}
+
++ (void)removeEquWithParams:(NSDictionary *)params
+                resultBlock:(void(^)(void))resultBlock {
+    //接口地址
+    NSString *path = [NSString stringWithFormat:@"%@app-partner-setmeal/v1/home/pageInfo/moveInCdz",NEW_HOST_URL];
+    [WKRequest postWithURLString:path parameters:params isJson:YES isShowHud:YES success:^(WKBaseModel *baseModel) {
+        if (CODE_ZERO) {
+            resultBlock();
         }else {
             [YFToast showMessage:baseModel.message inView:[[YFKeyWindow shareInstance] getCurrentVC].view];
         }
