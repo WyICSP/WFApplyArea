@@ -111,7 +111,7 @@
         url = [NSString stringWithFormat:@"%@yzc-app-partner/#/msg/index",H5_HOST];
     }else if (tag == 30) {
         // 设置
-        url = [NSString stringWithFormat:@"%@yzc_business_h5/page/setting.html",H5_HOST];
+        url = [NSString stringWithFormat:@"%@yzc-app-partner-old/page/setting.html",H5_HOST];
     }else if (tag == 40) {
         // 个人资料
         url = [NSString stringWithFormat:@"%@yzc_business_h5/page/userInfo.html",H5_HOST];
@@ -121,6 +121,9 @@
     }else if (tag == 60) {
         // 钱包
         url = [NSString stringWithFormat:@"%@yzc-app-partner/#/myWallet/index",H5_HOST];
+    }else if (tag == 70) {
+        // 头像
+        url = [NSString stringWithFormat:@"%@yzc-app-partner-old/page/userInfo.html",H5_HOST];
     }
     [self handleWebJumpWithUrl:url];
 }
@@ -149,7 +152,7 @@
         [self.navigationController pushViewController:web animated:YES];
     }else {
         // 电话客服
-        [WFUserCenterPublicAPI callPhoneWithNumber:self.cModel.customerServiceUrl];
+        [WFUserCenterPublicAPI callPhoneWithNumber:self.cModel.customerMobile];
     }
 }
 

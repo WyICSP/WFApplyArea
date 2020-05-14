@@ -49,7 +49,16 @@ static NSString *const cellId = @"WFMyAreaListTableViewCell";
     //事件
     self.time.text = model.createTime;
     
-    self.qrBtn.hidden = model.auditStatus == 2;
+    if (model.auditStatus == 2) {
+        self.moveBtn.hidden = YES;
+        [self.qrBtn setTitle:@"移入设备" forState:0];
+        self.qrBtn.tag = 110;
+    }else {
+        self.moveBtn.hidden = NO;
+        [self.qrBtn setTitle:@"二维码" forState:0];
+        self.qrBtn.tag = 100;
+    }
+    
     if (model.status) {
         if (model.isNew) {
             //新片区 状态 0：申请中 1：申请通过 2：申请驳回*/

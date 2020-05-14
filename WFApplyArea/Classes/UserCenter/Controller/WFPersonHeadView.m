@@ -22,6 +22,10 @@
     
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(clickView:)];
     [self.bottomView addGestureRecognizer:tap];
+    
+    // 头像
+    UITapGestureRecognizer *imgTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(clickImage:)];
+    [self.imgView addGestureRecognizer:imgTap];
 }
 
 /// 10 客服 20 消息 30 设置 40 个人资料
@@ -38,6 +42,11 @@
         // 钱包
         !self.clickEventBlock ? : self.clickEventBlock(60);
     }
+}
+
+- (void)clickImage:(UITapGestureRecognizer *)sender {
+    // 头像
+    !self.clickEventBlock ? : self.clickEventBlock(70);
 }
 
 - (void)setModel:(WFUserCenterModel *)model {

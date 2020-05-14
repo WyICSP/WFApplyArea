@@ -75,9 +75,9 @@
                                 </userDefinedRuntimeAttributes>
                             </label>
                             <button opaque="NO" tag="100" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="l6h-UL-a1G">
-                                <rect key="frame" x="286" y="77" width="58" height="27"/>
+                                <rect key="frame" x="274" y="74" width="70" height="33"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="58" id="AQ8-dI-cpv"/>
+                                    <constraint firstAttribute="width" constant="70" id="AQ8-dI-cpv"/>
                                     <constraint firstAttribute="width" secondItem="l6h-UL-a1G" secondAttribute="height" multiplier="58:27" id="gCM-rF-YRn"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="12"/>
@@ -89,7 +89,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" tag="110" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nut-gs-87O">
-                                <rect key="frame" x="206" y="77" width="70" height="27"/>
+                                <rect key="frame" x="194" y="74" width="70" height="33"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="70" id="pHd-mC-evi"/>
                                 </constraints>
