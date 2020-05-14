@@ -52,7 +52,7 @@
 - (void)setModel:(WFUserCenterModel *)model {
     self.phone.text = [NSString getNullOrNoNull:model.mobile];
     self.name.text = [NSString getNullOrNoNull:model.nickname];
-    self.banlance.text = [NSString stringWithFormat:@"%@",[NSString decimalNumberWithDouble:model.price.doubleValue/1000]];
+    self.banlance.text = [NSString stringWithFormat:@"%.3f",[NSString decimalPriceWithDouble:model.price.doubleValue/1000]];
     [self.imgView sd_setImageWithURL:[NSURL URLWithString:model.headUrl] placeholderImage:[UIImage imageNamed:@"fang"]];
 }
 

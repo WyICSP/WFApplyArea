@@ -194,6 +194,7 @@
                 <outlet property="bottomView" destination="lvm-J5-DjF" id="mLw-CG-Yq4"/>
                 <outlet property="imgView" destination="FaW-om-pRr" id="Ji1-MF-LAr"/>
                 <outlet property="infoView" destination="Umk-XG-R6a" id="KqS-Gc-84J"/>
+                <outlet property="mesBtn" destination="Rce-fg-wgi" id="Ers-Yg-8gu"/>
                 <outlet property="name" destination="FgC-Yr-pnN" id="R4p-vp-NVc"/>
                 <outlet property="phone" destination="dQz-xB-460" id="Pa9-ug-PJz"/>
                 <outlet property="topCons" destination="mo4-YH-hOH" id="IXr-Hm-bvh"/>

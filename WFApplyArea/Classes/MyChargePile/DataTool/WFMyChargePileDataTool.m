@@ -119,7 +119,8 @@
 }
 
 + (void)getUserInfoWithParams:(NSDictionary *)params
-                  resultBlock:(void(^)(WFUserCenterModel *models))resultBlock {
+                  resultBlock:(void(^)(WFUserCenterModel *models))resultBlock
+                    failBlock:(void(^)(void))failBlock {
     NSString *path = [NSString stringWithFormat:@"%@app-partner-setmeal/v1/home/pageInfo/getAdminInfo",NEW_HOST_URL];
     [WKRequest getWithURLString:path parameters:nil isShowHud:NO success:^(WKBaseModel *baseModel) {
         if (CODE_ZERO) {

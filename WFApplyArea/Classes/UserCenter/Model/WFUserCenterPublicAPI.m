@@ -21,6 +21,12 @@
 + (void)openSystemAlbumWithType:(WFUpdatePhotoType)type
                     resultBlock:(void (^)(NSString *photoData))resultBlock {
     TZImagePickerController *imagePickerVc = [[TZImagePickerController alloc] initWithMaxImagesCount:1 delegate:nil];
+    imagePickerVc.maxImagesCount = 1;
+    imagePickerVc.showSelectBtn = NO;
+    imagePickerVc.allowCrop = YES;
+//    imagePickerVc.needCircleCrop = YES;
+//    imagePickerVc.circleCropRadius = 20;
+    imagePickerVc.cropRect = CGRectMake(15, (ScreenHeight-(ScreenWidth-30))/2, ScreenWidth-30, ScreenWidth-30);
     // 你可以通过block或者代理，来得到用户选择的照片.
     @weakify(self)
     [imagePickerVc setDidFinishPickingPhotosHandle:^(NSArray<UIImage *> *photos, NSArray *assets, BOOL isSelectOriginalPhoto) {

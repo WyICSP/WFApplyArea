@@ -30,9 +30,9 @@
     [self setUI];
 }
 
-- (UIStatusBarStyle)preferredStatusBarStyle {
-    return UIStatusBarStyleLightContent;
-}
+//- (UIStatusBarStyle)preferredStatusBarStyle {
+//    return UIStatusBarStyleLightContent;
+//}
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
@@ -44,18 +44,10 @@
     [self.navigationController setNavigationBarHidden:NO animated:animated];
     //清空缓存
     [self deleteWebCache];
-    // 开启
-//    if ([self.navigationController respondsToSelector:@selector(interactivePopGestureRecognizer)]) {
-//        self.navigationController.interactivePopGestureRecognizer.enabled = YES;
-//    }
 }
 
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
-    // 禁用返回手势
-//    if ([self.navigationController respondsToSelector:@selector(interactivePopGestureRecognizer)]) {
-//        self.navigationController.interactivePopGestureRecognizer.enabled = NO;
-//    }
 }
 
 #pragma mark 设置页面
@@ -70,22 +62,6 @@
     [self.view.layer addSublayer:self.webProgressLayer];
 }
 
-//- (void)webView:(WKWebView *)webView decidePolicyForNavigationAction:(WKNavigationAction *)navigationAction decisionHandler:(void (^)(WKNavigationActionPolicy))decisionHandler {
-//    NSString *urlString =navigationAction.request.URL.absoluteString;
-//    if ([urlString containsString:@"page/menu.html"]) {
-//        //个人中心
-//        [self hideTabbar:NO];
-//    } else{
-//        //其他页面
-//        [self hideTabbar:YES];
-//    }
-//    
-//    if (navigationAction.targetFrame == nil) {
-//        //如果说有的网页点击数据点不了 就重新加载下这个页面
-//        [webView loadRequest:navigationAction.request];
-//    }
-//    decisionHandler(WKNavigationActionPolicyAllow);
-//}
 
 /**
  隐藏 tabbar

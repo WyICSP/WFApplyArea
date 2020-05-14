@@ -29,6 +29,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *topCons;
 /// 余额
 @property (weak, nonatomic) IBOutlet UILabel *banlance;
+/// 左边的按钮
+@property (weak, nonatomic) IBOutlet UIButton *mesBtn;
 
 /// 点击事件
 @property (copy, nonatomic) void (^clickEventBlock)(NSInteger tag);

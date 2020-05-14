@@ -15,7 +15,9 @@
 #import "WFUserCenterPublicAPI.h"
 #import "WFUserCenterModel.h"
 #import "NSString+Regular.h"
+#import <MJRefresh/MJRefresh.h>
 #import "WFPersonHeadView.h"
+#import "WFHomeDataTool.h"
 #import "MLMenuView.h"
 #import "WKSetting.h"
 #import "WKConfig.h"
@@ -35,6 +37,10 @@
 @property (nonatomic, strong, nullable) NSArray *dataInfo;
 /// 是否打开
 @property (nonatomic, assign) BOOL isOpenService;
+///是否可以侧滑
+@property (nonatomic,assign) BOOL isCanSideBack;
+/**消息未读*/
+@property (nonatomic, strong) UILabel *countLbl;
 @end
 
 @implementation WFPersonCenterViewController
@@ -52,6 +58,9 @@
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     [self.navigationController setNavigationBarHidden:YES animated:animated];
+    [self disableSideBack];
+    // 获取未读消息
+    [self getUserUnReadMessage];
     // 获取数据
     [self getUserInfo];
 }
@@ -59,6 +68,19 @@
 - (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
     [self.navigationController setNavigationBarHidden:NO animated:animated];
+}
+
+///禁用侧滑返回
+- (void)disableSideBack{
+    self.isCanSideBack = NO;
+    if([self.navigationController respondsToSelector:@selector(interactivePopGestureRecognizer)]) {
+        self.navigationController.interactivePopGestureRecognizer.delegate = (id)self;
+    }
+}
+
+#pragma mark - UIGestureRecognizerDelegate
+- (BOOL)gestureRecognizerShouldBegin:(UIGestureRecognizer*)gestureRecognizer {
+    return self.isCanSideBack;
 }
 
 #pragma mark 页面相关逻辑方法
@@ -74,14 +96,30 @@
     @weakify(self)
     [WFMyChargePileDataTool getUserInfoWithParams:@{} resultBlock:^(WFUserCenterModel * _Nonnull models) {
         @strongify(self)
+        [self.tableView.mj_header endRefreshing];
         self.headView.model = models;
         // 活动金
-        NSString *activityPrice = [NSString stringWithFormat:@"¥%@",[NSString decimalNumberWithDouble:models.activityPrice.doubleValue/1000]];
+        NSString *activityPrice = [NSString stringWithFormat:@"¥%.3f",[NSString decimalPriceWithDouble:models.activityPrice.doubleValue/1000]];
         
         // 添加到数组中
         self.dataInfo = @[@(models.adminNum),activityPrice];
         
         [self.tableView reloadData];
+    }failBlock:^{
+        @strongify(self)
+        [self.tableView.mj_header endRefreshing];
+    }];
+}
+
+/**
+ 获取用户未读消息
+ */
+- (void)getUserUnReadMessage {
+    @weakify(self)
+    [WFHomeDataTool getMessageUnReadCountWithParams:@{} resultBlock:^(NSDictionary * _Nonnull dict) {
+        @strongify(self)
+        NSString *dataCount = [NSString stringWithFormat:@"%@",[dict objectForKey:@"data"]];
+        self.countLbl.hidden = [dataCount intValue] == 0;
     }];
 }
 
@@ -187,11 +225,17 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.section == 0) {
-        // 社区服务
-        WFUserCenterViewController *web = [[WFUserCenterViewController alloc] init];
-        web.urlString = [NSString stringWithFormat:@"%@yzc-app-partner/#/service/index",H5_HOST];
-        web.hidesBottomBarWhenPushed = YES;
-        [self.navigationController pushViewController:web animated:YES];
+        if (indexPath.row == 0) {
+            // 社区服务
+            WFUserCenterViewController *web = [[WFUserCenterViewController alloc] init];
+            web.urlString = [NSString stringWithFormat:@"%@yzc-app-partner/#/service/index",H5_HOST];
+            web.hidesBottomBarWhenPushed = YES;
+            [self.navigationController pushViewController:web animated:YES];
+        } else if (indexPath.row == 1) {
+            // 奖励中心
+            [YFMediatorManager openRewardCtrlWithController:self];
+        }
+        
     } else if (indexPath.section == 1) {
         if (indexPath.row == 0) {
             // 合伙人
@@ -227,6 +271,11 @@
         if (@available(iOS 11.0, *))
         _tableView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;
         _tableView.tableHeaderView = self.headView;
+        @weakify(self)
+        _tableView.mj_header = [MJRefreshStateHeader headerWithRefreshingBlock:^{
+            @strongify(self)
+            [self getUserInfo];
+        }];
         [self.view addSubview:_tableView];
     }
     return _tableView;;
@@ -268,9 +317,29 @@
 }
 
 - (NSArray *)titles {
-    return @[@[@{@"title":@"社区服务"}],
+    return @[@[@{@"title":@"社区服务"},@{@"title":@"奖励中心"}],
              @[@{@"title":@"我的合伙人"},@{@"title":@"活动金"}],
              @[@{@"title":@"设备转让"}]];
+}
+
+/**
+ 消息数量
+
+ @return countLbl
+ */
+- (UILabel *)countLbl {
+    if (!_countLbl) {
+        _countLbl = [[UILabel alloc] initWithFrame:CGRectMake(19, 2, 10, 10)];
+        _countLbl.textColor = [UIColor whiteColor];
+        _countLbl.backgroundColor = UIColorFromRGB(0xFC3712);
+        _countLbl.layer.masksToBounds = YES;
+        _countLbl.layer.cornerRadius = 5;
+        _countLbl.hidden = YES;
+        _countLbl.font = [UIFont systemFontOfSize:9];
+        _countLbl.textAlignment = NSTextAlignmentCenter;
+        [self.headView.mesBtn addSubview:_countLbl];
+    }
+    return _countLbl;
 }
 
 

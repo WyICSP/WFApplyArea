@@ -82,7 +82,8 @@ NS_ASSUME_NONNULL_BEGIN
 /// @param params 参数
 /// @param resultBlock 返回
 + (void)getUserInfoWithParams:(NSDictionary *)params
-                  resultBlock:(void(^)(WFUserCenterModel *models))resultBlock;
+                  resultBlock:(void(^)(WFUserCenterModel *models))resultBlock
+                    failBlock:(void(^)(void))failBlock;
 
 
 
