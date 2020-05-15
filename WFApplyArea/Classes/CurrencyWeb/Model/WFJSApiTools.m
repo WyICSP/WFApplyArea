@@ -8,6 +8,7 @@
 #import "WFJSApiTools.h"
 #import "WFUserCenterPublicAPI.h"
 #import "WKTabbarController.h"
+#import "YFMediatorManager+WFUser.h"
 #import "WFShareHelpTool.h"
 #import "NSString+Regular.h"
 #import "dsbridge.h"
@@ -41,6 +42,7 @@
 /**返回*/
 - (void)goBackToRoot:(NSString *)msg :(JSCallback) completionHandler
 {
+    [YFNotificationCenter postNotificationName:@"reloadServiceKeys" object:nil];
     NSArray *controllers = [WKTabbarController shareInstance].selectedViewController.childViewControllers;
     if (controllers.count != 0) {
         UIViewController *controller = controllers.lastObject;
@@ -143,5 +145,46 @@
     completionHandler(msg,YES);
 }
 
+
+#pragma mark 老商城 JS 方法
+/**扫描二维码*/
+- (void)scanQRCode:(NSDictionary *)msg :(JSCallback) completionHandler
+{
+//    completionHandler(@"",YES);
+    [YFMediatorManager scanQRCode];
+//    [[WFShopPublicAPI shareInstance] jumpScanCtrl:^(NSDictionary * _Nonnull codeInfo) {
+//        [[[YFKeyWindow shareInstance] getCurrentVC].navigationController popViewControllerAnimated:NO];
+//        completionHandler(,YES);
+//    }];scanQRCode
+}
+
+/** 获取版本号*/
+- (NSString *)getAppVersion:(NSString *)msg {
+    return APP_VERSION;
+}
+
+/**UUID*/
+- (NSString *)getUserId:(NSString *)msg {
+    return [UserData userInfo].uuid;
+}
+
+/**分享*/
+- (void)openProfit:(NSDictionary *)msg :(JSCallback) completionHandler
+{
+    [YFMediatorManager openShareWithParams:msg];
+    completionHandler(@"",YES);
+    
+}
+
+/**跳转到提现页面*/
+- (void)gotoWithdrawController:(NSString *)msg :(JSCallback) completionHandler{
+    NSArray *controllers = [WKTabbarController shareInstance].selectedViewController.childViewControllers;
+    if (controllers.count != 0) {
+        UIViewController *controller = controllers.lastObject;
+        [YFMediatorManager gotoWithdrawController:controller];
+    }
+    completionHandler(msg,YES);
+    
+}
 
 @end

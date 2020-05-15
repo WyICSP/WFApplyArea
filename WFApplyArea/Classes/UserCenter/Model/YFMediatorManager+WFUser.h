@@ -27,6 +27,17 @@ NS_ASSUME_NONNULL_BEGIN
  */
 + (void)gotoPayFreightWithParams:(NSDictionary *)params;
 
+/// 跳转到提现页面
+/// @param controller 当前页面
++ (void)gotoWithdrawController:(UIViewController *)controller;
+
+/// 打开分享
+/// @param params 参数
++ (void)openShareWithParams:(NSDictionary *)params;
+
+/// 扫描二维码
++ (NSString *)scanQRCode;
+
 @end
 
 NS_ASSUME_NONNULL_END

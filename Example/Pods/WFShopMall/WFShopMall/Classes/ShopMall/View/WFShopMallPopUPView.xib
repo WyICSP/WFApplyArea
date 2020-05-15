@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="15400" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15404"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="WFShopMallPopUPView">
+            <rect key="frame" x="0.0" y="0.0" width="136" height="98"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="top" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="WFShopMall.bundle/shopMallPopBJ" translatesAutoresizingMaskIntoConstraints="NO" id="ZaJ-Kb-SCU">
+                    <rect key="frame" x="0.0" y="0.0" width="136" height="98"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                </imageView>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Kbh-tR-Vk2">
+                    <rect key="frame" x="0.0" y="9" width="136" height="44"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="44" id="mBc-ZI-08r"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" weight="medium" pointSize="14"/>
+                    <state key="normal" title="   特惠返利统计" image="WFShopMall.bundle/shopMallStatistics">
+                        <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    </state>
+                    <connections>
+                        <action selector="specialStatisticsButttonAction:" destination="iN0-l3-epB" eventType="touchUpInside" id="erC-52-7d9"/>
+                    </connections>
+                </button>
+                <label opaque="NO" userInteractionEnabled="NO" alpha="0.20000000000000001" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="x3v-xP-FPp">
+                    <rect key="frame" x="16" y="53" width="104" height="0.5"/>
+                    <color key="backgroundColor" red="0.93333333333333335" green="0.93333333333333335" blue="0.93333333333333335" alpha="1" colorSpace="calibratedRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="0.5" id="4gz-vA-EbB"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <nil key="textColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QPr-oP-0TT">
+                    <rect key="frame" x="0.0" y="53.5" width="136" height="44"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="44" id="DpN-Tt-vew"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" weight="medium" pointSize="14"/>
+                    <state key="normal" title="   攻略                " image="WFShopMall.bundle/shopTopStrategy">
+                        <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    </state>
+                    <connections>
+                        <action selector="strategyButtonAction:" destination="iN0-l3-epB" eventType="touchUpInside" id="FHI-3u-bdP"/>
+                    </connections>
+                </button>
+            </subviews>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <constraints>
+                <constraint firstAttribute="trailing" secondItem="QPr-oP-0TT" secondAttribute="trailing" id="BjZ-e9-wZy"/>
+                <constraint firstItem="x3v-xP-FPp" firstAttribute="top" secondItem="Kbh-tR-Vk2" secondAttribute="bottom" id="F7x-6m-J41"/>
+                <constraint firstAttribute="trailing" secondItem="Kbh-tR-Vk2" secondAttribute="trailing" id="bGZ-QK-4IJ"/>
+                <constraint firstItem="Kbh-tR-Vk2" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="cc2-AQ-l1y"/>
+                <constraint firstAttribute="trailing" secondItem="ZaJ-Kb-SCU" secondAttribute="trailing" id="gXn-dD-ZdE"/>
+                <constraint firstAttribute="bottom" secondItem="ZaJ-Kb-SCU" secondAttribute="bottom" id="hyi-5A-XVP"/>
+                <constraint firstItem="ZaJ-Kb-SCU" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="k4B-kd-0Ex"/>
+                <constraint firstItem="x3v-xP-FPp" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" constant="4" id="kTn-gv-Hdx"/>
+                <constraint firstItem="QPr-oP-0TT" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="lMN-6s-eyd"/>
+                <constraint firstAttribute="bottom" secondItem="QPr-oP-0TT" secondAttribute="bottom" constant="0.5" id="ncf-Yk-5Au"/>
+                <constraint firstAttribute="trailing" secondItem="x3v-xP-FPp" secondAttribute="trailing" constant="16" id="paL-jr-DkY"/>
+                <constraint firstItem="ZaJ-Kb-SCU" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="v8T-c5-3qy"/>
+                <constraint firstItem="x3v-xP-FPp" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="16" id="wdh-7y-hFT"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <connections>
+                <outlet property="bjImageView" destination="ZaJ-Kb-SCU" id="hsX-Nj-H1k"/>
+                <outlet property="horizontalLine" destination="x3v-xP-FPp" id="3fM-Q9-Dwz"/>
+                <outlet property="specialStatisticsBut" destination="Kbh-tR-Vk2" id="EDi-wH-vP5"/>
+                <outlet property="strategyBut" destination="QPr-oP-0TT" id="Djb-WS-rEW"/>
+            </connections>
+            <point key="canvasLocation" x="137.68115942028987" y="152.67857142857142"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="WFShopMall.bundle/shopMallPopBJ" width="16" height="16"/>
+        <image name="WFShopMall.bundle/shopMallStatistics" width="16" height="16"/>
+        <image name="WFShopMall.bundle/shopTopStrategy" width="16" height="16"/>
+    </resources>
+</document>

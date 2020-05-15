@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="15400" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15404"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="WFIssuingVoucherView">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="896"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="yoX-UY-M85">
+                    <rect key="frame" x="35" y="269.5" width="305" height="357"/>
+                    <subviews>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="请选择充电券类型，并输入本次发放的数量" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KO0-sj-a9T">
+                            <rect key="frame" x="12" y="15" width="281" height="17"/>
+                            <fontDescription key="fontDescription" type="boldSystem" pointSize="14"/>
+                            <color key="textColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <nil key="highlightedColor"/>
+                            <userDefinedRuntimeAttributes>
+                                <userDefinedRuntimeAttribute type="boolean" keyPath="isAdapterFont" value="YES"/>
+                            </userDefinedRuntimeAttributes>
+                        </label>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="张" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2GA-e2-VDb">
+                            <rect key="frame" x="200.5" y="53" width="14.5" height="17"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                            <color key="textColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="输入数量" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="IFd-YI-Q2I">
+                            <rect key="frame" x="110" y="47" width="85.5" height="29"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="29" id="Uje-mj-BDI"/>
+                            </constraints>
+                            <color key="textColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                            <textInputTraits key="textInputTraits"/>
+                        </textField>
+                        <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="fMM-Ue-QIk">
+                            <rect key="frame" x="12" y="91" width="281" height="196"/>
+                            <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        </tableView>
+                        <button opaque="NO" tag="100" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Leq-a6-6A5">
+                            <rect key="frame" x="67" y="302" width="171" height="40"/>
+                            <color key="backgroundColor" red="0.96862745098039216" green="0.52156862745098043" blue="0.33725490196078434" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="40" id="OUb-2t-2fF"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" type="boldSystem" pointSize="18"/>
+                            <state key="normal" title="确定">
+                                <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </state>
+                            <connections>
+                                <action selector="clickBtn:" destination="iN0-l3-epB" eventType="touchUpInside" id="C32-FA-cHv"/>
+                            </connections>
+                        </button>
+                    </subviews>
+                    <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                    <constraints>
+                        <constraint firstAttribute="trailing" secondItem="Leq-a6-6A5" secondAttribute="trailing" constant="67" id="4aT-RH-DeY"/>
+                        <constraint firstItem="Leq-a6-6A5" firstAttribute="leading" secondItem="yoX-UY-M85" secondAttribute="leading" constant="67" id="6Er-jU-tSf"/>
+                        <constraint firstItem="Leq-a6-6A5" firstAttribute="top" secondItem="fMM-Ue-QIk" secondAttribute="bottom" constant="15" id="9Wx-ck-G34"/>
+                        <constraint firstAttribute="trailing" secondItem="KO0-sj-a9T" secondAttribute="trailing" constant="12" id="Ijo-5h-uMv"/>
+                        <constraint firstAttribute="height" constant="357" id="KmB-Ss-MdE"/>
+                        <constraint firstItem="KO0-sj-a9T" firstAttribute="leading" secondItem="yoX-UY-M85" secondAttribute="leading" constant="12" id="Nfc-Q9-67f"/>
+                        <constraint firstItem="IFd-YI-Q2I" firstAttribute="centerX" secondItem="yoX-UY-M85" secondAttribute="centerX" id="OIl-Qg-3eO"/>
+                        <constraint firstItem="IFd-YI-Q2I" firstAttribute="top" secondItem="KO0-sj-a9T" secondAttribute="bottom" constant="15" id="VdF-dh-Lr8"/>
+                        <constraint firstAttribute="bottom" secondItem="Leq-a6-6A5" secondAttribute="bottom" constant="15" id="ekd-Ms-Xit"/>
+                        <constraint firstItem="2GA-e2-VDb" firstAttribute="leading" secondItem="IFd-YI-Q2I" secondAttribute="trailing" constant="5" id="ifh-CZ-8jm"/>
+                        <constraint firstItem="fMM-Ue-QIk" firstAttribute="top" secondItem="IFd-YI-Q2I" secondAttribute="bottom" constant="15" id="oyq-Nj-Bad"/>
+                        <constraint firstAttribute="trailing" secondItem="fMM-Ue-QIk" secondAttribute="trailing" constant="12" id="po1-mk-R3Y"/>
+                        <constraint firstItem="KO0-sj-a9T" firstAttribute="top" secondItem="yoX-UY-M85" secondAttribute="top" constant="15" id="sGQ-ac-OJJ"/>
+                        <constraint firstItem="2GA-e2-VDb" firstAttribute="centerY" secondItem="IFd-YI-Q2I" secondAttribute="centerY" id="tUi-ak-h6d"/>
+                        <constraint firstItem="fMM-Ue-QIk" firstAttribute="leading" secondItem="yoX-UY-M85" secondAttribute="leading" constant="12" id="v2I-eO-glg"/>
+                        <constraint firstItem="KO0-sj-a9T" firstAttribute="centerX" secondItem="yoX-UY-M85" secondAttribute="centerX" id="yTa-J3-yE8"/>
+                    </constraints>
+                </view>
+                <button opaque="NO" tag="200" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="B05-hL-Bxg">
+                    <rect key="frame" x="171.5" y="641.5" width="32" height="32"/>
+                    <constraints>
+                        <constraint firstAttribute="width" secondItem="B05-hL-Bxg" secondAttribute="height" multiplier="1:1" id="d2t-3Y-vkZ"/>
+                        <constraint firstAttribute="width" constant="32" id="ykJ-sv-ALj"/>
+                    </constraints>
+                    <state key="normal" image="WFShopMall.bundle/close"/>
+                    <connections>
+                        <action selector="clickBtn:" destination="iN0-l3-epB" eventType="touchUpInside" id="cfn-dD-SPp"/>
+                    </connections>
+                </button>
+            </subviews>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <constraints>
+                <constraint firstItem="B05-hL-Bxg" firstAttribute="top" secondItem="yoX-UY-M85" secondAttribute="bottom" constant="15" id="2Hz-qd-rwF"/>
+                <constraint firstItem="yoX-UY-M85" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="35" id="7E5-6v-wsL"/>
+                <constraint firstItem="yoX-UY-M85" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="U0E-jy-Q5W"/>
+                <constraint firstItem="yoX-UY-M85" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="g0Q-Tw-J1f"/>
+                <constraint firstItem="B05-hL-Bxg" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="x9X-xx-9pQ"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
+            <connections>
+                <outlet property="confirmBtn" destination="Leq-a6-6A5" id="w5X-Hr-ouM"/>
+                <outlet property="contentsView" destination="yoX-UY-M85" id="BHF-eJ-iWA"/>
+                <outlet property="countTF" destination="IFd-YI-Q2I" id="2M5-ed-jmt"/>
+                <outlet property="tableView" destination="fMM-Ue-QIk" id="OXv-xB-6O2"/>
+            </connections>
+            <point key="canvasLocation" x="-96" y="107"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="WFShopMall.bundle/close" width="16" height="16"/>
+    </resources>
+</document>

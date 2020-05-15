@@ -8,7 +8,7 @@
 
 #import "WFPersonCenterViewController.h"
 #import "WFPersonCenterTableViewCell.h"
-#import "WFUserCenterViewController.h"
+#import "WFCurrentWebViewController.h"
 #import "YFMediatorManager+WFLogin.h"
 #import "WFMyChargePileDataTool.h"
 #import "WFBaseWebViewController.h"
@@ -171,7 +171,7 @@
 - (void)handleWebJumpWithUrl:(NSString *)url {
     if (url.length == 0) return;
     
-    WFUserCenterViewController *web = [[WFUserCenterViewController alloc] init];
+    WFCurrentWebViewController *web = [[WFCurrentWebViewController alloc] init];
     web.urlString = url;
     web.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:web animated:YES];
@@ -227,7 +227,7 @@
     if (indexPath.section == 0) {
         if (indexPath.row == 0) {
             // 社区服务
-            WFUserCenterViewController *web = [[WFUserCenterViewController alloc] init];
+            WFCurrentWebViewController *web = [[WFCurrentWebViewController alloc] init];
             web.urlString = [NSString stringWithFormat:@"%@yzc-app-partner/#/service/index",H5_HOST];
             web.hidesBottomBarWhenPushed = YES;
             [self.navigationController pushViewController:web animated:YES];
@@ -239,7 +239,7 @@
     } else if (indexPath.section == 1) {
         if (indexPath.row == 0) {
             // 合伙人
-            WFUserCenterViewController *web = [[WFUserCenterViewController alloc] init];
+            WFCurrentWebViewController *web = [[WFCurrentWebViewController alloc] init];
             web.urlString = [NSString stringWithFormat:@"%@yzc-app-partner/#/myPartner/index",H5_HOST];
             web.hidesBottomBarWhenPushed = YES;
             [self.navigationController pushViewController:web animated:YES];
@@ -249,7 +249,7 @@
         }
     } else if (indexPath.section == 2) {
         // 设备转让
-        WFUserCenterViewController *web = [[WFUserCenterViewController alloc] init];
+        WFCurrentWebViewController *web = [[WFCurrentWebViewController alloc] init];
         web.urlString = [NSString stringWithFormat:@"%@yzc-app-partner/#/deviceTransfer/index",H5_HOST];
         web.hidesBottomBarWhenPushed = YES;
         [self.navigationController pushViewController:web animated:YES];

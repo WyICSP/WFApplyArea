@@ -137,7 +137,6 @@
         _dwebview = [[DWKWebView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, ScreenHeight-TabbarHeight)];
         [_dwebview addJavascriptObject:[[WFJSApiTools alloc] init] namespace:nil];
         [_dwebview loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:self.urlString]]];
-        _dwebview.scrollView.scrollEnabled = NO;
         _dwebview.navigationDelegate = self;
         [_dwebview setDebugMode:true];
     }

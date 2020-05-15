@@ -1,0 +1,6 @@
+framework module WFShopMall {
+  umbrella header "WFShopMall-umbrella.h"
+
+  export *
+  module * { export * }
+}

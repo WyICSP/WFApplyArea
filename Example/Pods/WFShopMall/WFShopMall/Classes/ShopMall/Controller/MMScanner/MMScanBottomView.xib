@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="15505" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15510"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="MMScanBottomView">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="80"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <button opaque="NO" tag="10" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gjn-17-jIA">
+                    <rect key="frame" x="99.5" y="9.5" width="45" height="45"/>
+                    <constraints>
+                        <constraint firstAttribute="width" secondItem="gjn-17-jIA" secondAttribute="height" multiplier="1:1" id="NYk-1c-pDH"/>
+                        <constraint firstAttribute="width" constant="45" id="Zzy-6z-aUe"/>
+                    </constraints>
+                    <state key="normal" image="WFShopMall.bundle/number">
+                        <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    </state>
+                    <connections>
+                        <action selector="clickBtn:" destination="iN0-l3-epB" eventType="touchUpInside" id="ChP-aD-3oy"/>
+                    </connections>
+                </button>
+                <button opaque="NO" tag="20" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ivE-Yo-ThQ">
+                    <rect key="frame" x="230.5" y="9.5" width="45" height="45"/>
+                    <state key="normal" image="WFShopMall.bundle/lamp">
+                        <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    </state>
+                    <state key="selected" image="WFShopMall.bundle/lampSelect"/>
+                    <connections>
+                        <action selector="clickBtn:" destination="iN0-l3-epB" eventType="touchUpInside" id="KHS-6X-iuE"/>
+                    </connections>
+                </button>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="输入核销码" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zoD-8r-G8L">
+                    <rect key="frame" x="91" y="59.5" width="61.5" height="15"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                    <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="打开手电筒" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cAR-zF-VGX">
+                    <rect key="frame" x="222" y="59.5" width="62" height="15"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                    <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <nil key="highlightedColor"/>
+                </label>
+            </subviews>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <constraints>
+                <constraint firstItem="cAR-zF-VGX" firstAttribute="centerY" secondItem="zoD-8r-G8L" secondAttribute="centerY" id="6lk-5f-4UM"/>
+                <constraint firstItem="ivE-Yo-ThQ" firstAttribute="centerY" secondItem="gjn-17-jIA" secondAttribute="centerY" id="AhQ-bo-x5h"/>
+                <constraint firstItem="zoD-8r-G8L" firstAttribute="centerX" secondItem="gjn-17-jIA" secondAttribute="centerX" id="CaL-63-BRj"/>
+                <constraint firstItem="ivE-Yo-ThQ" firstAttribute="width" secondItem="gjn-17-jIA" secondAttribute="width" id="QvD-IV-a4E"/>
+                <constraint firstItem="gjn-17-jIA" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" multiplier="0.65" id="atv-hu-gqk"/>
+                <constraint firstItem="ivE-Yo-ThQ" firstAttribute="height" secondItem="gjn-17-jIA" secondAttribute="height" id="elf-xe-cxT"/>
+                <constraint firstItem="cAR-zF-VGX" firstAttribute="centerX" secondItem="ivE-Yo-ThQ" secondAttribute="centerX" id="fXy-SC-ZPf"/>
+                <constraint firstItem="zoD-8r-G8L" firstAttribute="top" secondItem="gjn-17-jIA" secondAttribute="bottom" constant="5" id="nMs-Hk-hhW"/>
+                <constraint firstItem="gjn-17-jIA" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" constant="-8" id="t4b-Ne-tGp"/>
+                <constraint firstItem="ivE-Yo-ThQ" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" multiplier="1.35" id="uQc-U1-UrX"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <connections>
+                <outlet property="openFlash" destination="ivE-Yo-ThQ" id="h4L-sn-E8X"/>
+                <outlet property="titleLbl" destination="zoD-8r-G8L" id="srA-Tq-btr"/>
+            </connections>
+            <point key="canvasLocation" x="-423" y="101"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="WFShopMall.bundle/lamp" width="16" height="16"/>
+        <image name="WFShopMall.bundle/lampSelect" width="16" height="16"/>
+        <image name="WFShopMall.bundle/number" width="16" height="16"/>
+    </resources>
+</document>

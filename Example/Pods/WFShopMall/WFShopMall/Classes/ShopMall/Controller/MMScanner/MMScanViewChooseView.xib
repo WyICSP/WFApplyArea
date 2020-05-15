@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="MMScanViewChooseView">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <button opaque="NO" tag="10" contentMode="scaleToFill" selected="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DsJ-pf-DmP">
+                    <rect key="frame" x="108" y="6" width="49" height="32"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                    <state key="normal" title="二维码">
+                        <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    </state>
+                    <state key="selected">
+                        <color key="titleColor" red="1" green="0.42745098040000001" blue="0.1333333333" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                    </state>
+                    <connections>
+                        <action selector="clickBtn:" destination="iN0-l3-epB" eventType="touchUpInside" id="B1Q-hE-5dy"/>
+                    </connections>
+                </button>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="br3-Ac-MH7">
+                    <rect key="frame" x="187" y="14.5" width="1" height="15"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="1" id="74f-at-xMJ"/>
+                        <constraint firstAttribute="height" constant="15" id="BnC-Rh-Zcb"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <nil key="textColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <button opaque="NO" tag="20" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1WM-RT-SdF">
+                    <rect key="frame" x="218" y="6" width="49" height="32"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                    <state key="normal" title="条形码">
+                        <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    </state>
+                    <state key="selected">
+                        <color key="titleColor" red="1" green="0.42745098040000001" blue="0.1333333333" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                    </state>
+                    <connections>
+                        <action selector="clickBtn:" destination="iN0-l3-epB" eventType="touchUpInside" id="00h-3u-qEN"/>
+                    </connections>
+                </button>
+            </subviews>
+            <constraints>
+                <constraint firstItem="1WM-RT-SdF" firstAttribute="centerY" secondItem="br3-Ac-MH7" secondAttribute="centerY" id="4Os-5C-feS"/>
+                <constraint firstItem="br3-Ac-MH7" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="PdV-nB-Qre"/>
+                <constraint firstItem="DsJ-pf-DmP" firstAttribute="centerY" secondItem="br3-Ac-MH7" secondAttribute="centerY" id="Xdb-Em-haY"/>
+                <constraint firstItem="br3-Ac-MH7" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="wkK-j1-IWf"/>
+                <constraint firstItem="br3-Ac-MH7" firstAttribute="leading" secondItem="DsJ-pf-DmP" secondAttribute="trailing" constant="30" id="xo2-1X-eVI"/>
+                <constraint firstItem="1WM-RT-SdF" firstAttribute="leading" secondItem="br3-Ac-MH7" secondAttribute="trailing" constant="30" id="z6F-OV-4pr"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
+            <connections>
+                <outletCollection property="btns" destination="DsJ-pf-DmP" id="F3e-Ln-UA2"/>
+                <outletCollection property="btns" destination="1WM-RT-SdF" id="IHx-l4-rjg"/>
+            </connections>
+            <point key="canvasLocation" x="-106" y="-30"/>
+        </view>
+    </objects>
+</document>

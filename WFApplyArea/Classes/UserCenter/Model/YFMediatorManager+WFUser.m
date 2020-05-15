@@ -22,4 +22,18 @@
     [self performTarget:@"WFPayPublicAPI" action:@"gotoPayWithParams:" params:params isRequiredReturnValue:NO];
 }
 
++ (void)gotoWithdrawController:(UIViewController *)controller {
+    [self performTarget:@"WFShopPublicAPI" action:@"gotoWithdrawController:" params:controller isRequiredReturnValue:NO];
+}
+
++ (void)openShareWithParams:(NSDictionary *)params {
+    [self performTarget:@"WFShopPublicAPI" action:@"openShareViewCtrlWithParams:" params:params isRequiredReturnValue:NO];
+}
+
++ (NSString *)scanQRCode {
+    NSString *msg = [self performTarget:@"WFShopPublicAPI" action:@"jumpScanCtrl:" params:nil isRequiredReturnValue:YES];
+    return msg;
+}
+
+
 @end

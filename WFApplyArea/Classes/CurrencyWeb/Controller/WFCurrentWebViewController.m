@@ -8,6 +8,7 @@
 
 #import "WFCurrentWebViewController.h"
 #import "WFJSApiTools.h"
+#import "IncomeJsApiTest.h"
 #import "WKHelp.h"
 
 @interface WFCurrentWebViewController ()
@@ -18,7 +19,11 @@
 #pragma mark 生命周期
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [self.dwebview addJavascriptObject:[[WFJSApiTools alloc] init] namespace:nil];
+    if ([self.urlString containsString:@"yzc-app-partner/#/service/index"]) {
+        [self.dwebview addJavascriptObject:[[IncomeJsApiTest alloc] init] namespace:nil];
+    }else {
+        [self.dwebview addJavascriptObject:[[WFJSApiTools alloc] init] namespace:nil];
+    }
     self.progressColor = NavColor;
 }
 

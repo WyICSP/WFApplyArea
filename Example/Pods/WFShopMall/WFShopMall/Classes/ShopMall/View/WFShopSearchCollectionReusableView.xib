@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="15400" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15404"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <collectionReusableView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="U6b-Vx-4bR" customClass="WFShopSearchCollectionReusableView">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="40"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <subviews>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="搜索历史" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Xbg-gt-ZoY">
+                    <rect key="frame" x="16" y="12" width="54" height="16"/>
+                    <fontDescription key="fontDescription" type="boldSystem" pointSize="13"/>
+                    <color key="textColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="M27-WF-Nuo">
+                    <rect key="frame" x="282" y="5" width="30" height="30"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="30" id="SMj-EN-Vvr"/>
+                        <constraint firstAttribute="width" constant="30" id="mZm-09-0Uy"/>
+                    </constraints>
+                    <state key="normal" image="WFShopMall.bundle/delete"/>
+                    <connections>
+                        <action selector="clickDeleteBtn:" destination="U6b-Vx-4bR" eventType="touchUpInside" id="jep-S3-Ubp"/>
+                    </connections>
+                </button>
+            </subviews>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <constraints>
+                <constraint firstItem="M27-WF-Nuo" firstAttribute="centerY" secondItem="Xbg-gt-ZoY" secondAttribute="centerY" id="KLJ-La-RzQ"/>
+                <constraint firstItem="Xbg-gt-ZoY" firstAttribute="leading" secondItem="9Gg-ye-v9C" secondAttribute="leading" constant="16" id="PDt-xx-iyR"/>
+                <constraint firstItem="Xbg-gt-ZoY" firstAttribute="centerY" secondItem="U6b-Vx-4bR" secondAttribute="centerY" id="TX5-eG-wu4"/>
+                <constraint firstItem="9Gg-ye-v9C" firstAttribute="trailing" secondItem="M27-WF-Nuo" secondAttribute="trailing" constant="8" id="YGl-oc-8hZ"/>
+            </constraints>
+            <viewLayoutGuide key="safeArea" id="9Gg-ye-v9C"/>
+            <connections>
+                <outlet property="deleteBtn" destination="M27-WF-Nuo" id="C65-88-doS"/>
+                <outlet property="title" destination="Xbg-gt-ZoY" id="sqk-6z-AJ5"/>
+            </connections>
+            <point key="canvasLocation" x="137.59999999999999" y="145.72713643178412"/>
+        </collectionReusableView>
+    </objects>
+    <resources>
+        <image name="WFShopMall.bundle/delete" width="16" height="16"/>
+    </resources>
+</document>
