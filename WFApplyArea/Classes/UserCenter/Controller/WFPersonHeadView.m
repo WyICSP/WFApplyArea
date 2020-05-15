@@ -53,7 +53,7 @@
     self.phone.text = [NSString getNullOrNoNull:model.mobile];
     self.name.text = [NSString getNullOrNoNull:model.nickname];
     self.banlance.text = [NSString stringWithFormat:@"%.3f",[NSString decimalPriceWithDouble:model.price.doubleValue/1000]];
-    [self.imgView sd_setImageWithURL:[NSURL URLWithString:model.headUrl] placeholderImage:[UIImage imageNamed:@"fang"]];
+    [self.imgView sd_setImageWithURL:[NSURL URLWithString:model.headUrl] placeholderImage:[UIImage imageNamed:@"pfang"]];
 }
 
 

@@ -31,6 +31,8 @@
 @property (nonatomic, strong, nullable) MLMenuView *menuView;
 /// 客服
 @property (nonatomic, strong, nullable) WFMineCustomerServicModel *cModel;
+/// 个人中心数据
+@property (nonatomic, strong, nullable) WFUserCenterModel *mainModel;
 /// titles
 @property (nonatomic, strong, nullable) NSArray *titles;
 /// 合伙人数量和活动金
@@ -85,8 +87,7 @@
 
 #pragma mark 页面相关逻辑方法
 - (void)setUI {
-    [self.tableView reloadData];
-    self.titles = [self titles];
+//    [self.tableView reloadData];
     // 获取客服数据
     [self getCustomerServic];
 }
@@ -97,12 +98,19 @@
     [WFMyChargePileDataTool getUserInfoWithParams:@{} resultBlock:^(WFUserCenterModel * _Nonnull models) {
         @strongify(self)
         [self.tableView.mj_header endRefreshing];
-        self.headView.model = models;
+        self.mainModel = models;
+        // 获取数据
+        self.titles = [self titles];
+        self.headView.model = self.mainModel;
         // 活动金
         NSString *activityPrice = [NSString stringWithFormat:@"¥%.3f",[NSString decimalPriceWithDouble:models.activityPrice.doubleValue/1000]];
         
         // 添加到数组中
-        self.dataInfo = @[@(models.adminNum),activityPrice];
+        if (self.mainModel.isManage) {
+            self.dataInfo = @[@(models.adminNum),activityPrice];
+        }else {
+            self.dataInfo = @[activityPrice];
+        }
         
         [self.tableView reloadData];
     }failBlock:^{
@@ -235,15 +243,14 @@
             // 奖励中心
             [YFMediatorManager openRewardCtrlWithController:self];
         }
-        
     } else if (indexPath.section == 1) {
-        if (indexPath.row == 0) {
+        if (indexPath.row == 0 && self.mainModel.isManage) {
             // 合伙人
             WFCurrentWebViewController *web = [[WFCurrentWebViewController alloc] init];
             web.urlString = [NSString stringWithFormat:@"%@yzc-app-partner/#/myPartner/index",H5_HOST];
             web.hidesBottomBarWhenPushed = YES;
             [self.navigationController pushViewController:web animated:YES];
-        } else if (indexPath.row){
+        } else {
             // 活动金
             [YFMediatorManager openActivityOrRewardCtrlWithController:self type:1];
         }
@@ -316,12 +323,6 @@
     return _menuView;
 }
 
-- (NSArray *)titles {
-    return @[@[@{@"title":@"社区服务"},@{@"title":@"奖励中心"}],
-             @[@{@"title":@"我的合伙人"},@{@"title":@"活动金"}],
-             @[@{@"title":@"设备转让"}]];
-}
-
 /**
  消息数量
 
@@ -340,6 +341,17 @@
         [self.headView.mesBtn addSubview:_countLbl];
     }
     return _countLbl;
+}
+
+- (NSArray *)titles {
+    if (self.mainModel.isManage) {
+        return @[@[@{@"title":@"社区服务"},@{@"title":@"奖励中心"}],
+                 @[@{@"title":@"我的合伙人"},@{@"title":@"活动金"}],
+                 @[@{@"title":@"设备转让"}]];
+    }
+    return @[@[@{@"title":@"社区服务"},@{@"title":@"奖励中心"}],
+             @[@{@"title":@"活动金"}],
+             @[@{@"title":@"设备转让"}]];
 }
 
 

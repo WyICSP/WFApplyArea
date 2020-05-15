@@ -124,7 +124,7 @@
     sender.selected = !sender.selected;
     if (self.isSelectPile) {
         //充电桩
-        [self.rightTitleBtn setTitle:sender.selected ? @"取消" : @"选择解绑" forState:0];
+        [self.rightTitleBtn setTitle:sender.selected ? @"取消" : @"选择移出" forState:0];
         [self.chargePileView reloadDataWithEditType:sender.selected];
     } else if (self.isSelectGateway) {
         //网关
@@ -176,7 +176,7 @@
     NSMutableArray *titles = [[NSMutableArray alloc] init];
     //单次收费
     NSMutableDictionary *single = [NSMutableDictionary dictionary];
-    NSString *singleTitle = self.mainModels.singleCharge.chargeType == 0 ? @"单次收费/统一收费" : @"单次收费/功率收费";
+    NSString *singleTitle = self.mainModels.singleCharge.chargeType == 0 ? @"单次收费/统一收费" : @"单次收费/功率区间收费";
     [single safeSetObject:singleTitle forKey:@"title"];
     [single safeSetObject:self.mainModels.singleCharge.chargeType == 0 ? @0 : @1 forKey:@"isShowForm"];
     [single safeSetObject:@0 forKey:@"isShowDetail"];
@@ -192,12 +192,12 @@
     NSMutableDictionary *manyFee = [NSMutableDictionary dictionary];
     if (self.mainModels.multipleChargesList.count != 0) {
         WFAreaDetailMultipleModel *manyModel = self.mainModels.multipleChargesList.firstObject;
-        NSString *manyTitle = manyModel.chargeType == 0 ? @"多次收费/统一收费" : @"多次收费/功率收费";
+        NSString *manyTitle = manyModel.chargeType == 0 ? @"包月收费/统一收费" : @"包月收费/功率区间收费";
         [manyFee safeSetObject:manyTitle forKey:@"title"];
         [manyFee safeSetObject:manyModel.chargeType == 0 ? @0 : @1 forKey:@"isShowForm"];
         [manyFee safeSetObject:@0 forKey:@"isShowDetail"];
     }else {
-        [manyFee safeSetObject:@"多次收费" forKey:@"title"];
+        [manyFee safeSetObject:@"包月收费" forKey:@"title"];
         [manyFee safeSetObject:@0 forKey:@"isShowForm"];
         [manyFee safeSetObject:@0 forKey:@"isShowDetail"];
     }
@@ -218,7 +218,7 @@
     [titles addObject:manyFee];
     //优惠收费
     NSMutableDictionary *discountFee = [NSMutableDictionary dictionary];
-    [discountFee safeSetObject:@"优惠收费" forKey:@"title"];
+    [discountFee safeSetObject:@"VIP收费" forKey:@"title"];
     [discountFee safeSetObject:self.mainModels.vipCharge ? @1 : @0 forKey:@"isShowForm"];
     [discountFee safeSetObject:@0 forKey:@"isShowDetail"];
     if (self.jumpType == WFAreaDetailJumpAreaType) {
@@ -295,7 +295,7 @@
         //充电桩按钮
         //显示右侧按钮
         self.rightTitleBtn.hidden = self.rightTitleBtn.selected = NO;
-        [self.rightTitleBtn setTitle:@"选择解绑" forState:0];
+        [self.rightTitleBtn setTitle:@"选择移出" forState:0];
         
         self.chargePileView.hidden = self.isSelectGateway = NO;
         [self.chargePileView reloadDataWithEditType:NO];
@@ -413,7 +413,7 @@
 - (void)longPressDeleteManyOrDiscontFeeWithIndex:(NSInteger)index {
     if (self.jumpType == WFAreaDetailJumpPileType) return;
     if (index == 100) {
-        UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"您确定要删除多次收费吗?" message:nil preferredStyle:UIAlertControllerStyleAlert];
+        UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"您确定要删除包月收费吗?" message:nil preferredStyle:UIAlertControllerStyleAlert];
         //增加取消按钮；
         [alertController addAction:[UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleDefault handler:nil]];
         //增加确定按钮；
@@ -424,7 +424,7 @@
         [self presentViewController:alertController animated:true completion:nil];
         
     }else if (index == 200) {
-        UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"您确定要删除优惠收费吗?" message:nil preferredStyle:UIAlertControllerStyleAlert];
+        UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"您确定要删除VIP收费吗?" message:nil preferredStyle:UIAlertControllerStyleAlert];
         //增加取消按钮；
         [alertController addAction:[UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleDefault handler:nil]];
         //增加确定按钮；
@@ -697,7 +697,7 @@
         _chargePileView.resetEditBlock = ^{
             @strongify(self)
             self.rightTitleBtn.selected = NO;
-            [self.rightTitleBtn setTitle:@"选择解绑" forState:0];
+            [self.rightTitleBtn setTitle:@"选择移出" forState:0];
         };
         [self.view addSubview:_chargePileView];
     }

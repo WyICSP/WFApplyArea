@@ -59,12 +59,12 @@
     }
     //查看有无多次收费
     if (self.model.multipleChargesList.count != 0) {
-        [titles addObject:@"多次收费"];
+        [titles addObject:@"包月收费"];
         self.model.isHaveManyTime = YES;
     }
     //查看优惠收费
     if (self.model.vipCharge.vipChargeId.length != 0) {
-        [titles addObject:@"优惠收费"];
+        [titles addObject:@"VIP收费"];
         self.model.isHaveVip = YES;
     }
     

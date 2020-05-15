@@ -49,15 +49,36 @@ static NSString *const cellId = @"WFMyAreaListTableViewCell";
     //事件
     self.time.text = model.createTime;
     
-    if (model.auditStatus == 2) {
-        self.moveBtn.hidden = YES;
+    if (model.isInstall) {
+        // 如果是首次安装
+        if (model.auditStatus != 2) {
+            self.qrBtn.hidden = NO;
+            [self.qrBtn setTitle:@"二维码" forState:0];
+            self.qrBtn.tag = 100;
+        } else {
+            self.qrBtn.hidden = YES;
+        }
+    } else {
+        // 移入设备
         [self.qrBtn setTitle:@"移入设备" forState:0];
         self.qrBtn.tag = 110;
-    }else {
-        self.moveBtn.hidden = NO;
-        [self.qrBtn setTitle:@"二维码" forState:0];
-        self.qrBtn.tag = 100;
+        self.qrBtn.hidden = NO;
     }
+    
+//    if (model.auditStatus == 2) {
+//
+//    }
+//
+//
+//    if (model.auditStatus == 2) {
+//        self.moveBtn.hidden = YES;
+//        [self.qrBtn setTitle:@"移入设备" forState:0];
+//        self.qrBtn.tag = 110;
+//    }else {
+//        self.moveBtn.hidden = NO;
+//        [self.qrBtn setTitle:@"二维码" forState:0];
+//        self.qrBtn.tag = 100;
+//    }
     
     if (model.status) {
         if (model.isNew) {

@@ -25,6 +25,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, assign) BOOL status;
 /**是否新片区*/
 @property (nonatomic, assign) BOOL isNew;
+/// 是否首次使用
+@property (nonatomic, assign) BOOL isInstall;
 /**片区审核状态 0：申请中 1：申请通过 2：申请驳回*/
 @property (nonatomic, assign) NSInteger auditStatus;
 /**0:待处理 1：通过 2:驳回 3：编辑 4：编辑失败*/

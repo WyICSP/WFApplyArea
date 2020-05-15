@@ -25,6 +25,8 @@
 @property (weak, nonatomic) IBOutlet UIButton *addressBtn;
 /**详细地址*/
 @property (weak, nonatomic) IBOutlet UITextField *detailAddressTF;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *bottomHeight;
+
 /**片名*/
 @property (weak, nonatomic) IBOutlet UITextField *areaNameTF;
 /**背景*/
@@ -54,6 +56,8 @@
 - (void)setUI {
     self.title = @"片区信息";
     self.contentsView.layer.cornerRadius = 10.0f;
+    self.saveBtn.layer.cornerRadius = 20.0f;
+    self.bottomHeight.constant = 55.0f + SafeAreaBottom;
     self.view.backgroundColor = UIColorFromRGB(0xF5F5F5);
     //设置底部按钮
     [self.saveBtn setTitle:self.type == WFEditAddressAreaDetailType ? @"确认修改" : @"下一步(1/7)" forState:0];

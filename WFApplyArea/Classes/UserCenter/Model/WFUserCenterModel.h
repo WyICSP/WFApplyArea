@@ -22,6 +22,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, copy) NSString *nickname;
 /// 头像
 @property (nonatomic, copy) NSString *headUrl;
+/// 是否是管理合伙人
+@property (nonatomic, assign) BOOL isManage;
 @end
 
 @interface WFMineCustomerServicModel : NSObject

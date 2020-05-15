@@ -28,7 +28,7 @@
 /**tableView*/
 @property (nonatomic, strong, nullable) UITableView *tableView;
 /**申请片区按钮*/
-@property (nonatomic, strong, nullable) UIButton *confirmBtn;
+@property (nonatomic, strong, nullable) UIView *bottomView;
 /**headView*/
 @property (nonatomic, strong, nullable) UIView *headView;
 /**统一收费*/
@@ -388,7 +388,7 @@
         return unifiedView;
     }else if (section == 1) {
         WFBilleMethodSectionView *sectionView = [[[NSBundle bundleForClass:[self class]] loadNibNamed:@"WFBilleMethodSectionView" owner:nil options:nil] firstObject];
-        sectionView.title.text = @"功率收费";
+        sectionView.title.text = @"功率区间收费";
         //得到图片的路径
         NSString *showImgPath = [NSString getImagePathWithCurrentBundler:currentBundler PhotoName:self.powerModel.isOpenSecondSection ? @"showTop" : @"showBottom" bundlerName:@"WFApplyArea.bundle"];
         [sectionView.showImgBtn setImage:[UIImage imageWithContentsOfFile:showImgPath] forState:0];
@@ -426,7 +426,7 @@
 #pragma mark get set
 - (UITableView *)tableView {
     if (!_tableView) {
-        _tableView = [[UITableView alloc] initWithFrame:CGRectMake(KWidth(12.0f), 0, ScreenWidth-KWidth(24.0f), ScreenHeight - NavHeight - self.confirmBtn.height-SafeAreaBottom) style:UITableViewStyleGrouped];
+        _tableView = [[UITableView alloc] initWithFrame:CGRectMake(KWidth(12.0f), 0, ScreenWidth-KWidth(24.0f), ScreenHeight - NavHeight - self.bottomView.height) style:UITableViewStyleGrouped];
         _tableView.delegate = self;
         _tableView.dataSource = self;
         _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
@@ -460,18 +460,22 @@
  
  @return applyBtn
  */
-- (UIButton *)confirmBtn {
-    if (!_confirmBtn) {
-        _confirmBtn = [UIButton buttonWithType:UIButtonTypeSystem];
-        _confirmBtn.frame = CGRectMake(0, ScreenHeight - KHeight(45.0f) - NavHeight - SafeAreaBottom, ScreenWidth, KHeight(45));
-        [_confirmBtn setTitle:[self btnTitle] forState:0];
-        [_confirmBtn addTarget:self action:@selector(clickConfirmBtn) forControlEvents:UIControlEventTouchUpInside];
-        _confirmBtn.titleLabel.font = [UIFont boldSystemFontOfSize:16.0f];
-        [_confirmBtn setTitleColor:UIColor.whiteColor forState:UIControlStateNormal];
-        _confirmBtn.backgroundColor = UIColorFromRGB(0xF78556);
-        [self.view addSubview:_confirmBtn];
+- (UIView *)bottomView {
+    if (!_bottomView) {
+        _bottomView = [[UIView alloc] initWithFrame:CGRectMake(0, ScreenHeight - 55.0f - NavHeight-SafeAreaBottom, ScreenWidth, 55.0f+SafeAreaBottom)];
+        _bottomView.backgroundColor = UIColor.whiteColor;
+        UIButton *confirmBtn = [UIButton buttonWithType:UIButtonTypeSystem];
+        confirmBtn.frame = CGRectMake(15.0f, 7.5, ScreenWidth-30.0f, 40.0f);
+        [confirmBtn setTitle:[self btnTitle] forState:0];
+        [confirmBtn addTarget:self action:@selector(clickConfirmBtn) forControlEvents:UIControlEventTouchUpInside];
+        confirmBtn.titleLabel.font = [UIFont boldSystemFontOfSize:16.0f];
+        [confirmBtn setTitleColor:UIColor.whiteColor forState:UIControlStateNormal];
+        confirmBtn.backgroundColor = UIColorFromRGB(0xF78556);
+        confirmBtn.layer.cornerRadius = 20.0f;
+        [_bottomView addSubview:confirmBtn];
+        [self.view addSubview:_bottomView];
     }
-    return _confirmBtn;
+    return _bottomView;
 }
 
 /**

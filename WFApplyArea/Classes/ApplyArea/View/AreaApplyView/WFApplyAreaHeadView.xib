@@ -1,11 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
-    <device id="retina6_1" orientation="portrait">
-        <adaptation id="fullscreen"/>
-    </device>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="16096" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16086"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -24,14 +22,27 @@
                             <color key="textColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
                             <nil key="highlightedColor"/>
                         </label>
+                        <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EL9-Ww-le7">
+                            <rect key="frame" x="86" y="10" width="30" height="30"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="30" id="Elq-AP-iWC"/>
+                                <constraint firstAttribute="width" constant="30" id="FnL-s0-Mmz"/>
+                            </constraints>
+                            <state key="normal" image="WFApplyArea.bundle/explainicon"/>
+                            <connections>
+                                <action selector="clickExplainBtn:" destination="iN0-l3-epB" eventType="touchUpInside" id="eYM-vc-dJy"/>
+                            </connections>
+                        </button>
                     </subviews>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <constraints>
+                        <constraint firstItem="EL9-Ww-le7" firstAttribute="leading" secondItem="u1Z-u8-oJh" secondAttribute="trailing" constant="5" id="3Y7-wb-fC0"/>
                         <constraint firstItem="u1Z-u8-oJh" firstAttribute="leading" secondItem="0Md-EJ-8hg" secondAttribute="leading" constant="15" id="FOP-6A-fVT">
                             <userDefinedRuntimeAttributes>
                                 <userDefinedRuntimeAttribute type="boolean" keyPath="isAdaptateScreen" value="YES"/>
                             </userDefinedRuntimeAttributes>
                         </constraint>
+                        <constraint firstItem="EL9-Ww-le7" firstAttribute="centerY" secondItem="u1Z-u8-oJh" secondAttribute="centerY" id="gHV-RI-UjO"/>
                         <constraint firstAttribute="bottom" secondItem="u1Z-u8-oJh" secondAttribute="bottom" id="x1L-Yc-so7"/>
                     </constraints>
                 </view>
@@ -46,9 +57,13 @@
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <connections>
                 <outlet property="contentsView" destination="0Md-EJ-8hg" id="H2z-er-99n"/>
+                <outlet property="explainBtn" destination="EL9-Ww-le7" id="byT-0p-RH2"/>
                 <outlet property="title" destination="u1Z-u8-oJh" id="0Ve-Wv-kKL"/>
             </connections>
             <point key="canvasLocation" x="47.826086956521742" y="35.825892857142854"/>
         </view>
     </objects>
+    <resources>
+        <image name="WFApplyArea.bundle/explainicon" width="128" height="128"/>
+    </resources>
 </document>

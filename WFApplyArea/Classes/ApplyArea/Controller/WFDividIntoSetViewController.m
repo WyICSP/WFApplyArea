@@ -27,7 +27,7 @@
 /**tableView*/
 @property (nonatomic, strong, nullable) UITableView *tableView;
 /**申请片区按钮*/
-@property (nonatomic, strong, nullable) UIButton *confirmBtn;
+@property (nonatomic, strong, nullable) UIView *bottomView;
 /**公司的占比*/
 @property (nonatomic, strong, nullable) WFMyAreaDividIntoSetModel *comModel;
 /**合伙人占比*/
@@ -432,7 +432,7 @@
 #pragma mark get set
 - (UITableView *)tableView {
     if (!_tableView) {
-        _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, ScreenHeight - NavHeight - self.confirmBtn.height-SafeAreaBottom) style:UITableViewStyleGrouped];
+        _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, ScreenHeight - NavHeight - self.bottomView.height) style:UITableViewStyleGrouped];
         _tableView.delegate = self;
         _tableView.dataSource = self;
         _tableView.rowHeight = KHeight(44.0f);
@@ -448,22 +448,26 @@
 }
 
 /**
- 申请片区按钮
+ 完成按钮
  
  @return applyBtn
  */
-- (UIButton *)confirmBtn {
-    if (!_confirmBtn) {
-        _confirmBtn = [UIButton buttonWithType:UIButtonTypeSystem];
-        _confirmBtn.frame = CGRectMake(0, ScreenHeight - KHeight(45.0f) - NavHeight - SafeAreaBottom, ScreenWidth, KHeight(45));
-        [_confirmBtn setTitle:[self btnTitle] forState:UIControlStateNormal];
-        [_confirmBtn addTarget:self action:@selector(clickConfirmBtn) forControlEvents:UIControlEventTouchUpInside];
-        _confirmBtn.titleLabel.font = [UIFont boldSystemFontOfSize:16.0f];
-        [_confirmBtn setTitleColor:UIColor.whiteColor forState:UIControlStateNormal];
-        _confirmBtn.backgroundColor = UIColorFromRGB(0xF78556);
-        [self.view addSubview:_confirmBtn];
+- (UIView *)bottomView {
+    if (!_bottomView) {
+        _bottomView = [[UIView alloc] initWithFrame:CGRectMake(0, ScreenHeight - 55.0f - NavHeight-SafeAreaBottom, ScreenWidth, 55.0f+SafeAreaBottom)];
+        _bottomView.backgroundColor = UIColor.whiteColor;
+        UIButton *confirmBtn = [UIButton buttonWithType:UIButtonTypeSystem];
+        confirmBtn.frame = CGRectMake(15.0f, 7.5, ScreenWidth-30.0f, 40.0f);
+        [confirmBtn setTitle:[self btnTitle] forState:UIControlStateNormal];
+        [confirmBtn addTarget:self action:@selector(clickConfirmBtn) forControlEvents:UIControlEventTouchUpInside];
+        confirmBtn.titleLabel.font = [UIFont boldSystemFontOfSize:16.0f];
+        [confirmBtn setTitleColor:UIColor.whiteColor forState:UIControlStateNormal];
+        confirmBtn.backgroundColor = UIColorFromRGB(0xF78556);
+        confirmBtn.layer.cornerRadius = 20.0f;
+        [_bottomView addSubview:confirmBtn];
+        [self.view addSubview:_bottomView];
     }
-    return _confirmBtn;
+    return _bottomView;
 }
 
 /**

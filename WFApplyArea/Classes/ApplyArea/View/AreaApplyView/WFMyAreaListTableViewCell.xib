@@ -28,7 +28,7 @@
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="2019-08-88" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aPE-5e-te4">
                                 <rect key="frame" x="269" y="17.5" width="75" height="15"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="75" id="olx-M8-OyV"/>
+                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="75" id="olx-M8-OyV"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                 <color key="textColor" red="0.59999999999999998" green="0.59999999999999998" blue="0.59999999999999998" alpha="1" colorSpace="calibratedRGB"/>
@@ -75,10 +75,10 @@
                                 </userDefinedRuntimeAttributes>
                             </label>
                             <button opaque="NO" tag="100" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="l6h-UL-a1G">
-                                <rect key="frame" x="274" y="74" width="70" height="33"/>
+                                <rect key="frame" x="279" y="74" width="65" height="33"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="70" id="AQ8-dI-cpv"/>
-                                    <constraint firstAttribute="width" secondItem="l6h-UL-a1G" secondAttribute="height" multiplier="58:27" id="gCM-rF-YRn"/>
+                                    <constraint firstAttribute="width" constant="65" id="AQ8-dI-cpv"/>
+                                    <constraint firstAttribute="height" constant="33" id="bk2-GZ-Bkq"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                 <state key="normal" title="二维码">
@@ -88,8 +88,8 @@
                                     <action selector="clickBtn:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="Ecd-dq-WmX"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" tag="110" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nut-gs-87O">
-                                <rect key="frame" x="194" y="74" width="70" height="33"/>
+                            <button hidden="YES" opaque="NO" tag="110" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nut-gs-87O">
+                                <rect key="frame" x="199" y="74" width="70" height="33"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="70" id="pHd-mC-evi"/>
                                 </constraints>

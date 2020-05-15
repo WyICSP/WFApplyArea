@@ -37,7 +37,7 @@
 /**添加View*/
 @property (nonatomic, strong, nullable) WFDiscountFeeAddView *addView;
 /**申请片区按钮*/
-@property (nonatomic, strong, nullable) UIButton *confirmBtn;
+@property (nonatomic, strong, nullable) UIView *bottomView;
 /**vip用户*/
 @property (nonatomic, strong, nullable) NSMutableArray <WFGroupVipUserModel *> *vipData;
 /// vip 搜索数据
@@ -79,7 +79,7 @@
 
 #pragma mark 私有方法
 - (void)setUI {
-    self.title = @"优惠收费";
+    self.title = @"VIP收费";
     self.pageNo = 1;
     self.view.backgroundColor = UIColorFromRGB(0xF5F5F5);
     if (!self.mainModel) {
@@ -273,10 +273,10 @@
     if (self.type == WFUpdateUserMsgUpgradeType) {
         if (self.oldAreaModel.isExist || self.isSelect) {
             //老片区有优惠套餐必须要选中
-            alertMsg = ![self isCompleteData] ? @"请完善优惠收费信息" : @"";
+            alertMsg = ![self isCompleteData] ? @"请完善VIP收费信息" : @"";
         }
     }else {
-        alertMsg = ![self isCompleteData] ? @"请完善优惠收费信息" : @"";
+        alertMsg = ![self isCompleteData] ? @"请完善VIP收费信息" : @"";
     }
     
     if (alertMsg.length != 0) {
@@ -431,7 +431,7 @@
 #pragma mark get set
 - (UITableView *)tableView {
     if (!_tableView) {
-        _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, ScreenHeight - NavHeight - self.confirmBtn.height-SafeAreaBottom) style:UITableViewStyleGrouped];
+        _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, ScreenHeight - NavHeight - self.bottomView.height) style:UITableViewStyleGrouped];
         _tableView.delegate = self;
         _tableView.dataSource = self;
         _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
@@ -512,20 +512,26 @@
  
  @return applyBtn
  */
-- (UIButton *)confirmBtn {
-    if (!_confirmBtn) {
-        _confirmBtn = [UIButton buttonWithType:UIButtonTypeSystem];
-        _confirmBtn.frame = CGRectMake(0, ScreenHeight - KHeight(45.0f) - NavHeight-SafeAreaBottom, ScreenWidth, self.isNotAllow ? 0.0f : KHeight(45));
-        [_confirmBtn setTitle:[self btnTitle] forState:UIControlStateNormal];
-        [_confirmBtn addTarget:self action:@selector(clickConfirmBtn) forControlEvents:UIControlEventTouchUpInside];
-        _confirmBtn.titleLabel.font = [UIFont boldSystemFontOfSize:16.0f];
-        [_confirmBtn setTitleColor:UIColor.whiteColor forState:UIControlStateNormal];
-        _confirmBtn.backgroundColor = UIColorFromRGB(0xF78556);
-        _confirmBtn.hidden = self.isNotAllow;
-        [self.view addSubview:_confirmBtn];
+- (UIView *)bottomView {
+    if (!_bottomView) {
+        _bottomView = [[UIView alloc] initWithFrame:CGRectMake(0, ScreenHeight - 55.0f - NavHeight-SafeAreaBottom, ScreenWidth, 55.0f+SafeAreaBottom)];
+        _bottomView.backgroundColor = UIColor.whiteColor;
+        UIButton *confirmBtn = [UIButton buttonWithType:UIButtonTypeSystem];
+        confirmBtn.frame = CGRectMake(15.0f, 7.5, ScreenWidth-30.0f, self.isNotAllow ? 0.0f : 40.0f);
+        [confirmBtn setTitle:[self btnTitle] forState:UIControlStateNormal];
+        [confirmBtn addTarget:self action:@selector(clickConfirmBtn) forControlEvents:UIControlEventTouchUpInside];
+        confirmBtn.titleLabel.font = [UIFont boldSystemFontOfSize:16.0f];
+        [confirmBtn setTitleColor:UIColor.whiteColor forState:UIControlStateNormal];
+        confirmBtn.backgroundColor = UIColorFromRGB(0xF78556);
+        confirmBtn.hidden = self.isNotAllow;
+        confirmBtn.layer.cornerRadius = 20.0f;
+        [_bottomView addSubview:confirmBtn];
+        [self.view addSubview:_bottomView];
     }
-    return _confirmBtn;
+    return _bottomView;
 }
+
+
 
 - (NSMutableArray<WFGroupVipUserModel *> *)vipData {
     if (!_vipData) {

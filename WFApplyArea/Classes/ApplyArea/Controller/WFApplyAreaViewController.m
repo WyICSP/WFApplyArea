@@ -35,7 +35,7 @@
 /**收费说明*/
 @property (nonatomic, strong, nullable) WFApplyAreaFeeExplanView *explanView;
 /**申请片区按钮*/
-@property (nonatomic, strong, nullable) UIButton *nextBtn;
+@property (nonatomic, strong, nullable) UIView *bottomView;
 /**收费方式*/
 @property (nonatomic, strong, nullable) NSMutableArray <WFApplyChargeMethod *> *models;
 /**地址*/
@@ -142,7 +142,7 @@
         if ([self isCompleteManyTimeData]) {
             [params safeSetObject:[self multipleChargesList] forKey:@"multipleChargesList"];
         }else {
-            [YFToast showMessage:@"请完善多次收费信息" inView:self.view];
+            [YFToast showMessage:@"请完善包月收费信息" inView:self.view];
             return;
         }
     }
@@ -151,7 +151,7 @@
         if ([self isCompleteDiscountData]) {
             [params safeSetObject:[self vipCharge] forKey:@"vipCharge"];
         }else {
-            [YFToast showMessage:@"请完善优惠收费信息" inView:self.view];
+            [YFToast showMessage:@"请完善VIP收费信息" inView:self.view];
             return;
         }
     }
@@ -479,12 +479,6 @@
     }else if (indexPath.section == 1) {
         //收费方式
         WFApplyAreaItemTableViewCell *cell = [WFApplyAreaItemTableViewCell cellWithTableView:tableView indexPath:indexPath dataCount:self.models.count];
-        cell.explainBtn.hidden = indexPath.row != 0;
-        @weakify(self)
-        cell.LookFeeExplainBlock = ^{
-            @strongify(self)
-            [[WFPopTool sharedInstance] popView:self.explanView animated:YES];
-        };
         cell.model = self.models[indexPath.row];
         return cell;
     }else if (indexPath.section == 4) {
@@ -515,7 +509,13 @@
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
     WFApplyAreaHeadView *headView = [[[NSBundle bundleForClass:[self class]] loadNibNamed:@"WFApplyAreaHeadView" owner:nil options:nil] firstObject];
+    headView.explainBtn.hidden = section == 1 ? NO : YES;
     headView.title.text = self.headTitleArrays[section];
+    @weakify(self)
+    headView.LookFeeExplainBlock = ^{
+        @strongify(self)
+        [[WFPopTool sharedInstance] popView:self.explanView animated:YES];
+    };
     return headView;
 }
 
@@ -615,7 +615,7 @@
 #pragma mark get set
 - (UITableView *)tableView {
     if (!_tableView) {
-        _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, ScreenHeight - NavHeight - self.nextBtn.height-SafeAreaBottom) style:UITableViewStyleGrouped];
+        _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, ScreenHeight - NavHeight - self.bottomView.height-SafeAreaBottom) style:UITableViewStyleGrouped];
         _tableView.delegate = self;
         _tableView.dataSource = self;
         _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
@@ -634,18 +634,22 @@
  
  @return applyBtn
  */
-- (UIButton *)nextBtn {
-    if (!_nextBtn) {
-        _nextBtn = [UIButton buttonWithType:UIButtonTypeSystem];
-        _nextBtn.frame = CGRectMake(0, ScreenHeight - KHeight(45.0f) - NavHeight-SafeAreaBottom, ScreenWidth, KHeight(45));
-        [_nextBtn setTitle:@"提交" forState:UIControlStateNormal];
-        [_nextBtn addTarget:self action:@selector(clickNextBtn) forControlEvents:UIControlEventTouchUpInside];
-        _nextBtn.titleLabel.font = [UIFont boldSystemFontOfSize:16.0f];
-        [_nextBtn setTitleColor:UIColor.whiteColor forState:UIControlStateNormal];
-        _nextBtn.backgroundColor = UIColorFromRGB(0xF78556);
-        [self.view addSubview:_nextBtn];
+- (UIView *)bottomView {
+    if (!_bottomView) {
+        _bottomView = [[UIView alloc] initWithFrame:CGRectMake(0, ScreenHeight - 55.0f - NavHeight-SafeAreaBottom, ScreenWidth, 55.0f)];
+        _bottomView.backgroundColor = UIColor.whiteColor;
+        UIButton *nextBtn = [UIButton buttonWithType:UIButtonTypeSystem];
+        nextBtn.frame = CGRectMake(15.0f, 7.5, ScreenWidth-30.0f, 40.0f);
+        [nextBtn setTitle:@"提交" forState:UIControlStateNormal];
+        [nextBtn addTarget:self action:@selector(clickNextBtn) forControlEvents:UIControlEventTouchUpInside];
+        nextBtn.titleLabel.font = [UIFont boldSystemFontOfSize:16.0f];
+        [nextBtn setTitleColor:UIColor.whiteColor forState:UIControlStateNormal];
+        nextBtn.layer.cornerRadius = 20.0f;
+        nextBtn.backgroundColor = UIColorFromRGB(0xF78556);
+        [_bottomView addSubview:nextBtn];
+        [self.view addSubview:_bottomView];
     }
-    return _nextBtn;
+    return _bottomView;
 }
 
 - (NSMutableArray<WFApplyChargeMethod *> *)models {

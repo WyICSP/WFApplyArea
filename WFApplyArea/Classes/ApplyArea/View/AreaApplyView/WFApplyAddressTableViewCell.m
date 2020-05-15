@@ -58,6 +58,20 @@ static NSString *const cellId = @"WFApplyAddressTableViewCell";
 
 - (void)setModel:(WFApplyAreaAddressModel *)model {
     _model = model;
+    if (model.address.length != 0) {
+        [self.addressBtn setTitle:model.address forState:UIControlStateNormal];
+        [self.addressBtn setTitleColor:UIColorFromRGB(0x333333) forState:0];
+    }
+    
+    if (model.detailAddress.length != 0) {
+        self.detailAddressTF.text = model.detailAddress;
+    }
+    
+    if (model.areaName.length != 0) {
+        self.areaTF.text = model.areaName;
+    }
+    
+    
 }
 
 - (IBAction)textFieldDidChange:(UITextField *)textField {

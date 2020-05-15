@@ -1,6 +1,0 @@
-framework module WFStatistics {
-  umbrella header "WFStatistics-umbrella.h"
-
-  export *
-  module * { export * }
-}

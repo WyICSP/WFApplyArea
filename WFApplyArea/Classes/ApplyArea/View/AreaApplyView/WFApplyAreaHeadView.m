@@ -18,4 +18,8 @@
     [self.contentsView setRounderCornerWithRadius:10.0f rectCorner:WFRadiusRectCornerTopLeft | WFRadiusRectCornerTopRight imageColor:UIColor.whiteColor size:CGSizeMake(ScreenWidth-24.0f, KHeight(35.0f))];
 }
 
+- (IBAction)clickExplainBtn:(id)sender {
+    !self.LookFeeExplainBlock ? : self.LookFeeExplainBlock();
+}
+
 @end
