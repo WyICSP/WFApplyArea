@@ -15,6 +15,9 @@ PODS:
   - AFNetworking/UIKit (4.0.1):
     - AFNetworking/NSURLSession
   - dsBridge (3.0.6)
+  - FMDB (2.7.5):
+    - FMDB/standard (= 2.7.5)
+  - FMDB/standard (2.7.5)
   - IQKeyboardManager (6.5.4)
   - MJExtension (3.2.1)
   - MJRefresh (3.2.2)
@@ -49,10 +52,16 @@ PODS:
   - WFKitMain (0.2.8):
     - dsBridge
     - WFBasics
-  - WFShopMall (0.3.9):
+  - WFShopMall (0.4.0):
     - MJExtension
     - MJRefresh
     - SDWebImage
+    - WFBasics
+    - WFKitLogin
+    - WFKitMain
+    - WFStatistics
+  - WFStatistics (0.1.0):
+    - FMDB
     - WFBasics
     - WFKitLogin
     - WFKitMain
@@ -66,6 +75,7 @@ SPEC REPOS:
   https://github.com/cocoapods/specs.git:
     - AFNetworking
     - dsBridge
+    - FMDB
     - IQKeyboardManager
     - MJExtension
     - MJRefresh
@@ -79,6 +89,7 @@ SPEC REPOS:
     - WFKitLogin
     - WFKitMain
     - WFShopMall
+    - WFStatistics
     - WKFunComponents
 
 EXTERNAL SOURCES:
@@ -88,6 +99,7 @@ EXTERNAL SOURCES:
 SPEC CHECKSUMS:
   AFNetworking: 7864c38297c79aaca1500c33288e429c3451fdce
   dsBridge: 48b62ee8a411ad601a88d6f6c8cf6cb634b206b7
+  FMDB: 2ce00b547f966261cd18927a3ddb07cb6f3db82a
   IQKeyboardManager: 72b359cd7e777e3a984cedbe05f8da45320cbb63
   MJExtension: 635f2c663dcb1bf76fa4b715b2570a5710aec545
   MJRefresh: 72a46ecaa2a0feaf48fc5198dff95f25f8bb27c6
@@ -99,7 +111,8 @@ SPEC CHECKSUMS:
   WFHomeAddress: 4eb27df8a873af9161d147f8b10a1d50ba725467
   WFKitLogin: 6344fa86d19c8075829971898f4696f95221ecaa
   WFKitMain: 9fa8a908105ce2f9ace575538ae280eef5a94fc6
-  WFShopMall: 8648340a190d95c99b23a9c866c1701d2058dc53
+  WFShopMall: 02f9a9ff671cb6a5467314182b1dab89705296c2
+  WFStatistics: eebb64399964d975246a40da6d2de271c714f9c1
   WKFunComponents: 359e5059c096338eee60fee1d7146b701ed30372
   WYAutoLayout: 7bc596f94be915e1f690f316ac859287c8ec9d51
 

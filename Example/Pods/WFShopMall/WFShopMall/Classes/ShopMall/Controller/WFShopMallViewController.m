@@ -125,7 +125,6 @@
 
 -(void)webView:(WKWebView *)webView didFinishNavigation:(WKNavigation *)navigation{
     self.isShowTab = NO;
-//    [self.webProgressLayer finishedLoadWithError:nil];
 }
 
 - (void)reloadUrl {

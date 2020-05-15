@@ -9,6 +9,7 @@
 #import "WFShareWechatView.h"
 #import "MMScanViewController.h"
 #import "WKTabbarController.h"
+#import "WFWithdrawViewController.h"
 #import "YFKeyWindow.h"
 #import "WKSetting.h"
 #import "UIView+Frame.h"
@@ -70,6 +71,12 @@
         resultBlock(codeInfo);
     };
     [[[YFKeyWindow shareInstance] getCurrentVC].navigationController pushViewController:scan animated:YES];
+}
+
+- (void)gotoWithdrawController:(UIViewController *)controller {
+    WFWithdrawViewController *withDrawVC = [[WFWithdrawViewController alloc] initWithNibName:@"WFWithdrawViewController" bundle:[NSBundle bundleForClass:[self class]]];
+    withDrawVC.hidesBottomBarWhenPushed = YES;
+    [controller.navigationController pushViewController:withDrawVC animated:YES];
 }
 
 @end

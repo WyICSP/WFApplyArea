@@ -336,6 +336,7 @@
 			inputPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-WFApplyArea_Example/Pods-WFApplyArea_Example-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/AFNetworking/AFNetworking.framework",
+				"${BUILT_PRODUCTS_DIR}/FMDB/FMDB.framework",
 				"${BUILT_PRODUCTS_DIR}/IQKeyboardManager/IQKeyboardManager.framework",
 				"${BUILT_PRODUCTS_DIR}/MJExtension/MJExtension.framework",
 				"${BUILT_PRODUCTS_DIR}/MJRefresh/MJRefresh.framework",
@@ -348,6 +349,7 @@
 				"${BUILT_PRODUCTS_DIR}/WFKitLogin/WFKitLogin.framework",
 				"${BUILT_PRODUCTS_DIR}/WFKitMain/WFKitMain.framework",
 				"${BUILT_PRODUCTS_DIR}/WFShopMall/WFShopMall.framework",
+				"${BUILT_PRODUCTS_DIR}/WFStatistics/WFStatistics.framework",
 				"${BUILT_PRODUCTS_DIR}/WKFunComponents/WKFunComponents.framework",
 				"${BUILT_PRODUCTS_DIR}/WYAutoLayout/WYAutoLayout.framework",
 				"${BUILT_PRODUCTS_DIR}/dsBridge/dsBridge.framework",
@@ -355,6 +357,7 @@
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AFNetworking.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FMDB.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/IQKeyboardManager.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MJExtension.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MJRefresh.framework",
@@ -367,6 +370,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/WFKitLogin.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/WFKitMain.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/WFShopMall.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/WFStatistics.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/WKFunComponents.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/WYAutoLayout.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/dsBridge.framework",

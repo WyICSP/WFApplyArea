@@ -6,6 +6,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <UIKit/UIKit.h>
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -31,6 +32,9 @@ NS_ASSUME_NONNULL_BEGIN
 
 
 - (void)jumpScanCtrl:(void(^)(NSDictionary *codeInfo))resultBlock;
+
+/**跳转到提现页面*/
+- (void)gotoWithdrawController:(UIViewController *)controller;
 
 @end
 
