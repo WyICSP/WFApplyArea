@@ -87,7 +87,8 @@
 
 #pragma mark 页面相关逻辑方法
 - (void)setUI {
-//    [self.tableView reloadData];
+    self.titles = [self titles];
+    [self.tableView reloadData];
     // 获取客服数据
     [self getCustomerServic];
 }

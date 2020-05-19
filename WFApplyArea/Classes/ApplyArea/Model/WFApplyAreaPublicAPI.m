@@ -18,10 +18,17 @@
 /**
  打开我的片区页面
  */
-+ (void)openApplyAreaCtrlWithController:(UIViewController *)controller {
-    WFMyAreaViewController *area = [[WFMyAreaViewController alloc] init];
-    area.hidesBottomBarWhenPushed = YES;
-    [controller.navigationController pushViewController:area animated:YES];
++ (void)openApplyAreaCtrlWithController:(NSArray *)params {
+    if (params.count == 2) {
+        // 获取controller
+        UIViewController *controller = params.firstObject;
+        // 获取来源
+        NSInteger type = [params.lastObject integerValue];
+        WFMyAreaViewController *area = [[WFMyAreaViewController alloc] init];
+        area.partnerRole = type;
+        area.hidesBottomBarWhenPushed = YES;
+        [controller.navigationController pushViewController:area animated:YES];
+    }
 }
 
 /// 打开申请片区

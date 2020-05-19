@@ -39,6 +39,8 @@
 @property (nonatomic, strong, nullable) WFNewHomeServiceModel *cModel;
 /// 菜单
 @property (nonatomic, strong, nullable) MLMenuView *menuView;
+/// 合伙人身份
+@property (nonatomic, assign) NSInteger partnerRole;
 ///是否可以侧滑
 @property (nonatomic,assign) BOOL isCanSideBack;
 /**消息未读*/
@@ -95,6 +97,8 @@
     [self getTodayIncome];
     // 获取资产信息
     [self getAssetsInfo];
+    // 获取合伙人身份
+    [self getPartnerInfo];
 }
 
 /// 获取总收入
@@ -106,6 +110,7 @@
         [self.scrollView.mj_header endRefreshing];
     } failureBlock:^{
         @strongify(self)
+        self.headView.model = nil;
         [self.scrollView.mj_header endRefreshing];
     }];
 }
@@ -159,6 +164,18 @@
     }];
 }
 
+/// 获取合伙人身份信息
+- (void)getPartnerInfo {
+    @weakify(self)
+    [WFHomeDataTool getPartnerInfoWithParams:@{} resultBlock:^(NSDictionary * _Nonnull dict) {
+        @strongify(self)
+        NSString *partnerRole = [[dict safeJsonObjForKey:@"data"] stringObjectForKey:@"partnerRole"];
+        self.partnerRole = [partnerRole integerValue];
+        //1 市场合伙人  2 管理合伙人 3 物业
+        self.applyView.hidden = [partnerRole integerValue] == 3 ? YES : NO;
+    }];
+}
+
 /// 处理搜索点击事件
 /// @param index 每个点击事件的 tag
 - (void)clickItemEventWithIndex:(NSInteger)index {
@@ -182,7 +199,8 @@
         [self.navigationController pushViewController:web animated:YES];
     }else if (index == 40) {
         // 片区数量
-        [YFMediatorManager openApplyAreaCtrlWithController:self];
+        if (self.partnerRole!= 3)
+            [YFMediatorManager openApplyAreaCtrlWithController:self partnerRole:self.partnerRole];
     }else if (index == 50) {
         // 设备数量
         [YFMediatorManager openMyChargePileCtrlWithController:self];
@@ -215,7 +233,7 @@
         [self.navigationController pushViewController:web animated:YES];
     }else if (index == 120) {
         //奖励收入
-        [YFMediatorManager openRewardCtrlWithController:self];
+        [YFMediatorManager openActivityOrRewardCtrlWithController:self type:0];
     }else if (index == 130) {
         //公告
     }

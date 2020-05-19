@@ -11,7 +11,8 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @interface WFMyAreaViewController : YFBaseViewController
-
+/// 3 表示物业不能申请片区
+@property (nonatomic, assign) NSInteger partnerRole;
 @end
 
 NS_ASSUME_NONNULL_END

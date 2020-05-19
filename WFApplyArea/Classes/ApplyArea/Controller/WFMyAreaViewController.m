@@ -27,7 +27,7 @@
 /**tableView*/
 @property (nonatomic, strong, nullable) UITableView *tableView;
 /**申请片区按钮*/
-@property (nonatomic, strong, nullable) UIButton *applyBtn;
+@property (nonatomic, strong, nullable) UIView *bottomView;
 /**二维码*/
 @property (nonatomic, strong, nullable) WFMyAreaQRCodeView *qrCodeView;
 /**数据*/
@@ -64,7 +64,7 @@
     self.title = @"我的片区";
     self.view.backgroundColor = UIColorFromRGB(0xF5F5F5);
     [self.view addSubview:self.tableView];
-    [self.view addSubview:self.applyBtn];
+    [self.view addSubview:self.bottomView];
 }
 
 /**
@@ -185,7 +185,8 @@
 #pragma mark get set
 - (UITableView *)tableView {
     if (!_tableView) {
-        _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, ScreenHeight - NavHeight - self.applyBtn.height-SafeAreaBottom) style:UITableViewStyleGrouped];
+        _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, ScreenHeight - NavHeight - self.bottomView.height) style:UITableViewStyleGrouped];
+        if (self.partnerRole == 3) _tableView.height = ScreenHeight - NavHeight;
         _tableView.delegate = self;
         _tableView.dataSource = self;
         _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
@@ -220,21 +221,27 @@
 }
 
 /**
- 申请片区按钮
-
+申请片区按钮
+ 
  @return applyBtn
  */
-- (UIButton *)applyBtn {
-    if (!_applyBtn) {
-        _applyBtn = [UIButton buttonWithType:UIButtonTypeSystem];
-        _applyBtn.frame = CGRectMake(0, ScreenHeight - KHeight(45.0f) - NavHeight-SafeAreaBottom, ScreenWidth, KHeight(45));
-        [_applyBtn setTitle:@"申请片区" forState:UIControlStateNormal];
-        [_applyBtn addTarget:self action:@selector(clickApplyBtn) forControlEvents:UIControlEventTouchUpInside];
-        _applyBtn.titleLabel.font = [UIFont boldSystemFontOfSize:16.0f];
-        [_applyBtn setTitleColor:UIColor.whiteColor forState:UIControlStateNormal];
-        _applyBtn.backgroundColor = UIColorFromRGB(0xF78556);
+- (UIView *)bottomView {
+    if (!_bottomView) {
+        _bottomView = [[UIView alloc] initWithFrame:CGRectMake(0, ScreenHeight - 55.0f - NavHeight-SafeAreaBottom, ScreenWidth, 55.0f+SafeAreaBottom)];
+        _bottomView.backgroundColor = UIColor.whiteColor;
+        UIButton *applyBtn = [UIButton buttonWithType:UIButtonTypeSystem];
+        applyBtn.frame = CGRectMake(15.0f, 7.5, ScreenWidth-30.0f, 40.0f);
+        [applyBtn setTitle:@"申请片区" forState:UIControlStateNormal];
+        [applyBtn addTarget:self action:@selector(clickApplyBtn) forControlEvents:UIControlEventTouchUpInside];
+        applyBtn.titleLabel.font = [UIFont boldSystemFontOfSize:16.0f];
+        [applyBtn setTitleColor:UIColor.whiteColor forState:UIControlStateNormal];
+        applyBtn.backgroundColor = UIColorFromRGB(0xF78556);
+        applyBtn.layer.cornerRadius = 20.0f;
+        _bottomView.hidden = self.partnerRole == 3;
+        [_bottomView addSubview:applyBtn];
+        [self.view addSubview:_bottomView];
     }
-    return _applyBtn;
+    return _bottomView;
 }
 
 /**

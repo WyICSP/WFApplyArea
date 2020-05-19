@@ -16,7 +16,7 @@ NS_ASSUME_NONNULL_BEGIN
 /**
  打开片区申请页面
  */
-+ (void)openApplyAreaCtrlWithController:(UIViewController *)controller;
++ (void)openApplyAreaCtrlWithController:(NSArray *)params;
 
 /**
  开发我的片区页面
