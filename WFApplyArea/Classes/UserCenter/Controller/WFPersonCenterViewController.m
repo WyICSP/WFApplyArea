@@ -161,7 +161,7 @@
         url = [NSString stringWithFormat:@"%@yzc-app-partner-old/page/setting.html",H5_HOST];
     }else if (tag == 40) {
         // 个人资料
-        url = [NSString stringWithFormat:@"%@yzc_business_h5/page/userInfo.html",H5_HOST];
+        url = [NSString stringWithFormat:@"%@yzc-app-partner-old/page/userInfo.html",H5_HOST];
     }else if (tag == 50) {
         // 分享充点券
         url = [NSString stringWithFormat:@"%@yzc-union-fe/page/coupon/shareCoupon.html",H5_HOST];

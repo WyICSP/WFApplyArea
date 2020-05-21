@@ -60,6 +60,7 @@
     [self disableSideBack];
     // 获取未读消息
     [self getUserUnReadMessage];
+    [self.scrollView setContentOffset:CGPointZero];
 }
 
 ///禁用侧滑返回
@@ -199,8 +200,7 @@
         [self.navigationController pushViewController:web animated:YES];
     }else if (index == 40) {
         // 片区数量
-        if (self.partnerRole!= 3)
-            [YFMediatorManager openApplyAreaCtrlWithController:self partnerRole:self.partnerRole];
+        [YFMediatorManager openApplyAreaCtrlWithController:self partnerRole:self.partnerRole];
     }else if (index == 50) {
         // 设备数量
         [YFMediatorManager openMyChargePileCtrlWithController:self];
@@ -236,6 +236,9 @@
         [YFMediatorManager openActivityOrRewardCtrlWithController:self type:0];
     }else if (index == 130) {
         //公告
+    }else if (index == 140) {
+        //商城收入
+        [YFMediatorManager gotoCommunityServicePageWithController:self];
     }
 }
 

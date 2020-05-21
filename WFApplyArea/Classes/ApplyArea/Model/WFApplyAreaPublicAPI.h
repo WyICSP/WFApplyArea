@@ -33,6 +33,11 @@ NS_ASSUME_NONNULL_BEGIN
 /// @param params 参数
 + (void)gotoAppleAreaCtrlWithController:(UIViewController *)controller;
 
+
+/// 打开社区服务
+/// @param controller 控制器
++ (void)gotoCommunityServicePageWithController:(UIViewController *)controller;
+
 @end
 
 NS_ASSUME_NONNULL_END

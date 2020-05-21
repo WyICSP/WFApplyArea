@@ -177,7 +177,7 @@
     }else {
         //老片区
         WFCurrentWebViewController *web = [[WFCurrentWebViewController alloc] init];
-        web.urlString = [NSString stringWithFormat:@"%@yzc_business_h5/page/areaInfoSetmealsDetail.html?areaId=%@&groupId=%@",H5_HOST,itemModel.applyGroupId,itemModel.groupId];
+        web.urlString = [NSString stringWithFormat:@"%@yzc-app-partner-old/page/areaInfoSetmealsDetail.html?areaId=%@&groupId=%@",H5_HOST,itemModel.applyGroupId,itemModel.groupId];
         [self.navigationController pushViewController:web animated:YES];
     }
 }

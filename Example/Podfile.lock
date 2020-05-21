@@ -15,15 +15,15 @@ PODS:
   - AFNetworking/UIKit (4.0.1):
     - AFNetworking/NSURLSession
   - dsBridge (3.0.6)
-  - IQKeyboardManager (6.5.4)
+  - IQKeyboardManager (6.5.5)
   - MJExtension (3.2.1)
-  - MJRefresh (3.2.2)
+  - MJRefresh (3.4.1)
   - SDWebImage (5.7.4):
     - SDWebImage/Core (= 5.7.4)
   - SDWebImage/Core (5.7.4)
   - SVProgressHUD (2.2.5)
-  - TZImagePickerController (3.2.7)
-  - WFApplyArea (0.6.9):
+  - TZImagePickerController (3.3.1)
+  - WFApplyArea (0.7.0):
     - IQKeyboardManager
     - MJRefresh
     - TZImagePickerController
@@ -38,7 +38,7 @@ PODS:
     - WYAutoLayout
   - WFHomeAddress (0.1.5):
     - MJExtension
-  - WFKitLogin (0.7.3):
+  - WFKitLogin (0.7.5):
     - dsBridge
     - MJExtension
     - MJRefresh
@@ -88,16 +88,16 @@ EXTERNAL SOURCES:
 SPEC CHECKSUMS:
   AFNetworking: 7864c38297c79aaca1500c33288e429c3451fdce
   dsBridge: 48b62ee8a411ad601a88d6f6c8cf6cb634b206b7
-  IQKeyboardManager: 72b359cd7e777e3a984cedbe05f8da45320cbb63
+  IQKeyboardManager: 3a8b9e603f8b0eeaf5f096a1f2b2cfcf121992ef
   MJExtension: 635f2c663dcb1bf76fa4b715b2570a5710aec545
-  MJRefresh: 72a46ecaa2a0feaf48fc5198dff95f25f8bb27c6
+  MJRefresh: 3153c59a363159092c08b2177ec3a7d09f90bfaf
   SDWebImage: 48b88379b798fd1e4298f95bb25d2cdabbf4deb3
   SVProgressHUD: 1428aafac632c1f86f62aa4243ec12008d7a51d6
-  TZImagePickerController: 821b81f83594a736e831a018f2a2ce31822ddf0b
-  WFApplyArea: 531828e3323374599406dd2858af124ff338dc42
+  TZImagePickerController: 99f03b64145a8c92c55b9b1b931410967d9be4cb
+  WFApplyArea: b7d9e2f4b5144b0c75511573c791ed8ef5c99200
   WFBasics: 590f1608ff327f298915addd8f6ff3f0895e636e
   WFHomeAddress: 4eb27df8a873af9161d147f8b10a1d50ba725467
-  WFKitLogin: 56ff0f2cb60e8795db5e065b2e99b260c3dddced
+  WFKitLogin: eedb84aa4b2496a594e01bc3316d26db55a21d23
   WFKitMain: 0e163d1f90cb99b4007d486f892f165773194800
   WFShopMall: a85c332626fb0af451a8b57aee969c20ddab9c65
   WKFunComponents: 359e5059c096338eee60fee1d7146b701ed30372

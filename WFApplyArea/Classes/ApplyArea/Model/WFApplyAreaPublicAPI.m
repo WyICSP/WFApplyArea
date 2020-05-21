@@ -10,8 +10,10 @@
 #import "WFMyAreaViewController.h"
 #import "WFMyChargePileViewController.h"
 #import "WFCreditPayViewController.h"
+#import "WFCurrentWebViewController.h"
 #import "WFApplyAreaViewController.h"
 #import "WFShareHelpTool.h"
+#import "WKSetting.h"
 
 @implementation WFApplyAreaPublicAPI
 
@@ -62,6 +64,14 @@
         [controller.navigationController pushViewController:cred animated:YES];
     }
     
+}
+
+/// 打开社区服务
++ (void)gotoCommunityServicePageWithController:(UIViewController *)controller {
+    WFCurrentWebViewController *web = [[WFCurrentWebViewController alloc] init];
+    web.urlString = [NSString stringWithFormat:@"%@yzc-app-partner/#/service/index",H5_HOST];
+    web.hidesBottomBarWhenPushed = YES;
+    [controller.navigationController pushViewController:web animated:YES];
 }
 
 @end
