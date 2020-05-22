@@ -71,7 +71,7 @@
 
 #pragma mark 私有方法
 - (void)setUI {
-    self.title = @"我的充电桩";
+    self.title = @"我的设备";
     self.type = self.myType = 0;
     self.view.backgroundColor = UIColorFromRGB(0xF5F5F5);
     //设置按钮

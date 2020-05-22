@@ -19,6 +19,9 @@
 #pragma mark 生命周期
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    [self deleteWebCache];
+    
     if ([self.urlString containsString:@"yzc-app-partner/#/service/index"]) {
         [self.dwebview addJavascriptObject:[[IncomeJsApiTest alloc] init] namespace:nil];
     }else {

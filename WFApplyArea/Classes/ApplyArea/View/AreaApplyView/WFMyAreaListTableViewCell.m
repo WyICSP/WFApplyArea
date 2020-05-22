@@ -48,12 +48,12 @@ static NSString *const cellId = @"WFMyAreaListTableViewCell";
     self.address.text = model.groupAddress;
     //事件
     self.time.text = model.createTime;
-    
+        
     if (model.isInstall) {
         // 如果是首次安装
         if (model.auditStatus != 2) {
             self.qrBtn.hidden = NO;
-            [self.qrBtn setTitle:@"二维码" forState:0];
+            [self.qrBtn setTitle:@"首次安装" forState:0];
             self.qrBtn.tag = 100;
         } else {
             self.qrBtn.hidden = YES;
