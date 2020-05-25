@@ -14,6 +14,7 @@
 #import "WFAreaDetailViewController.h"
 #import "UITableView+YFExtension.h"
 #import "SVProgressHUD+YFHud.h"
+#import "UIButton+GradientLayer.h"
 #import "WFMyAreaListModel.h"
 #import "WFApplyAreaDataTool.h"
 #import "WFUpgradeAreaData.h"
@@ -460,10 +461,9 @@
         confirmBtn.frame = CGRectMake(15.0f, 7.5, ScreenWidth-30.0f, 40.0f);
         [confirmBtn setTitle:[self btnTitle] forState:UIControlStateNormal];
         [confirmBtn addTarget:self action:@selector(clickConfirmBtn) forControlEvents:UIControlEventTouchUpInside];
+        [confirmBtn setGradientLayerWithColors:@[UIColorFromRGB(0xFF6D22),UIColorFromRGB(0xFF7E3D)] cornerRadius:20.0f gradientType:WFButtonGradientTypeLeftToRight];
         confirmBtn.titleLabel.font = [UIFont boldSystemFontOfSize:16.0f];
         [confirmBtn setTitleColor:UIColor.whiteColor forState:UIControlStateNormal];
-        confirmBtn.backgroundColor = UIColorFromRGB(0xF78556);
-        confirmBtn.layer.cornerRadius = 20.0f;
         [_bottomView addSubview:confirmBtn];
         [self.view addSubview:_bottomView];
     }

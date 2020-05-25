@@ -32,7 +32,7 @@ PODS:
     - WFKitMain
     - WFShopMall
     - WKFunComponents
-  - WFBasics (0.3.7):
+  - WFBasics (0.3.8):
     - AFNetworking
     - SVProgressHUD
     - WYAutoLayout
@@ -95,7 +95,7 @@ SPEC CHECKSUMS:
   SVProgressHUD: 1428aafac632c1f86f62aa4243ec12008d7a51d6
   TZImagePickerController: 99f03b64145a8c92c55b9b1b931410967d9be4cb
   WFApplyArea: b7d9e2f4b5144b0c75511573c791ed8ef5c99200
-  WFBasics: 590f1608ff327f298915addd8f6ff3f0895e636e
+  WFBasics: 3dfc51f53a5770bf82deb9307cb394139da9a35a
   WFHomeAddress: 4eb27df8a873af9161d147f8b10a1d50ba725467
   WFKitLogin: eedb84aa4b2496a594e01bc3316d26db55a21d23
   WFKitMain: 0e163d1f90cb99b4007d486f892f165773194800

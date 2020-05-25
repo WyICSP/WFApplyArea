@@ -19,6 +19,7 @@
 #import "WFDefaultChargeFeeModel.h"
 #import "WFApplyAreaOtherConfigModel.h"
 #import "WFApplyAreaFeeExplanView.h"
+#import "UIButton+GradientLayer.h"
 #import "WFApplyAreaHeadView.h"
 #import "WFApplyAreaFooterView.h"
 #import "WFApplyAreaDataTool.h"
@@ -640,12 +641,11 @@
         _bottomView.backgroundColor = UIColor.whiteColor;
         UIButton *nextBtn = [UIButton buttonWithType:UIButtonTypeSystem];
         nextBtn.frame = CGRectMake(15.0f, 7.5, ScreenWidth-30.0f, 40.0f);
-        [nextBtn setTitle:@"提交" forState:UIControlStateNormal];
         [nextBtn addTarget:self action:@selector(clickNextBtn) forControlEvents:UIControlEventTouchUpInside];
-        nextBtn.titleLabel.font = [UIFont boldSystemFontOfSize:16.0f];
+        [nextBtn setGradientLayerWithColors:@[UIColorFromRGB(0xFF6D22),UIColorFromRGB(0xFF7E3D)] cornerRadius:20.0f gradientType:WFButtonGradientTypeLeftToRight];
         [nextBtn setTitleColor:UIColor.whiteColor forState:UIControlStateNormal];
-        nextBtn.layer.cornerRadius = 20.0f;
-        nextBtn.backgroundColor = UIColorFromRGB(0xF78556);
+        nextBtn.titleLabel.font = [UIFont boldSystemFontOfSize:16.0f];
+        [nextBtn setTitle:@"提交" forState:UIControlStateNormal];
         [_bottomView addSubview:nextBtn];
         [self.view addSubview:_bottomView];
     }

@@ -7,6 +7,7 @@
 
 #import "WFMoreEquViewController.h"
 #import "WFMoveEquItemTableViewCell.h"
+#import "UIButton+GradientLayer.h"
 #import "WFMoveEquSectionView.h"
 #import "WFApplyAreaDataTool.h"
 #import "WFMoveEquHeadView.h"
@@ -176,9 +177,8 @@
         UILabel *lbl = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, 10.0f)];
         lbl.backgroundColor = UIColorFromRGB(0xF5F5F5);
         UIButton *btn = [[UIButton alloc] initWithFrame:CGRectMake(15, 17.5, ScreenWidth-30, 40.0f)];
-        btn.backgroundColor = UIColorFromRGB(0xFF6D22);
         [btn addTarget:self action:@selector(removeEqu:) forControlEvents:UIControlEventTouchUpInside];
-        btn.layer.cornerRadius = 20.0f;
+        [btn setGradientLayerWithColors:@[UIColorFromRGB(0xFF6D22),UIColorFromRGB(0xFF7E3D)] cornerRadius:20.0f gradientType:WFButtonGradientTypeLeftToRight];
         [btn setTitle:@"确定移入" forState:0];
         [_bottomView addSubview:lbl];
         [_bottomView addSubview:btn];

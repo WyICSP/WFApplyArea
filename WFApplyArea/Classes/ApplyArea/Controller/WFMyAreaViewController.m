@@ -14,6 +14,7 @@
 #import <IQKeyboardManager/IQKeyboardManager.h>
 #import "WFMyAreaSearchHeadView.h"
 #import "WFMoreEquViewController.h"
+#import "UIButton+GradientLayer.h"
 #import "WFApplyAreaDataTool.h"
 #import "WFMyAreaListModel.h"
 #import "WFMyAreaQRCodeView.h"
@@ -233,10 +234,9 @@
         applyBtn.frame = CGRectMake(15.0f, 7.5, ScreenWidth-30.0f, 40.0f);
         [applyBtn setTitle:@"申请片区" forState:UIControlStateNormal];
         [applyBtn addTarget:self action:@selector(clickApplyBtn) forControlEvents:UIControlEventTouchUpInside];
+        [applyBtn setGradientLayerWithColors:@[UIColorFromRGB(0xFF6D22),UIColorFromRGB(0xFF7E3D)] cornerRadius:20.0f gradientType:WFButtonGradientTypeLeftToRight];
         applyBtn.titleLabel.font = [UIFont boldSystemFontOfSize:16.0f];
         [applyBtn setTitleColor:UIColor.whiteColor forState:UIControlStateNormal];
-        applyBtn.backgroundColor = UIColorFromRGB(0xF78556);
-        applyBtn.layer.cornerRadius = 20.0f;
         _bottomView.hidden = self.partnerRole == 3;
         [_bottomView addSubview:applyBtn];
         [self.view addSubview:_bottomView];

@@ -43,7 +43,7 @@
                                     </connections>
                                 </button>
                                 <button opaque="NO" tag="20" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Rce-fg-wgi">
-                                    <rect key="frame" x="271" y="48" width="40" height="40"/>
+                                    <rect key="frame" x="283" y="48" width="40" height="40"/>
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     <state key="normal" image="WFApplyArea.bundle/new_msg"/>
                                     <connections>
@@ -62,7 +62,7 @@
                                 <constraint firstItem="6Dj-3r-bVe" firstAttribute="height" secondItem="bvK-Xc-g6r" secondAttribute="height" id="fwT-j6-GgY"/>
                                 <constraint firstAttribute="height" constant="88" id="mo4-YH-hOH"/>
                                 <constraint firstItem="Rce-fg-wgi" firstAttribute="centerY" secondItem="bvK-Xc-g6r" secondAttribute="centerY" id="vOc-oH-Qwt"/>
-                                <constraint firstItem="6Dj-3r-bVe" firstAttribute="leading" secondItem="Rce-fg-wgi" secondAttribute="trailing" constant="12" id="wRM-Sb-Fdk"/>
+                                <constraint firstItem="6Dj-3r-bVe" firstAttribute="leading" secondItem="Rce-fg-wgi" secondAttribute="trailing" id="wRM-Sb-Fdk"/>
                             </constraints>
                         </view>
                         <imageView clipsSubviews="YES" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="WFApplyArea.bundle/defalut_logo" translatesAutoresizingMaskIntoConstraints="NO" id="FaW-om-pRr">
