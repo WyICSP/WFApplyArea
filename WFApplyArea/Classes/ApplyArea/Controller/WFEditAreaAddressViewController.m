@@ -8,6 +8,7 @@
 
 #import "WFEditAreaAddressViewController.h"
 #import "WFSingleFeeViewController.h"
+#import "UIButton+GradientLayer.h"
 #import "WFApplyAreaDataTool.h"
 #import "WFUpgradeAreaModel.h"
 #import "YFAddressPickView.h"
@@ -58,6 +59,9 @@
     self.contentsView.layer.cornerRadius = 10.0f;
     self.saveBtn.layer.cornerRadius = 20.0f;
     self.bottomHeight.constant = 55.0f + SafeAreaBottom;
+    
+    [self.saveBtn setGradientLayerWithColors:@[UIColorFromRGB(0xFF6D22),UIColorFromRGB(0xFF7E3D)] cornerRadius:20.0f gradientType:WFButtonGradientTypeLeftToRight withSize:CGSizeMake(ScreenWidth-30.0f, 40.0f)];
+    
     self.view.backgroundColor = UIColorFromRGB(0xF5F5F5);
     //设置底部按钮
     [self.saveBtn setTitle:self.type == WFEditAddressAreaDetailType ? @"确认修改" : @"下一步(1/7)" forState:0];
