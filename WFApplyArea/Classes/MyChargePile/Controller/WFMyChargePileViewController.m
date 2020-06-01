@@ -132,7 +132,10 @@
     self.titles = @[normalPileTitle,abnormalPileTitle,notInstallPileTitle];
     //设置头部选中状态
     self.cpView.model = self.models;
+    // 刷新页面
     [self.tableView reloadData];
+    // 赋值
+    self.pHeadView.models = self.models;
 }
 
 /// 搜索充电桩
@@ -301,7 +304,6 @@
 - (WFMyChargePileHeadView *)pHeadView {
     if (!_pHeadView) {
         _pHeadView = [[[NSBundle bundleForClass:[self class]] loadNibNamed:@"WFMyChargePileHeadView" owner:nil options:nil] firstObject];
-        _pHeadView.models = self.models;
         _pHeadView.frame = CGRectMake(0, 0, ScreenWidth, KHeight(85.0f));
         _pHeadView.autoresizingMask = 0;
         [self.view addSubview:_pHeadView];

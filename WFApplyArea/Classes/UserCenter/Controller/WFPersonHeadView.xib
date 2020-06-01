@@ -23,7 +23,7 @@
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Lj8-qL-32b">
                             <rect key="frame" x="0.0" y="0.0" width="375" height="88"/>
                             <subviews>
-                                <button opaque="NO" tag="10" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bvK-Xc-g6r">
+                                <button hidden="YES" opaque="NO" tag="10" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bvK-Xc-g6r">
                                     <rect key="frame" x="12" y="48" width="40" height="40"/>
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     <constraints>
@@ -194,6 +194,7 @@
                 <outlet property="bottomView" destination="lvm-J5-DjF" id="mLw-CG-Yq4"/>
                 <outlet property="imgView" destination="FaW-om-pRr" id="Ji1-MF-LAr"/>
                 <outlet property="infoView" destination="Umk-XG-R6a" id="KqS-Gc-84J"/>
+                <outlet property="leftBtn" destination="bvK-Xc-g6r" id="m9H-d0-OVB"/>
                 <outlet property="mesBtn" destination="Rce-fg-wgi" id="Ers-Yg-8gu"/>
                 <outlet property="name" destination="FgC-Yr-pnN" id="R4p-vp-NVc"/>
                 <outlet property="phone" destination="dQz-xB-460" id="Pa9-ug-PJz"/>

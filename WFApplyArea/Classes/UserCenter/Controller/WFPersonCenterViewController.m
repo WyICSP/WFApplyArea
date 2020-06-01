@@ -65,6 +65,10 @@
     [self getUserUnReadMessage];
     // 获取数据
     [self getUserInfo];
+    
+    // 如果等于 3 的话不显示客服
+    NSString *partnerRole = [NSString stringWithFormat:@"%@",[YFUserDefaults objectForKey:@"partnerRole"]];
+    self.headView.leftBtn.hidden = [partnerRole integerValue] == 3 ? YES : NO;
 }
 
 - (void)viewWillDisappear:(BOOL)animated {

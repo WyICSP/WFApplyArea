@@ -19,6 +19,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property (weak, nonatomic) IBOutlet UIView *bottomView;
 ///  图片
 @property (weak, nonatomic) IBOutlet UIImageView *imgView;
+/// 客服按钮
+@property (weak, nonatomic) IBOutlet UIButton *leftBtn;
 /// 名字
 @property (weak, nonatomic) IBOutlet UILabel *name;
 /// 手机号
