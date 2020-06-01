@@ -38,7 +38,7 @@ PODS:
     - WYAutoLayout
   - WFHomeAddress (0.1.5):
     - MJExtension
-  - WFKitLogin (0.7.5):
+  - WFKitLogin (0.7.6):
     - dsBridge
     - MJExtension
     - MJRefresh
@@ -97,7 +97,7 @@ SPEC CHECKSUMS:
   WFApplyArea: b7d9e2f4b5144b0c75511573c791ed8ef5c99200
   WFBasics: 3dfc51f53a5770bf82deb9307cb394139da9a35a
   WFHomeAddress: 4eb27df8a873af9161d147f8b10a1d50ba725467
-  WFKitLogin: eedb84aa4b2496a594e01bc3316d26db55a21d23
+  WFKitLogin: 52568ecdfb76e34456bbd83fd2260c523cdd75e7
   WFKitMain: 0e163d1f90cb99b4007d486f892f165773194800
   WFShopMall: a85c332626fb0af451a8b57aee969c20ddab9c65
   WKFunComponents: 359e5059c096338eee60fee1d7146b701ed30372

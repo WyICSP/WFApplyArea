@@ -14,6 +14,8 @@
 #import "WFBaseWebViewController.h"
 #import "YFMediatorManager+WFLogin.h"
 #import "WFHomeWebViewController.h"
+#import "WFNewHomeTodayDescView.h"
+#import "WFNewHomeAssetsDsecView.h"
 #import "WFLoginPublicAPI.h"
 #import "WFHomeDataTool.h"
 #import "WFNewHomeModel.h"
@@ -37,8 +39,14 @@
 @property (nonatomic, strong, nullable) WFNewHomeModel *assetsInfoModel;
 /// 客服
 @property (nonatomic, strong, nullable) WFNewHomeServiceModel *cModel;
+/// 进入说明弹出
+@property (nonatomic, strong, nullable) WFNewHomeTodayDescView *descView;
+/// 插座说明
+@property (nonatomic, strong, nullable) WFNewHomeAssetsDsecView *assetsDesView;
 /// 菜单
 @property (nonatomic, strong, nullable) MLMenuView *menuView;
+/// 淘宝链接
+@property (nonatomic, copy, nullable) NSString *paySkipUrl;
 /// 合伙人身份
 @property (nonatomic, assign) NSInteger partnerRole;
 ///是否可以侧滑
@@ -108,6 +116,7 @@
     [WFHomeDataTool getHomeTotalIncomeWithParams:@{} resultBlock:^(WFNewHomeIncomeModel * _Nonnull models) {
         @strongify(self)
         self.headView.model = models;
+        self.paySkipUrl = models.paySkipUrl;
         [self.scrollView.mj_header endRefreshing];
     } failureBlock:^{
         @strongify(self)
@@ -225,6 +234,12 @@
     }else if (index == 90) {
         //申请片区
         [YFMediatorManager gotoAppleAreaCtrlWithController:self];
+    }else if (index == 91) {
+        //打开浏览器
+        if (self.paySkipUrl.length != 0)
+            [self jumpToAnotherApp];
+//            [[UIApplication sharedApplication] openURL:[NSURL URLWithString:self.paySkipUrl]];
+        
     }else if (index == 100 || index == 110) {
         //总收入 充电收入
         WFHomeWebViewController *web = [[WFHomeWebViewController alloc] init];
@@ -239,8 +254,15 @@
     }else if (index == 140) {
         //商城收入
         [YFMediatorManager gotoCommunityServicePageWithController:self];
+    }else if (index == 180) {
+        // 收入说明
+        [[WFPopTool sharedInstance] popView:self.descView animated:YES];
+    }else if (index == 190) {
+        // 资产说明
+        [[WFPopTool sharedInstance] popView:self.assetsDesView animated:YES];
     }
 }
+
 
 // 客服
 - (void)leftImageButtonClick:(UIButton *)sender {
@@ -249,6 +271,30 @@
         [self.menuView showMenuEnterAnimation:MLEnterAnimationStyleRight];
     }else {
         [self.menuView hidMenuExitAnimation:MLEnterAnimationStyleRight];
+    }
+}
+
+/// 跳转到淘宝
+- (void)jumpToAnotherApp {
+    NSArray *pathArray = [self.paySkipUrl componentsSeparatedByString:@"//"];
+    NSString *path;
+    if (pathArray.count != 0)
+        path = [NSString stringWithFormat:@"tbopen://%@",pathArray.lastObject];
+    
+    NSURL *url = [NSURL URLWithString:path];
+    BOOL isCanOpen = [[UIApplication sharedApplication] canOpenURL:url];
+    if (isCanOpen) {
+        #ifdef NSFoundationVersionNumber_iOS_10_0
+            [[UIApplication sharedApplication] openURL:url options:@{} completionHandler:^(BOOL success) {
+                
+            }];
+        #else
+            [[UIApplication sharedApplication] openURL:url];
+        #endif
+        DLog(@"App1打开App2");
+    }else{
+        DLog(@"设备没有安装App2");
+        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:self.paySkipUrl]];
     }
 }
 
@@ -342,6 +388,7 @@
 - (WFNewHomeAppleAreaView *)applyView {
     if (!_applyView) {
         _applyView = [[[NSBundle bundleForClass:[self class]] loadNibNamed:@"WFNewHomeAppleAreaView" owner:nil options:nil] firstObject];
+        _applyView.hidden = YES;
         _applyView.frame = CGRectMake(0, self.assetsView.maxY + 10.0f, ScreenWidth, 75.0f);
         @weakify(self)
         _applyView.clickAreaEventBlock = ^(NSInteger index) {
@@ -371,6 +418,28 @@
         };
     }
     return _menuView;
+}
+
+/// 今日收益说明
+- (WFNewHomeTodayDescView *)descView {
+    if (!_descView) {
+        _descView = [[[NSBundle bundleForClass:[self class]] loadNibNamed:@"WFNewHomeTodayDescView" owner:nil options:nil] firstObject];
+        _descView.clickDissaperBlock = ^{
+            [[WFPopTool sharedInstance] closeAnimated:YES];
+        };
+    }
+    return _descView;
+}
+
+/// 插座说明
+- (WFNewHomeAssetsDsecView *)assetsDesView {
+    if (!_assetsDesView) {
+        _assetsDesView = [[[NSBundle bundleForClass:[self class]] loadNibNamed:@"WFNewHomeAssetsDsecView" owner:nil options:nil] firstObject];
+        _assetsDesView.clickDissaperBlock = ^{
+            [[WFPopTool sharedInstance] closeAnimated:YES];
+        };
+    }
+    return _assetsDesView;
 }
 
 /**
