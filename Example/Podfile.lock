@@ -23,7 +23,7 @@ PODS:
   - SDWebImage/Core (5.7.4)
   - SVProgressHUD (2.2.5)
   - TZImagePickerController (3.3.1)
-  - WFApplyArea (0.7.0):
+  - WFApplyArea (0.7.1):
     - IQKeyboardManager
     - MJRefresh
     - TZImagePickerController
@@ -94,7 +94,7 @@ SPEC CHECKSUMS:
   SDWebImage: 48b88379b798fd1e4298f95bb25d2cdabbf4deb3
   SVProgressHUD: 1428aafac632c1f86f62aa4243ec12008d7a51d6
   TZImagePickerController: 99f03b64145a8c92c55b9b1b931410967d9be4cb
-  WFApplyArea: b7d9e2f4b5144b0c75511573c791ed8ef5c99200
+  WFApplyArea: 812aa846f83d91667ccca6199b046c1db79fc3dd
   WFBasics: 3dfc51f53a5770bf82deb9307cb394139da9a35a
   WFHomeAddress: 4eb27df8a873af9161d147f8b10a1d50ba725467
   WFKitLogin: 52568ecdfb76e34456bbd83fd2260c523cdd75e7
