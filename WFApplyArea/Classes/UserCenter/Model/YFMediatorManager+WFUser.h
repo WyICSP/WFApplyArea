@@ -38,6 +38,9 @@ NS_ASSUME_NONNULL_BEGIN
 /// 扫描二维码
 + (NSString *)scanQRCode;
 
+/// 打开地图
++ (void)openChooseMap;
+
 @end
 
 NS_ASSUME_NONNULL_END

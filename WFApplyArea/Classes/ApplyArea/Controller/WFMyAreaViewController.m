@@ -113,13 +113,24 @@
 - (void)getSearchAreaListWithKey:(NSString *)key {
     NSMutableDictionary *params = [NSMutableDictionary dictionary];
     [params safeSetObject:key forKey:@"code"];
+    
     @weakify(self)
-    [WFApplyAreaDataTool getSearchAreaListWithParams:params resultBlock:^(NSArray<WFMyAreaListModel *> * _Nonnull models) {
+    [WFApplyAreaDataTool getMyApplyAreaListWithParams:params resultBlock:^(NSArray<WFMyAreaListModel *> * _Nonnull models) {
         @strongify(self)
         self.searchModels = models;
         self.isBeginEdit = YES;
         [self.tableView reloadData];
+    } failBlock:^{
+        
     }];
+    
+//    @weakify(self)
+//    [WFApplyAreaDataTool getSearchAreaListWithParams:params resultBlock:^(NSArray<WFMyAreaListModel *> * _Nonnull models) {
+//        @strongify(self)
+//        self.searchModels = models;
+//        self.isBeginEdit = YES;
+//        [self.tableView reloadData];
+//    }];
 }
 
 /**

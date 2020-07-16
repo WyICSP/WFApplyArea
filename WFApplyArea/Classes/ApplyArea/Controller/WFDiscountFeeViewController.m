@@ -257,13 +257,25 @@
     NSMutableDictionary *params = [NSMutableDictionary dictionary];
     [params safeSetObject:key forKey:@"code"];
     [params safeSetObject:self.applyGroupId forKey:@"groupId"];
+    [params safeSetObject:@(self.pageNo) forKey:@"pageNo"];
+    [params safeSetObject:@(100) forKey:@"pageSize"];
     @weakify(self)
-    [WFApplyAreaDataTool getSearchVipListWithParams:params resultBlock:^(NSArray<WFGroupVipUserModel *> * _Nonnull models) {
+    [WFApplyAreaDataTool getVipUserWithParams:params resultBlock:^(NSArray<WFGroupVipUserModel *> * _Nonnull models) {
         @strongify(self)
         self.vipSearchData = models;
         self.isBeginEdit = self.tableView.mj_header.hidden = YES;
         [self.tableView reloadData];
+    } failBlock:^{
+        @strongify(self)
+        [self.tableView.mj_footer endRefreshing];
     }];
+//    @weakify(self)
+//    [WFApplyAreaDataTool getSearchVipListWithParams:params resultBlock:^(NSArray<WFGroupVipUserModel *> * _Nonnull models) {
+//        @strongify(self)
+//        self.vipSearchData = models;
+//        self.isBeginEdit = self.tableView.mj_header.hidden = YES;
+//        [self.tableView reloadData];
+//    }];
 }
 
 #pragma mark 完成

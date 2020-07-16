@@ -25,7 +25,7 @@
 + (void)getMyChargePileWithParams:(NSDictionary *)params
                       resultBlock:(void(^)(WFMyChargePileModel *models))resultBlock {
     //接口地址
-    NSString *path = [NSString stringWithFormat:@"%@app-partner/home/cdz/queryMyCdz",NEW_HOST_URL];
+    NSString *path = [NSString stringWithFormat:@"%@yzsh-partner-apply/V1/partnerCharging/queryMyCdz",NEW_HOST_URL];
     [WKRequest getWithURLString:path parameters:params isShowHud:YES success:^(WKBaseModel *baseModel) {
         if (CODE_ZERO) {
             resultBlock([WFMyChargePileModel mj_objectWithKeyValues:baseModel.data]);
@@ -40,7 +40,7 @@
 + (void)getAbnormalPileListWithParams:(NSDictionary *)params
                           resultBlock:(void(^)(NSArray <WFAbnormalPileListModel *> *models))resultBlock {
     //接口地址
-    NSString *path = [NSString stringWithFormat:@"%@app-partner/home/cdz/queryAbnormalGroup",NEW_HOST_URL];
+    NSString *path = [NSString stringWithFormat:@"%@yzsh-partner-apply/V1/partnerCharging/abnormalGroupDetails",NEW_HOST_URL];
     [WKRequest getWithURLString:path parameters:params isShowHud:YES success:^(WKBaseModel *baseModel) {
         if (CODE_ZERO) {
             resultBlock([WFAbnormalPileListModel mj_objectArrayWithKeyValuesArray:baseModel.data]);
@@ -55,7 +55,7 @@
 + (void)getAreaPilesignalIntensitWithParams:(NSDictionary *)params
                                 resultBlock:(void(^)(NSArray <WFSignleIntensityListModel *> *models))resultBlock {
     //接口地址
-    NSString *path = [NSString stringWithFormat:@"%@app-partner/home/cdz/queryGroup",NEW_HOST_URL];
+    NSString *path = [NSString stringWithFormat:@"%@yzsh-partner-apply/V1/partnerCharging/groupDetails",NEW_HOST_URL];
     [WKRequest getWithURLString:path parameters:params isShowHud:YES success:^(WKBaseModel *baseModel) {
         if (CODE_ZERO) {
             resultBlock([WFSignleIntensityListModel mj_objectArrayWithKeyValuesArray:baseModel.data]);

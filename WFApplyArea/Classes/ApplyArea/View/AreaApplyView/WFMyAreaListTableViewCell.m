@@ -52,7 +52,7 @@ static NSString *const cellId = @"WFMyAreaListTableViewCell";
     if (model.isInstall) {
         // 如果是首次安装
         if (model.auditStatus != 2) {
-            self.qrBtn.hidden = NO;
+            self.qrBtn.hidden = YES;
             [self.qrBtn setTitle:@"首次安装" forState:0];
             self.qrBtn.tag = 100;
         } else {

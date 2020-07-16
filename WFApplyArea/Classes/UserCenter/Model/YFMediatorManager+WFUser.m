@@ -35,5 +35,12 @@
     return msg;
 }
 
+/// 打开地图
++ (void)openChooseMap {
+    [self performTarget:@"WFPushPublicAPI" action:@"openMap" params:nil isRequiredReturnValue:NO];
+}
+
+
+
 
 @end

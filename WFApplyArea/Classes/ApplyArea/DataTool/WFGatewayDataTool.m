@@ -96,7 +96,7 @@
 + (void)getSearchGatewayListWithParams:(NSDictionary *)params
                            resultBlock:(void(^)(NSArray <WFGatewayListModel *> *models))resultBlock {
     //接口地址
-    NSString *path = [NSString stringWithFormat:@"%@app-partner/loraTemplate/searchBycode",NEW_HOST_URL];
+    NSString *path = [NSString stringWithFormat:@"%@yzsh-partner-apply/V1/partnerCharging/searchByCode",NEW_HOST_URL];
     [WKRequest postWithURLString:path parameters:params isJson:YES isShowHud:YES success:^(WKBaseModel *baseModel) {
         if (CODE_ZERO) {
             resultBlock([WFGatewayListModel mj_objectArrayWithKeyValuesArray:baseModel.data]);
@@ -112,7 +112,7 @@
 + (void)getSearchCDZBycodeWithParams:(NSDictionary *)params
                          resultBlock:(void(^)(NSDictionary *dict))resultBlock {
     //接口地址
-    NSString *path = [NSString stringWithFormat:@"%@app-partner/loraTemplate/searchCDZBycode",NEW_HOST_URL];
+    NSString *path = [NSString stringWithFormat:@"%@yzsh-partner-apply/V1/partnerCharging/searchCharge",NEW_HOST_URL];
     [WKRequest postWithURLString:path parameters:params isJson:YES isShowHud:YES success:^(WKBaseModel *baseModel) {
         if (CODE_ZERO) {
             resultBlock(baseModel.mDictionary);

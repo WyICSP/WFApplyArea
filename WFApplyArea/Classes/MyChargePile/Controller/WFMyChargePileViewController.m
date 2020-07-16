@@ -167,21 +167,21 @@
         //搜索的关键字
         self.numSearchKey = self.searchKeys;
         //搜索数据
-        self.searchNomDatas = [WFMyCdzListListModel mj_objectArrayWithKeyValuesArray:[[dict safeJsonObjForKey:@"data"] safeJsonObjForKey:@"param"]];
+        self.searchNomDatas = [WFMyCdzListListModel mj_objectArrayWithKeyValuesArray:[[dict safeJsonObjForKey:@"data"] safeJsonObjForKey:@"groupCharginglists"]];
     }else if (self.type == 1) {
         self.isabmSearch = YES;
         self.isNomSearch = self.isNoInsSearch = NO;
         //搜索的关键字
         self.abmSearchKey = self.searchKeys;
         //搜索数据
-        self.searchAbnormalDatas = [WFAbnormalCdzListModel mj_objectArrayWithKeyValuesArray:[[dict safeJsonObjForKey:@"data"] safeJsonObjForKey:@"param"]];
+        self.searchAbnormalDatas = [WFAbnormalCdzListModel mj_objectArrayWithKeyValuesArray:[[dict safeJsonObjForKey:@"data"] safeJsonObjForKey:@"groupCharginglists"]];
     }else if (self.type == 2) {
         self.isNoInsSearch = YES;
         self.isNomSearch = self.isabmSearch = NO;
         //搜索的关键字
         self.noInsSearchKey = self.searchKeys;
         //搜索数据
-        self.searchNoInstallDatas = [WFNotInstalledCdzListModel mj_objectArrayWithKeyValuesArray:[[dict safeJsonObjForKey:@"data"] safeJsonObjForKey:@"param"]];
+        self.searchNoInstallDatas = [WFNotInstalledCdzListModel mj_objectArrayWithKeyValuesArray:[[dict safeJsonObjForKey:@"data"] safeJsonObjForKey:@"groupCharginglists"]];
     }
     [self.tableView reloadData];
 }
@@ -265,19 +265,19 @@
         [self.navigationController pushViewController:abnor animated:YES];
     }else if (self.models.isSelectPile) {
         WFMyCdzListListModel *model = self.isNomSearch ? self.searchNomDatas[indexPath.row] : self.models.myCdzListList[indexPath.row];
-        if (model.isNew) {
+//        if (model.isNew) {
             //新片区
             WFAreaDetailViewController *detail = [[WFAreaDetailViewController alloc] init];
             detail.groupId = model.groupId;
             detail.jumpType = WFAreaDetailJumpPileType;
             [self.navigationController pushViewController:detail animated:YES];
-        }else {
-            //老片区
-            WFCurrentWebViewController *web = [[WFCurrentWebViewController alloc] init];
-            web.urlString = [NSString stringWithFormat:@"%@yzc-app-partner-old/page/areaInfoSetmeals.html?code=%@",H5_HOST,model.groupId];
-            web.title = @"片区详情";
-            [self.navigationController pushViewController:web animated:YES];
-        }
+//        }else {
+//            //老片区
+//            WFCurrentWebViewController *web = [[WFCurrentWebViewController alloc] init];
+//            web.urlString = [NSString stringWithFormat:@"%@yzc-app-partner-old/page/areaInfoSetmeals.html?code=%@",H5_HOST,model.groupId];
+//            web.title = @"片区详情";
+//            [self.navigationController pushViewController:web animated:YES];
+//        }
     }
 }
 

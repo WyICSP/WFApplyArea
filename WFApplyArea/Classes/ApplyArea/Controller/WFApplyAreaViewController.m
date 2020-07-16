@@ -83,6 +83,9 @@
     [self getChargeMthod];
     //其他设置的默认配置
     [self getOtherDefaultConfig];
+    
+    // 选择地址的回调
+    [YFNotificationCenter addObserver:self selector:@selector(addressInfo:) name:@"MapAddressKeys" object:nil];
 }
 
 /**
@@ -171,6 +174,8 @@
         return;
     }
     
+    [params safeSetObject:self.addressModel.changingGroupLon forKey:@"changingGroupLon"];
+    [params safeSetObject:self.addressModel.chargingGroupLat forKey:@"chargingGroupLat"];
     //合伙人分成设置
     [params safeSetObject:[self partnerPropInfos] forKey:@"partnerPropInfos"];
     //起步价
@@ -501,7 +506,7 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.section == 0) {
-        return ISIPHONEX ? KHeight(120.0f) + 8.0f : KHeight(120.0f);
+        return ISIPHONEX ? KHeight(80.0f) + 8.0f : KHeight(80.0f);
     }else if (indexPath.section == 4) {
         return KHeight(94.0f);
     }
@@ -612,6 +617,19 @@
     cell.selectImg.hidden = !isShow;
 }
 
+- (void)addressInfo:(NSNotification *)notification {
+    NSDictionary *dict = notification.userInfo;
+    DLog(@"---收到地址%@",dict);
+    self.addressModel.address = [NSString stringWithFormat:@"%@",[dict safeJsonObjForKey:@"address"]];
+    self.addressModel.addressId = [NSString stringWithFormat:@"%@",[dict safeJsonObjForKey:@"code"]];
+    self.addressModel.changingGroupLon = [NSString stringWithFormat:@"%@",[dict safeJsonObjForKey:@"changingGroupLon"]];
+    self.addressModel.chargingGroupLat = [NSString stringWithFormat:@"%@",[dict safeJsonObjForKey:@"chargingGroupLat"]];
+    [self.tableView reloadData];
+}
+
+- (void)dealloc {
+    [YFNotificationCenter removeObserver:self name:@"MapAddressKeys" object:nil];
+}
 
 #pragma mark get set
 - (UITableView *)tableView {
