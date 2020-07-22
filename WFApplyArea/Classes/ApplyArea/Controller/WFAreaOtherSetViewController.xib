@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="15702" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="16096" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15704"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16086"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -119,13 +119,13 @@
                         <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="请填写6-12的正整数" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RXM-7i-DOl">
                             <rect key="frame" x="302.5" y="76.5" width="75.5" height="10"/>
                             <fontDescription key="fontDescription" type="system" pointSize="8"/>
-                            <color key="textColor" red="0.92549019610000005" green="0.50588235290000005" blue="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <color key="textColor" red="1" green="0.74117647060000003" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                             <nil key="highlightedColor"/>
                         </label>
                         <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="请输入0-1的正整数" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="doe-Zy-aqS">
                             <rect key="frame" x="307" y="108" width="71" height="10"/>
                             <fontDescription key="fontDescription" type="system" pointSize="8"/>
-                            <color key="textColor" red="0.92549019610000005" green="0.50588235290000005" blue="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <color key="textColor" red="1" green="0.74117647060000003" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                             <nil key="highlightedColor"/>
                         </label>
                     </subviews>
@@ -159,14 +159,14 @@
                     </constraints>
                 </view>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iKC-6r-Oci">
-                    <rect key="frame" x="0.0" y="818" width="414" height="44"/>
-                    <color key="backgroundColor" red="0.92549019610000005" green="0.50588235290000005" blue="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <rect key="frame" x="15" y="818" width="384" height="44"/>
+                    <color key="backgroundColor" red="1" green="0.74117647060000003" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="44" id="UMG-FN-FH4"/>
                     </constraints>
                     <fontDescription key="fontDescription" type="boldSystem" pointSize="16"/>
                     <state key="normal" title="下一步（7/7）">
-                        <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="titleColor" red="0.12941176469999999" green="0.12941176469999999" blue="0.12941176469999999" alpha="1" colorSpace="calibratedRGB"/>
                     </state>
                     <connections>
                         <action selector="clickSubmitBtn:" destination="-1" eventType="touchUpInside" id="cjw-KN-zRT"/>
@@ -176,8 +176,8 @@
             <color key="backgroundColor" red="0.96078431372549022" green="0.96078431372549022" blue="0.96078431372549022" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
                 <constraint firstItem="Q8z-4Z-XC2" firstAttribute="top" secondItem="Q5M-cg-NOt" secondAttribute="top" constant="10" id="IAg-Zg-upW"/>
-                <constraint firstItem="Q5M-cg-NOt" firstAttribute="trailing" secondItem="iKC-6r-Oci" secondAttribute="trailing" id="JSI-Xs-zQ1"/>
-                <constraint firstItem="iKC-6r-Oci" firstAttribute="leading" secondItem="Q5M-cg-NOt" secondAttribute="leading" id="VDq-qS-Uu4"/>
+                <constraint firstItem="Q5M-cg-NOt" firstAttribute="trailing" secondItem="iKC-6r-Oci" secondAttribute="trailing" constant="15" id="JSI-Xs-zQ1"/>
+                <constraint firstItem="iKC-6r-Oci" firstAttribute="leading" secondItem="Q5M-cg-NOt" secondAttribute="leading" constant="15" id="VDq-qS-Uu4"/>
                 <constraint firstItem="Q5M-cg-NOt" firstAttribute="trailing" secondItem="Q8z-4Z-XC2" secondAttribute="trailing" constant="12" id="Vkk-R0-1fP"/>
                 <constraint firstItem="Q8z-4Z-XC2" firstAttribute="leading" secondItem="Q5M-cg-NOt" secondAttribute="leading" constant="12" id="piN-Ye-Fop"/>
                 <constraint firstItem="Q5M-cg-NOt" firstAttribute="bottom" secondItem="iKC-6r-Oci" secondAttribute="bottom" id="vUG-QN-VDN"/>

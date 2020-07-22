@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="16096" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16086"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="WFNewUserHeadView">
+            <rect key="frame" x="0.0" y="0.0" width="414" height="225"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nLr-A2-8bq">
+                    <rect key="frame" x="0.0" y="0.0" width="414" height="90"/>
+                    <subviews>
+                        <imageView clipsSubviews="YES" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="new_default_photo" translatesAutoresizingMaskIntoConstraints="NO" id="jxs-9X-mf3">
+                            <rect key="frame" x="22" y="15" width="60" height="60"/>
+                            <constraints>
+                                <constraint firstAttribute="width" secondItem="jxs-9X-mf3" secondAttribute="height" multiplier="1:1" id="DMm-Xe-wVe"/>
+                                <constraint firstAttribute="width" constant="60" id="Gyb-rx-RAJ"/>
+                            </constraints>
+                        </imageView>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="默认昵称" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="v80-yF-4Lz">
+                            <rect key="frame" x="92" y="25" width="302" height="20"/>
+                            <fontDescription key="fontDescription" type="boldSystem" pointSize="16"/>
+                            <color key="textColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="手机号" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kzn-tY-4RG">
+                            <rect key="frame" x="92" y="53" width="37" height="15"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                            <color key="textColor" red="0.40000000000000002" green="0.40000000000000002" blue="0.40000000000000002" alpha="1" colorSpace="calibratedRGB"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                    </subviews>
+                    <constraints>
+                        <constraint firstItem="v80-yF-4Lz" firstAttribute="leading" secondItem="jxs-9X-mf3" secondAttribute="trailing" constant="10" id="76v-Fh-gxM"/>
+                        <constraint firstItem="jxs-9X-mf3" firstAttribute="centerY" secondItem="nLr-A2-8bq" secondAttribute="centerY" id="Fjv-qF-iTl"/>
+                        <constraint firstAttribute="trailing" secondItem="v80-yF-4Lz" secondAttribute="trailing" constant="20" id="Q5I-Xe-26Q"/>
+                        <constraint firstItem="kzn-tY-4RG" firstAttribute="leading" secondItem="v80-yF-4Lz" secondAttribute="leading" id="T1f-Jk-hqE"/>
+                        <constraint firstItem="kzn-tY-4RG" firstAttribute="top" secondItem="v80-yF-4Lz" secondAttribute="bottom" constant="8" id="ewa-o2-qmF"/>
+                        <constraint firstAttribute="height" constant="90" id="fm6-zT-uZ1"/>
+                        <constraint firstItem="v80-yF-4Lz" firstAttribute="top" secondItem="jxs-9X-mf3" secondAttribute="top" constant="10" id="j6k-GW-4oQ"/>
+                        <constraint firstItem="jxs-9X-mf3" firstAttribute="leading" secondItem="nLr-A2-8bq" secondAttribute="leading" constant="22" id="lNb-Gk-54U"/>
+                    </constraints>
+                </view>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="UN7-cK-KPs">
+                    <rect key="frame" x="15" y="90" width="384" height="120"/>
+                    <subviews>
+                        <imageView clipsSubviews="YES" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="WFApplyArea.bundle/new_balance" translatesAutoresizingMaskIntoConstraints="NO" id="ipe-Na-u0V">
+                            <rect key="frame" x="0.0" y="0.0" width="384" height="120"/>
+                        </imageView>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cSH-gf-ynl">
+                            <rect key="frame" x="357" y="54" width="7" height="12"/>
+                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="7" id="2Qj-rG-0jG"/>
+                                <constraint firstAttribute="height" constant="12" id="dkq-Mg-k1u"/>
+                            </constraints>
+                            <state key="normal" image="WFApplyArea.bundle/new_white_next">
+                                <color key="titleColor" red="1" green="0.53333333333333333" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
+                            </state>
+                            <connections>
+                                <action selector="clickBtn:" destination="iN0-l3-epB" eventType="touchUpInside" id="4Bc-3R-ntR"/>
+                            </connections>
+                        </button>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0.0" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jBV-xU-Kez">
+                            <rect key="frame" x="25" y="60" width="54" height="41"/>
+                            <fontDescription key="fontDescription" type="boldSystem" pointSize="34"/>
+                            <color key="textColor" red="0.12941176469999999" green="0.12941176469999999" blue="0.12941176469999999" alpha="1" colorSpace="calibratedRGB"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="我的钱包(元)" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ODi-lt-1bG">
+                            <rect key="frame" x="25" y="30" width="94" height="20"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                            <color key="textColor" red="0.12941176469999999" green="0.12941176469999999" blue="0.12941176469999999" alpha="1" colorSpace="calibratedRGB"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                    </subviews>
+                    <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                    <constraints>
+                        <constraint firstAttribute="bottom" secondItem="ipe-Na-u0V" secondAttribute="bottom" id="39Q-of-9XB"/>
+                        <constraint firstItem="ipe-Na-u0V" firstAttribute="leading" secondItem="UN7-cK-KPs" secondAttribute="leading" id="6dr-Az-00N"/>
+                        <constraint firstItem="jBV-xU-Kez" firstAttribute="leading" secondItem="ODi-lt-1bG" secondAttribute="leading" id="Die-Wd-IGg"/>
+                        <constraint firstAttribute="height" constant="120" id="MRX-Xh-bCT"/>
+                        <constraint firstAttribute="trailing" secondItem="cSH-gf-ynl" secondAttribute="trailing" constant="20" id="RNw-Sj-iha"/>
+                        <constraint firstItem="ipe-Na-u0V" firstAttribute="top" secondItem="UN7-cK-KPs" secondAttribute="top" id="S4b-zU-n8v"/>
+                        <constraint firstItem="ODi-lt-1bG" firstAttribute="centerY" secondItem="UN7-cK-KPs" secondAttribute="centerY" constant="-20" id="Tbu-Yg-gm1"/>
+                        <constraint firstItem="jBV-xU-Kez" firstAttribute="top" secondItem="ODi-lt-1bG" secondAttribute="bottom" constant="10" id="iuz-BU-Rb3"/>
+                        <constraint firstItem="ODi-lt-1bG" firstAttribute="leading" secondItem="UN7-cK-KPs" secondAttribute="leading" constant="25" id="ubd-uM-4ZF"/>
+                        <constraint firstItem="cSH-gf-ynl" firstAttribute="centerY" secondItem="UN7-cK-KPs" secondAttribute="centerY" id="uez-Dr-2mf"/>
+                        <constraint firstAttribute="trailing" secondItem="ipe-Na-u0V" secondAttribute="trailing" id="umV-Us-wt2"/>
+                    </constraints>
+                </view>
+            </subviews>
+            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstItem="UN7-cK-KPs" firstAttribute="top" secondItem="nLr-A2-8bq" secondAttribute="bottom" id="A1K-iP-8M6"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="nLr-A2-8bq" secondAttribute="trailing" id="SNu-No-UnZ"/>
+                <constraint firstItem="nLr-A2-8bq" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="bkd-4U-176"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="UN7-cK-KPs" secondAttribute="trailing" constant="15" id="h7P-4M-7CB"/>
+                <constraint firstItem="nLr-A2-8bq" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="i1S-hF-qqs"/>
+                <constraint firstItem="UN7-cK-KPs" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="15" id="zuN-aP-Zjn"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
+            <connections>
+                <outlet property="balance" destination="jBV-xU-Kez" id="E9j-zX-qcd"/>
+                <outlet property="balanceBgImg" destination="ipe-Na-u0V" id="INv-xi-NAl"/>
+                <outlet property="name" destination="v80-yF-4Lz" id="LaO-OO-Asu"/>
+                <outlet property="phone" destination="kzn-tY-4RG" id="VMe-Av-vch"/>
+                <outlet property="rechargeBtn" destination="cSH-gf-ynl" id="3Iq-YP-B8S"/>
+                <outlet property="userPhoto" destination="jxs-9X-mf3" id="U20-7X-abj"/>
+            </connections>
+            <point key="canvasLocation" x="-284.05797101449275" y="85.714285714285708"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="WFApplyArea.bundle/new_balance" width="128" height="128"/>
+        <image name="WFApplyArea.bundle/new_white_next" width="128" height="128"/>
+        <image name="new_default_photo" width="60" height="61"/>
+    </resources>
+</document>

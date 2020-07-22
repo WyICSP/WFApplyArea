@@ -12,8 +12,6 @@ NS_ASSUME_NONNULL_BEGIN
 @interface WFUserCenterModel : NSObject
 /// 活动金
 @property (nonatomic, strong) NSNumber *activityPrice;
-/// 余额
-@property (nonatomic, strong) NSNumber *price;
 /// 合伙人
 @property (nonatomic, assign) NSInteger adminNum;
 /// 点哈
@@ -22,8 +20,10 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, copy) NSString *nickname;
 /// 头像
 @property (nonatomic, copy) NSString *headUrl;
+/// 余额
+@property (nonatomic, copy) NSString *price;
 /// 是否是管理合伙人
-@property (nonatomic, assign) BOOL isManage;
+@property (nonatomic, assign) BOOL isManager;
 @end
 
 @interface WFMineCustomerServicModel : NSObject

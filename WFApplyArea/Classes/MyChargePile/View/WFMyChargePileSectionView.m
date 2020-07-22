@@ -33,15 +33,15 @@
     
     if (model.isSelectPile) {
         //选中我的充电桩
-        [self.leftBtn setTitleColor:UIColor.whiteColor forState:0];
+        [self.leftBtn setTitleColor:UIColorFromRGB(0x212121) forState:0];
         self.leftBtn.backgroundColor = NavColor;
     }else if (model.isSelectAbnormalPile) {
         //选中异常充电桩
-        [self.centerBtn setTitleColor:UIColor.whiteColor forState:0];
+        [self.centerBtn setTitleColor:UIColorFromRGB(0x212121) forState:0];
         self.centerBtn.backgroundColor = NavColor;
     }else if (model.isNoInstallPile) {
         //选中未安装充电桩
-        [self.rightBtn setTitleColor:UIColor.whiteColor forState:0];
+        [self.rightBtn setTitleColor:UIColorFromRGB(0x212121) forState:0];
         self.rightBtn.backgroundColor = NavColor;
     }
 }

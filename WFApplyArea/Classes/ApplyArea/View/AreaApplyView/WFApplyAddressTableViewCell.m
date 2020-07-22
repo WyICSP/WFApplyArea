@@ -29,8 +29,8 @@ static NSString *const cellId = @"WFApplyAddressTableViewCell";
 - (void)awakeFromNib {
     [super awakeFromNib];
     self.selectionStyle = 0;
-    self.addressBtn.titleLabel.adjustsFontSizeToFitWidth = YES;
-    self.addressBtn.titleLabel.minimumScaleFactor = 0.5;
+    self.addressLbl.adjustsFontSizeToFitWidth = YES;
+    self.addressLbl.minimumScaleFactor = 0.5;
     self.contentsView.backgroundColor = UIColor.clearColor;
     [self.contentsView setRounderCornerWithRadius:10.0f rectCorner:WFRadiusRectCornerBottomLeft | WFRadiusRectCornerBottomRight imageColor:UIColor.whiteColor size:CGSizeMake(ScreenWidth-24.0f, ISIPHONEX ? KHeight(80.0f) + 8.0f : KHeight(80.0f))];
 }
@@ -64,13 +64,9 @@ static NSString *const cellId = @"WFApplyAddressTableViewCell";
 - (void)setModel:(WFApplyAreaAddressModel *)model {
     _model = model;
     if (model.address.length != 0) {
-        [self.addressBtn setTitle:model.address forState:UIControlStateNormal];
-        [self.addressBtn setTitleColor:UIColorFromRGB(0x333333) forState:0];
+        self.addressLbl.text = model.address;
+        self.addressLbl.textColor = UIColorFromRGB(0x333333);
     }
-    
-//    if (model.detailAddress.length != 0) {
-//        self.detailAddressTF.text = model.detailAddress;
-//    }
     
     if (model.areaName.length != 0) {
         self.areaTF.text = model.areaName;
@@ -78,12 +74,7 @@ static NSString *const cellId = @"WFApplyAddressTableViewCell";
 }
 
 - (IBAction)textFieldDidChange:(UITextField *)textField {
-    if (textField == self.detailAddressTF) {
-        if (textField == self.detailAddressTF && textField.text.length > 50)
-            textField.text = [textField.text substringWithRange:NSMakeRange(0, 50)];
-        
-        self.model.detailAddress = textField.text;
-    }else if (textField == self.areaTF) {
+     if (textField == self.areaTF) {
         if (textField == self.areaTF && textField.text.length > 30)
             textField.text = [textField.text substringWithRange:NSMakeRange(0, 30)];
         

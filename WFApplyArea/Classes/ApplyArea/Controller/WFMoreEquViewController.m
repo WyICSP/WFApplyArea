@@ -178,8 +178,9 @@
         lbl.backgroundColor = UIColorFromRGB(0xF5F5F5);
         UIButton *btn = [[UIButton alloc] initWithFrame:CGRectMake(15, 17.5, ScreenWidth-30, 40.0f)];
         [btn addTarget:self action:@selector(removeEqu:) forControlEvents:UIControlEventTouchUpInside];
-        [btn setGradientLayerWithColors:@[UIColorFromRGB(0xFF6D22),UIColorFromRGB(0xFF7E3D)] cornerRadius:20.0f gradientType:WFButtonGradientTypeLeftToRight];
+        [btn setGradientLayerWithColors:@[UIColorFromRGB(0xFFBD00),UIColorFromRGB(0xFFCF00)] cornerRadius:20.0f gradientType:WFButtonGradientTypeLeftToRight];
         [btn setTitle:@"确定移入" forState:0];
+        [btn setTitleColor:UIColorFromRGB(0x212121) forState:UIControlStateNormal];
         [_bottomView addSubview:lbl];
         [_bottomView addSubview:btn];
     }

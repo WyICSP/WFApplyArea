@@ -9,6 +9,7 @@
 #import "WFEditAreaAddressViewController.h"
 #import "WFSingleFeeViewController.h"
 #import "UIButton+GradientLayer.h"
+#import "YFMediatorManager+WFUser.h"
 #import "WFApplyAreaDataTool.h"
 #import "WFUpgradeAreaModel.h"
 #import "YFAddressPickView.h"
@@ -26,6 +27,8 @@
 @property (weak, nonatomic) IBOutlet UIButton *addressBtn;
 /**详细地址*/
 @property (weak, nonatomic) IBOutlet UITextField *detailAddressTF;
+@property (weak, nonatomic) IBOutlet UILabel *addressLbl;
+
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *bottomHeight;
 
 /**片名*/
@@ -60,7 +63,7 @@
     self.saveBtn.layer.cornerRadius = 20.0f;
     self.bottomHeight.constant = 55.0f + SafeAreaBottom;
     
-    [self.saveBtn setGradientLayerWithColors:@[UIColorFromRGB(0xFF6D22),UIColorFromRGB(0xFF7E3D)] cornerRadius:20.0f gradientType:WFButtonGradientTypeLeftToRight withSize:CGSizeMake(ScreenWidth-30.0f, 40.0f)];
+    [self.saveBtn setGradientLayerWithColors:@[UIColorFromRGB(0xFFBD00),UIColorFromRGB(0xFFCF00)] cornerRadius:20.0f gradientType:WFButtonGradientTypeLeftToRight withSize:CGSizeMake(ScreenWidth-30.0f, 40.0f)];
     
     self.view.backgroundColor = UIColorFromRGB(0xF5F5F5);
     //设置底部按钮
@@ -73,12 +76,13 @@
         [self getChargeMthod];
     }else {
         //赋值
-        [self.addressBtn setTitleColor:UIColorFromRGB(0x333333) forState:0];
-        [self.addressBtn setTitle:self.models.areaName forState:0];
-        self.detailAddressTF.text = self.models.address;
+        self.addressLbl.text = self.models.address;
         self.areaNameTF.text = self.models.name;
         self.areaId = self.models.areaId;
     }
+    
+    // 选择地址的回调
+    [YFNotificationCenter addObserver:self selector:@selector(addressInfo:) name:@"MapAddressKeys" object:nil];
 }
 
 /**
@@ -150,16 +154,27 @@
  */
 - (IBAction)chooseAddressBtn:(id)sender {
     [self.view endEditing:YES];
-    YFAddressPickView *addressPickView = [YFAddressPickView shareInstance];
-    addressPickView.addressDatas = [[WFHomeSaveDataTool shareInstance] readAddressFile];
-    WS(weakSelf)
-    addressPickView.startPlaceBlock = ^(NSString *address, NSString *addressId) {
-        DLog(@"地址=%@-addressId=%@",address,addressId);
-        weakSelf.areaId = addressId;
-        [weakSelf.addressBtn setTitle:address forState:UIControlStateNormal];
-        [weakSelf.addressBtn setTitleColor:UIColorFromRGB(0x333333) forState:0];
-    };
-    [YFWindow addSubview:addressPickView];
+//    YFAddressPickView *addressPickView = [YFAddressPickView shareInstance];
+//    addressPickView.addressDatas = [[WFHomeSaveDataTool shareInstance] readAddressFile];
+//    WS(weakSelf)
+//    addressPickView.startPlaceBlock = ^(NSString *address, NSString *addressId) {
+//        DLog(@"地址=%@-addressId=%@",address,addressId);
+//        weakSelf.areaId = addressId;
+//        [weakSelf.addressBtn setTitle:address forState:UIControlStateNormal];
+//        [weakSelf.addressBtn setTitleColor:UIColorFromRGB(0x333333) forState:0];
+//    };
+//    [YFWindow addSubview:addressPickView];
+    
+    
+    /// 选择地图
+    [YFMediatorManager openChooseMap];
+}
+
+- (void)addressInfo:(NSNotification *)notification {
+    NSDictionary *dict = notification.userInfo;
+    DLog(@"---收到地址%@",dict);
+    self.addressLbl.text = [NSString stringWithFormat:@"%@",[dict safeJsonObjForKey:@"address"]];
+    self.areaId = [NSString stringWithFormat:@"%@",[dict safeJsonObjForKey:@"code"]];
 }
 
 /**
@@ -192,7 +207,7 @@
 
 - (NSDictionary *)addressMsg {
     NSMutableDictionary *params = [NSMutableDictionary dictionary];
-    [params safeSetObject:self.detailAddressTF.text forKey:@"address"];
+    [params safeSetObject:self.addressLbl.text forKey:@"address"];
     [params safeSetObject:self.areaId forKey:@"areaId"];
     [params safeSetObject:self.models.groupId forKey:@"groupId"];
     [params safeSetObject:self.areaNameTF.text forKey:@"name"];

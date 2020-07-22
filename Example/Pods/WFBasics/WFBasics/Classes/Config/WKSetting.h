@@ -38,7 +38,7 @@
 //#define H5_HOST             @"http://dev.jx9n.cn/"
 ////趣商城 链接 测试
 //#define H5_SHOP_URL         @"http://39.106.62.16/"
-//
+
 ////老接口域名 正式
 //#define HOST_URL          @"http://yzcapp.jx9n.com/api/"
 ////新接口域名 正式

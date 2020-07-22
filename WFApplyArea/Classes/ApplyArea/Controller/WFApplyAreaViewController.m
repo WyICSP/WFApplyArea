@@ -119,8 +119,6 @@
     NSString *alertMsg = @"";
     if ([NSString isBlankString:self.addressModel.addressId]) {
         alertMsg = @"请选择省市区";
-    }else if ([NSString isBlankString:self.addressModel.detailAddress]) {
-        alertMsg = @"请填写详细地址";
     }else if ([NSString isBlankString:self.addressModel.areaName]) {
         alertMsg = @"请输入市+区+小区名";
     }else if (!self.singleFeeData) {
@@ -137,7 +135,7 @@
     }
     
     NSMutableDictionary *params = [NSMutableDictionary dictionary];
-    [params safeSetObject:self.addressModel.detailAddress forKey:@"address"];//详细地址
+    [params safeSetObject:self.addressModel.address forKey:@"address"];//详细地址
     [params safeSetObject:self.addressModel.addressId forKey:@"areaId"];//区的 Id
     [params safeSetObject:self.addressModel.areaName forKey:@"name"];//片区名
     [params safeSetObject:[self billingPlanIds] forKey:@"billingPlanIds"];//计费方式数组
@@ -660,8 +658,8 @@
         UIButton *nextBtn = [UIButton buttonWithType:UIButtonTypeSystem];
         nextBtn.frame = CGRectMake(15.0f, 7.5, ScreenWidth-30.0f, 40.0f);
         [nextBtn addTarget:self action:@selector(clickNextBtn) forControlEvents:UIControlEventTouchUpInside];
-        [nextBtn setGradientLayerWithColors:@[UIColorFromRGB(0xFF6D22),UIColorFromRGB(0xFF7E3D)] cornerRadius:20.0f gradientType:WFButtonGradientTypeLeftToRight];
-        [nextBtn setTitleColor:UIColor.whiteColor forState:UIControlStateNormal];
+        [nextBtn setGradientLayerWithColors:@[UIColorFromRGB(0xFFBD00),UIColorFromRGB(0xFFCF00)] cornerRadius:20.0f gradientType:WFButtonGradientTypeLeftToRight];
+        [nextBtn setTitleColor:UIColorFromRGB(0x212121) forState:UIControlStateNormal];
         nextBtn.titleLabel.font = [UIFont boldSystemFontOfSize:16.0f];
         [nextBtn setTitle:@"提交" forState:UIControlStateNormal];
         [_bottomView addSubview:nextBtn];

@@ -11,6 +11,7 @@
 #import "YFMediatorManager+WFUser.h"
 #import "WFShareHelpTool.h"
 #import "NSString+Regular.h"
+#import "SKSafeObject.h"
 #import "dsbridge.h"
 #import "YFKeyWindow.h"
 #import "UserData.h"
@@ -30,6 +31,10 @@
     return ISIPHONEX ? @"1" : @"0";
 }
 
+- (void)getToken:(NSString *)msg :(JSCallback) completionHandler
+{
+    completionHandler([UserData userInfo].token,YES);
+}
 
 /**返回*/
 - (void)goBack:(NSString *)msg :(JSCallback) completionHandler
@@ -66,6 +71,35 @@
     [WFUserCenterPublicAPI openSystemAlbumWithType:WFUpdatePhotoModHeadType resultBlock:^(NSString * _Nonnull photoData) {
         completionHandler(photoData,YES);
     }];
+}
+
+/// 新版上传头像
+- (void)upLoadImg:(NSString *)msg :(JSCallback) completionHandler
+{
+    NSDictionary *dict = (NSDictionary *)msg;
+    if ([dict isKindOfClass:[NSDictionary class]]) {
+        NSString *type = [NSString stringWithFormat:@"%@",[dict safeJsonObjForKey:@"params"]];
+        if ([type isEqualToString:@"camera"]) {
+            // 拍照
+            [WFUserCenterPublicAPI openSystemCameraWithType:WFUpdatePhotoFeedbackType resyltBlock:^(NSString * _Nonnull photoData) {
+                NSMutableDictionary *params = [NSMutableDictionary dictionary];
+                [params safeSetObject:@(YES) forKey:@"success"];
+                [params safeSetObject:photoData forKey:@"data"];
+                NSString *result = [NSString dictionTransformationJson:params];
+                completionHandler(result,YES);
+            }];
+        } else {
+            // 相机
+            [WFUserCenterPublicAPI openSystemAlbumWithType:WFUpdatePhotoFeedbackType resultBlock:^(NSString * _Nonnull photoData) {
+                NSMutableDictionary *params = [NSMutableDictionary dictionary];
+                [params safeSetObject:@(YES) forKey:@"success"];
+                [params safeSetObject:photoData forKey:@"data"];
+                NSString *result = [NSString dictionTransformationJson:params];
+                completionHandler(result,YES);
+            }];
+        }
+        
+    }
 }
 
 /**联系客服*/

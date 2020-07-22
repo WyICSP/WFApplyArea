@@ -67,7 +67,7 @@
     sureBtn.frame = CGRectMake(kScreenWidth - 80, 0, 80, navigationViewHeight);
     [sureBtn setTitle:@"确定" forState:UIControlStateNormal];
     sureBtn.titleLabel.font = [UIFont systemFontOfSize:15];
-    [sureBtn setTitleColor:[UIColor colorWithRed:247.0/255.0 green:133.0/255.0 blue:86.0/255.0 alpha:1] forState:UIControlStateNormal];
+    [sureBtn setTitleColor:[UIColor colorWithRed:255.0/255.0 green:189.0/255.0 blue:0/255.0 alpha:1] forState:UIControlStateNormal];
     [sureBtn addTarget:self action:@selector(tapButton:) forControlEvents:UIControlEventTouchUpInside];
     [_navigationView addSubview:sureBtn];
     

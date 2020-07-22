@@ -50,7 +50,7 @@
 + (void)getVerificationCodeWithParams:(NSDictionary *)params
                           resultBlock:(void(^)(void))resultBlock {
     //接口地址
-    NSString *path = [NSString stringWithFormat:@"%@app-partner/loginTemplate/getCode",NEW_HOST_URL];
+    NSString *path = [NSString stringWithFormat:@"%@yzsh-system/v1/sms/send/code",NEW_HOST_URL];
     [WKRequest postWithURLString:path parameters:params isJson:YES isShowHud:YES success:^(WKBaseModel *baseModel) {
         if (CODE_ZERO) {
             resultBlock();
@@ -113,7 +113,7 @@
 + (void)getAddressDataWithParams:(NSDictionary *)params
                      resultBlock:(void(^)(NSArray *models))resultBlock {
     //接口地址
-    NSString *path = [NSString stringWithFormat:@"%@yzsh-system/v1/region/list",NEW_HOST_URL];
+    NSString *path = [NSString stringWithFormat:@"%@app-partner-group/v1/area/get/area",NEW_HOST_URL];
     [WKRequest getWithURLString:path parameters:params isShowHud:NO success:^(WKBaseModel *baseModel) {
         if (CODE_ZERO) {
             resultBlock((NSArray *)baseModel.data);
