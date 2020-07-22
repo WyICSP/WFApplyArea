@@ -63,10 +63,8 @@
     [self getUserUnReadMessage];
     // 获取数据
     [self getUserInfo];
-
-    // 如果等于 3 的话不显示客服
-    NSString *partnerRole = [NSString stringWithFormat:@"%@",[YFUserDefaults objectForKey:@"partnerRole"]];
-    self.leftImageBtn.hidden = [partnerRole integerValue] == 2 ? YES : NO;
+    // 获取客服数据
+    [self getCustomerServic];
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
@@ -91,14 +89,15 @@
     self.titles = [self titles];
     // 昨天客服
     [self addLeftImageBtn:@"new_service"];
+    self.leftImageBtn.width = 40;
+    self.leftImageBtn.hidden = YES;
     
     [self addRightItems:2 rightItem1Name:@"new_setting" isImage1:YES rightItem2:@"new_msg" isImage2:YES];
     self.rightItem1.width = 48;
     self.rightItem2.width = 48;
     
     [self.tableView reloadData];
-    // 获取客服数据
-    [self getCustomerServic];
+    
 }
 
 /// 获取数据
@@ -145,8 +144,9 @@
     [WFMyChargePileDataTool getCustomerServiceWithParams:@{} resultBlock:^(WFMineCustomerServicModel * _Nonnull cModel) {
         @strongify(self)
         self.cModel = cModel;
-        self.cModel.customerMobile = cModel.customerMobile.length == 0 ? @"4003231232" : cModel.customerMobile;
-        self.cModel.customerServiceUrl = cModel.customerServiceUrl.length == 0 ? @"https://chat.sobot.com/chat/h5/v2/index.html?sysnum=5671d20094344db1abd7c0386cdbd5a8&source=2" : cModel.customerServiceUrl;
+        if (![NSString isBlankString:self.cModel.customerMobile] && ![NSString isBlankString:self.cModel.customerServiceUrl]) {
+           self.leftImageBtn.hidden = NO;
+        }
     }];
 }
 

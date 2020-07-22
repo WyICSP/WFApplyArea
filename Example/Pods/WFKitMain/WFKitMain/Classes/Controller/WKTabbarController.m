@@ -42,7 +42,7 @@
     
     WKNavigationController *nav             = [[WKNavigationController alloc] initWithRootViewController:vc];
     nav.tabBarItem                          = [[UITabBarItem alloc] initWithTitle:title image:[UIImage imageNamed:normalImageName] selectedImage:[UIImage imageNamed:selectedImageName]];
-    nav.tabBarItem.titlePositionAdjustment  = UIOffsetMake(0.0f, -3.0f);
+    nav.tabBarItem.titlePositionAdjustment  = UIOffsetMake(0.0f, 1.0f);
     [self addChildViewController:nav];
     
 }

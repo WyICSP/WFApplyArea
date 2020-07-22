@@ -85,10 +85,6 @@
     }
 }
 
-- (UIStatusBarStyle)preferredStatusBarStyle {
-    return UIStatusBarStyleLightContent;
-}
-
 #pragma mark 接口
 + (instancetype)shareInstance {
     static WFLoginViewController *login;
@@ -120,7 +116,7 @@
     //倒计时初始值
     self.countIndex = 60;
     //获取地址信息
-    if ([[WFHomeSaveDataTool shareInstance] readAddressFile].count == 0) [self getAddress];
+//    if ([[WFHomeSaveDataTool shareInstance] readAddressFile].count == 0) [self getAddress];
     
 }
 
@@ -261,7 +257,7 @@
  */
 - (void)userEnableBtn {
     [self.codeButton setTitle:@"获取验证码" forState:UIControlStateNormal];
-    [self.codeButton setTitleColor:UIColorFromRGB(0xF78556) forState:0];
+    [self.codeButton setTitleColor:NavColor forState:0];
     self.codeButton.userInteractionEnabled = YES;
     self.countIndex = 60;
 }

@@ -46,7 +46,7 @@ PODS:
     - WFHomeAddress
     - WFKitMain
     - WKFunComponents
-  - WFKitMain (0.2.9):
+  - WFKitMain (1.0.0):
     - dsBridge
     - WFBasics
   - WFShopMall (0.4.1):
@@ -98,7 +98,7 @@ SPEC CHECKSUMS:
   WFBasics: ce22e064d209a5ddc43b0077be6817bbfbd7f7fe
   WFHomeAddress: 4eb27df8a873af9161d147f8b10a1d50ba725467
   WFKitLogin: c772410678baa09fafc8a84e634373c8f0fdae5d
-  WFKitMain: 0e163d1f90cb99b4007d486f892f165773194800
+  WFKitMain: 75c32ce43809b24179ae5a84324590ca1e4c6b76
   WFShopMall: a85c332626fb0af451a8b57aee969c20ddab9c65
   WKFunComponents: 359e5059c096338eee60fee1d7146b701ed30372
   WYAutoLayout: 7bc596f94be915e1f690f316ac859287c8ec9d51
