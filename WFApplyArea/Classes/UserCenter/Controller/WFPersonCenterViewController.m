@@ -394,7 +394,7 @@
  */
 - (UILabel *)countLbl {
     if (!_countLbl) {
-        _countLbl = [[UILabel alloc] initWithFrame:CGRectMake(19, 2, 10, 10)];
+        _countLbl = [[UILabel alloc] initWithFrame:CGRectMake(23, -4, 10, 10)];
         _countLbl.textColor = [UIColor whiteColor];
         _countLbl.backgroundColor = UIColorFromRGB(0xFC3712);
         _countLbl.layer.masksToBounds = YES;
@@ -402,7 +402,7 @@
         _countLbl.hidden = YES;
         _countLbl.font = [UIFont systemFontOfSize:9];
         _countLbl.textAlignment = NSTextAlignmentCenter;
-        [self.rightItem1 addSubview:_countLbl];
+        [self.rightItem2 addSubview:_countLbl];
     }
     return _countLbl;
 }
