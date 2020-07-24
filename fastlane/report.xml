@@ -5,47 +5,49 @@
     
     
       
-      <testcase classname="fastlane.lanes" name="0: cocoapods" time="8.385073">
+      <testcase classname="fastlane.lanes" name="0: cocoapods" time="16.314678">
         
       </testcase>
     
       
-      <testcase classname="fastlane.lanes" name="1: git_add" time="0.303693">
+      <testcase classname="fastlane.lanes" name="1: git_add" time="0.446774">
         
       </testcase>
     
       
-      <testcase classname="fastlane.lanes" name="2: git_commit" time="0.103732">
+      <testcase classname="fastlane.lanes" name="2: git_commit" time="0.137943">
         
       </testcase>
     
       
-      <testcase classname="fastlane.lanes" name="3: push_to_git_remote" time="5.86692">
+      <testcase classname="fastlane.lanes" name="3: push_to_git_remote" time="6.764051">
         
       </testcase>
     
       
-      <testcase classname="fastlane.lanes" name="4: git_tag_exists" time="0.01715">
+      <testcase classname="fastlane.lanes" name="4: git_tag_exists" time="0.013097">
         
       </testcase>
     
       
-      <testcase classname="fastlane.lanes" name="5: remove_tag" time="6.184289">
+      <testcase classname="fastlane.lanes" name="5: remove_tag" time="5.9049">
         
       </testcase>
     
       
-      <testcase classname="fastlane.lanes" name="6: add_git_tag" time="0.026423">
+      <testcase classname="fastlane.lanes" name="6: add_git_tag" time="0.019838">
         
       </testcase>
     
       
-      <testcase classname="fastlane.lanes" name="7: push_git_tags" time="6.387921">
+      <testcase classname="fastlane.lanes" name="7: push_git_tags" time="5.705045">
         
       </testcase>
     
       
-      <testcase classname="fastlane.lanes" name="8: pod_push" time="158.647107">
+      <testcase classname="fastlane.lanes" name="8: pod_push" time="520.904171">
+        
+          <failure message="/Users/wangyu/.rvm/gems/ruby-2.2.2@global/gems/fastlane-2.134.0/fastlane/lib/fastlane/actions/actions_helper.rb:48:in `execute_action'&#10;/Users/wangyu/.rvm/gems/ruby-2.2.2@global/gems/fastlane-2.134.0/fastlane/lib/fastlane/runner.rb:235:in `block in execute_action'&#10;/Users/wangyu/.rvm/gems/ruby-2.2.2@global/gems/fastlane-2.134.0/fastlane/lib/fastlane/runner.rb:227:in `chdir'&#10;/Users/wangyu/.rvm/gems/ruby-2.2.2@global/gems/fastlane-2.134.0/fastlane/lib/fastlane/runner.rb:227:in `execute_action'&#10;/Users/wangyu/.rvm/gems/ruby-2.2.2@global/gems/fastlane-2.134.0/fastlane/lib/fastlane/runner.rb:157:in `trigger_action_by_name'&#10;/Users/wangyu/.rvm/gems/ruby-2.2.2@global/gems/fastlane-2.134.0/fastlane/lib/fastlane/fast_file.rb:159:in `method_missing'&#10;Fastfile:43:in `block in parsing_binding'&#10;/Users/wangyu/.rvm/gems/ruby-2.2.2@global/gems/fastlane-2.134.0/fastlane/lib/fastlane/lane.rb:33:in `call'&#10;/Users/wangyu/.rvm/gems/ruby-2.2.2@global/gems/fastlane-2.134.0/fastlane/lib/fastlane/lane.rb:33:in `call'&#10;/Users/wangyu/.rvm/gems/ruby-2.2.2@global/gems/fastlane-2.134.0/fastlane/lib/fastlane/runner.rb:49:in `block in execute'&#10;/Users/wangyu/.rvm/gems/ruby-2.2.2@global/gems/fastlane-2.134.0/fastlane/lib/fastlane/runner.rb:45:in `chdir'&#10;/Users/wangyu/.rvm/gems/ruby-2.2.2@global/gems/fastlane-2.134.0/fastlane/lib/fastlane/runner.rb:45:in `execute'&#10;/Users/wangyu/.rvm/gems/ruby-2.2.2@global/gems/fastlane-2.134.0/fastlane/lib/fastlane/lane_manager.rb:56:in `cruise_lane'&#10;/Users/wangyu/.rvm/gems/ruby-2.2.2@global/gems/fastlane-2.134.0/fastlane/lib/fastlane/command_line_handler.rb:36:in `handle'&#10;/Users/wangyu/.rvm/gems/ruby-2.2.2@global/gems/fastlane-2.134.0/fastlane/lib/fastlane/commands_generator.rb:108:in `block (2 levels) in run'&#10;/Users/wangyu/.rvm/gems/ruby-2.2.2@global/gems/commander-fastlane-4.4.6/lib/commander/command.rb:178:in `call'&#10;/Users/wangyu/.rvm/gems/ruby-2.2.2@global/gems/commander-fastlane-4.4.6/lib/commander/command.rb:178:in `call'&#10;/Users/wangyu/.rvm/gems/ruby-2.2.2@global/gems/commander-fastlane-4.4.6/lib/commander/command.rb:153:in `run'&#10;/Users/wangyu/.rvm/gems/ruby-2.2.2@global/gems/commander-fastlane-4.4.6/lib/commander/runner.rb:476:in `run_active_command'&#10;/Users/wangyu/.rvm/rubies/ruby-2.2.2/lib/ruby/gems/2.2.0/gems/fastlane-2.134.0/fastlane_core/lib/fastlane_core/ui/fastlane_runner.rb:76:in `run!'&#10;/Users/wangyu/.rvm/gems/ruby-2.2.2@global/gems/commander-fastlane-4.4.6/lib/commander/delegates.rb:15:in `run!'&#10;/Users/wangyu/.rvm/gems/ruby-2.2.2@global/gems/fastlane-2.134.0/fastlane/lib/fastlane/commands_generator.rb:349:in `run'&#10;/Users/wangyu/.rvm/gems/ruby-2.2.2@global/gems/fastlane-2.134.0/fastlane/lib/fastlane/commands_generator.rb:41:in `start'&#10;/Users/wangyu/.rvm/gems/ruby-2.2.2@global/gems/fastlane-2.134.0/fastlane/lib/fastlane/cli_tools_distributor.rb:119:in `take_off'&#10;/Users/wangyu/.rvm/gems/ruby-2.2.2@global/gems/fastlane-2.134.0/bin/fastlane:23:in `&lt;top (required)&gt;'&#10;/Users/wangyu/.rvm/gems/ruby-2.2.2/bin/fastlane:23:in `load'&#10;/Users/wangyu/.rvm/gems/ruby-2.2.2/bin/fastlane:23:in `&lt;main&gt;'&#10;&#10;Exit status of command 'pod repo push WFSpecs 'WFApplyArea.podspec' --allow-warnings' was 1 instead of 0.&#10;&#10;Validating spec&#10; -&gt; WFApplyArea -&gt; WFApplyArea (1.0.0)&#10;    - ERROR | [iOS] unknown: Encountered an unknown error ([!] /usr/bin/git clone https://github.com/WyICSP/WFKitMain.git /var/folders/tb/4kcnkcd5703gmc9t7ps7fzz40000gn/T/d20200724-894-14ui8lf --template= --single-branch --depth 1 --branch 1.0.0&#10;&#10;Cloning into '/var/folders/tb/4kcnkcd5703gmc9t7ps7fzz40000gn/T/d20200724-894-14ui8lf'...&#10;fatal: unable to access 'https://github.com/WyICSP/WFKitMain.git/': Failed to connect to github.com port 443: Operation timed out&#10;) during validation.&#10;&#10;[!] The `WFApplyArea.podspec` specification does not validate.&#10;&#10;[!] Found multiple specifications for `WFKitMain (0.1.0)`:&#10;- /Users/wangyu/.cocoapods/repos/WFSpecs/WFKitMain/0.1.0/WFKitMain.podspec&#10;- /Users/wangyu/.cocoapods/repos/WKBaseSpecs/WFKitMain/0.1.0/WFKitMain.podspec&#10;&#10;[!] Found multiple specifications for `WKFunComponents (0.1.0)`:&#10;- /Users/wangyu/.cocoapods/repos/WFSpecs/WKFunComponents/0.1.0/WKFunComponents.podspec&#10;- /Users/wangyu/.cocoapods/repos/WKBaseSpecs/WKFunComponents/0.1.0/WKFunComponents.podspec&#10;" />
         
       </testcase>
     
