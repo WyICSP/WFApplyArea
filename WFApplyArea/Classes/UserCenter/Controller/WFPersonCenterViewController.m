@@ -372,7 +372,7 @@
     NSArray *images = @[@"new_pop_service",@"new_phone"];
     if (!_menuView) {
         _menuView = [[MLMenuView alloc] initWithFrame:CGRectMake(10, 0, 130, 44 * 4) WithTitles:titles WithImageNames:images WithMenuViewOffsetTop:NavHeight WithTriangleOffsetLeft:20];
-        _menuView.showType = WFShowNoHasNavBarType;
+        _menuView.showType = WFShowHasNavBarType;
         @weakify(self)
         _menuView.didSelectBlock = ^(NSInteger index) {
             @strongify(self)
@@ -381,7 +381,7 @@
         _menuView.dissaperBlock = ^{
             @strongify(self)
             // 设置按钮选中情况
-            self.isOpenService = NO;
+            self.leftImageBtn.selected = NO;
         };
     }
     return _menuView;

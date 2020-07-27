@@ -49,21 +49,21 @@ static NSString *const cellId = @"WFMyAreaListTableViewCell";
     //事件
     self.time.text = model.createTime;
         
-    if (model.isInstall) {
-        // 如果是首次安装
-        if (model.auditStatus != 2) {
-            self.qrBtn.hidden = YES;
-            [self.qrBtn setTitle:@"首次安装" forState:0];
-            self.qrBtn.tag = 100;
-        } else {
-            self.qrBtn.hidden = YES;
-        }
-    } else {
-        // 移入设备
-        [self.qrBtn setTitle:@"移入设备" forState:0];
-        self.qrBtn.tag = 110;
-        self.qrBtn.hidden = NO;
-    }
+//    if (model.isInstall) {
+//        // 如果是首次安装
+//        if (model.auditStatus != 2) {
+//            self.qrBtn.hidden = YES;
+//            [self.qrBtn setTitle:@"首次安装" forState:0];
+//            self.qrBtn.tag = 100;
+//        } else {
+//            self.qrBtn.hidden = YES;
+//        }
+//    } else {
+    // 移入设备
+    [self.qrBtn setTitle:@"移入设备" forState:0];
+    self.qrBtn.tag = 110;
+    self.qrBtn.hidden = NO;
+//    }
     
 //    if (model.auditStatus == 2) {
 //
