@@ -25,7 +25,7 @@
 + (void)getMyChargePileWithParams:(NSDictionary *)params
                       resultBlock:(void(^)(WFMyChargePileModel *models))resultBlock {
     //接口地址
-    NSString *path = [NSString stringWithFormat:@"%@yzsh-partner-apply/V1/partnerCharging/queryMyCdz",NEW_HOST_URL];
+    NSString *path = [NSString stringWithFormat:@"%@app-partner/home/cdz/queryMyCdz",NEW_HOST_URL];
     [WKRequest getWithURLString:path parameters:params isShowHud:YES success:^(WKBaseModel *baseModel) {
         if (CODE_ZERO) {
             resultBlock([WFMyChargePileModel mj_objectWithKeyValues:baseModel.data]);
@@ -40,7 +40,7 @@
 + (void)getAbnormalPileListWithParams:(NSDictionary *)params
                           resultBlock:(void(^)(NSArray <WFAbnormalPileListModel *> *models))resultBlock {
     //接口地址
-    NSString *path = [NSString stringWithFormat:@"%@yzsh-partner-apply/V1/partnerCharging/abnormalGroupDetails",NEW_HOST_URL];
+    NSString *path = [NSString stringWithFormat:@"%@app-partner/home/cdz/queryAbnormalGroup",NEW_HOST_URL];
     [WKRequest getWithURLString:path parameters:params isShowHud:YES success:^(WKBaseModel *baseModel) {
         if (CODE_ZERO) {
             resultBlock([WFAbnormalPileListModel mj_objectArrayWithKeyValuesArray:baseModel.data]);
@@ -55,7 +55,7 @@
 + (void)getAreaPilesignalIntensitWithParams:(NSDictionary *)params
                                 resultBlock:(void(^)(NSArray <WFSignleIntensityListModel *> *models))resultBlock {
     //接口地址
-    NSString *path = [NSString stringWithFormat:@"%@yzsh-partner-apply/V1/partnerCharging/groupDetails",NEW_HOST_URL];
+    NSString *path = [NSString stringWithFormat:@"%@app-partner/home/cdz/queryGroup",NEW_HOST_URL];
     [WKRequest getWithURLString:path parameters:params isShowHud:YES success:^(WKBaseModel *baseModel) {
         if (CODE_ZERO) {
             resultBlock([WFSignleIntensityListModel mj_objectArrayWithKeyValuesArray:baseModel.data]);
@@ -75,33 +75,6 @@
     [WKRequest postWithURLString:path parameters:params isJson:NO isShowHud:YES success:^(WKBaseModel *baseModel) {
         if (CODE_ZERO) {
             resultBlock(baseModel.data);
-        }else {
-            [YFToast showMessage:baseModel.message inView:[[YFKeyWindow shareInstance] getCurrentVC].view];
-        }
-    } failure:^(NSError *error) {
-
-    }];
-    //接口地址POST
-//    NSString *path = [NSString stringWithFormat:@"%@/v1/file/upload",NEW_HOST_URL];
-//    [WKRequest postWithUrlString:path parameters:@"uploadfile" isShowHud:YES uploadImage:photoImage success:^(WKBaseModel *baseModel) {
-//        if (CODE_ZERO) {
-//            resultBlock(baseModel.data);
-//        }else {
-//            [YFToast showMessage:baseModel.message inView:[[YFKeyWindow shareInstance] getCurrentVC].view];
-//        }
-//    } failure:^(NSError *error) {
-//
-//    }];
-}
-
-+ (void)uploadFileWithParams:(NSDictionary *)params
-                  photoImage:(UIImage *)photoImage
-                 resultBlock:(void(^)(NSString *str))resultBlock {
-    //接口地址POST
-    NSString *path = [NSString stringWithFormat:@"%@/yzsh-system/v1/file/upload",NEW_HOST_URL];
-    [WKRequest postWithUrlString:path parameters:@"file" isShowHud:YES uploadImage:photoImage success:^(WKBaseModel *baseModel) {
-        if (CODE_ZERO) {
-            resultBlock([[baseModel.mDictionary objectForKey:@"data"] objectForKey:@"filename"]);
         }else {
             [YFToast showMessage:baseModel.message inView:[[YFKeyWindow shareInstance] getCurrentVC].view];
         }
@@ -148,7 +121,7 @@
 + (void)getUserInfoWithParams:(NSDictionary *)params
                   resultBlock:(void(^)(WFUserCenterModel *models))resultBlock
                     failBlock:(void(^)(void))failBlock {
-    NSString *path = [NSString stringWithFormat:@"%@yzsh-partner/v1/partner/detail",NEW_HOST_URL];
+    NSString *path = [NSString stringWithFormat:@"%@app-partner-setmeal/v1/home/pageInfo/getAdminInfo",NEW_HOST_URL];
     [WKRequest getWithURLString:path parameters:nil isShowHud:NO success:^(WKBaseModel *baseModel) {
         if (CODE_ZERO) {
             resultBlock([WFUserCenterModel mj_objectWithKeyValues:baseModel.data]);
@@ -160,7 +133,7 @@
 
 + (void)getCustomerServiceWithParams:(NSDictionary *)params
                          resultBlock:(void(^)(WFMineCustomerServicModel *cModel))resultBlock {
-    NSString *path = [NSString stringWithFormat:@"%@yzsh-partner-apply/V1/customer/headAd",NEW_HOST_URL];
+    NSString *path = [NSString stringWithFormat:@"%@app-partner-setmeal/v1/home/pageInfo/headAd",NEW_HOST_URL];
     [WKRequest getWithURLString:path parameters:nil isShowHud:NO success:^(WKBaseModel *baseModel) {
         if (CODE_ZERO) {
             resultBlock([WFMineCustomerServicModel mj_objectWithKeyValues:baseModel.data]);

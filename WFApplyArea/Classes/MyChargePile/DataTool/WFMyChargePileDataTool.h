@@ -61,17 +61,6 @@ NS_ASSUME_NONNULL_BEGIN
 + (void)uploadModHeadWithParams:(NSDictionary *)params
                     resultBlock:(void (^)(NSString *str))resultBlock;
 
-/**
- 上传图片
-
- @param params 参数
- @param photoImage 图片对象
- @param resultBlock 返回的链接
- */
-+ (void)uploadFileWithParams:(NSDictionary *)params
-                    photoImage:(UIImage *)photoImage
-                    resultBlock:(void(^)(NSString *str))resultBlock;
-
 #pragma mark  授信相关接口
 /// 授信接口
 /// @param params 参数

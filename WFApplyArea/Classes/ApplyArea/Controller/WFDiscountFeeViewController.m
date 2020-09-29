@@ -257,25 +257,13 @@
     NSMutableDictionary *params = [NSMutableDictionary dictionary];
     [params safeSetObject:key forKey:@"code"];
     [params safeSetObject:self.applyGroupId forKey:@"groupId"];
-    [params safeSetObject:@(self.pageNo) forKey:@"pageNo"];
-    [params safeSetObject:@(100) forKey:@"pageSize"];
     @weakify(self)
-    [WFApplyAreaDataTool getVipUserWithParams:params resultBlock:^(NSArray<WFGroupVipUserModel *> * _Nonnull models) {
+    [WFApplyAreaDataTool getSearchVipListWithParams:params resultBlock:^(NSArray<WFGroupVipUserModel *> * _Nonnull models) {
         @strongify(self)
         self.vipSearchData = models;
         self.isBeginEdit = self.tableView.mj_header.hidden = YES;
         [self.tableView reloadData];
-    } failBlock:^{
-        @strongify(self)
-        [self.tableView.mj_footer endRefreshing];
     }];
-//    @weakify(self)
-//    [WFApplyAreaDataTool getSearchVipListWithParams:params resultBlock:^(NSArray<WFGroupVipUserModel *> * _Nonnull models) {
-//        @strongify(self)
-//        self.vipSearchData = models;
-//        self.isBeginEdit = self.tableView.mj_header.hidden = YES;
-//        [self.tableView reloadData];
-//    }];
 }
 
 #pragma mark 完成
@@ -533,9 +521,9 @@
         confirmBtn.frame = CGRectMake(15.0f, 7.5, ScreenWidth-30.0f, self.isNotAllow ? 0.0f : 40.0f);
         [confirmBtn setTitle:[self btnTitle] forState:UIControlStateNormal];
         [confirmBtn addTarget:self action:@selector(clickConfirmBtn) forControlEvents:UIControlEventTouchUpInside];
-        [confirmBtn setGradientLayerWithColors:@[UIColorFromRGB(0xFFBD00),UIColorFromRGB(0xFFCF00)] cornerRadius:20.0f gradientType:WFButtonGradientTypeLeftToRight];
+        [confirmBtn setGradientLayerWithColors:@[UIColorFromRGB(0xFF6D22),UIColorFromRGB(0xFF7E3D)] cornerRadius:20.0f gradientType:WFButtonGradientTypeLeftToRight];
         confirmBtn.titleLabel.font = [UIFont boldSystemFontOfSize:16.0f];
-        [confirmBtn setTitleColor:UIColorFromRGB(0x212121) forState:UIControlStateNormal];
+        [confirmBtn setTitleColor:UIColor.whiteColor forState:UIControlStateNormal];
         confirmBtn.hidden = self.isNotAllow;
         [_bottomView addSubview:confirmBtn];
         [self.view addSubview:_bottomView];

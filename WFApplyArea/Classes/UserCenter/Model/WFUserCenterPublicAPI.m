@@ -36,9 +36,9 @@
         NSString *encodedImageStr = [data base64EncodedStringWithOptions:NSDataBase64Encoding64CharacterLineLength];
         
         if (type == WFUpdatePhotoFeedbackType) {
-            [self upLoadPhotoWithImageString:encodedImageStr photoImage:image successBlock:^(NSString *str) {
-                resultBlock(str);
-            }];
+//            [self upLoadPhotoWithImageString:encodedImageStr photoImage:image successBlock:^(NSString *str) {
+//                resultBlock(str);
+//            }];
         }else {
             [self upLoadModHeadImageWithParams:encodedImageStr successBlock:^(NSString *str) {
                 resultBlock(str);
@@ -59,9 +59,9 @@
     update.callBackImage = ^(NSString *data,UIImage *image){
         @strongify(self)
         if (type == WFUpdatePhotoFeedbackType) {
-            [self upLoadPhotoWithImageString:data photoImage:image successBlock:^(NSString *str) {
-                resultBlock(str);
-            }];
+//            [self upLoadPhotoWithImageString:data photoImage:image successBlock:^(NSString *str) {
+//                resultBlock(str);
+//            }];
         }else {
             [self upLoadModHeadImageWithParams:data successBlock:^(NSString *str) {
                 resultBlock(str);
@@ -123,18 +123,6 @@
     WFEditAreaAddressViewController *edit = [[WFEditAreaAddressViewController alloc] initWithNibName:@"WFEditAreaAddressViewController" bundle:[NSBundle bundleForClass:[self class]]];
     edit.sourceType(WFEditAddressAreauUpgradeType).areaGroupId(groupId);
     [[[YFKeyWindow shareInstance] getCurrentVC].navigationController pushViewController:edit animated:YES];
-}
-
-+ (void)upLoadPhotoWithImageString:(NSString *)imageString
-                        photoImage:(UIImage *)photoImage
-                      successBlock:(void(^)(NSString *str))successBlock {
-    
-    NSMutableDictionary *parms = [NSMutableDictionary dictionary];
-    [parms setValue:imageString forKey:@"uploadfile"];
-    
-    [WFMyChargePileDataTool uploadFileWithParams:parms photoImage:photoImage resultBlock:^(NSString * _Nonnull str) {
-        successBlock(str);
-    }];
 }
 
 

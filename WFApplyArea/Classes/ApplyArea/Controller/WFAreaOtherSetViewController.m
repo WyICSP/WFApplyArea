@@ -46,7 +46,6 @@
     self.startPriceTF.delegate = self;
     self.view.backgroundColor = UIColorFromRGB(0xF5F5F5);
     [self.comfireBtn setTitle:[self btnTitle] forState:0];
-    self.comfireBtn.layer.cornerRadius = 20.0f;
     
     //获取默认配置信息
     [self getOtherDefaultConfig];

@@ -37,7 +37,7 @@ static NSString *const cellId = @"WFBilleMethodCollectionViewCell";
  */
 - (void)setTModel:(WFBillingTimeMethodModel *)cmodel {
     self.title.text = cmodel.billingName;
-    self.title.textColor = cmodel.isSelect ? UIColorFromRGB(0x212121) : UIColorFromRGB(0x333333);
+    self.title.textColor = cmodel.isSelect ? UIColor.whiteColor : UIColorFromRGB(0x333333);
     self.contentsView.backgroundColor = cmodel.isSelect ? NavColor : UIColorFromRGB(0xF5F5F5);
     
 }
@@ -49,7 +49,7 @@ static NSString *const cellId = @"WFBilleMethodCollectionViewCell";
  */
 - (void)setPModel:(WFBillingPriceMethodModel *)pModel {
     self.title.text = pModel.billingName;
-    self.title.textColor = pModel.isSelect ? UIColorFromRGB(0x212121) : UIColorFromRGB(0x333333);
+    self.title.textColor = pModel.isSelect ? UIColor.whiteColor : UIColorFromRGB(0x333333);
     self.contentsView.backgroundColor = pModel.isSelect ? NavColor : UIColorFromRGB(0xF5F5F5);
 }
 

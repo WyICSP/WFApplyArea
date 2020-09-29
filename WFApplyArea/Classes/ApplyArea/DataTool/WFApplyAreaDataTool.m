@@ -30,7 +30,7 @@
                          resultBlock:(void(^)(NSArray<WFMyAreaListModel *> *models))resultBlock
                            failBlock:(void(^)(void))failBlock {
     //接口地址
-    NSString *path = [NSString stringWithFormat:@"%@yzsh-charging-group/v1/charging/group/get/list",NEW_HOST_URL];
+    NSString *path = [NSString stringWithFormat:@"%@app-partner-group/v1/charging/group/get/list",NEW_HOST_URL];
     [WKRequest getWithURLString:path parameters:params isShowHud:YES success:^(WKBaseModel *baseModel) {
         if (CODE_ZERO) {
             resultBlock([WFMyAreaListModel mj_objectArrayWithKeyValuesArray:baseModel.data]);
@@ -61,7 +61,7 @@
 + (void)getChargeMethodWithParams:(NSDictionary *)params
                       resultBlock:(void(^)(NSArray <WFApplyChargeMethod *> *models))resultBlock {
     //接口地址
-    NSString *path = [NSString stringWithFormat:@"%@yzsh-charging-group/v1/billing/get/charging/model",NEW_HOST_URL];
+    NSString *path = [NSString stringWithFormat:@"%@app-partner-group/v1/charging/group/get/charging/model",NEW_HOST_URL];
     [WKRequest getWithURLString:path parameters:params isShowHud:YES success:^(WKBaseModel *baseModel) {
         if (CODE_ZERO) {
             resultBlock([WFApplyChargeMethod mj_objectArrayWithKeyValuesArray:baseModel.data]);
@@ -76,7 +76,7 @@
 + (void)getOtherDefaultConfigWithParams:(NSDictionary *)params
                             resultBlock:(void(^)(WFApplyAreaOtherConfigModel *models))resultBlock {
     //接口地址
-    NSString *path = [NSString stringWithFormat:@"%@yzsh-charging-group/v1/billing/get/other/default/config",NEW_HOST_URL];
+    NSString *path = [NSString stringWithFormat:@"%@app-partner-group/v1/charging/group/get/other/default/config",NEW_HOST_URL];
     [WKRequest getWithURLString:path parameters:params isShowHud:NO success:^(WKBaseModel *baseModel) {
         if (CODE_ZERO) {
             resultBlock([WFApplyAreaOtherConfigModel mj_objectWithKeyValues:baseModel.data]);
@@ -92,7 +92,7 @@
 + (void)getUserDividintoSetWithParams:(NSDictionary *)params
                           resultBlock:(void(^)(NSArray <WFMyAreaDividIntoSetModel *> *models))resultBlock {
     //接口地址
-    NSString *path = [NSString stringWithFormat:@"%@yzsh-partner/v1/partner/get/default/proportions",NEW_HOST_URL];
+    NSString *path = [NSString stringWithFormat:@"%@app-partner-group/v1/charging/group/get/default/proportions",NEW_HOST_URL];
     [WKRequest getWithURLString:path parameters:params isShowHud:YES success:^(WKBaseModel *baseModel) {
         if (CODE_ZERO) {
             resultBlock([WFMyAreaDividIntoSetModel mj_objectArrayWithKeyValuesArray:baseModel.data]);
@@ -107,7 +107,7 @@
 + (void)getUserDividIntoSetByGroupIdWithParams:(NSDictionary *)params
                                    resultBlock:(void(^)(NSArray <WFMyAreaDividIntoSetModel *> *models))resultBlock {
     //接口地址
-    NSString *path = [NSString stringWithFormat:@"%@yzsh-charging-group/v1/charging/group/prop/get/partner/proportions",NEW_HOST_URL];
+    NSString *path = [NSString stringWithFormat:@"%@app-partner-group/v1/charging/group/get/partner/proportions",NEW_HOST_URL];
     [WKRequest getWithURLString:path parameters:params isShowHud:YES success:^(WKBaseModel *baseModel) {
         if (CODE_ZERO) {
             resultBlock([WFMyAreaDividIntoSetModel mj_objectArrayWithKeyValuesArray:baseModel.data]);
@@ -122,7 +122,7 @@
 + (void)updateDividIntoSetWithParams:(NSDictionary *)params
                          resultBlock:(void(^)(void))resultBlock {
     //接口地址
-    NSString *path = [NSString stringWithFormat:@"%@yzsh-charging-group/v1/charging/group/prop/update/partner/proportions",NEW_HOST_URL];
+    NSString *path = [NSString stringWithFormat:@"%@app-partner-group/v1/charging/group/update/partner/proportions",NEW_HOST_URL];
     [WKRequest postWithURLString:path parameters:params isJson:YES isShowHud:YES success:^(WKBaseModel *baseModel) {
         if (CODE_ZERO) {
             resultBlock();
@@ -137,7 +137,7 @@
 + (void)getUserInfoByMobileWithParams:(NSDictionary *)params
                           resultBlock:(void(^)(NSDictionary *info))resultBlock {
     //接口地址
-    NSString *path = [NSString stringWithFormat:@"%@yzsh-partner/v1/partner/get/partner/info/by/phone",NEW_HOST_URL];
+    NSString *path = [NSString stringWithFormat:@"%@app-partner-group/v1/charging/group/get/admin/info",NEW_HOST_URL];
     [WKRequest getWithURLString:path parameters:params isShowHud:YES success:^(WKBaseModel *baseModel) {
         if (CODE_ZERO) {
             resultBlock(baseModel.mDictionary);
@@ -153,7 +153,7 @@
 + (void)addDiscountUserWithParams:(NSDictionary *)params
                       resultBlock:(void(^)(void))resultBlock {
     //接口地址
-    NSString *path = [NSString stringWithFormat:@"%@yzsh-charging-group/v1/billing/add/vip/member",NEW_HOST_URL];
+    NSString *path = [NSString stringWithFormat:@"%@app-partner-group/v1/charging/group/add/vip/member",NEW_HOST_URL];
     [WKRequest postWithURLString:path parameters:params isJson:YES isShowHud:YES success:^(WKBaseModel *baseModel) {
         if (CODE_ZERO) {
             resultBlock();
@@ -168,7 +168,7 @@
 + (void)updateDiscountUserWithParams:(NSDictionary *)params
                          resultBlock:(void(^)(void))resultBlock {
     //接口地址
-    NSString *path = [NSString stringWithFormat:@"%@yzsh-charging-group/v1/billing/update/vip/member",NEW_HOST_URL];
+    NSString *path = [NSString stringWithFormat:@"%@app-partner-group/v1/charging/group/update/vip/member",NEW_HOST_URL];
     [WKRequest postWithURLString:path parameters:params isJson:YES isShowHud:YES success:^(WKBaseModel *baseModel) {
         if (CODE_ZERO) {
             resultBlock();
@@ -185,7 +185,7 @@
                  resultBlock:(void(^)(NSArray <WFGroupVipUserModel *> *models))resultBlock
                    failBlock:(void(^)(void))failBlock {
     //接口地址
-    NSString *path = [NSString stringWithFormat:@"%@yzsh-charging-group/v1/billing/get/group/vip/member",NEW_HOST_URL];
+    NSString *path = [NSString stringWithFormat:@"%@app-partner-group/v1/charging/group/get/group/vip/member",NEW_HOST_URL];
     [WKRequest getWithURLString:path parameters:params isShowHud:YES success:^(WKBaseModel *baseModel) {
         if (CODE_ZERO) {
             resultBlock([WFGroupVipUserModel mj_objectArrayWithKeyValuesArray:[[baseModel.mDictionary safeJsonObjForKey:@"data"] safeJsonObjForKey:@"list"]]);
@@ -201,7 +201,7 @@
 + (void)deleteVipUserWithParams:(NSDictionary *)params
                     resultBlock:(void(^)(void))resultBlock {
     //接口地址
-    NSString *path = [NSString stringWithFormat:@"%@yzsh-charging-group/v1/billing/delete/vip",NEW_HOST_URL];
+    NSString *path = [NSString stringWithFormat:@"%@app-partner-group/v1/charging/group/delete/vip",NEW_HOST_URL];
     [WKRequest postWithURLString:path parameters:params isJson:YES isShowHud:YES success:^(WKBaseModel *baseModel) {
         if (CODE_ZERO) {
             resultBlock();
@@ -217,7 +217,7 @@
 + (void)getBillingMethodWithParams:(NSDictionary *)params
                        resultBlock:(void(^)(WFBillMethodModel *models))resultBlock {
     //接口地址
-    NSString *path = [NSString stringWithFormat:@"%@yzsh-charging-group/v1/billing/get/billing/method",NEW_HOST_URL];
+    NSString *path = [NSString stringWithFormat:@"%@app-partner-group/v1/charging/group/get/billing/method",NEW_HOST_URL];
     [WKRequest getWithURLString:path parameters:params isShowHud:YES success:^(WKBaseModel *baseModel) {
         if (CODE_ZERO) {
             resultBlock([WFBillMethodModel mj_objectWithKeyValues:baseModel.data]);
@@ -232,7 +232,7 @@
 + (void)addBillingMethodWithParams:(NSDictionary *)params
                        resultBlock:(void(^)(WFBillingPriceMethodModel *models))resultBlock {
     //接口地址
-    NSString *path = [NSString stringWithFormat:@"%@yzsh-charging-group/v1/billing/add/billing/method",NEW_HOST_URL];
+    NSString *path = [NSString stringWithFormat:@"%@app-partner-group/v1/charging/group/add/billing/method",NEW_HOST_URL];
     [WKRequest postWithURLString:path parameters:params isJson:YES isShowHud:YES success:^(WKBaseModel *baseModel) {
         if (CODE_ZERO) {
             resultBlock([WFBillingPriceMethodModel mj_objectWithKeyValues:baseModel.data]);
@@ -249,7 +249,7 @@
 + (void)getDefaultSingleChargeWithParams:(NSDictionary *)params
                              resultBlock:(void(^)(NSArray <WFDefaultChargeFeeModel *>*models))resultBlock {
     //接口地址
-    NSString *path = [NSString stringWithFormat:@"%@yzsh-charging-group/v1/billing/get/charging/default/config",NEW_HOST_URL];
+    NSString *path = [NSString stringWithFormat:@"%@app-partner-group/v1/charging/group/get/charging/default/config",NEW_HOST_URL];
     [WKRequest getWithURLString:path parameters:params isShowHud:YES success:^(WKBaseModel *baseModel) {
         if (CODE_ZERO) {
             resultBlock([WFDefaultChargeFeeModel mj_objectArrayWithKeyValuesArray:baseModel.data]);
@@ -265,7 +265,7 @@
 + (void)getDefaultManyTimesChargeWithParams:(NSDictionary *)params
                                 resultBlock:(void(^)(WFDefaultManyTimesModel *models))resultBlock {
     //接口地址
-    NSString *path = [NSString stringWithFormat:@"%@yzsh-charging-group/v1/billing/get/charging/default/config",NEW_HOST_URL];
+    NSString *path = [NSString stringWithFormat:@"%@app-partner-group/v1/charging/group/get/charging/default/config",NEW_HOST_URL];
     [WKRequest getWithURLString:path parameters:params isShowHud:YES success:^(WKBaseModel *baseModel) {
         if (CODE_ZERO) {
             resultBlock([WFDefaultManyTimesModel mj_objectWithKeyValues:baseModel.data]);
@@ -280,7 +280,7 @@
 + (void)getDefaultDisCountChargeWithParams:(NSDictionary *)params
                                resultBlock:(void(^)(NSArray<WFDefaultDiscountModel *> *models))resultBlock {
     //接口地址
-    NSString *path = [NSString stringWithFormat:@"%@yzsh-charging-group/v1/billing/get/charging/default/config",NEW_HOST_URL];
+    NSString *path = [NSString stringWithFormat:@"%@app-partner-group/v1/charging/group/get/charging/default/config",NEW_HOST_URL];
     [WKRequest getWithURLString:path parameters:params isShowHud:YES success:^(WKBaseModel *baseModel) {
         if (CODE_ZERO) {
             resultBlock([WFDefaultDiscountModel mj_objectArrayWithKeyValuesArray:baseModel.data]);
@@ -296,7 +296,7 @@
 + (void)getPowerIntervalTableWithParams:(NSDictionary *)params
                             resultBlock:(void(^)(NSArray <WFPowerIntervalModel *> *models))resultBlock {
     //接口地址
-    NSString *path = [NSString stringWithFormat:@"%@yzsh-charging-group/v1/billing/get/power/interval/time/table",NEW_HOST_URL];
+    NSString *path = [NSString stringWithFormat:@"%@app-partner-group/v1/charging/group/get/power/interval/time/table",NEW_HOST_URL];
     [WKRequest getWithURLString:path parameters:params isShowHud:YES success:^(WKBaseModel *baseModel) {
         if (CODE_ZERO) {
             resultBlock([WFPowerIntervalModel mj_objectArrayWithKeyValuesArray:baseModel.data]);
@@ -311,7 +311,7 @@
 + (void)getProfitTableWithParams:(NSDictionary *)params
                      resultBlock:(void(^)(NSArray <WFProfitTableModel *> *models))resultBlock {
     //接口地址
-    NSString *path = [NSString stringWithFormat:@"%@yzsh-charging-group/v1/billing/get/power/interval/billing/table",NEW_HOST_URL];
+    NSString *path = [NSString stringWithFormat:@"%@app-partner-group/v1/charging/group/get/power/interval/billing/table",NEW_HOST_URL];
     [WKRequest getWithURLString:path parameters:params isShowHud:YES success:^(WKBaseModel *baseModel) {
         if (CODE_ZERO) {
             resultBlock([WFProfitTableModel mj_objectArrayWithKeyValuesArray:baseModel.data]);
@@ -329,7 +329,7 @@
                 resultBlock:(void(^)(void))resultBlock
                   failBlock:(void(^)(void))failBlock {
     //接口地址
-    NSString *path = [NSString stringWithFormat:@"%@yzsh-charging-group/v1/charging/group/add",NEW_HOST_URL];
+    NSString *path = [NSString stringWithFormat:@"%@app-partner-group/v1/charging/group/add",NEW_HOST_URL];
     [WKRequest postWithURLString:path parameters:params isJson:YES isShowHud:YES success:^(WKBaseModel *baseModel) {
         if (CODE_ZERO) {
             resultBlock();
@@ -346,7 +346,7 @@
 + (void)getAreaDetailWithParams:(NSDictionary *)params
                     resultBlock:(void(^)(NSDictionary *models))resultBlock {
     //接口地址
-    NSString *path = [NSString stringWithFormat:@"%@yzsh-charging-group/v1/charging/group/get/group/info",NEW_HOST_URL];
+    NSString *path = [NSString stringWithFormat:@"%@app-partner-group/v1/charging/group/get/group/info",NEW_HOST_URL];
     [WKRequest getWithURLString:path parameters:params isShowHud:YES success:^(WKBaseModel *baseModel) {
         if (CODE_ZERO) {
             resultBlock((NSDictionary *)baseModel.data);
@@ -362,7 +362,7 @@
 + (void)updateChargingMethodWithParams:(NSDictionary *)params
                            resultBlock:(void(^)(void))resultBlock {
     //接口地址
-    NSString *path = [NSString stringWithFormat:@"%@yzsh-charging-group/v1/billing/update/billing/method",NEW_HOST_URL];
+    NSString *path = [NSString stringWithFormat:@"%@app-partner-group/v1/charging/group/update/billing/method",NEW_HOST_URL];
     [WKRequest postWithURLString:path parameters:params isJson:YES isShowHud:YES success:^(WKBaseModel *baseModel) {
         if (CODE_ZERO) {
             resultBlock();
@@ -377,7 +377,7 @@
 + (void)updateVipCollectFeeWithParams:(NSDictionary *)params
                           resultBlock:(void(^)(void))resultBlock {
     //接口地址
-    NSString *path = [NSString stringWithFormat:@"%@yzsh-charging-group/v1/billing/update/vip/charge",NEW_HOST_URL];
+    NSString *path = [NSString stringWithFormat:@"%@app-partner-group/v1/charging/group/update/vip/charge",NEW_HOST_URL];
     [WKRequest postWithURLString:path parameters:params isJson:YES isShowHud:YES success:^(WKBaseModel *baseModel) {
         if (CODE_ZERO) {
             resultBlock();
@@ -392,7 +392,7 @@
 + (void)updateSingleFeeWithParams:(NSDictionary *)params
                       resultBlock:(void(^)(void))resultBlock {
     //接口地址
-    NSString *path = [NSString stringWithFormat:@"%@yzsh-charging-group/v1/billing/update/sing/charge",NEW_HOST_URL];
+    NSString *path = [NSString stringWithFormat:@"%@app-partner-group/v1/charging/group/update/sing/charge",NEW_HOST_URL];
     [WKRequest postWithURLString:path parameters:params isJson:YES isShowHud:YES success:^(WKBaseModel *baseModel) {
         if (CODE_ZERO) {
             resultBlock();
@@ -407,7 +407,7 @@
 + (void)updateAreaAddressWithParams:(NSDictionary *)params
                         resultBlock:(void(^)(void))resultBlock {
     //接口地址
-    NSString *path = [NSString stringWithFormat:@"%@yzsh-charging-group/v1/charging/group/update/group/base/info",NEW_HOST_URL];
+    NSString *path = [NSString stringWithFormat:@"%@app-partner-group/v1/charging/group/update/group/base/info",NEW_HOST_URL];
     [WKRequest postWithURLString:path parameters:params isJson:YES isShowHud:YES success:^(WKBaseModel *baseModel) {
         if (CODE_ZERO) {
             resultBlock();
@@ -423,7 +423,7 @@
 + (void)updateManyTimeFeeWithPamrams:(NSDictionary *)params
                          resultBlock:(void(^)(void))resultBlock {
     //接口地址
-    NSString *path = [NSString stringWithFormat:@"%@yzsh-charging-group/v1/billing/update/multiple/charge",NEW_HOST_URL];
+    NSString *path = [NSString stringWithFormat:@"%@app-partner-group/v1/charging/group/update/multiple/charge",NEW_HOST_URL];
     [WKRequest postWithURLString:path parameters:params isJson:YES isShowHud:YES success:^(WKBaseModel *baseModel) {
         if (CODE_ZERO) {
             resultBlock();
@@ -438,7 +438,7 @@
 + (void)updateOtherSetWithParams:(NSDictionary *)params
                      resultBlock:(void(^)(void))resultBlock {
     //接口地址
-    NSString *path = [NSString stringWithFormat:@"%@yzsh-charging-group/v1/billing/update/other/config",NEW_HOST_URL];
+    NSString *path = [NSString stringWithFormat:@"%@app-partner-group/v1/charging/group/update/other/config",NEW_HOST_URL];
     [WKRequest postWithURLString:path parameters:params isJson:YES isShowHud:YES success:^(WKBaseModel *baseModel) {
         if (CODE_ZERO) {
             resultBlock();
@@ -456,7 +456,7 @@
 + (void)deleteManyTimeFeeWithParams:(NSDictionary *)params
                         resultBlock:(void(^)(void))resultBlock {
     //接口地址
-    NSString *path = [NSString stringWithFormat:@"%@yzsh-charging-group/v1/billing/delete/multiple/charge",NEW_HOST_URL];
+    NSString *path = [NSString stringWithFormat:@"%@app-partner-group/v1/charging/group/delete/multiple/charge",NEW_HOST_URL];
     [WKRequest postWithURLString:path parameters:params isJson:YES isShowHud:YES success:^(WKBaseModel *baseModel) {
         if (CODE_ZERO) {
             resultBlock();
@@ -471,7 +471,7 @@
 + (void)deleteVipChargeFeeWithParams:(NSDictionary *)params
                          resultBlock:(void(^)(void))resultBlock {
     //接口地址
-    NSString *path = [NSString stringWithFormat:@"%@yzsh-charging-group/v1/billing/delete/vip/charge",NEW_HOST_URL];
+    NSString *path = [NSString stringWithFormat:@"%@app-partner-group/v1/charging/group/delete/vip/charge",NEW_HOST_URL];
     [WKRequest postWithURLString:path parameters:params isJson:YES isShowHud:YES success:^(WKBaseModel *baseModel) {
         if (CODE_ZERO) {
             resultBlock();
@@ -596,7 +596,7 @@
 + (void)getGroupCanEquWithParams:(NSDictionary *)params
                      resultBlock:(void(^)(WFRemoveEquModel *models))resultBlock {
     //接口地址
-    NSString *path = [NSString stringWithFormat:@"%@yzsh-partner-apply/V1/assets/getNotInstallCdz",NEW_HOST_URL];
+    NSString *path = [NSString stringWithFormat:@"%@app-partner-setmeal/v1/home/pageInfo/getNotInstallCdz",NEW_HOST_URL];
     [WKRequest postWithURLString:path parameters:params isJson:YES isShowHud:YES success:^(WKBaseModel *baseModel) {
         if (CODE_ZERO) {
             resultBlock([WFRemoveEquModel mj_objectWithKeyValues:baseModel.data]);
@@ -611,7 +611,7 @@
 + (void)removeEquWithParams:(NSDictionary *)params
                 resultBlock:(void(^)(void))resultBlock {
     //接口地址
-    NSString *path = [NSString stringWithFormat:@"%@yzsh-partner-apply/V1/assets/moveInCdz",NEW_HOST_URL];
+    NSString *path = [NSString stringWithFormat:@"%@app-partner-setmeal/v1/home/pageInfo/moveInCdz",NEW_HOST_URL];
     [WKRequest postWithURLString:path parameters:params isJson:YES isShowHud:YES success:^(WKBaseModel *baseModel) {
         if (CODE_ZERO) {
             resultBlock();

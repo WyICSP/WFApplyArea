@@ -113,24 +113,13 @@
 - (void)getSearchAreaListWithKey:(NSString *)key {
     NSMutableDictionary *params = [NSMutableDictionary dictionary];
     [params safeSetObject:key forKey:@"code"];
-    
     @weakify(self)
-    [WFApplyAreaDataTool getMyApplyAreaListWithParams:params resultBlock:^(NSArray<WFMyAreaListModel *> * _Nonnull models) {
+    [WFApplyAreaDataTool getSearchAreaListWithParams:params resultBlock:^(NSArray<WFMyAreaListModel *> * _Nonnull models) {
         @strongify(self)
         self.searchModels = models;
         self.isBeginEdit = YES;
         [self.tableView reloadData];
-    } failBlock:^{
-        
     }];
-    
-//    @weakify(self)
-//    [WFApplyAreaDataTool getSearchAreaListWithParams:params resultBlock:^(NSArray<WFMyAreaListModel *> * _Nonnull models) {
-//        @strongify(self)
-//        self.searchModels = models;
-//        self.isBeginEdit = YES;
-//        [self.tableView reloadData];
-//    }];
 }
 
 /**
@@ -245,9 +234,9 @@
         applyBtn.frame = CGRectMake(15.0f, 7.5, ScreenWidth-30.0f, 40.0f);
         [applyBtn setTitle:@"申请片区" forState:UIControlStateNormal];
         [applyBtn addTarget:self action:@selector(clickApplyBtn) forControlEvents:UIControlEventTouchUpInside];
-        [applyBtn setGradientLayerWithColors:@[UIColorFromRGB(0xFFBD00),UIColorFromRGB(0xFFCF00)] cornerRadius:20.0f gradientType:WFButtonGradientTypeLeftToRight];
+        [applyBtn setGradientLayerWithColors:@[UIColorFromRGB(0xFF6D22),UIColorFromRGB(0xFF7E3D)] cornerRadius:20.0f gradientType:WFButtonGradientTypeLeftToRight];
         applyBtn.titleLabel.font = [UIFont boldSystemFontOfSize:16.0f];
-        [applyBtn setTitleColor:UIColorFromRGB(0x212121) forState:UIControlStateNormal];
+        [applyBtn setTitleColor:UIColor.whiteColor forState:UIControlStateNormal];
         _bottomView.hidden = self.partnerRole == 3;
         [_bottomView addSubview:applyBtn];
         [self.view addSubview:_bottomView];
