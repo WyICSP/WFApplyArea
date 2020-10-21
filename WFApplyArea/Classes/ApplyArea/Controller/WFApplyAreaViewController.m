@@ -83,6 +83,10 @@
     [self getChargeMthod];
     //其他设置的默认配置
     [self getOtherDefaultConfig];
+    
+    // 选择地址的回调
+    [YFNotificationCenter addObserver:self selector:@selector(addressInfo:) name:@"MapAddressKeys" object:nil];
+    [self.tableView reloadData];
 }
 
 /**
@@ -114,11 +118,7 @@
 #pragma mark 提交申请片区
 - (void)clickNextBtn {
     NSString *alertMsg = @"";
-    if ([NSString isBlankString:self.addressModel.addressId]) {
-        alertMsg = @"请选择省市区";
-    }else if ([NSString isBlankString:self.addressModel.detailAddress]) {
-        alertMsg = @"请填写详细地址";
-    }else if ([NSString isBlankString:self.addressModel.areaName]) {
+    if ([NSString isBlankString:self.addressModel.areaName]) {
         alertMsg = @"请输入市+区+小区名";
     }else if (!self.singleFeeData) {
         alertMsg = @"请选择单次收费";
@@ -134,7 +134,7 @@
     }
     
     NSMutableDictionary *params = [NSMutableDictionary dictionary];
-    [params safeSetObject:self.addressModel.detailAddress forKey:@"address"];//详细地址
+    [params safeSetObject:self.addressModel.address forKey:@"address"];//详细地址
     [params safeSetObject:self.addressModel.addressId forKey:@"areaId"];//区的 Id
     [params safeSetObject:self.addressModel.areaName forKey:@"name"];//片区名
     [params safeSetObject:[self billingPlanIds] forKey:@"billingPlanIds"];//计费方式数组
@@ -171,6 +171,8 @@
         return;
     }
     
+    [params safeSetObject:self.addressModel.changingGroupLon forKey:@"changingGroupLon"];
+    [params safeSetObject:self.addressModel.chargingGroupLat forKey:@"chargingGroupLat"];
     //合伙人分成设置
     [params safeSetObject:[self partnerPropInfos] forKey:@"partnerPropInfos"];
     //起步价
@@ -501,7 +503,7 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.section == 0) {
-        return ISIPHONEX ? KHeight(120.0f) + 8.0f : KHeight(120.0f);
+        return ISIPHONEX ? KHeight(80.0f) + 8.0f : KHeight(80.0f);
     }else if (indexPath.section == 4) {
         return KHeight(94.0f);
     }
@@ -612,6 +614,19 @@
     cell.selectImg.hidden = !isShow;
 }
 
+- (void)addressInfo:(NSNotification *)notification {
+    NSDictionary *dict = notification.userInfo;
+    DLog(@"---收到地址%@",dict);
+    self.addressModel.address = [NSString stringWithFormat:@"%@",[dict safeJsonObjForKey:@"address"]];
+    self.addressModel.addressId = [NSString stringWithFormat:@"%@",[dict safeJsonObjForKey:@"code"]];
+    self.addressModel.changingGroupLon = [NSString stringWithFormat:@"%@",[dict safeJsonObjForKey:@"changingGroupLon"]];
+    self.addressModel.chargingGroupLat = [NSString stringWithFormat:@"%@",[dict safeJsonObjForKey:@"chargingGroupLat"]];
+    [self.tableView reloadData];
+}
+
+- (void)dealloc {
+    [YFNotificationCenter removeObserver:self name:@"MapAddressKeys" object:nil];
+}
 
 #pragma mark get set
 - (UITableView *)tableView {
@@ -639,14 +654,16 @@
     if (!_bottomView) {
         _bottomView = [[UIView alloc] initWithFrame:CGRectMake(0, ScreenHeight - 55.0f - NavHeight-SafeAreaBottom, ScreenWidth, 55.0f)];
         _bottomView.backgroundColor = UIColor.whiteColor;
-        UIButton *nextBtn = [UIButton buttonWithType:UIButtonTypeSystem];
-        nextBtn.frame = CGRectMake(15.0f, 7.5, ScreenWidth-30.0f, 40.0f);
-        [nextBtn addTarget:self action:@selector(clickNextBtn) forControlEvents:UIControlEventTouchUpInside];
-        [nextBtn setGradientLayerWithColors:@[UIColorFromRGB(0xFF6D22),UIColorFromRGB(0xFF7E3D)] cornerRadius:20.0f gradientType:WFButtonGradientTypeLeftToRight];
-        [nextBtn setTitleColor:UIColor.whiteColor forState:UIControlStateNormal];
-        nextBtn.titleLabel.font = [UIFont boldSystemFontOfSize:16.0f];
-        [nextBtn setTitle:@"提交" forState:UIControlStateNormal];
-        [_bottomView addSubview:nextBtn];
+        UIButton *confirmBtn = [UIButton buttonWithType:UIButtonTypeSystem];
+        confirmBtn.frame = CGRectMake(15.0f, 7.5, ScreenWidth-30.0f, 40.0f);
+        [confirmBtn setTitle:@"提交" forState:0];
+        [confirmBtn addTarget:self action:@selector(clickNextBtn) forControlEvents:UIControlEventTouchUpInside];
+        [confirmBtn setGradientLayerWithColors:@[UIColorFromRGB(0xFF6D22),UIColorFromRGB(0xFF7E3D)] cornerRadius:20.0f gradientType:WFButtonGradientTypeLeftToRight];
+        confirmBtn.titleLabel.font = [UIFont boldSystemFontOfSize:16.0f];
+        [confirmBtn setTitleColor:UIColor.whiteColor forState:UIControlStateNormal];
+        [_bottomView addSubview:confirmBtn];
+        
+        
         [self.view addSubview:_bottomView];
     }
     return _bottomView;

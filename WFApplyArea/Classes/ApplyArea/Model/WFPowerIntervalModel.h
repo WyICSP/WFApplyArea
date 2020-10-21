@@ -39,6 +39,10 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, copy) NSString *detailAddress;
 /**片区名*/
 @property (nonatomic, copy) NSString *areaName;
+/// 经度
+@property (nonatomic, copy) NSString *changingGroupLon;
+/// 纬度
+@property (nonatomic, copy) NSString *chargingGroupLat;
 @end
 
 NS_ASSUME_NONNULL_END

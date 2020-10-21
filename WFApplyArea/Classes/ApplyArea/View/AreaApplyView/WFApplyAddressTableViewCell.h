@@ -18,7 +18,8 @@ NS_ASSUME_NONNULL_BEGIN
 /**城市*/
 @property (weak, nonatomic) IBOutlet UIButton *addressBtn;
 /**具体地址*/
-@property (weak, nonatomic) IBOutlet UITextField *detailAddressTF;
+@property (weak, nonatomic) IBOutlet UILabel *addressLbl;
+
 /**小区名*/
 @property (weak, nonatomic) IBOutlet UITextField *areaTF;
 /**地址*/
