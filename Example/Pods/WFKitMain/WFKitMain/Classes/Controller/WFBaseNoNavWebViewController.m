@@ -126,9 +126,9 @@
 
 - (void)setUrlString:(NSString *)urlString {
     if ([urlString containsString:@"?"]) {
-        urlString = [NSString stringWithFormat:@"%@&appVersion=%@&appMode=app&appName=partner&appType=native",urlString,APP_VERSION];
+        urlString = [NSString stringWithFormat:@"%@&uuid=%@&appVersion=%@&appMode=app&appName=%@",urlString,USER_UUID,APP_VERSION,[NSString getProjectName]];
     }else {
-        urlString = [NSString stringWithFormat:@"%@?appVersion=%@&appMode=app&appName=partner&appType=native",urlString,APP_VERSION];
+        urlString = [NSString stringWithFormat:@"%@?uuid=%@&appVersion=%@&appMode=app&appName=%@",urlString,USER_UUID,APP_VERSION,[NSString getProjectName]];
     }
     _urlString = urlString;
 }

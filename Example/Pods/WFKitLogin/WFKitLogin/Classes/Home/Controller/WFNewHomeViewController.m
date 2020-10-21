@@ -117,7 +117,7 @@
     [WFHomeDataTool getHomeTotalIncomeWithParams:@{} resultBlock:^(WFNewHomeIncomeModel * _Nonnull models) {
         @strongify(self)
         self.headView.model = models;
-        self.paySkipUrl = models.partnerPaySkipUrl;
+        self.paySkipUrl = models.paySkipUrl;
         [self.scrollView.mj_header endRefreshing];
     } failureBlock:^{
         @strongify(self)
@@ -187,9 +187,9 @@
         [YFUserDefaults synchronize];
         
         self.partnerRole = [partnerRole integerValue];
-        //0 市场合伙人  1 管理合伙人 2 分佣合伙人 3购买设备合伙人 4 公司账号
-        self.applyView.hidden = [partnerRole integerValue] == 2 ? YES : NO;
-        self.leftImageBtn.hidden = [partnerRole integerValue] == 2 ? YES : NO;
+        //1 市场合伙人  2 管理合伙人 3 物业
+        self.applyView.hidden = [partnerRole integerValue] == 3 ? YES : NO;
+        self.leftImageBtn.hidden = [partnerRole integerValue] == 3 ? YES : NO;
     }];
 }
 
@@ -199,19 +199,19 @@
     if (index == 10) {
         // 今日收入
         WFHomeWebViewController *web = [[WFHomeWebViewController alloc] init];
-        web.urlString = [NSString stringWithFormat:@"%@yzsh-app-partner/#/home/chargingOrderList",H5_HOST];
+        web.urlString = [NSString stringWithFormat:@"%@yzc-app-partner/#/home/chargingOrderList",H5_HOST];
         web.hidesBottomBarWhenPushed = YES;
         [self.navigationController pushViewController:web animated:YES];
     }else if (index == 20) {
         // 充电订单
         WFHomeWebViewController *web = [[WFHomeWebViewController alloc] init];
-        web.urlString = [NSString stringWithFormat:@"%@yzsh-app-partner/#/home/chargingOrderList",H5_HOST];
+        web.urlString = [NSString stringWithFormat:@"%@yzc-app-partner/#/home/chargingOrderList",H5_HOST];
         web.hidesBottomBarWhenPushed = YES;
         [self.navigationController pushViewController:web animated:YES];
     }else if (index == 30) {
         // 近 7 日使用率
         WFHomeWebViewController *web = [[WFHomeWebViewController alloc] init];
-        web.urlString = [NSString stringWithFormat:@"%@yzsh-app-partner/#/home/utilizationRate",H5_HOST];
+        web.urlString = [NSString stringWithFormat:@"%@yzc-app-partner/#/home/utilizationRate",H5_HOST];
         web.hidesBottomBarWhenPushed = YES;
         [self.navigationController pushViewController:web animated:YES];
     }else if (index == 40) {
@@ -223,19 +223,19 @@
     }else if (index == 60) {
         // 设备警告
         WFHomeWebViewController *web = [[WFHomeWebViewController alloc] init];
-        web.urlString = [NSString stringWithFormat:@"%@yzsh-app-partner/#/warningDevice/index",H5_HOST];
+        web.urlString = [NSString stringWithFormat:@"%@yzc-app-partner/#/warningDevice/index",H5_HOST];
         web.hidesBottomBarWhenPushed = YES;
         [self.navigationController pushViewController:web animated:YES];
     }else if (index == 70) {
         // 插座状态
         WFHomeWebViewController *web = [[WFHomeWebViewController alloc] init];
-        web.urlString = [NSString stringWithFormat:@"%@yzsh-app-partner/#/slot/index",H5_HOST];
+        web.urlString = [NSString stringWithFormat:@"%@yzc-app-partner/#/slot/index",H5_HOST];
         web.hidesBottomBarWhenPushed = YES;
         [self.navigationController pushViewController:web animated:YES];
     }else if (index == 80) {
         //申请充电桩
         WFHomeWebViewController *web = [[WFHomeWebViewController alloc] init];
-        web.urlString = [NSString stringWithFormat:@"%@yzsh-app-partner/#/apply/list",H5_HOST];
+        web.urlString = [NSString stringWithFormat:@"%@yzc-app-partner/#/apply/list",H5_HOST];
         web.hidesBottomBarWhenPushed = YES;
         [self.navigationController pushViewController:web animated:YES];
     }else if (index == 90) {
@@ -243,18 +243,14 @@
         [YFMediatorManager gotoAppleAreaCtrlWithController:self];
     }else if (index == 91) {
         //打开浏览器
-        if (self.paySkipUrl.length != 0) {
+        if (self.paySkipUrl.length != 0)
             [self jumpToAnotherApp];
-        }else {
-            [YFToast showMessage:@"网点正在建设中..." inView:self.view];
-        }
-            
 //            [[UIApplication sharedApplication] openURL:[NSURL URLWithString:self.paySkipUrl]];
         
     }else if (index == 100 || index == 110) {
         //总收入 充电收入
         WFHomeWebViewController *web = [[WFHomeWebViewController alloc] init];
-        web.urlString = [NSString stringWithFormat:@"%@yzsh-app-partner/#/myIncome/index",H5_HOST];
+        web.urlString = [NSString stringWithFormat:@"%@yzc-app-partner/#/myIncome/index",H5_HOST];
         web.hidesBottomBarWhenPushed = YES;
         [self.navigationController pushViewController:web animated:YES];
     }else if (index == 120) {
@@ -278,12 +274,10 @@
 // 客服
 - (void)leftImageButtonClick:(UIButton *)sender {
     sender.selected =! sender.selected;
-    if (self.cModel) {
-        if (sender.selected) {
-            [self.menuView showMenuEnterAnimation:MLEnterAnimationStyleRight];
-        }else {
-            [self.menuView hidMenuExitAnimation:MLEnterAnimationStyleRight];
-        }
+    if (sender.selected) {
+        [self.menuView showMenuEnterAnimation:MLEnterAnimationStyleRight];
+    }else {
+        [self.menuView hidMenuExitAnimation:MLEnterAnimationStyleRight];
     }
 }
 
@@ -314,7 +308,7 @@
 // 消息
 - (void)rightImageButtonClick:(UIButton *)sender {
     WFHomeWebViewController *web = [[WFHomeWebViewController alloc] init];
-    web.urlString = [NSString stringWithFormat:@"%@yzsh-app-partner/#/msg/index",H5_HOST];
+    web.urlString = [NSString stringWithFormat:@"%@yzc-app-partner/#/msg/index",H5_HOST];
     web.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:web animated:YES];
 }

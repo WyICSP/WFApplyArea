@@ -32,13 +32,13 @@ PODS:
     - WFKitMain
     - WFShopMall
     - WKFunComponents
-  - WFBasics (1.0.0):
+  - WFBasics (2.0.0):
     - AFNetworking
     - SVProgressHUD
     - WYAutoLayout
   - WFHomeAddress (0.1.5):
     - MJExtension
-  - WFKitLogin (1.0.0):
+  - WFKitLogin (2.0.0):
     - dsBridge
     - MJExtension
     - MJRefresh
@@ -46,7 +46,7 @@ PODS:
     - WFHomeAddress
     - WFKitMain
     - WKFunComponents
-  - WFKitMain (1.0.0):
+  - WFKitMain (2.0.0):
     - dsBridge
     - WFBasics
   - WFShopMall (0.4.1):
@@ -95,10 +95,10 @@ SPEC CHECKSUMS:
   SVProgressHUD: 1428aafac632c1f86f62aa4243ec12008d7a51d6
   TZImagePickerController: 99f03b64145a8c92c55b9b1b931410967d9be4cb
   WFApplyArea: 71e5de76c047568d3d66d51cd450ce48c5fe35b0
-  WFBasics: ce22e064d209a5ddc43b0077be6817bbfbd7f7fe
+  WFBasics: abaf38ac0eb04fc8724c01c5227dc90b2fba5f6d
   WFHomeAddress: 4eb27df8a873af9161d147f8b10a1d50ba725467
-  WFKitLogin: c772410678baa09fafc8a84e634373c8f0fdae5d
-  WFKitMain: 75c32ce43809b24179ae5a84324590ca1e4c6b76
+  WFKitLogin: aec3754df1ccffdf87dffc4879ed92003e9d6ae2
+  WFKitMain: 1dcd58dd7ab39611ffe05431e78374bee1414a5d
   WFShopMall: a85c332626fb0af451a8b57aee969c20ddab9c65
   WKFunComponents: 359e5059c096338eee60fee1d7146b701ed30372
   WYAutoLayout: 7bc596f94be915e1f690f316ac859287c8ec9d51
